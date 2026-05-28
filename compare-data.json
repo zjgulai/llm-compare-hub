@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-01-13",
+  "lastUpdated": "2026-05-27",
   "methodology": {
     "stabilityScoring": "基于API架构成熟度、平台SLA保障、用户反馈、模型可用率综合评估。硅基流动采用标准OpenAI格式+国内CDN+Pro高可用版本，稳定性普遍高于PoYo的异步轮询架构。",
     "valueScoring": "基于每1M token/每次请求的成本、上下文长度、输出质量、功能丰富度综合计算。价格按实时汇率折算为人民币。"
