@@ -158,7 +158,7 @@
         {
           "modelId": "seedream-4-5-api",
           "name": "Seedream 4.5",
-          "vendor": "Seedance",
+          "vendor": "Seedream",
           "capabilities": [
             "Text to Image"
           ],
@@ -175,7 +175,7 @@
         {
           "modelId": "seedream-5-0-lite-api",
           "name": "Seedream 5.0 Lite",
-          "vendor": "Seedance",
+          "vendor": "Seedream",
           "capabilities": [
             "Text to Image"
           ],
@@ -192,7 +192,7 @@
         {
           "modelId": "seedream-4",
           "name": "Seedream 4",
-          "vendor": "Seedance",
+          "vendor": "Seedream",
           "capabilities": [
             "Text to Image"
           ],

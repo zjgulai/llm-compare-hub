@@ -253,7 +253,7 @@
           "docsUrl": "https://docs.poyo.ai"
         },
         {
-          "modelId": "flux-kontext",
+          "modelId": "flux-kontext-pro",
           "name": "Flux Kontext",
           "vendor": "Black Forest Labs",
           "capabilities": [
@@ -289,7 +289,7 @@
           "docsUrl": "https://docs.poyo.ai"
         },
         {
-          "modelId": "grok-imagine",
+          "modelId": "grok-imagine-image",
           "name": "Grok Imagine",
           "vendor": "xAI",
           "capabilities": [
@@ -397,7 +397,7 @@
           "docsUrl": "https://docs.poyo.ai/api-manual/video-series/sora-2-official"
         },
         {
-          "modelId": "veo-3-1",
+          "modelId": "veo3.1-fast",
           "name": "Veo 3.1",
           "vendor": "Google",
           "capabilities": [
@@ -416,7 +416,7 @@
           "docsUrl": "https://docs.poyo.ai"
         },
         {
-          "modelId": "kling-2-1",
+          "modelId": "kling-2.1/standard",
           "name": "Kling 2.1",
           "vendor": "Kling",
           "capabilities": [
