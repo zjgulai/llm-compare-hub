@@ -3,6 +3,17 @@
 *.key
 *.p12
 *.pfx
+ai_video.pem
+
+# 敏感配置 / 凭据
+.env
+.env.*
+.env.local
+.env.*.local
+*secret*
+*credential*
+*_secret.json
+*_credentials.json
 
 # macOS
 .DS_Store
