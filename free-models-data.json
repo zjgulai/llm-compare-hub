@@ -56,37 +56,46 @@
       "type": "本地/API",
       "architecture": "Mixture-of-Experts",
       "parameters": {
-        "total": "109B (16 experts, 17B active)",
+        "total": "109B（16 experts，每 token 激活 17B）",
         "experts": 16,
         "activePerToken": "17B"
       },
-      "context": "256K tokens",
+      "context": "10M tokens",
       "capabilities": [
         "文本生成",
-        "多模态",
-        "长上下文",
-        "代码"
+        "多模态（图像输入）",
+        "超长上下文（10M tokens）",
+        "代码",
+        "多语言（12 种官方语言）",
+        "视觉理解",
+        "工具调用"
       ],
       "license": "Llama 4 License",
       "huggingface": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E",
-      "notes": "Meta最新开源旗舰模型，支持256K超长上下文和多模态，可通过Ollama一键本地部署",
-      "output": "Text / Multimodal",
-      "install": "ollama pull llama4",
+      "notes": "Meta 最新多模态 MoE 模型，109B 总参数激活 17B；支持业界最长 10M token 上下文和图像输入；Q4_K_M 需 67GB，适合 Mac Studio M2/M3 96GB+ 机器",
+      "output": "Text / Multimodal（Text + Image）",
+      "install": "ollama pull llama4:scout",
       "baseModelUrl": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E",
-      "diskSize": "~11 GB (Q4_K_M)",
-      "ramUsage": "~16 GB (Q4_K_M)",
-      "speed": "20-35 tok/s (M2/M3 Max)",
-      "requirements": "Apple Silicon (M2/M3/M4) with 16 GB+ unified memory",
+      "diskSize": "67 GB (Q4_K_M)",
+      "ramUsage": "最低 96 GB unified memory（推荐 128 GB+）",
+      "speed": "~5–12 tok/s（M2/M3 Ultra 192GB，Q4_K_M）",
+      "requirements": "Apple Silicon 96 GB+（Mac Studio M2/M3 Max 96GB 或 Ultra）",
       "quantization": {
-        "method": "Q4_K_M",
-        "via": "ollama"
+        "recommended": "Q4_K_M",
+        "available": [
+          "Q4_K_M",
+          "Q8_0",
+          "fp16"
+        ],
+        "recommendedSize": "67 GB"
       },
       "sampler": {
         "chat": "--temp 0.7",
         "reasoning": "--temp 0.3"
       },
-      "usage": "ollama run llama4",
-      "paper": "https://ai.meta.com/research/publications/the-llama-4-herd/"
+      "usage": "ollama run llama4:scout",
+      "paper": "https://ai.meta.com/research/publications/the-llama-4-herd/",
+      "ollamaUrl": "https://ollama.com/library/llama4"
     },
     {
       "rank": 3,
@@ -141,25 +150,32 @@
         "total": "235B",
         "activePerToken": "22B"
       },
-      "context": "128K tokens",
+      "context": "256K tokens",
       "capabilities": [
         "文本生成",
         "对话",
         "代码",
-        "推理"
+        "推理（思考模式）",
+        "多语言（100+ 语言）",
+        "工具调用"
       ],
-      "license": "Qwen License",
+      "license": "Apache 2.0",
       "huggingface": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
-      "notes": "阿里Qwen3旗舰开源模型，MoE架构，推理能力对标GPT-4。注意：SiliconFlow 已于 2025-12-31 停服，但本地仍可通过 ollama 运行",
+      "notes": "阿里 Qwen3 旗舰 MoE 模型，235B 总参数仅激活 22B，推理能力对标 DeepSeek-R1/o3-mini；需 192GB+ 内存；支持 /think 和 /no_think 两种模式。注意：SiliconFlow 已于 2025-12-31 停服，本地仍可通过 ollama 运行",
       "output": "Text",
       "baseModelUrl": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
-      "diskSize": "~130 GB (Q4_K_M)",
-      "ramUsage": "~64 GB+ (Q4_K_M, expert offload)",
-      "speed": "8-15 tok/s (M4 Ultra 192GB)",
-      "requirements": "Apple Silicon with 64 GB+ unified memory (M3/M4 Ultra 推荐)",
+      "diskSize": "142 GB (Q4_K_M)",
+      "ramUsage": "最低 192 GB unified memory（Mac Studio M2/M3 Ultra）",
+      "speed": "~3–8 tok/s（M2/M3 Ultra 192GB，Q4_K_M）",
+      "requirements": "Apple Silicon 192 GB+（Mac Studio / Mac Pro M2/M3 Ultra）",
       "quantization": {
-        "method": "Q4_K_M",
-        "via": "ollama"
+        "recommended": "Q4_K_M",
+        "available": [
+          "Q4_K_M",
+          "Q8_0",
+          "fp16"
+        ],
+        "recommendedSize": "142 GB"
       },
       "sampler": {
         "chat": "--temp 0.7",
@@ -167,7 +183,8 @@
       },
       "install": "ollama pull qwen3:235b",
       "usage": "ollama run qwen3:235b",
-      "paper": "https://arxiv.org/abs/2505.09388"
+      "paper": "https://arxiv.org/abs/2505.09388",
+      "ollamaUrl": "https://ollama.com/library/qwen3"
     },
     {
       "rank": 5,
@@ -335,22 +352,36 @@
         "total": "70B"
       },
       "quantization": {
-        "method": "Q4_K_M",
-        "via": "ollama"
+        "recommended": "Q4_K_M",
+        "available": [
+          "Q2_K",
+          "Q3_K_S",
+          "Q3_K_M",
+          "Q4_0",
+          "Q4_K_S",
+          "Q4_K_M",
+          "Q5_0",
+          "Q5_1",
+          "Q5_K_M",
+          "Q6_K",
+          "Q8_0",
+          "fp16"
+        ],
+        "recommendedSize": "43 GB"
       },
       "context": "128K tokens",
-      "diskSize": "~40 GB (Q4_K_M)",
-      "ramUsage": "~48 GB (Q4_K_M)",
-      "speed": "15-25 tok/s (M3 Max 128GB)",
-      "requirements": "Apple Silicon (M2/M3 Max/Ultra) with 48 GB+ unified memory",
+      "diskSize": "43 GB (Q4_K_M)",
+      "ramUsage": "最低 48 GB unified memory（推荐 64 GB+）",
+      "speed": "10–18 tok/s（M3 Max 64GB）；6–9 tok/s（M2/M3 Max 96GB）；15–25 tok/s（M3 Ultra 192GB）",
+      "requirements": "Apple Silicon 64 GB+ unified memory（M2 Max / M3 Max 及以上）",
       "license": "Llama 3 License",
       "paper": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct",
       "capabilities": [
         "文本生成",
         "对话",
         "代码",
-        "推理",
-        "多语言"
+        "多语言（英/德/法/西/意/葡/印地/泰语）",
+        "工具调用"
       ],
       "install": "ollama pull llama3.3:70b",
       "usage": "ollama run llama3.3:70b",
@@ -359,8 +390,9 @@
         "reasoning": "--temp 0.3"
       },
       "huggingface": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct",
-      "notes": "Meta Llama 3.3 旗舰密集模型，70B 参数综合能力均衡，Apache/Llama 许可证，适合 M3 Max 128GB 本地运行，性能接近 Llama 4 Scout 但推理更稳定",
-      "output": "Text"
+      "notes": "Meta 70B 旗舰开源模型，性能接近 Llama 3.1 405B；Q4_K_M 量化后需 43GB，适合 M2/M3 Max 64GB+ 机器；支持 8 种语言和工具调用",
+      "output": "Text",
+      "ollamaUrl": "https://ollama.com/library/llama3.3"
     },
     {
       "rank": 10,
