@@ -222,7 +222,7 @@
         {
           "rank": 7,
           "name": "Gemini 3 Flash",
-          "modelId": "gemini-3-flash-preview",
+          "modelId": "gemini-3-api",
           "platform": "poyo",
           "platformName": "PoYo.ai",
           "vendor": "Google",
@@ -945,19 +945,19 @@
     },
     {
       "rank": 3,
-      "name": "DeepSeek-R1",
-      "platform": "siliconflow",
-      "category": "文本对话",
-      "score": 92,
-      "tag": "推理之王"
-    },
-    {
-      "rank": 4,
       "name": "bge-reranker-v2-m3",
       "platform": "siliconflow",
       "category": "RAG重排序",
       "score": 93,
       "tag": "RAG精排标准"
+    },
+    {
+      "rank": 4,
+      "name": "DeepSeek-R1",
+      "platform": "siliconflow",
+      "category": "文本对话",
+      "score": 92,
+      "tag": "推理之王"
     },
     {
       "rank": 5,
@@ -969,22 +969,6 @@
     },
     {
       "rank": 6,
-      "name": "Qwen3-VL-32B",
-      "platform": "siliconflow",
-      "category": "文本对话",
-      "score": 85,
-      "tag": "多模态性价比"
-    },
-    {
-      "rank": 7,
-      "name": "GPT Image 2",
-      "platform": "poyo",
-      "category": "图像生成",
-      "score": 85,
-      "tag": "图像质量顶级"
-    },
-    {
-      "rank": 8,
       "name": "Kling 2.1",
       "platform": "poyo",
       "category": "视频生成",
@@ -992,12 +976,28 @@
       "tag": "视频性价比"
     },
     {
-      "rank": 9,
+      "rank": 7,
       "name": "FLUX.2",
       "platform": "poyo",
       "category": "图像生成",
       "score": 86,
       "tag": "开源SOTA"
+    },
+    {
+      "rank": 8,
+      "name": "Qwen3-VL-32B",
+      "platform": "siliconflow",
+      "category": "文本对话",
+      "score": 85,
+      "tag": "多模态性价比"
+    },
+    {
+      "rank": 9,
+      "name": "GPT Image 2",
+      "platform": "poyo",
+      "category": "图像生成",
+      "score": 85,
+      "tag": "图像质量顶级"
     },
     {
       "rank": 10,
@@ -1169,7 +1169,7 @@
         {
           "rank": 4,
           "name": "Gemini 3 Pro",
-          "modelId": "gemini-3-pro-preview",
+          "modelId": "gemini-3-api",
           "platform": "poyo",
           "score": 88,
           "tag": "Google代码能力",
@@ -1566,7 +1566,7 @@
         {
           "rank": 2,
           "name": "Gemini 3 Pro",
-          "modelId": "gemini-3-pro-preview",
+          "modelId": "gemini-3-api",
           "platform": "poyo",
           "score": 90,
           "tag": "Google多模态",
