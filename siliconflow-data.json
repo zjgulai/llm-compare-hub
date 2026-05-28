@@ -541,6 +541,47 @@
           "pricing": "输入 ¥1/M | 输出 ¥2/M",
           "output": "Text",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "deepseek-ai/DeepSeek-V4-Pro",
+          "name": "DeepSeek-V4-Pro",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "推理",
+            "代码",
+            "对话",
+            "长上下文"
+          ],
+          "context": "1049K tokens",
+          "pricing": "输入 ¥1.25/M | 输出 ¥2.50/M（估算，$0.174/$0.348，×7.2）",
+          "output": "Text",
+          "notes": "DeepSeek-V4 旗舰版，1.6T 总参数 49B 激活 MoE，1049K 超长上下文，2026-04-24 上线"
+        },
+        {
+          "modelId": "Qwen/Qwen3.5-27B",
+          "name": "Qwen3.5-27B",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话",
+            "代码"
+          ],
+          "context": "262K tokens",
+          "pricing": "输入 ¥1.8/M | 输出 ¥14.4/M（估算，$0.25/$2.00，×7.2）",
+          "output": "Text",
+          "notes": "Qwen3.5 密集 27B 模型，综合能力均衡，2026-04-24 上线"
+        },
+        {
+          "modelId": "Qwen/Qwen3.5-9B",
+          "name": "Qwen3.5-9B",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话",
+            "代码"
+          ],
+          "context": "262K tokens",
+          "pricing": "输入 ¥0.72/M | 输出 ¥1.08/M（估算，$0.10/$0.15，×7.2）",
+          "output": "Text",
+          "notes": "Qwen3.5 轻量版，9B 参数，极低价格，适合高并发轻量任务，2026-04-24 上线"
         }
       ]
     },
