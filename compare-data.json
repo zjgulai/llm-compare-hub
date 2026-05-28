@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-27",
+  "lastUpdated": "2026-05-28",
   "methodology": {
     "stabilityScoring": "基于API架构成熟度、平台SLA保障、用户反馈、模型可用率综合评估。硅基流动采用标准OpenAI格式+国内CDN+Pro高可用版本，稳定性普遍高于PoYo的异步轮询架构。",
     "valueScoring": "基于每1M token/每次请求的成本、上下文长度、输出质量、功能丰富度综合计算。价格按实时汇率折算为人民币。"
@@ -937,6 +937,14 @@
     },
     {
       "rank": 2,
+      "name": "DeepSeek-V4-Pro (EasyRouter)",
+      "platform": "easyrouter",
+      "category": "文本对话",
+      "score": 95,
+      "tag": "企业级+75%OFF"
+    },
+    {
+      "rank": 3,
       "name": "bge-m3",
       "platform": "siliconflow",
       "category": "RAG嵌入",
@@ -944,7 +952,15 @@
       "tag": "RAG行业标准"
     },
     {
-      "rank": 3,
+      "rank": 4,
+      "name": "DeepSeek-V4-Flash (EasyRouter)",
+      "platform": "easyrouter",
+      "category": "文本对话",
+      "score": 94,
+      "tag": "企业级85折"
+    },
+    {
+      "rank": 5,
       "name": "bge-reranker-v2-m3",
       "platform": "siliconflow",
       "category": "RAG重排序",
@@ -952,7 +968,15 @@
       "tag": "RAG精排标准"
     },
     {
-      "rank": 4,
+      "rank": 6,
+      "name": "DeepSeek-V4-Flash (BAI)",
+      "platform": "bai",
+      "category": "文本对话",
+      "score": 92,
+      "tag": "超大上下文"
+    },
+    {
+      "rank": 7,
       "name": "DeepSeek-R1",
       "platform": "siliconflow",
       "category": "文本对话",
@@ -960,7 +984,7 @@
       "tag": "推理之王"
     },
     {
-      "rank": 5,
+      "rank": 8,
       "name": "Kimi-K2.6",
       "platform": "siliconflow",
       "category": "文本对话",
@@ -968,7 +992,7 @@
       "tag": "中文长上下文"
     },
     {
-      "rank": 6,
+      "rank": 9,
       "name": "Kling 2.1",
       "platform": "poyo",
       "category": "视频生成",
@@ -976,7 +1000,7 @@
       "tag": "视频性价比"
     },
     {
-      "rank": 7,
+      "rank": 10,
       "name": "FLUX.2",
       "platform": "poyo",
       "category": "图像生成",
@@ -984,15 +1008,7 @@
       "tag": "开源SOTA"
     },
     {
-      "rank": 8,
-      "name": "Qwen3-VL-32B",
-      "platform": "siliconflow",
-      "category": "文本对话",
-      "score": 85,
-      "tag": "多模态性价比"
-    },
-    {
-      "rank": 9,
+      "rank": 11,
       "name": "GPT Image 2",
       "platform": "poyo",
       "category": "图像生成",
@@ -1000,12 +1016,20 @@
       "tag": "图像质量顶级"
     },
     {
-      "rank": 10,
+      "rank": 12,
       "name": "Sora 2 Official",
       "platform": "poyo",
       "category": "视频生成",
       "score": 85,
       "tag": "视频质量顶级"
+    },
+    {
+      "rank": 13,
+      "name": "Qwen3-VL-32B",
+      "platform": "siliconflow",
+      "category": "文本对话",
+      "score": 85,
+      "tag": "多模态性价比"
     }
   ],
   "functionRanking": [
@@ -1035,6 +1059,15 @@
         },
         {
           "rank": 3,
+          "name": "DeepSeek-V4-Flash (BAI)",
+          "modelId": "deepseek-v4-flash",
+          "platform": "bai",
+          "score": 91,
+          "tag": "BAI超大上下文",
+          "why": "BAI 平台 DeepSeek-V4-Flash 支持超大上下文窗口，适合处理完整代码库、长文档摘要等场景"
+        },
+        {
+          "rank": 4,
           "name": "Kimi-K2.6",
           "modelId": "moonshotai/Kimi-K2.6",
           "platform": "siliconflow",
@@ -1043,7 +1076,7 @@
           "why": "256K上下文，Moonshot以长文本著称，中文长文档摘要能力顶级"
         },
         {
-          "rank": 4,
+          "rank": 5,
           "name": "Kimi-K2.5",
           "modelId": "moonshotai/Kimi-K2.5",
           "platform": "siliconflow",
@@ -1052,7 +1085,7 @@
           "why": "256K上下文，价格比K2.6略低，长文本能力同样出色"
         },
         {
-          "rank": 5,
+          "rank": 6,
           "name": "GLM-5.1",
           "modelId": "zai-org/GLM-5.1",
           "platform": "siliconflow",
@@ -1061,7 +1094,7 @@
           "why": "198K上下文，智谱GLM系列在长文本Agent场景表现优秀"
         },
         {
-          "rank": 6,
+          "rank": 7,
           "name": "Claude Opus 4.7",
           "modelId": "claude-opus-4-7",
           "platform": "poyo",
@@ -1088,6 +1121,15 @@
         },
         {
           "rank": 2,
+          "name": "DeepSeek-V4-Pro (EasyRouter)",
+          "modelId": "deepseek-v4-pro",
+          "platform": "easyrouter",
+          "score": 95,
+          "tag": "企业级+75%OFF",
+          "why": "EasyRouter 全平台统一入口，DeepSeek-V4-Pro 享 25% 折扣，性价比极高，响应延迟极低"
+        },
+        {
+          "rank": 3,
           "name": "Qwen2.5-7B-Instruct",
           "modelId": "Qwen/Qwen2.5-7B-Instruct",
           "platform": "siliconflow",
@@ -1096,7 +1138,7 @@
           "why": "输入仅¥0.5/M，输出¥1/M，7B参数但对话能力出色，性价比极高"
         },
         {
-          "rank": 3,
+          "rank": 4,
           "name": "Kimi-K2.6",
           "modelId": "moonshotai/Kimi-K2.6",
           "platform": "siliconflow",
@@ -1105,7 +1147,16 @@
           "why": "中文理解和生成能力行业顶级，日常对话自然流畅"
         },
         {
-          "rank": 4,
+          "rank": 5,
+          "name": "DeepSeek-V4-Flash (BAI)",
+          "modelId": "deepseek-v4-flash",
+          "platform": "bai",
+          "score": 90,
+          "tag": "超大上下文",
+          "why": "BAI 平台 DeepSeek-V4-Flash，上下文窗口超大，适合长文档对话场景"
+        },
+        {
+          "rank": 6,
           "name": "GLM-5",
           "modelId": "zai-org/GLM-5",
           "platform": "siliconflow",
@@ -1114,7 +1165,7 @@
           "why": "198K上下文，工具调用能力强，适合Agent对话场景"
         },
         {
-          "rank": 5,
+          "rank": 7,
           "name": "DeepSeek-V3.2",
           "modelId": "deepseek-ai/DeepSeek-V3.2",
           "platform": "siliconflow",
@@ -1123,7 +1174,7 @@
           "why": "128K上下文，通用能力比V4-Flash更强，但价格更高（¥5/¥30）"
         },
         {
-          "rank": 6,
+          "rank": 8,
           "name": "Claude 4.5 Series",
           "modelId": "claude-4-5-api",
           "platform": "poyo",
@@ -1159,6 +1210,15 @@
         },
         {
           "rank": 3,
+          "name": "GPT-5.1 Codex (EasyRouter)",
+          "modelId": "gpt-5.1-codex",
+          "platform": "easyrouter",
+          "score": 93,
+          "tag": "专用代码模型",
+          "why": "EasyRouter 独有 Codex 专用代码模型，代码补全和生成针对性优化，享 15% 折扣"
+        },
+        {
+          "rank": 4,
           "name": "Qwen2.5-Coder-32B",
           "modelId": "Qwen/Qwen2.5-Coder-32B-Instruct",
           "platform": "siliconflow",
@@ -1167,7 +1227,16 @@
           "why": "阿里巴巴专用代码模型，32B参数，代码补全和生成能力出色，仅¥0.5/¥1 per 1M"
         },
         {
-          "rank": 4,
+          "rank": 5,
+          "name": "GPT-5.2 Codex (EasyRouter)",
+          "modelId": "gpt-5.2-codex",
+          "platform": "easyrouter",
+          "score": 91,
+          "tag": "Codex 升级版",
+          "why": "EasyRouter GPT-5.2 Codex，代码理解和多语言支持更强，适合复杂代码生成任务"
+        },
+        {
+          "rank": 6,
           "name": "Gemini 3 Pro",
           "modelId": "gemini-3-api",
           "platform": "poyo",
@@ -1176,7 +1245,7 @@
           "why": "Google Gemini代码能力优秀，支持streamGenerateContent流式输出"
         },
         {
-          "rank": 5,
+          "rank": 7,
           "name": "DeepSeek-V3.2",
           "modelId": "deepseek-ai/DeepSeek-V3.2",
           "platform": "siliconflow",
@@ -1185,7 +1254,7 @@
           "why": "通用能力强，代码任务表现良好，128K上下文适合大型代码库分析"
         },
         {
-          "rank": 6,
+          "rank": 8,
           "name": "GLM-Z1-32B-0414",
           "modelId": "THUDM/GLM-Z1-32B-0414",
           "platform": "siliconflow",
@@ -1442,6 +1511,15 @@
       "topModels": [
         {
           "rank": 1,
+          "name": "ElevenLabs V3 TTS",
+          "modelId": "elevenlabs-v3-tts",
+          "platform": "poyo",
+          "score": 96,
+          "tag": "音质顶级",
+          "why": "ElevenLabs V3 是当前最自然的TTS模型，支持29种语言，极低延迟流式输出，情感和语调控制精准，适合播客、有声书、客服等高质量场景"
+        },
+        {
+          "rank": 2,
           "name": "CosyVoice2-0.5B",
           "modelId": "FunAudioLLM/CosyVoice2-0.5B",
           "platform": "siliconflow",
@@ -1450,7 +1528,7 @@
           "why": "支持多音色克隆、情感控制、语速调节，输出格式丰富(mp3/wav/pcm/flac/opus/aac)，标准OpenAI格式"
         },
         {
-          "rank": 2,
+          "rank": 3,
           "name": "Add Vocals",
           "modelId": "add-vocals",
           "platform": "poyo",
@@ -1686,6 +1764,41 @@
           "score": 80,
           "tag": "格式转换",
           "why": "音频格式转换为WAV，$0.005/次"
+        }
+      ]
+    },
+    {
+      "functionId": "3d",
+      "functionName": "3D 模型生成",
+      "icon": "Box",
+      "description": "三维资产生成场景，核心指标：几何精度、纹理质量、生成速度、输出格式支持",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "Meshy 6 3D",
+          "modelId": "meshy-6-3d",
+          "platform": "poyo",
+          "score": 94,
+          "tag": "3D生成SOTA",
+          "why": "Meshy 最新旗舰3D生成模型，文本/图像→3D，高精度几何+PBR纹理，支持glTF/FBX/OBJ多格式导出"
+        },
+        {
+          "rank": 2,
+          "name": "Tripo3D H3.1",
+          "modelId": "tripo-h31-3d",
+          "platform": "poyo",
+          "score": 91,
+          "tag": "高精度建模",
+          "why": "Tripo3D 旗舰版，专注高精度3D重建，适合产品级资产生成，几何细节出色"
+        },
+        {
+          "rank": 3,
+          "name": "Tripo3D P1",
+          "modelId": "tripo-p1-3d",
+          "platform": "poyo",
+          "score": 87,
+          "tag": "快速原型",
+          "why": "Tripo3D 轻量版，生成速度快，适合快速原型验证，性价比高"
         }
       ]
     }
