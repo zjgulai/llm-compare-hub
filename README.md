@@ -2,6 +2,8 @@
 
 > 大模型 API 横向对比、选型参考、费用计算一站式查询平台
 
+🌐 **在线访问**: [https://zjgulai.github.io/llm-compare-hub/](https://zjgulai.github.io/llm-compare-hub/)
+
 ## 功能概览
 
 - **模型横向对比** — PoYo.ai vs 硅基流动，覆盖文本对话、图像生成、视频生成、音乐生成等多类别
