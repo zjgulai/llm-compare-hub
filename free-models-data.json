@@ -71,7 +71,22 @@
       "huggingface": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E",
       "notes": "Meta最新开源旗舰模型，支持256K超长上下文和多模态，可通过Ollama一键本地部署",
       "output": "Text / Multimodal",
-      "install": "ollama run llama4"
+      "install": "ollama pull llama4",
+      "baseModelUrl": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E",
+      "diskSize": "~11 GB (Q4_K_M)",
+      "ramUsage": "~16 GB (Q4_K_M)",
+      "speed": "20-35 tok/s (M2/M3 Max)",
+      "requirements": "Apple Silicon (M2/M3/M4) with 16 GB+ unified memory",
+      "quantization": {
+        "method": "Q4_K_M",
+        "via": "ollama"
+      },
+      "sampler": {
+        "chat": "--temp 0.7",
+        "reasoning": "--temp 0.3"
+      },
+      "usage": "ollama run llama4",
+      "paper": "https://ai.meta.com/research/publications/the-llama-4-herd/"
     },
     {
       "rank": 3,
@@ -97,7 +112,22 @@
       "huggingface": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E",
       "notes": "Meta最强开源模型，400B总参数，推理和代码能力接近GPT-4",
       "output": "Text / Multimodal",
-      "install": "ollama run llama4:maverick"
+      "install": "ollama pull llama4:maverick",
+      "baseModelUrl": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E",
+      "diskSize": "~65 GB (Q4_K_M, 128 experts)",
+      "ramUsage": "~24 GB+ (Q4_K_M, expert offload)",
+      "speed": "10-20 tok/s (M3 Max 128GB)",
+      "requirements": "Apple Silicon (M3/M4 Max/Ultra) with 64 GB+ unified memory",
+      "quantization": {
+        "method": "Q4_K_M",
+        "via": "ollama (requires 64GB+ RAM)"
+      },
+      "sampler": {
+        "chat": "--temp 0.7",
+        "reasoning": "--temp 0.3"
+      },
+      "usage": "ollama run llama4:maverick",
+      "paper": "https://ai.meta.com/research/publications/the-llama-4-herd/"
     },
     {
       "rank": 4,
@@ -120,8 +150,24 @@
       ],
       "license": "Qwen License",
       "huggingface": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
-      "notes": "阿里Qwen3旗舰开源模型，MoE架构，推理能力对标GPT-4",
-      "output": "Text"
+      "notes": "阿里Qwen3旗舰开源模型，MoE架构，推理能力对标GPT-4。注意：SiliconFlow 已于 2025-12-31 停服，但本地仍可通过 ollama 运行",
+      "output": "Text",
+      "baseModelUrl": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
+      "diskSize": "~130 GB (Q4_K_M)",
+      "ramUsage": "~64 GB+ (Q4_K_M, expert offload)",
+      "speed": "8-15 tok/s (M4 Ultra 192GB)",
+      "requirements": "Apple Silicon with 64 GB+ unified memory (M3/M4 Ultra 推荐)",
+      "quantization": {
+        "method": "Q4_K_M",
+        "via": "ollama"
+      },
+      "sampler": {
+        "chat": "--temp 0.7",
+        "thinking": "--temp 0.6"
+      },
+      "install": "ollama pull qwen3:235b",
+      "usage": "ollama run qwen3:235b",
+      "paper": "https://arxiv.org/abs/2505.09388"
     },
     {
       "rank": 5,
@@ -145,7 +191,23 @@
       "license": "DeepSeek License",
       "huggingface": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
       "notes": "深度求索开源旗舰，671B MoE架构，完全免费，国内访问顺畅",
-      "output": "Text"
+      "output": "Text",
+      "baseModelUrl": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
+      "diskSize": "~382 GB (Q4_K_M)",
+      "ramUsage": "~192 GB+ (需要 M4 Ultra 或多机)",
+      "speed": "5-10 tok/s (M4 Ultra 192GB)",
+      "requirements": "192 GB+ unified memory，或多 GPU 服务器",
+      "quantization": {
+        "method": "Q4_K_M / Q2_K",
+        "note": "Q2_K 约 190GB，单机可运行"
+      },
+      "sampler": {
+        "chat": "--temp 0.7",
+        "reasoning": "--temp 0.3"
+      },
+      "install": "ollama pull deepseek-v3",
+      "usage": "ollama run deepseek-v3",
+      "paper": "https://arxiv.org/abs/2412.19437"
     },
     {
       "rank": 6,
@@ -168,7 +230,21 @@
       "huggingface": "https://huggingface.co/google/gemma-3-27b-it",
       "notes": "Google Gemma 3系列，支持多模态，可通过Ollama一键运行",
       "output": "Text / Multimodal",
-      "install": "ollama run gemma3:27b"
+      "install": "ollama run gemma3:27b",
+      "baseModelUrl": "https://huggingface.co/google/gemma-3-27b-it",
+      "diskSize": "~17 GB (Q4_K_M)",
+      "ramUsage": "~20 GB (Q4_K_M)",
+      "speed": "15-25 tok/s (M2/M3 Max)",
+      "requirements": "Apple Silicon (M2/M3/M4) with 24 GB+ unified memory",
+      "quantization": {
+        "method": "Q4_K_M",
+        "via": "ollama"
+      },
+      "sampler": {
+        "chat": "--temp 0.7"
+      },
+      "usage": "ollama run gemma3:27b",
+      "paper": "https://arxiv.org/abs/2503.19786"
     },
     {
       "rank": 7,
@@ -190,7 +266,22 @@
       "license": "Apache 2.0",
       "huggingface": "https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503",
       "notes": "Mistral Small系列，Apache 2.0完全开源，商业友好",
-      "output": "Text"
+      "output": "Text",
+      "baseModelUrl": "https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503",
+      "diskSize": "~14 GB (Q4_K_M)",
+      "ramUsage": "~16 GB (Q4_K_M)",
+      "speed": "20-30 tok/s (M2/M3 Max)",
+      "requirements": "Apple Silicon (M2/M3/M4) with 16 GB+ unified memory",
+      "quantization": {
+        "method": "Q4_K_M",
+        "via": "ollama"
+      },
+      "sampler": {
+        "chat": "--temp 0.7"
+      },
+      "install": "ollama pull mistral-small3.1",
+      "usage": "ollama run mistral-small3.1",
+      "paper": "https://mistral.ai/news/mistral-small-3-1/"
     },
     {
       "rank": 8,
@@ -213,7 +304,102 @@
       "license": "MIT",
       "huggingface": "https://huggingface.co/microsoft/Phi-4-multimodal-instruct",
       "notes": "微软Phi-4多模态模型，仅5.6B参数但能力出色，MIT许可证",
-      "output": "Text / Multimodal"
+      "output": "Text / Multimodal",
+      "baseModelUrl": "https://huggingface.co/microsoft/Phi-4-multimodal-instruct",
+      "diskSize": "~3.5 GB (Q4_K_M)",
+      "ramUsage": "~6 GB (Q4_K_M)",
+      "speed": "50-80 tok/s (M1/M2)",
+      "requirements": "Apple Silicon (M1/M2/M3) with 8 GB+ unified memory",
+      "quantization": {
+        "method": "Q4_K_M",
+        "via": "ollama"
+      },
+      "sampler": {
+        "chat": "--temp 0.7",
+        "vision": "--temp 0.3"
+      },
+      "install": "ollama pull phi4",
+      "usage": "ollama run phi4",
+      "paper": "https://arxiv.org/abs/2503.01743"
+    },
+    {
+      "rank": 9,
+      "modelId": "meta-llama/Llama-3.3-70B-Instruct",
+      "name": "Llama 3.3 70B",
+      "vendor": "Meta",
+      "baseModel": "meta-llama/Llama-3.3-70B-Instruct",
+      "baseModelUrl": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct",
+      "type": "本地/API",
+      "architecture": "Dense Transformer",
+      "parameters": {
+        "total": "70B"
+      },
+      "quantization": {
+        "method": "Q4_K_M",
+        "via": "ollama"
+      },
+      "context": "128K tokens",
+      "diskSize": "~40 GB (Q4_K_M)",
+      "ramUsage": "~48 GB (Q4_K_M)",
+      "speed": "15-25 tok/s (M3 Max 128GB)",
+      "requirements": "Apple Silicon (M2/M3 Max/Ultra) with 48 GB+ unified memory",
+      "license": "Llama 3 License",
+      "paper": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct",
+      "capabilities": [
+        "文本生成",
+        "对话",
+        "代码",
+        "推理",
+        "多语言"
+      ],
+      "install": "ollama pull llama3.3:70b",
+      "usage": "ollama run llama3.3:70b",
+      "sampler": {
+        "chat": "--temp 0.7",
+        "reasoning": "--temp 0.3"
+      },
+      "huggingface": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct",
+      "notes": "Meta Llama 3.3 旗舰密集模型，70B 参数综合能力均衡，Apache/Llama 许可证，适合 M3 Max 128GB 本地运行，性能接近 Llama 4 Scout 但推理更稳定",
+      "output": "Text"
+    },
+    {
+      "rank": 10,
+      "modelId": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "name": "DeepSeek-R1 7B",
+      "vendor": "DeepSeek",
+      "baseModel": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "baseModelUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "type": "本地运行",
+      "architecture": "Dense Transformer (R1 蒸馏)",
+      "parameters": {
+        "total": "7B"
+      },
+      "quantization": {
+        "method": "Q4_K_M",
+        "via": "ollama"
+      },
+      "context": "128K tokens",
+      "diskSize": "~4.7 GB (Q4_K_M)",
+      "ramUsage": "~8 GB (Q4_K_M)",
+      "speed": "40-60 tok/s (M1/M2 16GB)",
+      "requirements": "Apple Silicon (M1/M2) with 8 GB+ unified memory",
+      "license": "MIT",
+      "paper": "https://arxiv.org/abs/2501.12948",
+      "capabilities": [
+        "推理",
+        "数学",
+        "代码",
+        "逻辑"
+      ],
+      "install": "ollama pull deepseek-r1:7b",
+      "usage": "ollama run deepseek-r1:7b",
+      "sampler": {
+        "reasoning": "--temp 0.3",
+        "chat": "--temp 0.6"
+      },
+      "huggingface": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "notes": "DeepSeek-R1 蒸馏小模型，MIT 许可证完全开源商用，仅需 8GB 内存即可运行，推理和数学能力远超同规模模型，MacBook Pro M1/M2 上的最佳推理本地模型",
+      "output": "Text"
     }
   ]
 }
