@@ -803,9 +803,10 @@
             "prompt": "string",
             "image": "optional"
           },
-          "pricing": "按需",
+          "pricing": "$0.060/sec (720p) | $0.090/sec (1080p)",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai"
+          "docsUrl": "https://docs.poyo.ai",
+          "pricingNote": "按秒计费，与 Wan 2.5/2.6 格式一致。720p $0.060/s，1080p $0.090/s，官方 Fal 原价 $0.100/s，PoYo 享 -40% 折扣"
         },
         {
           "modelId": "kling-avatar-2.0",
