@@ -1,0 +1,1474 @@
+{
+  "platform": "poyo",
+  "platformName": "PoYo.ai",
+  "platformUrl": "https://poyo.ai/zh",
+  "docsUrl": "https://docs.poyo.ai",
+  "apiOverview": {
+    "baseUrl": "https://api.poyo.ai",
+    "authentication": {
+      "type": "Bearer Token",
+      "header": "Authorization: Bearer YOUR_API_KEY",
+      "note": "获取API Key: https://poyo.ai/dashboard/api-key"
+    },
+    "architecture": "图像/视频/音乐生成使用异步架构; 聊天模型使用同步架构",
+    "asyncModels": "图像/视频/音乐生成使用异步架构",
+    "syncModels": "聊天模型使用同步架构"
+  },
+  "categories": [
+    {
+      "id": "image",
+      "name": "图像生成 API",
+      "description": "POST /api/generate/submit → 返回task_id → GET /api/generate/status/{task_id} 查询结果",
+      "endpoint": "POST /api/generate/submit",
+      "auth": "Authorization: Bearer <token>",
+      "commonParams": {
+        "model": "string (required) - 模型名称",
+        "input": "object (required) - 包含prompt等参数",
+        "callback_url": "string (optional) - 任务完成回调URL"
+      },
+      "models": [
+        {
+          "modelId": "gpt-image-2",
+          "name": "GPT Image 2",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "Text to Image",
+            "Image to Image"
+          ],
+          "variants": [
+            "gpt-image-2",
+            "gpt-image-2-edit"
+          ],
+          "input": {
+            "prompt": "string (required)",
+            "quality": "low|medium|high (default: low)",
+            "size": "auto|1:1|2:3|3:2|4:3|3:4|4:5|5:4|16:9|9:16|21:9|custom(WxH)",
+            "resolution": "1K(1x credits)|2K(2x)|4K(4x)"
+          },
+          "notes": "gpt-image-2-edit需要image_urls参数(支持多图); quality控制质量; resolution控制输出分辨率和credits消耗",
+          "pricing": "2 credits/per gen | Low: 1K=2cr,2K=4cr,4K=8cr | Medium: 1K=3cr,2K=6cr,4K=12cr | High: 1K=12cr,2K=24cr,4K=48cr | ~60% cheaper than official",
+          "output": "Image (PNG/JPEG)",
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/gpt-image-2"
+        },
+        {
+          "modelId": "nano-banana",
+          "name": "Nano Banana",
+          "vendor": "Google",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "nano-banana",
+            "nano-banana-edit"
+          ],
+          "input": {
+            "prompt": "string (required)",
+            "size": "16:9 (optional)"
+          },
+          "notes": "基于Gemini 2.5 Flash, 支持text-to-image和image-to-image",
+          "pricing": "$0.025/次 -36%",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/nano-banana"
+        },
+        {
+          "modelId": "nano-banana-2-api",
+          "name": "Nano Banana Pro",
+          "vendor": "Google",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "nano-banana-2-api"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.025/次 -69%",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/nano-banana-2"
+        },
+        {
+          "modelId": "gpt-image-1-5-api",
+          "name": "GPT Image 1.5",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "gpt-image-1-5-api"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.01/次 -23%",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/gpt-image-1.5"
+        },
+        {
+          "modelId": "gpt-4o-image-api",
+          "name": "GPT-4o Image",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "gpt-4o-image-api"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.02/次 -80%",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/gpt-4o-image"
+        },
+        {
+          "modelId": "kling-o3-image",
+          "name": "Kling O3 Image",
+          "vendor": "Kling",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "kling-o3-image"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.018/次 -37%",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "kling-o1-image",
+          "name": "Kling O1 Image",
+          "vendor": "Kling",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "kling-o1-image"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.018/次 -37%",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "seedream-4-5-api",
+          "name": "Seedream 4.5",
+          "vendor": "Seedance",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "seedream-4-5-api"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.025/次 -37.5%",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "seedream-5-0-lite-api",
+          "name": "Seedream 5.0 Lite",
+          "vendor": "Seedance",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "seedream-5-0-lite-api"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.025/次 -29%",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "seedream-4",
+          "name": "Seedream 4",
+          "vendor": "Seedance",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "seedream-4"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.025/次",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "z-image",
+          "name": "Z-Image",
+          "vendor": "Wan",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "z-image"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.01/次",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "wan-2-7-image",
+          "name": "Wan 2.7 Image",
+          "vendor": "Wan",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "wan-2-7-image"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.021/次 -30%",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "flux-2",
+          "name": "FLUX.2",
+          "vendor": "Black Forest Labs",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "flux-2-pro",
+            "flux-2-pro-edit",
+            "flux-2-flex",
+            "flux-2-flex-edit"
+          ],
+          "input": {
+            "prompt": "string (required)",
+            "size": "1:1|4:3|3:4|16:9|9:16|21:9|9:21 (optional)",
+            "resolution": "1K|2K (optional)",
+            "image_urls": "edit模型必填, 最多8张参考图"
+          },
+          "notes": "32B参数图像生成模型; flux-2-pro-edit支持最多8张输入图的多参考编辑; flux-2-flex可调节速度vs质量平衡",
+          "pricing": "$0.03/次",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/flux-2"
+        },
+        {
+          "modelId": "flux-kontext-pro",
+          "name": "Flux Kontext",
+          "vendor": "Black Forest Labs",
+          "capabilities": [
+            "Text to Image",
+            "Image to Image"
+          ],
+          "variants": [
+            "flux-kontext-pro",
+            "flux-kontext-pro-edit",
+            "flux-kontext-max",
+            "flux-kontext-max-edit"
+          ],
+          "input": {
+            "prompt": "string (required)",
+            "size": "1:1|4:3|3:4|16:9|9:16|21:9|9:21",
+            "output_format": "png|jpg",
+            "image_urls": "edit模型必填, 仅使用image_urls[0]"
+          },
+          "notes": "flux-kontext-pro-edit和flux-kontext-max-edit需要image_urls, 仅使用image_urls[0]作为输入图片",
+          "pricing": "$0.04/次",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/flux-kontext"
+        },
+        {
+          "modelId": "happy-horse",
+          "name": "Happy Horse",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "happy-horse"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.08/次 -43%",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "grok-imagine-image",
+          "name": "Grok Imagine",
+          "vendor": "xAI",
+          "capabilities": [
+            "Text to Image",
+            "Image to Image"
+          ],
+          "variants": [
+            "grok-imagine-image"
+          ],
+          "input": {
+            "prompt": "string (required)",
+            "size": "2:3|3:2|1:1|16:9|9:16 (optional)",
+            "image_urls": "image-to-image必填, 单张URL数组"
+          },
+          "notes": "支持text-to-image和image-to-image; image-to-image需要image_urls(单张, jpeg/png/webp, max 10MB)",
+          "pricing": "$0.03/次 -57%",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/grok-imagine-image"
+        },
+        {
+          "modelId": "nano-banana-2-new",
+          "name": "Nano Banana 2 (gemini-3.1-flash-image-preview)",
+          "vendor": "Google",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "variants": [
+            "nano-banana-2-new"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.025/次",
+          "output": "Image",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "image-translator",
+          "name": "Image Translator",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Image Translation"
+          ],
+          "variants": [
+            "image-translator"
+          ],
+          "input": {
+            "image": "input image URL",
+            "target_language": "string"
+          },
+          "notes": "图像翻译，将图片中的文字翻译为目标语言",
+          "pricing": "$0.05/次",
+          "output": "Translated Image",
+          "docsUrl": "https://docs.poyo.ai"
+        }
+      ]
+    },
+    {
+      "id": "video",
+      "name": "视频生成 API",
+      "description": "POST /api/generate/submit → GET /api/generate/status/{task_id}",
+      "endpoint": "POST /api/generate/submit",
+      "auth": "Authorization: Bearer <token>",
+      "commonParams": {
+        "model": "string (required)",
+        "input": "object (required)",
+        "callback_url": "string (optional)"
+      },
+      "models": [
+        {
+          "modelId": "seedance-2",
+          "name": "Seedance 2",
+          "vendor": "Seedance",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "seedance-2",
+            "seedance-2-fast"
+          ],
+          "input": {
+            "prompt": "string (required)",
+            "aspect_ratio": "21:9|16:9|4:3|1:1|3:4|9:16 (optional)",
+            "resolution": "480p|720p|1080p (seedance-2支持全部, fast仅480p/720p)",
+            "duration": "4-15 (整数秒)",
+            "generate_audio": "boolean (optional)",
+            "seed": "integer (optional)",
+            "image_urls": "最多2张, index0=首帧, index1=尾帧 (与reference_*_urls互斥)",
+            "reference_image_urls": "参考图片 (与image_urls互斥)",
+            "reference_video_urls": "参考视频 (与image_urls互斥)",
+            "reference_audio_urls": "参考音频 (与image_urls互斥)"
+          },
+          "notes": "image_urls与reference_*_urls互斥不能同时使用; seedance-2-fast仅支持480p和720p; 支持音频生成",
+          "pricing": "20 credits/second | 480p: 10cr/s(video输入)/20cr/s(无video) | 720p: 20cr/s/40cr/s | 1080p: 45cr/s/90cr/s",
+          "output": "Video (MP4) with optional audio",
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/seedance-2"
+        },
+        {
+          "modelId": "sora-2",
+          "name": "Sora 2",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "Text to Video"
+          ],
+          "variants": [
+            "sora-2"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.025/次 -95%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/sora-2"
+        },
+        {
+          "modelId": "sora-2-pro",
+          "name": "Sora 2 Pro",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "Text to Video"
+          ],
+          "variants": [
+            "sora-2-pro"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.50/次 -95%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/sora-2-pro"
+        },
+        {
+          "modelId": "sora-2-official",
+          "name": "Sora 2 Official",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "sora-2-official",
+            "sora-2-pro-official"
+          ],
+          "input": {
+            "prompt": "string (required)",
+            "duration": "4|8|12|16|20 (default: 4)",
+            "aspect_ratio": "16:9|9:16 (default: 16:9)",
+            "image_urls": "optional, 最多1张参考图 (JPEG/PNG/WebP up to 10MB)"
+          },
+          "pricing": "48 credits/4s | 96cr/8s | 144cr/12s | 192cr/16s | 240cr/20s | $0.06/秒, 40% cheaper than fal.ai",
+          "output": "Video with optional audio",
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/sora-2-official"
+        },
+        {
+          "modelId": "veo3.1-fast",
+          "name": "Veo 3.1",
+          "vendor": "Google",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "veo3.1-fast",
+            "veo3.1-lite",
+            "veo3.1-quality"
+          ],
+          "input": {
+            "prompt": "string (required)",
+            "duration": "8 (固定8秒)",
+            "aspect_ratio": "16:9|9:16|etc",
+            "image_urls": "veo3.1-fast和veo3.1-quality支持, veo3.1-lite不支持",
+            "generation_type": "frame(2张图)|reference(3张图) (由image_urls数量推断)"
+          },
+          "notes": "所有模型支持text-to-video; veo3.1-fast和veo3.1-quality支持image-to-video; 支持4K输出; 视频URL有效期24小时",
+          "pricing": "$0.05/次 -87%",
+          "output": "Video (MP4), 4K支持",
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/veo-3-1"
+        },
+        {
+          "modelId": "kling-2.1/standard",
+          "name": "Kling 2.1",
+          "vendor": "Kling",
+          "capabilities": [
+            "Image to Video"
+          ],
+          "variants": [
+            "kling-2.1/standard",
+            "kling-2.1/pro"
+          ],
+          "input": {
+            "prompt": "string (required)",
+            "start_image_url": "string (required, 首帧图片URL)",
+            "end_image_url": "string (optional, 仅pro支持尾帧)",
+            "duration": "5|10 (default: 5)",
+            "negative_prompt": "string (optional)"
+          },
+          "notes": "standard不支持end_image_url, pro支持首尾帧",
+          "pricing": "30 credits/5s standard | pro从55 credits起 | 50% cheaper than fal.ai",
+          "output": "Video (MP4)",
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-2-1"
+        },
+        {
+          "modelId": "kling-2-6",
+          "name": "Kling 2.6",
+          "vendor": "Kling",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "kling-2-6"
+          ],
+          "input": {
+            "prompt": "string",
+            "image": "optional"
+          },
+          "pricing": "$0.325/次 -7%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-2-6"
+        },
+        {
+          "modelId": "kling-2-5-turbo-pro",
+          "name": "Kling 2.5 Turbo Pro",
+          "vendor": "Kling",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "kling-2-5-turbo-pro"
+          ],
+          "input": {
+            "prompt": "string",
+            "image": "optional"
+          },
+          "pricing": "$0.21/次 -40%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "kling-3-api",
+          "name": "Kling 3.0",
+          "vendor": "Kling",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "kling-3-api"
+          ],
+          "input": {
+            "prompt": "string",
+            "image": "optional"
+          },
+          "pricing": "$0.135/次 -20%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "kling-3-0-motion-control",
+          "name": "Kling 3.0 Motion Control",
+          "vendor": "Kling",
+          "capabilities": [
+            "Motion Control"
+          ],
+          "variants": [
+            "kling-3-0-motion-control"
+          ],
+          "input": {
+            "prompt": "string",
+            "motion_path": "optional"
+          },
+          "pricing": "$0.045/次 -64%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "kling-2-6-motion-control",
+          "name": "Kling 2.6 Motion Control",
+          "vendor": "Kling",
+          "capabilities": [
+            "Motion Control"
+          ],
+          "variants": [
+            "kling-2-6-motion-control"
+          ],
+          "input": {
+            "prompt": "string",
+            "motion_path": "optional"
+          },
+          "pricing": "$0.04/次 -30%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "kling-o3-api",
+          "name": "Kling O3",
+          "vendor": "Kling",
+          "capabilities": [
+            "Text to Video"
+          ],
+          "variants": [
+            "kling-o3-api"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.05/次",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "seedance-1-0-pro",
+          "name": "Seedance 1.0 Pro",
+          "vendor": "Seedance",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "seedance-1-0-pro"
+          ],
+          "input": {
+            "prompt": "string",
+            "image": "optional"
+          },
+          "pricing": "$0.105/次 -83%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "seedance-1-5-pro",
+          "name": "Seedance 1.5 Pro",
+          "vendor": "Seedance",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "seedance-1-5-pro"
+          ],
+          "input": {
+            "prompt": "string",
+            "image": "optional"
+          },
+          "pricing": "$0.045/次 -24%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "wan-2-2-fast",
+          "name": "Wan 2.2 Fast",
+          "vendor": "Wan",
+          "capabilities": [
+            "Text to Video"
+          ],
+          "variants": [
+            "wan-2-2-fast"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.03/次",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "wan-2-5",
+          "name": "Wan 2.5",
+          "vendor": "Wan",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "wan-2-5"
+          ],
+          "input": {
+            "prompt": "string",
+            "image": "optional"
+          },
+          "pricing": "$0.15/次 -40%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "wan-2-6",
+          "name": "Wan 2.6",
+          "vendor": "Wan",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "wan-2-6"
+          ],
+          "input": {
+            "prompt": "string",
+            "image": "optional"
+          },
+          "pricing": "$0.40/次 -20%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "wan-animate",
+          "name": "Wan Animate",
+          "vendor": "Wan",
+          "capabilities": [
+            "Character Animation"
+          ],
+          "variants": [
+            "wan-animate"
+          ],
+          "input": {
+            "prompt": "string",
+            "character_image": "optional"
+          },
+          "pricing": "$0.035/次 -12%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "hailuo-02",
+          "name": "Hailuo 02",
+          "vendor": "Hailuo",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "hailuo-02"
+          ],
+          "input": {
+            "prompt": "string",
+            "image": "optional"
+          },
+          "pricing": "$0.035/次 -22%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "hailuo-2-3",
+          "name": "Hailuo 2.3",
+          "vendor": "Hailuo",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "hailuo-2-3"
+          ],
+          "input": {
+            "prompt": "string",
+            "image": "optional"
+          },
+          "pricing": "$0.175/次 -38%",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "runway-gen-4-5",
+          "name": "Runway Gen-4.5",
+          "vendor": "Runway",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "runway-gen-4-5"
+          ],
+          "input": {
+            "prompt": "string",
+            "image": "optional"
+          },
+          "pricing": "$0.375/次",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "wan-2-7-video",
+          "name": "Wan 2.7 Video",
+          "vendor": "Wan",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "variants": [
+            "wan-2-7-video"
+          ],
+          "input": {
+            "prompt": "string",
+            "image": "optional"
+          },
+          "pricing": "按需",
+          "output": "Video",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "kling-avatar-2.0",
+          "name": "Kling Avatar 2.0",
+          "vendor": "Kling",
+          "capabilities": [
+            "Avatar Generation"
+          ],
+          "variants": [
+            "kling-avatar-2.0"
+          ],
+          "input": {
+            "prompt": "string",
+            "image": "optional"
+          },
+          "notes": "Kling数字人生成/Avatar生成模型",
+          "pricing": "$0.035/次 -38%",
+          "output": "Video / Avatar",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "video-translator",
+          "name": "Video Translator",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Video Translation"
+          ],
+          "variants": [
+            "video-translator"
+          ],
+          "input": {
+            "video": "input video URL",
+            "target_language": "string"
+          },
+          "notes": "视频翻译，将视频中的语音和字幕翻译为目标语言",
+          "pricing": "$0.075/次",
+          "output": "Translated Video",
+          "docsUrl": "https://docs.poyo.ai"
+        }
+      ]
+    },
+    {
+      "id": "chat",
+      "name": "文本对话 API",
+      "description": "Claude: POST /v1/messages (x-api-key) | Gemini: POST /{method}/v1beta/models/{model} (Bearer) | 同步返回",
+      "endpoint": "POST /v1/messages 或 POST /{method}/v1beta/models/{model}",
+      "auth": "x-api-key 或 Authorization: Bearer",
+      "commonParams": {
+        "model": "string (required)",
+        "messages": "array (required)",
+        "max_tokens": "integer (required for Claude)",
+        "temperature": "number (optional, 0-1)",
+        "top_p": "number (optional, 0-1)",
+        "system": "string (optional)"
+      },
+      "models": [
+        {
+          "modelId": "claude-opus-4-7",
+          "name": "Claude Opus 4.7",
+          "vendor": "Anthropic",
+          "capabilities": [
+            "Chat",
+            "Code"
+          ],
+          "variants": [
+            "claude-opus-4-7"
+          ],
+          "input": {
+            "model": "string",
+            "messages": "array[{role,content}]",
+            "max_tokens": "integer",
+            "system": "optional string",
+            "temperature": "0-1",
+            "top_p": "0-1"
+          },
+          "notes": "与Claude Messages API格式完全兼容, 支持多轮对话和单轮查询, 支持文本和图像的多模态内容",
+          "pricing": "$0.004/1K 输入 ($4/$20 per 1M input/output)",
+          "output": "Text / Code (同步返回)",
+          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/claude-messages"
+        },
+        {
+          "modelId": "claude-4-6-api",
+          "name": "Claude 4.6 Series",
+          "vendor": "Anthropic",
+          "capabilities": [
+            "Chat"
+          ],
+          "variants": [
+            "claude-4-6-api"
+          ],
+          "input": {
+            "model": "string",
+            "messages": "array[{role,content}]",
+            "max_tokens": "integer"
+          },
+          "pricing": "$0.001/1K input -40%",
+          "output": "Text (同步返回)",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "claude-4-5-api",
+          "name": "Claude 4.5 Series",
+          "vendor": "Anthropic",
+          "capabilities": [
+            "Chat"
+          ],
+          "variants": [
+            "claude-4-5-api"
+          ],
+          "input": {
+            "model": "string",
+            "messages": "array[{role,content}]",
+            "max_tokens": "integer"
+          },
+          "pricing": "$0.001/1K input",
+          "output": "Text (同步返回)",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "gemini-3-api",
+          "name": "Gemini 3 Series",
+          "vendor": "Google",
+          "capabilities": [
+            "Chat",
+            "Code"
+          ],
+          "variants": [
+            "gemini-3-flash-preview",
+            "gemini-3-pro-preview"
+          ],
+          "input": {
+            "contents": "array[{role, parts:[{text}]}]",
+            "generationConfig": "object (可选, 温度/最大token等)",
+            "safetySettings": "object[] (可选)"
+          },
+          "pathParams": {
+            "model": "gemini-3-flash-preview 或 gemini-3-pro-preview",
+            "method": "generateContent 或 streamGenerateContent"
+          },
+          "notes": "使用Google Native API格式, 同步处理实时响应; streamGenerateContent支持流式输出",
+          "pricing": "1 credits/1K input (Flash: $0.4/$2.4, Pro: $0.8/$4.8 per 1M)",
+          "output": "Text / Code (同步返回)",
+          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/gemini-native-format"
+        },
+        {
+          "modelId": "gpt-5.5",
+          "name": "GPT-5.5",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "代码"
+          ],
+          "variants": [
+            "gpt-5.5"
+          ],
+          "input": {
+            "model": "gpt-5.5",
+            "messages": "array[{role,content}]",
+            "max_tokens": "integer",
+            "temperature": "0-1",
+            "top_p": "0-1"
+          },
+          "notes": "OpenAI GPT-5.5 系列模型",
+          "pricing": "$0.003/1K 输入 -40%",
+          "output": "Text / Code (同步返回)",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "gemini-3.5-flash",
+          "name": "Gemini 3.5 Flash",
+          "vendor": "Google",
+          "capabilities": [
+            "对话",
+            "多模态"
+          ],
+          "variants": [
+            "gemini-3.5-flash"
+          ],
+          "input": {
+            "contents": "array[{role, parts:[{text}]}]",
+            "generationConfig": "object (可选)"
+          },
+          "notes": "Google Gemini 3.5 Flash，速度快、性价比高",
+          "pricing": "$0.0009/1K 输入 -40%",
+          "output": "Text / Code (同步返回)",
+          "docsUrl": "https://docs.poyo.ai"
+        }
+      ]
+    },
+    {
+      "id": "music",
+      "name": "音乐音效 API",
+      "description": "POST /api/generate/submit → GET /api/generate/status/{task_id} | 查询详情: POST /api/generate/music/detail",
+      "endpoint": "POST /api/generate/submit",
+      "auth": "Authorization: Bearer <token>",
+      "commonParams": {
+        "model": "string (required) - generate-music 等",
+        "input": "object (required) - 包含prompt/style等",
+        "callback_url": "string (optional)"
+      },
+      "models": [
+        {
+          "modelId": "generate-music",
+          "name": "AI Music (Generate Music)",
+          "vendor": "PoYo (Suno AI)",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "generate-music"
+          ],
+          "input": {
+            "prompt": "string (e.g., A catchy pop song about summer love)",
+            "style": "string (custom_mode=true时必填)",
+            "title": "string (custom_mode=true时必填)",
+            "custom_mode": "boolean (default: false)",
+            "instrumental": "boolean (default: false, true=纯音乐)",
+            "mv": "V4|V4_5|V4_5PLUS|V4_5ALL|V5|V5_5 (default: V4)",
+            "negative_tags": "string (optional)",
+            "persona_id": "string (optional)",
+            "style_weight": "0-1 (default: 0.50)",
+            "weirdness_constraint": "0-1 (default: 0.50)",
+            "audio_weight": "0-1 (default: 0.50)",
+            "vocal_gender": "m|f (optional)"
+          },
+          "notes": "Custom Mode: custom_mode=true时, instrumental=true需要style+title; instrumental=false需要style+prompt+title; Non-custom Mode: prompt最多500字符; 不同mv版本字符限制不同",
+          "pricing": "20 credits/次",
+          "output": "Audio (MP3/WAV)",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-music"
+        },
+        {
+          "modelId": "extend-music",
+          "name": "Extend Music",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "extend-music"
+          ],
+          "input": {
+            "audio": "input audio URL",
+            "duration": "target duration"
+          },
+          "pricing": "$0.10/次",
+          "output": "Audio",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/extend-music"
+        },
+        {
+          "modelId": "upload-and-cover-audio",
+          "name": "Upload and Cover Audio",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "upload-and-cover-audio"
+          ],
+          "input": {
+            "audio": "input audio URL",
+            "style": "string"
+          },
+          "pricing": "$0.10/次",
+          "output": "Audio",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/upload-and-cover-audio"
+        },
+        {
+          "modelId": "upload-and-extend-audio",
+          "name": "Upload and Extend Audio",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "upload-and-extend-audio"
+          ],
+          "input": {
+            "audio": "input audio URL",
+            "duration": "target duration"
+          },
+          "pricing": "$0.10/次",
+          "output": "Audio",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/upload-and-extend-audio"
+        },
+        {
+          "modelId": "add-instrumental",
+          "name": "Add Instrumental",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "add-instrumental"
+          ],
+          "input": {
+            "audio": "input audio with vocals"
+          },
+          "pricing": "$0.10/次",
+          "output": "Audio with instrumental track",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/add-instrumental"
+        },
+        {
+          "modelId": "add-vocals",
+          "name": "Add Vocals",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "add-vocals"
+          ],
+          "input": {
+            "audio": "input instrumental",
+            "lyrics": "optional string"
+          },
+          "pricing": "$0.10/次",
+          "output": "Audio with vocals",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/add-vocals"
+        },
+        {
+          "modelId": "get-timestamped-lyrics",
+          "name": "Get Timestamped Lyrics",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "get-timestamped-lyrics"
+          ],
+          "input": {
+            "audio": "input audio"
+          },
+          "pricing": "$0.005/次",
+          "output": "Timestamped lyrics (LRC format)",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/get-timestamped-lyrics"
+        },
+        {
+          "modelId": "boost-music-style",
+          "name": "Boost Music Style",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "boost-music-style"
+          ],
+          "input": {
+            "audio": "input audio",
+            "style": "string"
+          },
+          "pricing": "$0.005/次",
+          "output": "Audio",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/boost-music-style"
+        },
+        {
+          "modelId": "generate-music-cover",
+          "name": "Generate Music Cover",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "generate-music-cover"
+          ],
+          "input": {
+            "audio": "input audio"
+          },
+          "pricing": "$0.005/次",
+          "output": "Album cover image",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-music-cover"
+        },
+        {
+          "modelId": "replace-section",
+          "name": "Replace Section",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "replace-section"
+          ],
+          "input": {
+            "audio": "input audio",
+            "start_time": "number",
+            "end_time": "number",
+            "replacement": "audio segment"
+          },
+          "pricing": "$0.05/次",
+          "output": "Audio",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/replace-section"
+        },
+        {
+          "modelId": "generate-persona",
+          "name": "Generate Persona",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "generate-persona"
+          ],
+          "input": {
+            "description": "string"
+          },
+          "pricing": "$0.005/次",
+          "output": "Persona ID",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-persona"
+        },
+        {
+          "modelId": "generate-lyrics",
+          "name": "Generate Lyrics",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "generate-lyrics"
+          ],
+          "input": {
+            "topic": "string",
+            "style": "optional string"
+          },
+          "pricing": "$0.005/次",
+          "output": "Lyrics text",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-lyrics"
+        },
+        {
+          "modelId": "convert-to-wav",
+          "name": "Convert to WAV",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "convert-to-wav"
+          ],
+          "input": {
+            "audio": "input audio"
+          },
+          "pricing": "$0.005/次",
+          "output": "WAV audio file",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/convert-to-wav"
+        },
+        {
+          "modelId": "vocal-remover-api",
+          "name": "Vocal Remover",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "vocal-remover"
+          ],
+          "input": {
+            "audio": "input audio"
+          },
+          "pricing": "$0.075/次",
+          "output": "Instrumental audio (vocals removed)",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/vocal-remover"
+        },
+        {
+          "modelId": "create-music-video",
+          "name": "AI Music Video",
+          "vendor": "PoYo",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "create-music-video"
+          ],
+          "input": {
+            "audio": "input audio",
+            "style": "optional string"
+          },
+          "pricing": "$0.02/次",
+          "output": "Video (MP4)",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/create-music-video"
+        },
+        {
+          "modelId": "minimax-music-2-6",
+          "name": "MiniMax Music 2.6",
+          "vendor": "MiniMax",
+          "capabilities": [
+            "Music"
+          ],
+          "variants": [
+            "minimax-music-2-6"
+          ],
+          "input": {
+            "prompt": "string"
+          },
+          "pricing": "$0.10/次",
+          "output": "Audio",
+          "docsUrl": "https://docs.poyo.ai"
+        }
+      ]
+    },
+    {
+      "id": "3d",
+      "name": "3D 生成 API",
+      "description": "POST /api/generate/submit | 文本/图片生成3D模型",
+      "endpoint": "POST /api/generate/submit",
+      "auth": "Authorization: Bearer <token>",
+      "commonParams": {
+        "model": "string (required)",
+        "input": "object (required)",
+        "callback_url": "string (optional)"
+      },
+      "models": [
+        {
+          "modelId": "meshy-6-3d",
+          "name": "Meshy 6 3D",
+          "vendor": "Meshy",
+          "capabilities": [
+            "Text to 3D",
+            "Image to 3D"
+          ],
+          "variants": [
+            "meshy-6-3d"
+          ],
+          "input": {
+            "prompt": "string (required)",
+            "image": "optional"
+          },
+          "notes": "Meshy 3D生成模型，支持文本和图片输入生成3D模型",
+          "pricing": "按次计费",
+          "output": "3D Model (GLB/OBJ)",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "tripo-h31-3d",
+          "name": "Tripo3D H3.1",
+          "vendor": "Tripo3D",
+          "capabilities": [
+            "Text to 3D",
+            "Image to 3D"
+          ],
+          "variants": [
+            "tripo-h31-3d"
+          ],
+          "input": {
+            "prompt": "string (required)",
+            "image": "optional"
+          },
+          "notes": "Tripo3D高保真3D生成模型",
+          "pricing": "按次计费",
+          "output": "3D Model (GLB/OBJ)",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "modelId": "tripo-p1-3d",
+          "name": "Tripo3D P1",
+          "vendor": "Tripo3D",
+          "capabilities": [
+            "Text to 3D",
+            "Image to 3D"
+          ],
+          "variants": [
+            "tripo-p1-3d"
+          ],
+          "input": {
+            "prompt": "string (required)",
+            "image": "optional"
+          },
+          "notes": "Tripo3D快速3D生成模型",
+          "pricing": "按次计费",
+          "output": "3D Model (GLB/OBJ)",
+          "docsUrl": "https://docs.poyo.ai"
+        }
+      ]
+    },
+    {
+      "id": "audio",
+      "name": "语音合成 API",
+      "description": "文本转语音 API | 多种音色和语言支持",
+      "endpoint": "POST /api/generate/submit",
+      "auth": "Authorization: Bearer <token>",
+      "commonParams": {
+        "model": "string (required)",
+        "input": "object (required)",
+        "callback_url": "string (optional)"
+      },
+      "models": [
+        {
+          "modelId": "elevenlabs-v3-tts",
+          "name": "ElevenLabs V3 TTS",
+          "vendor": "ElevenLabs",
+          "capabilities": [
+            "TTS"
+          ],
+          "variants": [
+            "elevenlabs-v3-tts"
+          ],
+          "input": {
+            "text": "string (required)",
+            "voice": "string (optional)",
+            "language": "string (optional)"
+          },
+          "notes": "ElevenLabs V3 文本转语音，支持多种音色和语言",
+          "pricing": "$0.08/次 -20%",
+          "output": "Audio (MP3/WAV)",
+          "docsUrl": "https://docs.poyo.ai"
+        }
+      ]
+    }
+  ],
+  "commonApis": [
+    {
+      "name": "Query Task Status",
+      "endpoint": "GET /api/generate/status/{task_id}",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "description": "查询图像/视频/音乐生成任务的执行状态和结果",
+      "response": {
+        "code": "200",
+        "data": {
+          "task_id": "string",
+          "status": "finished|not_started|in_progress|failed",
+          "files": [
+            {
+              "file_url": "string",
+              "file_type": "image|video|audio"
+            }
+          ],
+          "created_time": "datetime",
+          "progress": "0-100",
+          "error_message": "string|null"
+        }
+      }
+    },
+    {
+      "name": "Upload File from URL",
+      "endpoint": "POST /api/common/upload/url",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "description": "通过远程URL上传文件到PoYo AI存储",
+      "request": {
+        "file_url": "https://example.com/images/sample.jpg"
+      },
+      "response": {
+        "success": "true",
+        "data": {
+          "file_url": "string",
+          "expires_at": "72小时后过期"
+        }
+      },
+      "notes": "支持JPEG/PNG/GIF/WebP, 每次1张图, 文件72小时后自动删除"
+    },
+    {
+      "name": "Upload File from Base64",
+      "endpoint": "POST /api/common/upload/base64",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "description": "通过Base64编码上传文件"
+    },
+    {
+      "name": "Query User Balance",
+      "endpoint": "GET /api/user/balance",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "description": "查询账户余额和 credits 信息"
+    },
+    {
+      "name": "Query Music Detail",
+      "endpoint": "POST /api/generate/music/detail",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "description": "查询音乐生成的详细结果"
+    }
+  ]
+}

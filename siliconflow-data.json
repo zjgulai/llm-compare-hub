@@ -1,0 +1,964 @@
+{
+  "platform": "siliconflow",
+  "platformName": "硅基流动 (SiliconFlow)",
+  "platformUrl": "https://www.siliconflow.cn",
+  "docsUrl": "https://docs.siliconflow.cn",
+  "apiOverview": {
+    "baseUrl": "https://api.siliconflow.cn",
+    "authentication": {
+      "type": "Bearer Token",
+      "header": "Authorization: Bearer YOUR_API_KEY",
+      "note": "获取API Key: https://cloud.siliconflow.cn/account/ak"
+    },
+    "architecture": "所有模型统一通过 OpenAI 兼容格式调用，支持流式(stream)输出，部分模型支持 Anthropic 原生格式"
+  },
+  "categories": [
+    {
+      "id": "chat",
+      "name": "文本对话 API",
+      "description": "POST /v1/chat/completions (OpenAI兼容格式) | 支持流式输出",
+      "endpoint": "POST /v1/chat/completions",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "commonParams": {
+        "model": "string (required) - 模型名称",
+        "messages": "array (required) - 对话消息列表 [{role, content}]",
+        "stream": "boolean (optional, default: false) - 是否流式返回 SSE",
+        "max_tokens": "integer (optional) - 最大生成token数，预留~10K buffer",
+        "temperature": "number (optional, default: 0.7) - 采样温度",
+        "top_p": "number (optional, default: 0.7) - 核采样概率阈值",
+        "top_k": "integer (optional) - Top-K采样",
+        "frequency_penalty": "number (optional, default: 0) - 频率惩罚",
+        "presence_penalty": "number (optional, default: 0) - 存在惩罚",
+        "n": "integer (optional, default: 1) - 生成数量",
+        "stop": "string/array (optional) - 停止词",
+        "tools": "array (optional) - 工具定义",
+        "tool_choice": "string/object (optional) - 工具选择策略",
+        "response_format": "object (optional) - 输出格式如json_schema"
+      },
+      "response": {
+        "id": "string",
+        "object": "chat.completion",
+        "created": "integer",
+        "model": "string",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "string",
+              "reasoning_content": "string"
+            },
+            "finish_reason": "string"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": "integer",
+          "completion_tokens": "integer",
+          "total_tokens": "integer",
+          "completion_tokens_details": {
+            "reasoning_tokens": "integer"
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": "integer"
+          },
+          "prompt_cache_hit_tokens": "integer",
+          "prompt_cache_miss_tokens": "integer"
+        }
+      },
+      "models": [
+        {
+          "modelId": "deepseek-ai/DeepSeek-V4-Flash",
+          "name": "DeepSeek-V4-Flash",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "1024K",
+          "pricing": "输入 ¥1/M | 输出 ¥2/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "deepseek-ai/DeepSeek-V3.2",
+          "name": "DeepSeek-V3.2",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "128K",
+          "pricing": "输入 ¥2/M | 输出 ¥3/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Pro/deepseek-ai/DeepSeek-V3.2",
+          "name": "DeepSeek-V3.2 (Pro)",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "128K",
+          "pricing": "输入 ¥8.5/M | 输出 ¥30/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "deepseek-ai/DeepSeek-V3.1-Terminus",
+          "name": "DeepSeek-V3.1-Terminus",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "64K",
+          "pricing": "输入 ¥1/M | 输出 ¥2/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Pro/deepseek-ai/DeepSeek-V3.1-Terminus",
+          "name": "DeepSeek-V3.1-Terminus (Pro)",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "64K",
+          "pricing": "输入 ¥5/M | 输出 ¥30/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "deepseek-ai/DeepSeek-R1",
+          "name": "DeepSeek-R1",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "对话",
+            "推理"
+          ],
+          "context": "64K",
+          "pricing": "输入 ¥4/M | 输出 ¥16/M",
+          "output": "Text (含reasoning_content)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Pro/deepseek-ai/DeepSeek-R1",
+          "name": "DeepSeek-R1 (Pro)",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "对话",
+            "推理"
+          ],
+          "context": "64K",
+          "pricing": "输入 ¥4/M | 输出 ¥16/M",
+          "output": "Text (含reasoning_content)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "moonshotai/Kimi-K2.6",
+          "name": "Kimi-K2.6",
+          "vendor": "Moonshot",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "256K",
+          "pricing": "输入 ¥6.5/M | 输出 ¥27/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Pro/moonshotai/Kimi-K2.6",
+          "name": "Kimi-K2.6 (Pro)",
+          "vendor": "Moonshot",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "256K",
+          "pricing": "输入 ¥6.5/M | 输出 ¥27/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "moonshotai/Kimi-K2.5",
+          "name": "Kimi-K2.5",
+          "vendor": "Moonshot",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "256K",
+          "pricing": "输入 ¥4/M | 输出 ¥21/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Pro/moonshotai/Kimi-K2.5",
+          "name": "Kimi-K2.5 (Pro)",
+          "vendor": "Moonshot",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "256K",
+          "pricing": "输入 ¥6.5/M | 输出 ¥27/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "moonshotai/Kimi-K2-Thinking",
+          "name": "Kimi-K2-Thinking",
+          "vendor": "Moonshot",
+          "capabilities": [
+            "对话",
+            "推理"
+          ],
+          "context": "256K",
+          "pricing": "输入 ¥2/M | 输出 ¥16/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "moonshotai/Kimi-K2-Instruct-0905",
+          "name": "Kimi-K2-Instruct-0905",
+          "vendor": "Moonshot",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "128K",
+          "pricing": "输入 ¥5/M | 输出 ¥20/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "zai-org/GLM-5.1",
+          "name": "GLM-5.1",
+          "vendor": "智谱",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "198K",
+          "pricing": "输入 ¥6/M | 输出 ¥28/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Pro/zai-org/GLM-5.1",
+          "name": "GLM-5.1 (Pro)",
+          "vendor": "智谱",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "198K",
+          "pricing": "输入 ¥6/M | 输出 ¥28/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "zai-org/GLM-5",
+          "name": "GLM-5",
+          "vendor": "智谱",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "198K",
+          "pricing": "输入 ¥5.6/M | 输出 ¥25/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Pro/zai-org/GLM-5",
+          "name": "GLM-5 (Pro)",
+          "vendor": "智谱",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "198K",
+          "pricing": "输入 ¥4/M | 输出 ¥22/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "zai-org/GLM-4.7",
+          "name": "GLM-4.7",
+          "vendor": "智谱",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "198K",
+          "pricing": "输入 ¥5/M | 输出 ¥22/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Pro/zai-org/GLM-4.7",
+          "name": "GLM-4.7 (Pro)",
+          "vendor": "智谱",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "198K",
+          "pricing": "输入 ¥4/M | 输出 ¥16/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "zai-org/GLM-4.6",
+          "name": "GLM-4.6",
+          "vendor": "智谱",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "198K",
+          "pricing": "输入 ¥4/M | 输出 ¥18/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Pro/zai-org/GLM-4.6",
+          "name": "GLM-4.6 (Pro)",
+          "vendor": "智谱",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "198K",
+          "pricing": "输入 ¥4/M | 输出 ¥18/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "THUDM/GLM-Z1-32B-0414",
+          "name": "GLM-Z1-32B-0414",
+          "vendor": "智谱",
+          "capabilities": [
+            "对话",
+            "推理"
+          ],
+          "context": "128K",
+          "pricing": "输入 ¥2.5/M | 输出 ¥10/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "THUDM/GLM-4-32B-0414",
+          "name": "GLM-4-32B-0414",
+          "vendor": "智谱",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "128K",
+          "pricing": "输入 ¥2.5/M | 输出 ¥10/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "THUDM/GLM-Z1-9B-0414",
+          "name": "GLM-Z1-9B-0414",
+          "vendor": "智谱",
+          "capabilities": [
+            "对话",
+            "推理"
+          ],
+          "context": "128K",
+          "pricing": "输入 ¥1/M | 输出 ¥4/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "THUDM/GLM-4-9B-0414",
+          "name": "GLM-4-9B-0414",
+          "vendor": "智谱",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "128K",
+          "pricing": "输入 ¥1/M | 输出 ¥4/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "MiniMaxAI/MiniMax-M2.5",
+          "name": "MiniMax-M2.5",
+          "vendor": "MiniMax",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "192K",
+          "pricing": "输入 ¥2.1/M | 输出 ¥8.4/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Pro/MiniMaxAI/MiniMax-M2.5",
+          "name": "MiniMax-M2.5 (Pro)",
+          "vendor": "MiniMax",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "512K",
+          "pricing": "输入 ¥5/M | 输出 ¥20/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Qwen/Qwen3.6-35B-A3B",
+          "name": "Qwen3.6-35B-A3B",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "256K",
+          "pricing": "输入 ¥1/M | 输出 ¥5/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Qwen/Qwen3.6-27B",
+          "name": "Qwen3.6-27B",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "256K",
+          "pricing": "输入 ¥2.5/M | 输出 ¥10/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Qwen/Qwen3.5-397B-A17B",
+          "name": "Qwen3.5-397B-A17B",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "128K",
+          "pricing": "输入 ¥1/M | 输出 ¥5/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Qwen/Qwen3.5-122B-A10B",
+          "name": "Qwen3.5-122B-A10B",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "128K",
+          "pricing": "输入 ¥2.5/M | 输出 ¥10/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Qwen/Qwen3.5-35B-A3B",
+          "name": "Qwen3.5-35B-A3B",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "128K",
+          "pricing": "输入 ¥1/M | 输出 ¥5/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Qwen/Qwen3-VL-32B-Instruct",
+          "name": "Qwen3-VL-32B-Instruct",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话",
+            "视觉"
+          ],
+          "context": "40K",
+          "pricing": "输入 ¥1/M | 输出 ¥5/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Qwen/Qwen2.5-72B-Instruct",
+          "name": "Qwen2.5-72B-Instruct",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "64K",
+          "pricing": "输入 ¥1/M | 输出 ¥2/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Qwen/Qwen2.5-14B-Instruct",
+          "name": "Qwen2.5-14B-Instruct",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "64K",
+          "pricing": "输入 ¥1/M | 输出 ¥2/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Qwen/Qwen2.5-7B-Instruct",
+          "name": "Qwen2.5-7B-Instruct",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "32K",
+          "pricing": "输入 ¥0.5/M | 输出 ¥1/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Pro/Qwen/Qwen2.5-7B-Instruct",
+          "name": "Qwen2.5-7B-Instruct (Pro)",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "32K",
+          "pricing": "输入 ¥0.5/M | 输出 ¥1/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Qwen/Qwen2.5-Coder-32B-Instruct",
+          "name": "Qwen2.5-Coder-32B-Instruct",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话",
+            "代码"
+          ],
+          "context": "32K",
+          "pricing": "输入 ¥0.5/M | 输出 ¥1/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "modelId": "Qwen/Qwen2.5-Math-72B",
+          "name": "Qwen2.5-Math-72B",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "对话",
+            "数学"
+          ],
+          "context": "32K",
+          "pricing": "输入 ¥1/M | 输出 ¥2/M",
+          "output": "Text",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        }
+      ]
+    },
+    {
+      "id": "image",
+      "name": "图像生成 API",
+      "description": "POST /v1/images/generations - 图片URL有效期1小时，请及时下载保存",
+      "endpoint": "POST /v1/images/generations",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "commonParams": {
+        "model": "string (required) - 如 Kwai-Kolors/Kolors",
+        "prompt": "string (required) - 文本描述",
+        "negative_prompt": "string (optional) - 负面提示",
+        "image_size": "string (required, 格式: widthxheight) - 推荐值见各模型文档",
+        "batch_size": "integer (optional, default: 1) - 生成数量 1-4",
+        "num_inference_steps": "integer (optional, default: 20) - 推理步数",
+        "guidance_scale": "number (optional, default: 7.5) - CFG scale",
+        "image": "string (optional) - 图生图时的参考图URL/base64",
+        "strength": "number (optional) - 图生图强度 0-1",
+        "seed": "integer (optional) - 随机种子"
+      },
+      "response": {
+        "images": [
+          {
+            "url": "string",
+            "timings": {
+              "inference": 123
+            },
+            "seed": 123
+          }
+        ]
+      },
+      "models": [
+        {
+          "modelId": "Qwen/Qwen-Image-Edit-2509",
+          "name": "Qwen-Image-Edit-2509",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "生图",
+            "编辑"
+          ],
+          "pricing": "按需",
+          "output": "Image (URL有效1小时)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+        },
+        {
+          "modelId": "Qwen/Qwen-Image-Edit",
+          "name": "Qwen-Image-Edit",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "生图",
+            "编辑"
+          ],
+          "pricing": "按需",
+          "output": "Image (URL有效1小时)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+        },
+        {
+          "modelId": "Qwen/Qwen-Image-Max-360p",
+          "name": "Qwen-Image-Max-360p",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "生图"
+          ],
+          "pricing": "按需",
+          "output": "Image (URL有效1小时)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+        },
+        {
+          "modelId": "Qwen/Qwen-Image-Max-720p",
+          "name": "Qwen-Image-Max-720p",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "生图"
+          ],
+          "pricing": "按需",
+          "output": "Image (URL有效1小时)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+        },
+        {
+          "modelId": "Tongyi-MAI/Z-Image-Turbo",
+          "name": "Z-Image-Turbo",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "生图"
+          ],
+          "pricing": "输入 ¥0/M | 输出 ¥0.1/M",
+          "output": "Image (URL有效1小时)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+        },
+        {
+          "modelId": "Tongyi-MAI/Z-Image",
+          "name": "Z-Image",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "生图"
+          ],
+          "pricing": "输入 ¥0/M | 输出 ¥0.3/M",
+          "output": "Image (URL有效1小时)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+        },
+        {
+          "modelId": "Kwai-Kolors/Kolors",
+          "name": "Kolors",
+          "vendor": "Kwai",
+          "capabilities": [
+            "生图"
+          ],
+          "pricing": "按需",
+          "output": "Image (URL有效1小时)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+        },
+        {
+          "modelId": "baidu/ERNIE-Image-Turbo",
+          "name": "ERNIE-Image-Turbo",
+          "vendor": "百度",
+          "capabilities": [
+            "生图"
+          ],
+          "pricing": "输入 ¥0/M | 输出 ¥0.11/M",
+          "output": "Image (URL有效1小时)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+        }
+      ]
+    },
+    {
+      "id": "video",
+      "name": "视频生成 API",
+      "description": "POST /v1/video/submit (异步) → POST /v1/videos/status (查询结果, 10分钟有效)",
+      "endpoint": "POST /v1/video/submit",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "commonParams": {
+        "model": "string (required) - Wan-AI/Wan2.2-I2V-A14B 或 Wan-AI/Wan2.2-T2V-A14B",
+        "prompt": "string (required) - 视频描述",
+        "image_size": "enum (required) - 1280x720 | 720x1280 | 960x960",
+        "negative_prompt": "string (optional) - 负面提示",
+        "image": "string (I2V必填) - 参考图URL/base64"
+      },
+      "response": {
+        "requestId": "string"
+      },
+      "statusEndpoint": "POST /v1/videos/status",
+      "statusParams": {
+        "requestId": "string (required)"
+      },
+      "models": [
+        {
+          "modelId": "Wan-AI/Wan2.2-I2V-A14B",
+          "name": "Wan2.2-I2V-A14B",
+          "vendor": "Wan",
+          "capabilities": [
+            "图生视频"
+          ],
+          "pricing": "按需",
+          "output": "Video (MP4, 10分钟有效)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit"
+        },
+        {
+          "modelId": "Wan-AI/Wan2.2-T2V-A14B",
+          "name": "Wan2.2-T2V-A14B",
+          "vendor": "Wan",
+          "capabilities": [
+            "文生视频"
+          ],
+          "pricing": "按需",
+          "output": "Video (MP4, 10分钟有效)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit"
+        }
+      ]
+    },
+    {
+      "id": "embedding",
+      "name": "嵌入 API",
+      "description": "POST /v1/embeddings - 将文本/图片转化为向量，支持经典格式和VL多模态格式",
+      "endpoint": "POST /v1/embeddings",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "commonParams": {
+        "model": "string (required) - 如 BAAI/bge-large-zh-v1.5",
+        "input": "string/array (required) - 输入文本或token数组; VL模型支持图片URL/base64",
+        "user": "string (optional) - 用户标识",
+        "truncate": "boolean (optional) - 超出最大token是否截断"
+      },
+      "response": {
+        "object": "list",
+        "model": "string",
+        "data": [
+          {
+            "object": "embedding",
+            "embedding": [
+              123
+            ],
+            "index": 123
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 123,
+          "total_tokens": 123
+        }
+      },
+      "models": [
+        {
+          "modelId": "BAAI/bge-large-zh-v1.5",
+          "name": "bge-large-zh-v1.5",
+          "vendor": "BAAI",
+          "capabilities": [
+            "嵌入"
+          ],
+          "context": "512",
+          "pricing": "¥0.5/M tokens",
+          "output": "Vector (1024维)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+        },
+        {
+          "modelId": "BAAI/bge-large-en-v1.5",
+          "name": "bge-large-en-v1.5",
+          "vendor": "BAAI",
+          "capabilities": [
+            "嵌入"
+          ],
+          "context": "512",
+          "pricing": "¥0.5/M tokens",
+          "output": "Vector (1024维)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+        },
+        {
+          "modelId": "BAAI/bge-m3",
+          "name": "bge-m3",
+          "vendor": "BAAI",
+          "capabilities": [
+            "嵌入"
+          ],
+          "context": "8192",
+          "pricing": "¥0.5/M tokens",
+          "output": "Vector (1024维)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+        },
+        {
+          "modelId": "Pro/BAAI/bge-m3",
+          "name": "bge-m3 (Pro)",
+          "vendor": "BAAI",
+          "capabilities": [
+            "嵌入"
+          ],
+          "context": "8192",
+          "pricing": "¥0.5/M tokens",
+          "output": "Vector (1024维)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+        },
+        {
+          "modelId": "Qwen/Qwen3-Embedding-4B",
+          "name": "Qwen3-Embedding-4B",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "嵌入"
+          ],
+          "context": "32768",
+          "pricing": "按需",
+          "output": "Vector",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+        },
+        {
+          "modelId": "Qwen/Qwen3-Embedding-0.6B",
+          "name": "Qwen3-Embedding-0.6B",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "嵌入"
+          ],
+          "context": "32768",
+          "pricing": "按需",
+          "output": "Vector",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+        },
+        {
+          "modelId": "netease-youdao/bce-embedding-base_v1",
+          "name": "bce-embedding-base_v1",
+          "vendor": "网易有道",
+          "capabilities": [
+            "嵌入"
+          ],
+          "context": "512",
+          "pricing": "按需",
+          "output": "Vector",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+        }
+      ]
+    },
+    {
+      "id": "rerank",
+      "name": "重排序 API",
+      "description": "POST /v1/rerank - 对文档列表按与query的相关性进行重排序",
+      "endpoint": "POST /v1/rerank",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "commonParams": {
+        "model": "string (required)",
+        "query": "string (required) - 查询文本",
+        "documents": "array (required) - 待排序文档列表",
+        "top_n": "integer (optional) - 返回前N个结果",
+        "return_documents": "boolean (optional, default: false) - 是否返回文档内容"
+      },
+      "response": {
+        "id": "string",
+        "results": [
+          {
+            "index": 123,
+            "relevance_score": 0.95,
+            "document": "string"
+          }
+        ]
+      },
+      "models": [
+        {
+          "modelId": "Pro/BAAI/bge-reranker-v2-m3",
+          "name": "bge-reranker-v2-m3",
+          "vendor": "BAAI",
+          "capabilities": [
+            "重排序"
+          ],
+          "pricing": "按需",
+          "output": "Ranked documents",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
+        },
+        {
+          "modelId": "BAAI/bge-reranker-v2-m3",
+          "name": "bge-reranker-v2-m3",
+          "vendor": "BAAI",
+          "capabilities": [
+            "重排序"
+          ],
+          "pricing": "按需",
+          "output": "Ranked documents",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
+        },
+        {
+          "modelId": "Qwen/Qwen3-Reranker-4B",
+          "name": "Qwen3-Reranker-4B",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "重排序"
+          ],
+          "pricing": "按需",
+          "output": "Ranked documents",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
+        },
+        {
+          "modelId": "Qwen/Qwen3-Reranker-0.6B",
+          "name": "Qwen3-Reranker-0.6B",
+          "vendor": "Alibaba",
+          "capabilities": [
+            "重排序"
+          ],
+          "pricing": "按需",
+          "output": "Ranked documents",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
+        }
+      ]
+    },
+    {
+      "id": "audio",
+      "name": "语音 API",
+      "description": "TTS: POST /v1/audio/speech | STT: POST /v1/audio/transcriptions | 上传参考音频: POST /v1/audio/voice | 获取列表: GET /v1/audio/voices",
+      "ttsEndpoint": "POST /v1/audio/speech",
+      "sttEndpoint": "POST /v1/audio/transcriptions",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "ttsParams": {
+        "model": "string (required) - FunAudioLLM/CosyVoice2-0.5B",
+        "input": "string (required) - 要转换的文本",
+        "voice": "string (required) - 音色ID，通过/v1/audio/voices获取",
+        "response_format": "string (optional, default: mp3) - mp3|wav|pcm|flac|opus|aac",
+        "speed": "number (optional, default: 1.0) - 语速倍率",
+        "sample_rate": "integer (optional) - 采样率"
+      },
+      "sttParams": {
+        "model": "string (required) - FunAudioLLM/SenseVoiceSmall",
+        "file": "string (required) - 音频文件路径或URL",
+        "language": "string (optional) - 语言代码如zh/en",
+        "response_format": "string (optional, default: json) - json|text|verbose_json|srt|vtt"
+      },
+      "models": [
+        {
+          "modelId": "FunAudioLLM/CosyVoice2-0.5B",
+          "name": "CosyVoice2-0.5B",
+          "vendor": "FunAudioLLM",
+          "capabilities": [
+            "TTS"
+          ],
+          "pricing": "按需",
+          "output": "Audio (MP3/WAV/PCM/FLAC/Opus/AAC)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/audio/create-speech"
+        },
+        {
+          "modelId": "FunAudioLLM/SenseVoiceSmall",
+          "name": "SenseVoiceSmall",
+          "vendor": "FunAudioLLM",
+          "capabilities": [
+            "STT"
+          ],
+          "pricing": "按需",
+          "output": "Text (转录文本)",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/audio/create-audio-transcriptions"
+        }
+      ]
+    }
+  ],
+  "commonApis": [
+    {
+      "name": "获取用户模型列表",
+      "endpoint": "GET /v1/user/models",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "description": "获取当前用户可用的所有模型列表"
+    },
+    {
+      "name": "查询视频生成状态",
+      "endpoint": "POST /v1/videos/status",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "description": "通过 requestId 查询视频生成任务状态，返回视频链接(10分钟有效)",
+      "request": {
+        "requestId": "string"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1693 @@
+{
+  "lastUpdated": "2025-01-13",
+  "methodology": {
+    "stabilityScoring": "基于API架构成熟度、平台SLA保障、用户反馈、模型可用率综合评估。硅基流动采用标准OpenAI格式+国内CDN+Pro高可用版本，稳定性普遍高于PoYo的异步轮询架构。",
+    "valueScoring": "基于每1M token/每次请求的成本、上下文长度、输出质量、功能丰富度综合计算。价格按实时汇率折算为人民币。"
+  },
+  "categories": [
+    {
+      "categoryId": "chat",
+      "categoryName": "文本对话",
+      "icon": "MessageSquare",
+      "winner": "硅基流动",
+      "summary": "硅基流动在对话模型数量(39个 vs 4个)和价格(DeepSeek ¥1/M)上碾压PoYo。PoYo仅聚合Claude/Gemini海外模型，适合必须使用海外模型的场景。",
+      "models": [
+        {
+          "rank": 1,
+          "name": "DeepSeek-V4-Flash",
+          "modelId": "deepseek-ai/DeepSeek-V4-Flash",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "DeepSeek",
+          "category": "文本对话",
+          "capabilities": [
+            "对话",
+            "长上下文"
+          ],
+          "context": "1024K",
+          "inputPrice": 1.0,
+          "outputPrice": 2.0,
+          "priceNote": "输入 ¥1/M | 输出 ¥2/M",
+          "stability": 5,
+          "stabilityReason": "硅基流动Pro版本+国内CDN，标准OpenAI格式，SLA保障高",
+          "valueScore": 5,
+          "valueReason": "1024K上下文仅¥1/M，性价比绝对天花板，无对手",
+          "overallScore": 98,
+          "pros": [
+            "1024K超大上下文",
+            "¥1/M输入价格全行业最低",
+            "标准OpenAI API格式",
+            "国内CDN低延迟",
+            "流式输出支持"
+          ],
+          "cons": [
+            "相比Claude代码能力略弱",
+            "海外知识更新可能滞后"
+          ],
+          "bestFor": "长文档分析、知识库问答、大规模文本处理",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "rank": 2,
+          "name": "DeepSeek-R1",
+          "modelId": "deepseek-ai/DeepSeek-R1",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "DeepSeek",
+          "category": "文本对话",
+          "capabilities": [
+            "对话",
+            "推理",
+            "数学"
+          ],
+          "context": "64K",
+          "inputPrice": 4.0,
+          "outputPrice": 16.0,
+          "priceNote": "输入 ¥4/M | 输出 ¥16/M",
+          "stability": 5,
+          "stabilityReason": "硅基流动Pro版本，推理模型中稳定性最高",
+          "valueScore": 4.5,
+          "valueReason": "推理能力对标Claude Opus，价格仅1/7",
+          "overallScore": 92,
+          "pros": [
+            "推理能力顶级(对标Claude)",
+            "数学/逻辑能力极强",
+            "显示思考过程(reasoning_content)",
+            "价格远低于海外推理模型"
+          ],
+          "cons": [
+            "输出较贵(¥16/M)",
+            "响应速度较慢(需推理)"
+          ],
+          "bestFor": "数学计算、逻辑推理、代码调试、复杂分析",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "rank": 3,
+          "name": "Kimi-K2.6",
+          "modelId": "moonshotai/Kimi-K2.6",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "Moonshot",
+          "category": "文本对话",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "256K",
+          "inputPrice": 6.5,
+          "outputPrice": 27.0,
+          "priceNote": "输入 ¥6.5/M | 输出 ¥27/M",
+          "stability": 4.5,
+          "stabilityReason": "Moonshot官方直连，硅基流动Pro版本保障",
+          "valueScore": 4,
+          "valueReason": "256K长上下文，中文理解和生成能力顶级",
+          "overallScore": 87,
+          "pros": [
+            "256K长上下文",
+            "中文能力行业顶级",
+            "Moonshot官方模型",
+            "长文档摘要能力强"
+          ],
+          "cons": [
+            "输出价格较高(¥27/M)",
+            "非Pro版可能排队"
+          ],
+          "bestFor": "中文长文档处理、小说创作、中文知识问答",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "rank": 4,
+          "name": "GLM-5.1",
+          "modelId": "zai-org/GLM-5.1",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "智谱",
+          "category": "文本对话",
+          "capabilities": [
+            "对话"
+          ],
+          "context": "198K",
+          "inputPrice": 6.0,
+          "outputPrice": 28.0,
+          "priceNote": "输入 ¥6/M | 输出 ¥28/M",
+          "stability": 4.5,
+          "stabilityReason": "智谱官方模型，硅基流动Pro版高可用",
+          "valueScore": 3.8,
+          "valueReason": "198K上下文+中文能力强，但输出价格偏高",
+          "overallScore": 82,
+          "pros": [
+            "198K长上下文",
+            "中文能力优秀",
+            "智谱GLM系列旗舰",
+            "工具调用能力强"
+          ],
+          "cons": [
+            "输出价格贵(¥28/M)",
+            "国际知名度较低"
+          ],
+          "bestFor": "中文Agent开发、工具调用场景、国内合规要求",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "rank": 5,
+          "name": "Qwen3-VL-32B-Instruct",
+          "modelId": "Qwen/Qwen3-VL-32B-Instruct",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "Alibaba",
+          "category": "文本对话",
+          "capabilities": [
+            "对话",
+            "视觉",
+            "多模态"
+          ],
+          "context": "40K",
+          "inputPrice": 1.0,
+          "outputPrice": 5.0,
+          "priceNote": "输入 ¥1/M | 输出 ¥5/M",
+          "stability": 4.5,
+          "stabilityReason": "阿里云官方模型，稳定性有保障",
+          "valueScore": 4.2,
+          "valueReason": "多模态能力强，价格仅¥1/M输入",
+          "overallScore": 85,
+          "pros": [
+            "支持图像理解(VL)",
+            "价格极低",
+            "40K上下文",
+            "阿里巴巴官方"
+          ],
+          "cons": [
+            "上下文较短(40K)",
+            "图像理解精度不如GPT-4o"
+          ],
+          "bestFor": "图像问答、多模态RAG、图文混合处理",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+        },
+        {
+          "rank": 6,
+          "name": "Claude Opus 4.7",
+          "modelId": "claude-opus-4-7",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "Anthropic",
+          "category": "文本对话",
+          "capabilities": [
+            "对话",
+            "代码"
+          ],
+          "context": "200K",
+          "inputPrice": 28.0,
+          "outputPrice": 140.0,
+          "priceNote": "$4/$20 per 1M tokens (~¥28/¥140)",
+          "stability": 3.5,
+          "stabilityReason": "PoYo异步架构，需轮询状态，海外链路可能波动",
+          "valueScore": 2.5,
+          "valueReason": "代码能力顶级但价格极贵，仅适合必须使用Claude的场景",
+          "overallScore": 68,
+          "pros": [
+            "代码能力全球顶级",
+            "200K上下文",
+            "Claude原生Messages API",
+            "推理能力强"
+          ],
+          "cons": [
+            "价格极贵(¥28/¥140 per 1M)",
+            "PoYo平台异步架构复杂",
+            "海外链路延迟高",
+            "仅4个对话模型可选"
+          ],
+          "bestFor": "必须使用Claude的代码任务、复杂推理、海外合规场景",
+          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/claude-messages"
+        },
+        {
+          "rank": 7,
+          "name": "Gemini 3 Flash",
+          "modelId": "gemini-3-flash-preview",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "Google",
+          "category": "文本对话",
+          "capabilities": [
+            "对话",
+            "代码"
+          ],
+          "context": "128K",
+          "inputPrice": 2.8,
+          "outputPrice": 17.0,
+          "priceNote": "$0.4/$2.4 per 1M tokens (~¥2.8/¥17)",
+          "stability": 3.5,
+          "stabilityReason": "PoYo异步架构，Google Native格式兼容性一般",
+          "valueScore": 3.2,
+          "valueReason": "价格比Claude低很多，但架构不如硅基流动成熟",
+          "overallScore": 72,
+          "pros": [
+            "Google原生多模态",
+            "支持streamGenerateContent流式",
+            "价格比Claude低"
+          ],
+          "cons": [
+            "PoYo平台稳定性一般",
+            "非标准OpenAI格式",
+            "上下文128K较短"
+          ],
+          "bestFor": "必须使用Google Gemini的场景、Google生态集成",
+          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/gemini-native-format"
+        }
+      ]
+    },
+    {
+      "categoryId": "image",
+      "categoryName": "图像生成",
+      "icon": "Image",
+      "winner": "各有优势",
+      "summary": "硅基流动覆盖国内主流图像模型(Qwen/Kolors/ERNIE)，价格低；PoYo独占GPT Image 2、FLUX.2、Grok Imagine等海外顶级模型，但价格更高。Z-Image两个平台都有。",
+      "models": [
+        {
+          "rank": 1,
+          "name": "GPT Image 2",
+          "modelId": "gpt-image-2",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "OpenAI",
+          "category": "图像生成",
+          "capabilities": [
+            "Text to Image",
+            "Image to Image"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 14.0,
+          "priceNote": "2 credits/次 (~¥0.14/次起，按质量/分辨率递增)",
+          "stability": 4,
+          "stabilityReason": "OpenAI官方模型，PoYo稳定代理",
+          "valueScore": 3.5,
+          "valueReason": "图像质量顶级，但按次计费不如硅基流动的按量计费灵活",
+          "overallScore": 85,
+          "pros": [
+            "图像质量行业顶级",
+            "支持1K/2K/4K分辨率",
+            "支持Image-to-Image编辑",
+            "质量等级可调"
+          ],
+          "cons": [
+            "按次计费不够灵活",
+            "价格随质量递增",
+            "PoYo平台异步等待"
+          ],
+          "bestFor": "高质量商业图像、广告设计、专业图像编辑",
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/gpt-image-2"
+        },
+        {
+          "rank": 2,
+          "name": "FLUX.2",
+          "modelId": "flux-2",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "Black Forest Labs",
+          "category": "图像生成",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 21.0,
+          "priceNote": "$0.03/次 (~¥0.21/次)",
+          "stability": 4,
+          "stabilityReason": "Black Forest Labs官方，PoYo代理稳定",
+          "valueScore": 4,
+          "valueReason": "32B参数开源SOTA，支持多种变体，价格适中",
+          "overallScore": 86,
+          "pros": [
+            "32B参数开源图像SOTA",
+            "支持Pro/Flex/Edit多版本",
+            "支持最多8张参考图",
+            "1K/2K分辨率"
+          ],
+          "cons": [
+            "$0.03/次对高频使用不够经济",
+            "上下文编辑能力不如GPT Image 2"
+          ],
+          "bestFor": "高质量图像生成、多参考图合成、艺术创作",
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/flux-2"
+        },
+        {
+          "rank": 3,
+          "name": "Z-Image (硅基流动)",
+          "modelId": "Tongyi-MAI/Z-Image",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "Alibaba",
+          "category": "图像生成",
+          "capabilities": [
+            "生图"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 0,
+          "priceNote": "按需计费（通常低于PoYo）",
+          "stability": 4.5,
+          "stabilityReason": "阿里云官方模型，标准API格式",
+          "valueScore": 4.5,
+          "valueReason": "标准OpenAI格式，阿里云基础设施，价格低",
+          "overallScore": 88,
+          "pros": [
+            "阿里云官方模型",
+            "标准OpenAI images/generations格式",
+            "国内CDN低延迟",
+            "价格透明"
+          ],
+          "cons": [
+            "图像质量不如FLUX.2/GPT Image 2",
+            "功能较单一"
+          ],
+          "bestFor": "国内业务图像生成、电商产品图、快速原型",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+        },
+        {
+          "rank": 4,
+          "name": "Z-Image (PoYo)",
+          "modelId": "z-image",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "Alibaba",
+          "category": "图像生成",
+          "capabilities": [
+            "Text to Image"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 7.0,
+          "priceNote": "$0.01/次 (~¥0.07/次)",
+          "stability": 3.5,
+          "stabilityReason": "PoYo异步架构，需轮询获取结果",
+          "valueScore": 3.8,
+          "valueReason": "价格极低，但异步体验不如硅基流动的同步返回",
+          "overallScore": 78,
+          "pros": [
+            "价格极低($0.01/次)",
+            "支持多种尺寸",
+            "Wan生态"
+          ],
+          "cons": [
+            "异步轮询架构",
+            "图像质量中等",
+            "不如硅基流动同模型的同步体验"
+          ],
+          "bestFor": "低成本批量图像生成、测试场景",
+          "docsUrl": "https://docs.poyo.ai"
+        },
+        {
+          "rank": 5,
+          "name": "Kolors",
+          "modelId": "Kwai-Kolors/Kolors",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "Kwai",
+          "category": "图像生成",
+          "capabilities": [
+            "生图"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 0,
+          "priceNote": "按需计费",
+          "stability": 4,
+          "stabilityReason": "Kwai官方模型，硅基流动稳定代理",
+          "valueScore": 4,
+          "valueReason": "中文理解能力强的图像模型，价格适中",
+          "overallScore": 82,
+          "pros": [
+            "中文提示词理解强",
+            "Kwai自研模型",
+            "标准API格式"
+          ],
+          "cons": [
+            "国际知名度不如FLUX",
+            "社区生态较小"
+          ],
+          "bestFor": "中文场景图像生成、国风/动漫风格",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+        },
+        {
+          "rank": 6,
+          "name": "Grok Imagine",
+          "modelId": "grok-imagine-image",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "xAI",
+          "category": "图像生成",
+          "capabilities": [
+            "Text to Image",
+            "Image to Image"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 21.0,
+          "priceNote": "$0.03/次 (~¥0.21/次), -57%",
+          "stability": 3.5,
+          "stabilityReason": "xAI模型，PoYo代理，海外链路",
+          "valueScore": 3.2,
+          "valueReason": "比官方便宜57%，但质量中等，不如FLUX.2",
+          "overallScore": 72,
+          "pros": [
+            "比xAI官方便宜57%",
+            "支持Image-to-Image",
+            "多种尺寸"
+          ],
+          "cons": [
+            "图像质量一般",
+            "海外链路不稳定",
+            "Grok生态不成熟"
+          ],
+          "bestFor": "必须使用Grok生态的场景",
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/grok-imagine-image"
+        }
+      ]
+    },
+    {
+      "categoryId": "video",
+      "categoryName": "视频生成",
+      "icon": "Video",
+      "winner": "PoYo.ai",
+      "summary": "硅基流动仅有2个Wan2.2视频模型。PoYo拥有Sora 2、Veo 3.1、Kling全系列、Wan全系列、Hailuo、Seedance、Runway等21个视频模型，碾压式优势。",
+      "models": [
+        {
+          "rank": 1,
+          "name": "Sora 2 Official",
+          "modelId": "sora-2-official",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "OpenAI",
+          "category": "视频生成",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 42.0,
+          "priceNote": "48cr/4s = ~¥0.24/4s (~¥0.06/秒), 比fal.ai便宜40%",
+          "stability": 4,
+          "stabilityReason": "OpenAI官方，PoYo稳定代理，支持最长20秒",
+          "valueScore": 3.5,
+          "valueReason": "视频质量顶级但价格较高，适合高质量商业用途",
+          "overallScore": 85,
+          "pros": [
+            "OpenAI Sora官方质量",
+            "支持4s-20s多时长",
+            "支持Image-to-Video",
+            "比fal.ai便宜40%",
+            "可生成音频"
+          ],
+          "cons": [
+            "价格较高(48cr/4s)",
+            "仅支持16:9",
+            "需要异步轮询"
+          ],
+          "bestFor": "商业广告视频、高质量创意视频、AI电影制作",
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/sora-2-official"
+        },
+        {
+          "rank": 2,
+          "name": "Seedance 2",
+          "modelId": "seedance-2",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "Seedance",
+          "category": "视频生成",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 50.0,
+          "priceNote": "20cr/秒 (~¥0.10-0.45/秒按分辨率)",
+          "stability": 3.8,
+          "stabilityReason": "Seedance官方，PoYo代理，支持480p/720p/1080p",
+          "valueScore": 3.8,
+          "valueReason": "运动质量好，支持首尾帧和音频生成，比官方便宜30-45%",
+          "overallScore": 84,
+          "pros": [
+            "运动质量优秀",
+            "支持首尾帧",
+            "支持参考视频/音频",
+            "支持音频生成",
+            "比官方便宜30-45%"
+          ],
+          "cons": [
+            "价格较高",
+            "720p以上更贵",
+            "需异步轮询"
+          ],
+          "bestFor": "舞蹈视频、运动控制、角色一致性视频",
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/seedance-2"
+        },
+        {
+          "rank": 3,
+          "name": "Kling 2.1",
+          "modelId": "kling-2.1/standard",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "Kling",
+          "category": "视频生成",
+          "capabilities": [
+            "Image to Video"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 15.0,
+          "priceNote": "30cr/5s standard (~¥0.15/5s)",
+          "stability": 4,
+          "stabilityReason": "Kling官方，PoYo代理，国内模型相对延迟低",
+          "valueScore": 4.2,
+          "valueReason": "价格比Sora/Seedance低很多，支持首尾帧(pro版)",
+          "overallScore": 86,
+          "pros": [
+            "价格比海外模型低50%",
+            "pro版支持首尾帧",
+            "5s/10s可选",
+            "运动控制稳定"
+          ],
+          "cons": [
+            "仅Image-to-Video",
+            "standard版不支持尾帧",
+            "分辨率不如Sora"
+          ],
+          "bestFor": "图生视频、电商视频、短视频内容",
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-2-1"
+        },
+        {
+          "rank": 4,
+          "name": "Veo 3.1",
+          "modelId": "veo3.1-fast",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "Google",
+          "category": "视频生成",
+          "capabilities": [
+            "Text to Video",
+            "Image to Video"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 35.0,
+          "priceNote": "$0.05/次 (~¥0.35/次), -87%",
+          "stability": 3.5,
+          "stabilityReason": "Google Veo，PoYo代理，支持4K输出",
+          "valueScore": 3.5,
+          "valueReason": "比官方便宜87%，支持4K，但异步架构体验一般",
+          "overallScore": 78,
+          "pros": [
+            "比Google官方便宜87%",
+            "支持4K输出",
+            "支持图生视频",
+            "Google质量保障"
+          ],
+          "cons": [
+            "异步架构需轮询",
+            "视频URL仅24小时有效",
+            "固定8秒时长"
+          ],
+          "bestFor": "4K高质量视频、必须使用Google Veo的场景",
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/veo-3-1"
+        },
+        {
+          "rank": 5,
+          "name": "Wan2.2 I2V/T2V (硅基流动)",
+          "modelId": "Wan-AI/Wan2.2-I2V-A14B",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "Wan",
+          "category": "视频生成",
+          "capabilities": [
+            "图生视频",
+            "文生视频"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 0,
+          "priceNote": "按需计费（通常较低）",
+          "stability": 4,
+          "stabilityReason": "标准OpenAI格式，同步返回requestId再查询",
+          "valueScore": 4,
+          "valueReason": "标准API格式，价格低，但仅有2个模型可选",
+          "overallScore": 76,
+          "pros": [
+            "标准API格式",
+            "国内基础设施",
+            "价格透明",
+            "Wan开源生态"
+          ],
+          "cons": [
+            "仅2个视频模型",
+            "视频质量中等",
+            "无Sora/Kling级别质量",
+            "需额外查询状态"
+          ],
+          "bestFor": "标准API集成的视频需求、国内合规场景",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit"
+        }
+      ]
+    },
+    {
+      "categoryId": "rag",
+      "categoryName": "RAG / 嵌入 / 重排序",
+      "icon": "Database",
+      "winner": "硅基流动",
+      "summary": "硅基流动拥有完整的RAG工具链：bge-large-zh/en(512K)、bge-m3(8192K)、Qwen3-Embedding(32768K)、bge-reranker、Qwen3-Reranker。PoYo完全没有嵌入和重排序模型。",
+      "models": [
+        {
+          "rank": 1,
+          "name": "bge-m3",
+          "modelId": "BAAI/bge-m3",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "BAAI",
+          "category": "RAG嵌入",
+          "capabilities": [
+            "嵌入"
+          ],
+          "context": "8192",
+          "inputPrice": 0.5,
+          "outputPrice": 0,
+          "priceNote": "¥0.5/M tokens",
+          "stability": 5,
+          "stabilityReason": "BAAI官方模型，硅基流动稳定代理，行业标准",
+          "valueScore": 5,
+          "valueReason": "8192K上下文+多语言+多粒度，RAG行业标准，¥0.5/M极低",
+          "overallScore": 95,
+          "pros": [
+            "8192K超长上下文嵌入",
+            "多语言支持",
+            "多粒度(句/段/文档)",
+            "RAG行业标准",
+            "价格极低"
+          ],
+          "cons": [
+            "仅嵌入功能",
+            "需要配合重排序使用"
+          ],
+          "bestFor": "长文档RAG、知识库检索、多语言场景",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+        },
+        {
+          "rank": 2,
+          "name": "bge-reranker-v2-m3",
+          "modelId": "Pro/BAAI/bge-reranker-v2-m3",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "BAAI",
+          "category": "RAG重排序",
+          "capabilities": [
+            "重排序"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 0,
+          "priceNote": "按需计费",
+          "stability": 5,
+          "stabilityReason": "BAAI官方重排序模型，Pro版本高可用",
+          "valueScore": 5,
+          "valueReason": "RAG重排序行业标准，Pro版本高可用",
+          "overallScore": 93,
+          "pros": [
+            "RAG重排序行业标准",
+            "Pro版高可用",
+            "支持多语言",
+            "相关性评分精准"
+          ],
+          "cons": [
+            "需配合嵌入模型使用",
+            "单独使用无意义"
+          ],
+          "bestFor": "RAG精排序、搜索结果优化、知识库问答",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
+        },
+        {
+          "rank": 3,
+          "name": "Qwen3-Embedding-4B",
+          "modelId": "Qwen/Qwen3-Embedding-4B",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "Alibaba",
+          "category": "RAG嵌入",
+          "capabilities": [
+            "嵌入"
+          ],
+          "context": "32768",
+          "inputPrice": 0,
+          "outputPrice": 0,
+          "priceNote": "按需计费",
+          "stability": 4.5,
+          "stabilityReason": "阿里云官方模型，支持32768K上下文",
+          "valueScore": 4.5,
+          "valueReason": "32768K超长上下文，4B参数能力强",
+          "overallScore": 88,
+          "pros": [
+            "32768K超长上下文",
+            "4B参数能力强",
+            "阿里云官方",
+            "中文优化"
+          ],
+          "cons": [
+            "价格高于bge-m3",
+            "社区生态不如bge"
+          ],
+          "bestFor": "超长文档RAG、中文知识库、大规模语料",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+        }
+      ]
+    },
+    {
+      "categoryId": "audio",
+      "categoryName": "语音 (TTS/STT)",
+      "icon": "AudioLines",
+      "winner": "硅基流动",
+      "summary": "硅基流动提供CosyVoice2(TTS)和SenseVoiceSmall(STT)。PoYo没有直接对应的语音模型，仅有音乐相关模型。",
+      "models": [
+        {
+          "rank": 1,
+          "name": "CosyVoice2-0.5B",
+          "modelId": "FunAudioLLM/CosyVoice2-0.5B",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "FunAudioLLM",
+          "category": "语音合成",
+          "capabilities": [
+            "TTS"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 0,
+          "priceNote": "按需计费",
+          "stability": 4.5,
+          "stabilityReason": "标准OpenAI audio/speech格式，支持多音色",
+          "valueScore": 4.5,
+          "valueReason": "支持多音色克隆、情感控制、标准API格式",
+          "overallScore": 88,
+          "pros": [
+            "多音色克隆",
+            "情感控制",
+            "支持mp3/wav/pcm/flac/opus/aac",
+            "语速可调",
+            "标准OpenAI格式"
+          ],
+          "cons": [
+            "0.5B参数量较小",
+            "复杂场景不如大型TTS"
+          ],
+          "bestFor": "语音合成、有声书、客服语音、音色克隆",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/audio/create-speech"
+        },
+        {
+          "rank": 2,
+          "name": "SenseVoiceSmall",
+          "modelId": "FunAudioLLM/SenseVoiceSmall",
+          "platform": "siliconflow",
+          "platformName": "硅基流动",
+          "vendor": "FunAudioLLM",
+          "category": "语音识别",
+          "capabilities": [
+            "STT"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 0,
+          "priceNote": "按需计费",
+          "stability": 4.5,
+          "stabilityReason": "标准OpenAI audio/transcriptions格式，多语言支持",
+          "valueScore": 4.5,
+          "valueReason": "支持多语言、多种输出格式，标准API",
+          "overallScore": 86,
+          "pros": [
+            "多语言识别",
+            "支持json/text/srt/vtt输出",
+            "标准OpenAI格式",
+            "实时性好"
+          ],
+          "cons": [
+            "精度不如商用ASR",
+            "噪声环境表现一般"
+          ],
+          "bestFor": "语音转文字、会议记录、字幕生成",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/audio/create-audio-transcriptions"
+        }
+      ]
+    },
+    {
+      "categoryId": "music",
+      "categoryName": "音乐音效",
+      "icon": "Music",
+      "winner": "PoYo.ai",
+      "summary": "PoYo拥有完整的音乐AI工具链：AI Music生成、Extend、Cover、Vocal Remover、Music Video等16个模型。硅基流动完全没有音乐模型。",
+      "models": [
+        {
+          "rank": 1,
+          "name": "AI Music (Generate Music)",
+          "modelId": "generate-music",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "PoYo (Suno AI)",
+          "category": "音乐生成",
+          "capabilities": [
+            "音乐生成"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 20.0,
+          "priceNote": "20 credits/次 (~¥0.20/次)",
+          "stability": 4,
+          "stabilityReason": "Suno AI底层，PoYo稳定代理",
+          "valueScore": 4,
+          "valueReason": "20cr/次价格合理，支持多种风格和纯音乐",
+          "overallScore": 85,
+          "pros": [
+            "Suno AI底层质量",
+            "支持多种风格",
+            "支持纯音乐/歌词",
+            "支持Persona音色",
+            "可生成专辑封面"
+          ],
+          "cons": [
+            "异步架构",
+            "字符限制因版本不同",
+            "中文歌曲质量一般"
+          ],
+          "bestFor": "背景音乐、广告配乐、个人创作、专辑制作",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-music"
+        },
+        {
+          "rank": 2,
+          "name": "Vocal Remover",
+          "modelId": "vocal-remover",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "PoYo",
+          "category": "音频处理",
+          "capabilities": [
+            "人声消除"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 7.5,
+          "priceNote": "$0.075/次 (~¥0.53/次)",
+          "stability": 4,
+          "stabilityReason": "PoYo自研，标准异步架构",
+          "valueScore": 4,
+          "valueReason": "人声分离效果好，价格合理",
+          "overallScore": 82,
+          "pros": [
+            "人声分离效果好",
+            "适合K歌伴奏提取",
+            "支持多种音频格式"
+          ],
+          "cons": [
+            "不如专业音频软件精细",
+            "复杂混音效果一般"
+          ],
+          "bestFor": "K歌伴奏提取、音频素材处理",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/vocal-remover"
+        },
+        {
+          "rank": 3,
+          "name": "MiniMax Music 2.6",
+          "modelId": "minimax-music-2-6",
+          "platform": "poyo",
+          "platformName": "PoYo.ai",
+          "vendor": "MiniMax",
+          "category": "音乐生成",
+          "capabilities": [
+            "音乐生成"
+          ],
+          "inputPrice": 0,
+          "outputPrice": 10.0,
+          "priceNote": "$0.10/次 (~¥0.70/次)",
+          "stability": 3.8,
+          "stabilityReason": "MiniMax官方，PoYo代理",
+          "valueScore": 3.5,
+          "valueReason": "MiniMax音乐质量好但价格偏高",
+          "overallScore": 76,
+          "pros": [
+            "MiniMax音乐质量好",
+            "中文歌曲支持较好"
+          ],
+          "cons": [
+            "价格偏高",
+            "不如Suno生态成熟"
+          ],
+          "bestFor": "中文歌曲生成、必须使用MiniMax的场景",
+          "docsUrl": "https://docs.poyo.ai"
+        }
+      ]
+    }
+  ],
+  "overallRanking": [
+    {
+      "rank": 1,
+      "name": "DeepSeek-V4-Flash",
+      "platform": "siliconflow",
+      "category": "文本对话",
+      "score": 98,
+      "tag": "性价比天花板"
+    },
+    {
+      "rank": 2,
+      "name": "bge-m3",
+      "platform": "siliconflow",
+      "category": "RAG嵌入",
+      "score": 95,
+      "tag": "RAG行业标准"
+    },
+    {
+      "rank": 3,
+      "name": "DeepSeek-R1",
+      "platform": "siliconflow",
+      "category": "文本对话",
+      "score": 92,
+      "tag": "推理之王"
+    },
+    {
+      "rank": 4,
+      "name": "bge-reranker-v2-m3",
+      "platform": "siliconflow",
+      "category": "RAG重排序",
+      "score": 93,
+      "tag": "RAG精排标准"
+    },
+    {
+      "rank": 5,
+      "name": "Kimi-K2.6",
+      "platform": "siliconflow",
+      "category": "文本对话",
+      "score": 87,
+      "tag": "中文长上下文"
+    },
+    {
+      "rank": 6,
+      "name": "Qwen3-VL-32B",
+      "platform": "siliconflow",
+      "category": "文本对话",
+      "score": 85,
+      "tag": "多模态性价比"
+    },
+    {
+      "rank": 7,
+      "name": "GPT Image 2",
+      "platform": "poyo",
+      "category": "图像生成",
+      "score": 85,
+      "tag": "图像质量顶级"
+    },
+    {
+      "rank": 8,
+      "name": "Kling 2.1",
+      "platform": "poyo",
+      "category": "视频生成",
+      "score": 86,
+      "tag": "视频性价比"
+    },
+    {
+      "rank": 9,
+      "name": "FLUX.2",
+      "platform": "poyo",
+      "category": "图像生成",
+      "score": 86,
+      "tag": "开源SOTA"
+    },
+    {
+      "rank": 10,
+      "name": "Sora 2 Official",
+      "platform": "poyo",
+      "category": "视频生成",
+      "score": 85,
+      "tag": "视频质量顶级"
+    }
+  ],
+  "functionRanking": [
+    {
+      "functionId": "long-context",
+      "functionName": "长文本/长上下文处理",
+      "icon": "ScrollText",
+      "description": "处理超长文档、论文、书籍等场景，核心指标：上下文长度、价格、长文本一致性",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "DeepSeek-V4-Flash",
+          "modelId": "deepseek-ai/DeepSeek-V4-Flash",
+          "platform": "siliconflow",
+          "score": 99,
+          "tag": "1024K上下文+¥1/M",
+          "why": "1024K（100万token）上下文全行业最长，输入仅¥1/M，处理整本书的成本不到1元，且无对手"
+        },
+        {
+          "rank": 2,
+          "name": "MiniMax-M2.5",
+          "modelId": "MiniMaxAI/MiniMax-M2.5",
+          "platform": "siliconflow",
+          "score": 92,
+          "tag": "512K上下文",
+          "why": "512K上下文，MiniMax在长文本一致性方面表现优秀，价格适中"
+        },
+        {
+          "rank": 3,
+          "name": "Kimi-K2.6",
+          "modelId": "moonshotai/Kimi-K2.6",
+          "platform": "siliconflow",
+          "score": 90,
+          "tag": "256K上下文+中文优化",
+          "why": "256K上下文，Moonshot以长文本著称，中文长文档摘要能力顶级"
+        },
+        {
+          "rank": 4,
+          "name": "Kimi-K2.5",
+          "modelId": "moonshotai/Kimi-K2.5",
+          "platform": "siliconflow",
+          "score": 88,
+          "tag": "256K上下文",
+          "why": "256K上下文，价格比K2.6略低，长文本能力同样出色"
+        },
+        {
+          "rank": 5,
+          "name": "GLM-5.1",
+          "modelId": "zai-org/GLM-5.1",
+          "platform": "siliconflow",
+          "score": 86,
+          "tag": "198K上下文",
+          "why": "198K上下文，智谱GLM系列在长文本Agent场景表现优秀"
+        },
+        {
+          "rank": 6,
+          "name": "Claude Opus 4.7",
+          "modelId": "claude-opus-4-7",
+          "platform": "poyo",
+          "score": 82,
+          "tag": "200K上下文",
+          "why": "200K上下文，Claude长文本一致性极好，但价格极贵（¥28/¥140 per 1M）"
+        }
+      ]
+    },
+    {
+      "functionId": "chat",
+      "functionName": "日常对话/会话",
+      "icon": "MessageCircle",
+      "description": "通用对话、问答、闲聊场景，核心指标：响应速度、价格、通用能力",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "DeepSeek-V4-Flash",
+          "modelId": "deepseek-ai/DeepSeek-V4-Flash",
+          "platform": "siliconflow",
+          "score": 98,
+          "tag": "¥1/M+1024K",
+          "why": "价格全行业最低，上下文最长，通用对话能力优秀，无短板"
+        },
+        {
+          "rank": 2,
+          "name": "Qwen2.5-7B-Instruct",
+          "modelId": "Qwen/Qwen2.5-7B-Instruct",
+          "platform": "siliconflow",
+          "score": 94,
+          "tag": "¥0.5/M",
+          "why": "输入仅¥0.5/M，输出¥1/M，7B参数但对话能力出色，性价比极高"
+        },
+        {
+          "rank": 3,
+          "name": "Kimi-K2.6",
+          "modelId": "moonshotai/Kimi-K2.6",
+          "platform": "siliconflow",
+          "score": 90,
+          "tag": "中文对话顶级",
+          "why": "中文理解和生成能力行业顶级，日常对话自然流畅"
+        },
+        {
+          "rank": 4,
+          "name": "GLM-5",
+          "modelId": "zai-org/GLM-5",
+          "platform": "siliconflow",
+          "score": 87,
+          "tag": "工具调用强",
+          "why": "198K上下文，工具调用能力强，适合Agent对话场景"
+        },
+        {
+          "rank": 5,
+          "name": "DeepSeek-V3.2",
+          "modelId": "deepseek-ai/DeepSeek-V3.2",
+          "platform": "siliconflow",
+          "score": 86,
+          "tag": "128K+高质量",
+          "why": "128K上下文，通用能力比V4-Flash更强，但价格更高（¥5/¥30）"
+        },
+        {
+          "rank": 6,
+          "name": "Claude 4.5 Series",
+          "modelId": "claude-4-5-api",
+          "platform": "poyo",
+          "score": 78,
+          "tag": "Claude对话体验",
+          "why": "Claude对话体验独特，但PoYo仅4个对话模型，价格不具优势"
+        }
+      ]
+    },
+    {
+      "functionId": "code",
+      "functionName": "代码生成/编程",
+      "icon": "Code",
+      "description": "代码编写、调试、重构、算法实现，核心指标：代码正确率、语言覆盖、Reasoning能力",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "DeepSeek-R1",
+          "modelId": "deepseek-ai/DeepSeek-R1",
+          "platform": "siliconflow",
+          "score": 96,
+          "tag": "推理+代码双强",
+          "why": "推理能力对标Claude Opus，代码调试和算法实现能力顶级，价格仅Claude的1/7，显示完整思考过程"
+        },
+        {
+          "rank": 2,
+          "name": "Claude Opus 4.7",
+          "modelId": "claude-opus-4-7",
+          "platform": "poyo",
+          "score": 95,
+          "tag": "代码能力全球顶级",
+          "why": "代码生成和调试能力公认全球最强之一，但价格极贵（¥28/¥140 per 1M）"
+        },
+        {
+          "rank": 3,
+          "name": "Qwen2.5-Coder-32B",
+          "modelId": "Qwen/Qwen2.5-Coder-32B-Instruct",
+          "platform": "siliconflow",
+          "score": 91,
+          "tag": "专用代码模型",
+          "why": "阿里巴巴专用代码模型，32B参数，代码补全和生成能力出色，仅¥0.5/¥1 per 1M"
+        },
+        {
+          "rank": 4,
+          "name": "Gemini 3 Pro",
+          "modelId": "gemini-3-pro-preview",
+          "platform": "poyo",
+          "score": 88,
+          "tag": "Google代码能力",
+          "why": "Google Gemini代码能力优秀，支持streamGenerateContent流式输出"
+        },
+        {
+          "rank": 5,
+          "name": "DeepSeek-V3.2",
+          "modelId": "deepseek-ai/DeepSeek-V3.2",
+          "platform": "siliconflow",
+          "score": 87,
+          "tag": "通用+代码",
+          "why": "通用能力强，代码任务表现良好，128K上下文适合大型代码库分析"
+        },
+        {
+          "rank": 6,
+          "name": "GLM-Z1-32B-0414",
+          "modelId": "THUDM/GLM-Z1-32B-0414",
+          "platform": "siliconflow",
+          "score": 84,
+          "tag": "推理+代码",
+          "why": "智谱推理版本，32B参数，代码和数学推理能力均衡"
+        }
+      ]
+    },
+    {
+      "functionId": "reasoning",
+      "functionName": "推理/数学/逻辑",
+      "icon": "Brain",
+      "description": "数学计算、逻辑推理、复杂问题求解，核心指标：推理准确率、思考过程展示",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "DeepSeek-R1",
+          "modelId": "deepseek-ai/DeepSeek-R1",
+          "platform": "siliconflow",
+          "score": 97,
+          "tag": "推理之王",
+          "why": "推理能力对标Claude Opus，显示完整reasoning_content思考过程，数学竞赛级别，价格仅¥4/¥16"
+        },
+        {
+          "rank": 2,
+          "name": "Kimi-K2-Thinking",
+          "modelId": "moonshotai/Kimi-K2-Thinking",
+          "platform": "siliconflow",
+          "score": 92,
+          "tag": "中文推理强",
+          "why": "Moonshot推理版本，中文数学和逻辑推理表现出色，256K上下文"
+        },
+        {
+          "rank": 3,
+          "name": "GLM-Z1-32B-0414",
+          "modelId": "THUDM/GLM-Z1-32B-0414",
+          "platform": "siliconflow",
+          "score": 89,
+          "tag": "32B推理",
+          "why": "智谱Z1推理系列，32B参数，推理和数学能力均衡，价格适中"
+        },
+        {
+          "rank": 4,
+          "name": "Qwen2.5-Math-72B",
+          "modelId": "Qwen/Qwen2.5-Math-72B",
+          "platform": "siliconflow",
+          "score": 88,
+          "tag": "数学专用",
+          "why": "阿里巴巴专用数学模型，72B参数，数学竞赛题表现出色"
+        },
+        {
+          "rank": 5,
+          "name": "Claude Opus 4.7",
+          "modelId": "claude-opus-4-7",
+          "platform": "poyo",
+          "score": 90,
+          "tag": "推理顶级但贵",
+          "why": "Claude推理能力全球顶级，但价格极贵（¥28/¥140 per 1M），性价比不如DeepSeek-R1"
+        },
+        {
+          "rank": 6,
+          "name": "GLM-Z1-9B-0414",
+          "modelId": "THUDM/GLM-Z1-9B-0414",
+          "platform": "siliconflow",
+          "score": 82,
+          "tag": "轻量推理",
+          "why": "9B轻量推理模型，适合快速推理场景，价格极低（¥1/¥4）"
+        }
+      ]
+    },
+    {
+      "functionId": "image",
+      "functionName": "图像生成",
+      "icon": "Image",
+      "description": "文生图、图生图、图像编辑，核心指标：图像质量、分辨率、风格多样性、价格",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "GPT Image 2",
+          "modelId": "gpt-image-2",
+          "platform": "poyo",
+          "score": 97,
+          "tag": "质量顶级+4K",
+          "why": "OpenAI最新图像模型，质量行业顶级，支持1K/2K/4K分辨率，支持Image-to-Image编辑，质量等级可调"
+        },
+        {
+          "rank": 2,
+          "name": "FLUX.2",
+          "modelId": "flux-2",
+          "platform": "poyo",
+          "score": 95,
+          "tag": "开源SOTA+32B",
+          "why": "32B参数开源图像SOTA，支持Pro/Flex/Edit多版本，最多8张参考图，$0.03/次"
+        },
+        {
+          "rank": 3,
+          "name": "Flux Kontext",
+          "modelId": "flux-kontext-pro",
+          "platform": "poyo",
+          "score": 93,
+          "tag": "上下文编辑",
+          "why": "支持上下文感知的图像编辑，Pro/Max多版本，$0.04/次"
+        },
+        {
+          "rank": 4,
+          "name": "Z-Image (硅基流动)",
+          "modelId": "Tongyi-MAI/Z-Image",
+          "platform": "siliconflow",
+          "score": 88,
+          "tag": "国内低延迟",
+          "why": "阿里云官方模型，标准OpenAI格式，国内CDN低延迟，适合国内业务"
+        },
+        {
+          "rank": 5,
+          "name": "Kolors",
+          "modelId": "Kwai-Kolors/Kolors",
+          "platform": "siliconflow",
+          "score": 86,
+          "tag": "中文提示词强",
+          "why": "Kwai自研，中文提示词理解能力强，国风/动漫风格出色"
+        },
+        {
+          "rank": 6,
+          "name": "Grok Imagine",
+          "modelId": "grok-imagine-image",
+          "platform": "poyo",
+          "score": 80,
+          "tag": "比官方便宜57%",
+          "why": "xAI图像模型，比官方便宜57%，支持Image-to-Image，但质量中等"
+        },
+        {
+          "rank": 7,
+          "name": "Qwen-Image-Edit",
+          "modelId": "Qwen/Qwen-Image-Edit",
+          "platform": "siliconflow",
+          "score": 84,
+          "tag": "图像编辑",
+          "why": "阿里巴巴图像编辑模型，支持生图和编辑，标准API格式"
+        }
+      ]
+    },
+    {
+      "functionId": "video",
+      "functionName": "视频生成",
+      "icon": "Video",
+      "description": "文生视频、图生视频、运动控制，核心指标：视频质量、时长、分辨率、运动稳定性",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "Sora 2 Official",
+          "modelId": "sora-2-official",
+          "platform": "poyo",
+          "score": 97,
+          "tag": "OpenAI官方",
+          "why": "OpenAI Sora官方质量，支持4s-20s多时长，Image-to-Video，可生成音频，比fal.ai便宜40%"
+        },
+        {
+          "rank": 2,
+          "name": "Seedance 2",
+          "modelId": "seedance-2",
+          "platform": "poyo",
+          "score": 94,
+          "tag": "运动+音频",
+          "why": "运动质量优秀，支持首尾帧和参考视频/音频，支持音频生成，比官方便宜30-45%"
+        },
+        {
+          "rank": 3,
+          "name": "Kling 2.1",
+          "modelId": "kling-2.1/standard",
+          "platform": "poyo",
+          "score": 92,
+          "tag": "性价比最高",
+          "why": "价格比海外模型低50%，pro版支持首尾帧，国内模型延迟低，30cr/5s"
+        },
+        {
+          "rank": 4,
+          "name": "Veo 3.1",
+          "modelId": "veo3.1-fast",
+          "platform": "poyo",
+          "score": 89,
+          "tag": "Google+4K",
+          "why": "Google Veo官方，支持4K输出，比官方便宜87%，固定8秒"
+        },
+        {
+          "rank": 5,
+          "name": "Wan2.2 (硅基流动)",
+          "modelId": "Wan-AI/Wan2.2-I2V-A14B",
+          "platform": "siliconflow",
+          "score": 82,
+          "tag": "标准API",
+          "why": "标准OpenAI格式，适合API集成，但视频质量中等"
+        },
+        {
+          "rank": 6,
+          "name": "Runway Gen-4.5",
+          "modelId": "runway-gen-4-5",
+          "platform": "poyo",
+          "score": 88,
+          "tag": "Runway质量",
+          "why": "Runway官方模型，视频质量和控制能力出色，$0.375/次"
+        }
+      ]
+    },
+    {
+      "functionId": "music",
+      "functionName": "音乐生成",
+      "icon": "Music",
+      "description": "音乐创作、旋律生成、歌词创作，核心指标：音乐质量、风格多样性、时长",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "AI Music (Generate Music)",
+          "modelId": "generate-music",
+          "platform": "poyo",
+          "score": 94,
+          "tag": "Suno底层",
+          "why": "Suno AI底层，20cr/次，支持多种风格/纯音乐/歌词，可生成专辑封面，质量顶级"
+        },
+        {
+          "rank": 2,
+          "name": "MiniMax Music 2.6",
+          "modelId": "minimax-music-2-6",
+          "platform": "poyo",
+          "score": 86,
+          "tag": "中文音乐",
+          "why": "MiniMax音乐质量好，中文歌曲支持较好，$0.10/次"
+        },
+        {
+          "rank": 3,
+          "name": "Extend Music",
+          "modelId": "extend-music",
+          "platform": "poyo",
+          "score": 82,
+          "tag": "音乐延长",
+          "why": "将现有音乐延长到目标时长，$0.10/次"
+        },
+        {
+          "rank": 4,
+          "name": "Upload and Cover Audio",
+          "modelId": "upload-and-cover-audio",
+          "platform": "poyo",
+          "score": 80,
+          "tag": "风格翻唱",
+          "why": "上传音频并改变风格，$0.10/次"
+        }
+      ]
+    },
+    {
+      "functionId": "tts",
+      "functionName": "语音合成 (TTS)",
+      "icon": "Mic",
+      "description": "文本转语音、音色克隆、有声书制作，核心指标：语音自然度、音色多样性、语速控制",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "CosyVoice2-0.5B",
+          "modelId": "FunAudioLLM/CosyVoice2-0.5B",
+          "platform": "siliconflow",
+          "score": 93,
+          "tag": "多音色克隆",
+          "why": "支持多音色克隆、情感控制、语速调节，输出格式丰富(mp3/wav/pcm/flac/opus/aac)，标准OpenAI格式"
+        },
+        {
+          "rank": 2,
+          "name": "Add Vocals",
+          "modelId": "add-vocals",
+          "platform": "poyo",
+          "score": 78,
+          "tag": "添加人声",
+          "why": "为纯音乐添加人声演唱，适合音乐制作"
+        }
+      ]
+    },
+    {
+      "functionId": "stt",
+      "functionName": "语音识别 (STT)",
+      "icon": "Ear",
+      "description": "语音转文字、会议记录、字幕生成，核心指标：识别准确率、多语言支持、实时性",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "SenseVoiceSmall",
+          "modelId": "FunAudioLLM/SenseVoiceSmall",
+          "platform": "siliconflow",
+          "score": 91,
+          "tag": "多语言+标准API",
+          "why": "多语言识别，支持json/text/srt/vtt多种输出，标准OpenAI audio/transcriptions格式"
+        },
+        {
+          "rank": 2,
+          "name": "Get Timestamped Lyrics",
+          "modelId": "get-timestamped-lyrics",
+          "platform": "poyo",
+          "score": 82,
+          "tag": "歌词时间戳",
+          "why": "提取音频中的歌词并生成LRC时间戳文件，$0.005/次"
+        }
+      ]
+    },
+    {
+      "functionId": "rag",
+      "functionName": "RAG / 知识库 / 检索",
+      "icon": "Database",
+      "description": "文档嵌入、语义检索、重排序、知识库问答，核心指标：嵌入质量、上下文长度、检索精度",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "bge-m3",
+          "modelId": "BAAI/bge-m3",
+          "platform": "siliconflow",
+          "score": 98,
+          "tag": "RAG行业标准",
+          "why": "8192K上下文+多语言+多粒度(句/段/文档)，RAG嵌入行业标准，¥0.5/M极低价格"
+        },
+        {
+          "rank": 2,
+          "name": "bge-reranker-v2-m3",
+          "modelId": "Pro/BAAI/bge-reranker-v2-m3",
+          "platform": "siliconflow",
+          "score": 96,
+          "tag": "精排标准",
+          "why": "RAG重排序行业标准，Pro版高可用，多语言支持，相关性评分精准"
+        },
+        {
+          "rank": 3,
+          "name": "Qwen3-Embedding-4B",
+          "modelId": "Qwen/Qwen3-Embedding-4B",
+          "platform": "siliconflow",
+          "score": 92,
+          "tag": "32768K+4B",
+          "why": "32768K超长上下文，4B参数能力强，阿里云官方，中文优化"
+        },
+        {
+          "rank": 4,
+          "name": "Qwen3-Reranker-4B",
+          "modelId": "Qwen/Qwen3-Reranker-4B",
+          "platform": "siliconflow",
+          "score": 88,
+          "tag": "Qwen重排",
+          "why": "Qwen3重排序模型，4B参数，与Qwen嵌入模型配合效果好"
+        },
+        {
+          "rank": 5,
+          "name": "bce-embedding-base_v1",
+          "modelId": "netease-youdao/bce-embedding-base_v1",
+          "platform": "siliconflow",
+          "score": 84,
+          "tag": "网易有道",
+          "why": "网易有道嵌入模型，中文场景优化"
+        },
+        {
+          "rank": 6,
+          "name": "bge-large-zh-v1.5",
+          "modelId": "BAAI/bge-large-zh-v1.5",
+          "platform": "siliconflow",
+          "score": 86,
+          "tag": "经典中文嵌入",
+          "why": "BAAI经典中文嵌入模型，1024维向量，512K上下文"
+        }
+      ]
+    },
+    {
+      "functionId": "multimodal",
+      "functionName": "多模态 / 视觉理解",
+      "icon": "Eye",
+      "description": "图像理解、图文问答、视觉推理，核心指标：图像理解精度、多模态融合能力",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "Qwen3-VL-32B-Instruct",
+          "modelId": "Qwen/Qwen3-VL-32B-Instruct",
+          "platform": "siliconflow",
+          "score": 93,
+          "tag": "¥1/M+40K",
+          "why": "32B参数视觉模型，输入仅¥1/M，支持图像理解+文本生成，40K上下文，性价比极高"
+        },
+        {
+          "rank": 2,
+          "name": "Gemini 3 Pro",
+          "modelId": "gemini-3-pro-preview",
+          "platform": "poyo",
+          "score": 90,
+          "tag": "Google多模态",
+          "why": "Google原生多模态能力，支持图像+文本混合输入，stream流式输出"
+        },
+        {
+          "rank": 3,
+          "name": "Claude Opus 4.7",
+          "modelId": "claude-opus-4-7",
+          "platform": "poyo",
+          "score": 88,
+          "tag": "Claude视觉",
+          "why": "Claude支持图像输入，视觉理解能力优秀，但价格极贵"
+        }
+      ]
+    },
+    {
+      "functionId": "chinese",
+      "functionName": "中文处理 / 中文创作",
+      "icon": "Languages",
+      "description": "中文理解、中文生成、中文文学创作、古诗词，核心指标：中文语义理解、文化适配、生成自然度",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "Kimi-K2.6",
+          "modelId": "moonshotai/Kimi-K2.6",
+          "platform": "siliconflow",
+          "score": 96,
+          "tag": "中文顶级",
+          "why": "Moonshot以中文能力著称，K2.6是旗舰版本，中文理解、生成、长文本摘要均行业顶级"
+        },
+        {
+          "rank": 2,
+          "name": "Kimi-K2.5",
+          "modelId": "moonshotai/Kimi-K2.5",
+          "platform": "siliconflow",
+          "score": 93,
+          "tag": "中文优秀",
+          "why": "K2.5版本中文能力同样出色，价格比K2.6略低"
+        },
+        {
+          "rank": 3,
+          "name": "GLM-5.1",
+          "modelId": "zai-org/GLM-5.1",
+          "platform": "siliconflow",
+          "score": 91,
+          "tag": "智谱中文",
+          "why": "智谱GLM系列专为中国市场优化，中文Agent和工具调用场景优秀"
+        },
+        {
+          "rank": 4,
+          "name": "Qwen3.6-35B-A3B",
+          "modelId": "Qwen/Qwen3.6-35B-A3B",
+          "platform": "siliconflow",
+          "score": 89,
+          "tag": "阿里中文",
+          "why": "阿里巴巴Qwen系列中文能力强，35B MoE架构高效"
+        },
+        {
+          "rank": 5,
+          "name": "DeepSeek-V4-Flash",
+          "modelId": "deepseek-ai/DeepSeek-V4-Flash",
+          "platform": "siliconflow",
+          "score": 87,
+          "tag": "通用中文",
+          "why": "DeepSeek中文能力良好，1024K上下文适合中文长文档，但不如Kimi/GLM专精"
+        },
+        {
+          "rank": 6,
+          "name": "Kolors",
+          "modelId": "Kwai-Kolors/Kolors",
+          "platform": "siliconflow",
+          "score": 85,
+          "tag": "中文图像",
+          "why": "中文提示词理解强的图像模型，国风/动漫风格出色"
+        }
+      ]
+    },
+    {
+      "functionId": "audio-edit",
+      "functionName": "音频处理 / 音乐编辑",
+      "icon": "Waves",
+      "description": "人声消除、音乐翻唱、音频格式转换、片段替换，核心指标：处理质量、功能丰富度",
+      "topModels": [
+        {
+          "rank": 1,
+          "name": "Vocal Remover",
+          "modelId": "vocal-remover",
+          "platform": "poyo",
+          "score": 90,
+          "tag": "人声分离",
+          "why": "人声消除效果好，适合K歌伴奏提取，$0.075/次"
+        },
+        {
+          "rank": 2,
+          "name": "Upload and Cover Audio",
+          "modelId": "upload-and-cover-audio",
+          "platform": "poyo",
+          "score": 86,
+          "tag": "风格翻唱",
+          "why": "上传音频并改变风格，$0.10/次"
+        },
+        {
+          "rank": 3,
+          "name": "Replace Section",
+          "modelId": "replace-section",
+          "platform": "poyo",
+          "score": 84,
+          "tag": "片段替换",
+          "why": "替换音频中指定时间段的内容，$0.05/次"
+        },
+        {
+          "rank": 4,
+          "name": "Convert to WAV",
+          "modelId": "convert-to-wav",
+          "platform": "poyo",
+          "score": 80,
+          "tag": "格式转换",
+          "why": "音频格式转换为WAV，$0.005/次"
+        }
+      ]
+    }
+  ]
+}
