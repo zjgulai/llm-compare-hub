@@ -1,0 +1,185 @@
+{
+  "page": "codex-essence",
+  "title": "Codex 用法精粹",
+  "subtitle": "Codex (OpenAI) 使用技巧、最佳实践与资源导航",
+  "updatedAt": "2026-06-09",
+  "sections": [
+    {
+      "id": "overview",
+      "name": "Codex 概览",
+      "description": "Codex 模型家族、能力边界与最新更新",
+      "color": "blue",
+      "items": [
+        {
+          "section": 0,
+          "title": "Codex 官方概览",
+          "url": "https://openai.com/codex/",
+          "source": "OpenAI",
+          "tags": [
+            "官方",
+            "入门"
+          ],
+          "summary": "Codex 产品介绍与能力概述"
+        },
+        {
+          "section": 0,
+          "title": "Codex for every role",
+          "url": "https://openai.com/index/codex-for-every-role-tool-workflow/",
+          "source": "OpenAI Blog",
+          "tags": [
+            "官方",
+            "更新"
+          ],
+          "summary": "2026年6月：Codex 扩展到每一种角色、工具和工作流"
+        },
+        {
+          "section": 0,
+          "title": "Codex on AWS",
+          "url": "https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws/",
+          "source": "OpenAI Blog",
+          "tags": [
+            "官方",
+            "集成"
+          ],
+          "summary": "OpenAI 前沿模型和 Codex 现已可在 AWS 上使用"
+        }
+      ]
+    },
+    {
+      "id": "coding",
+      "name": "编码工作流",
+      "description": "代码生成、重构、调试与测试",
+      "color": "emerald",
+      "items": [
+        {
+          "section": 1,
+          "title": "Codex API 快速开始",
+          "url": "https://platform.openai.com/docs/quickstart",
+          "source": "OpenAI Docs",
+          "tags": [
+            "官方",
+            "API"
+          ],
+          "summary": "5分钟接入 Codex API"
+        },
+        {
+          "section": 1,
+          "title": "Codex 代码补全与生成指南",
+          "url": "https://platform.openai.com/docs/guides/code",
+          "source": "OpenAI Docs",
+          "tags": [
+            "官方",
+            "编码"
+          ],
+          "summary": "使用 Codex 进行代码补全、生成与重构"
+        }
+      ]
+    },
+    {
+      "id": "agent",
+      "name": "Agent 开发",
+      "description": "工具调用、多步骤工作流与框架集成",
+      "color": "purple",
+      "items": [
+        {
+          "section": 2,
+          "title": "Codex + Function Calling",
+          "url": "https://platform.openai.com/docs/guides/function-calling",
+          "source": "OpenAI Docs",
+          "tags": [
+            "官方",
+            "Agent"
+          ],
+          "summary": "Codex 的工具调用与函数调用指南"
+        },
+        {
+          "section": 2,
+          "title": "Text-To-Lottie: Codex/Claude Code 生成动画",
+          "url": "https://x.com/shao__meng/status/2064508455051043008",
+          "source": "aiho.virxact.com",
+          "tags": [
+            "MCP/工具",
+            "开源/仓库"
+          ],
+          "summary": "Agent Skill + 本地预览，让 Codex 生成 Lottie JSON 动画"
+        }
+      ]
+    },
+    {
+      "id": "integration",
+      "name": "部署与集成",
+      "description": "API 接入、IDE 配置与云平台部署",
+      "color": "amber",
+      "items": [
+        {
+          "section": 3,
+          "title": "Codex 与 IDE 集成",
+          "url": "https://platform.openai.com/docs/guides/code#ide-integration",
+          "source": "OpenAI Docs",
+          "tags": [
+            "官方",
+            "IDE"
+          ],
+          "summary": "将 Codex 集成到 VS Code、Cursor 等 IDE"
+        },
+        {
+          "section": 3,
+          "title": "Codex 成本优化",
+          "url": "https://platform.openai.com/docs/guides/rate-limits",
+          "source": "OpenAI Docs",
+          "tags": [
+            "官方",
+            "性能"
+          ],
+          "summary": "管理 API 使用配额、缓存策略和成本"
+        }
+      ]
+    },
+    {
+      "id": "resources",
+      "name": "资源导航",
+      "description": "官方文档、更新日志与社区实践",
+      "color": "rose",
+      "items": [
+        {
+          "section": 4,
+          "title": "OpenAI API 参考",
+          "url": "https://platform.openai.com/docs/api-reference",
+          "source": "OpenAI",
+          "tags": [
+            "官方",
+            "API"
+          ],
+          "summary": "完整 API 参考文档"
+        },
+        {
+          "section": 4,
+          "title": "Codex 模型与定价",
+          "url": "https://openai.com/pricing",
+          "source": "OpenAI",
+          "tags": [
+            "官方",
+            "定价"
+          ],
+          "summary": "Codex 模型版本和定价信息"
+        },
+        {
+          "section": 4,
+          "title": "OpenAI 开发者论坛",
+          "url": "https://community.openai.com/",
+          "source": "OpenAI",
+          "tags": [
+            "社区",
+            "支持"
+          ],
+          "summary": "开发者社区讨论与支持"
+        }
+      ]
+    }
+  ],
+  "infoSources": {
+    "aiho": "https://aihot.virxact.com/",
+    "officialBlog": "https://openai.com/blog",
+    "officialDocs": "https://platform.openai.com/docs"
+  }
+}

@@ -555,7 +555,8 @@
           "context": "1049K tokens",
           "pricing": "输入 ¥1.25/M | 输出 ¥2.50/M（估算，$0.174/$0.348，×7.2）",
           "output": "Text",
-          "notes": "DeepSeek-V4 旗舰版，1.6T 总参数 49B 激活 MoE，1049K 超长上下文，2026-04-24 上线"
+          "notes": "DeepSeek-V4 旗舰版，1.6T 总参数 49B 激活 MoE，1049K 超长上下文，2026-04-24 上线",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
         },
         {
           "modelId": "Qwen/Qwen3.5-27B",
@@ -568,7 +569,8 @@
           "context": "262K tokens",
           "pricing": "输入 ¥1.8/M | 输出 ¥14.4/M（估算，$0.25/$2.00，×7.2）",
           "output": "Text",
-          "notes": "Qwen3.5 密集 27B 模型，综合能力均衡，2026-04-24 上线"
+          "notes": "Qwen3.5 密集 27B 模型，综合能力均衡，2026-04-24 上线",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
         },
         {
           "modelId": "Qwen/Qwen3.5-9B",
@@ -581,7 +583,8 @@
           "context": "262K tokens",
           "pricing": "输入 ¥0.72/M | 输出 ¥1.08/M（估算，$0.10/$0.15，×7.2）",
           "output": "Text",
-          "notes": "Qwen3.5 轻量版，9B 参数，极低价格，适合高并发轻量任务，2026-04-24 上线"
+          "notes": "Qwen3.5 轻量版，9B 参数，极低价格，适合高并发轻量任务，2026-04-24 上线",
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
         }
       ]
     },
@@ -623,7 +626,7 @@
             "生图",
             "编辑"
           ],
-          "pricing": "按需",
+          "pricing": "¥0.30/次（按需计费）",
           "output": "Image (URL有效1小时)",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
         },
@@ -635,7 +638,7 @@
             "生图",
             "编辑"
           ],
-          "pricing": "按需",
+          "pricing": "¥0.30/次（按需计费）",
           "output": "Image (URL有效1小时)",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
         },
@@ -646,7 +649,7 @@
           "capabilities": [
             "生图"
           ],
-          "pricing": "按需",
+          "pricing": "¥0.30/次（按需计费）",
           "output": "Image (URL有效1小时)",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
         },
@@ -657,7 +660,7 @@
           "capabilities": [
             "生图"
           ],
-          "pricing": "按需",
+          "pricing": "¥0.30/次（按需计费）",
           "output": "Image (URL有效1小时)",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
         },
@@ -690,7 +693,7 @@
           "capabilities": [
             "生图"
           ],
-          "pricing": "按需",
+          "pricing": "¥0.50/次（按需计费，当前免费开放）",
           "output": "Image (URL有效1小时)",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
         },
@@ -735,7 +738,7 @@
           "capabilities": [
             "图生视频"
           ],
-          "pricing": "按需",
+          "pricing": "¥2.00/次（按需计费）",
           "output": "Video (MP4, 10分钟有效)",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit"
         },
@@ -746,7 +749,7 @@
           "capabilities": [
             "文生视频"
           ],
-          "pricing": "按需",
+          "pricing": "¥2.00/次（按需计费）",
           "output": "Video (MP4, 10分钟有效)",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit"
         }
@@ -838,7 +841,7 @@
             "嵌入"
           ],
           "context": "32768",
-          "pricing": "按需",
+          "pricing": "¥0.50/M tokens（按需计费）",
           "output": "Vector",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
         },
@@ -850,7 +853,7 @@
             "嵌入"
           ],
           "context": "32768",
-          "pricing": "按需",
+          "pricing": "¥0.50/M tokens（按需计费）",
           "output": "Vector",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
         },
@@ -862,7 +865,7 @@
             "嵌入"
           ],
           "context": "512",
-          "pricing": "按需",
+          "pricing": "¥0.05/M tokens（按需计费）",
           "output": "Vector",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
         }
@@ -899,7 +902,7 @@
           "capabilities": [
             "重排序"
           ],
-          "pricing": "按需",
+          "pricing": "¥0.10/次（按需计费）",
           "output": "Ranked documents",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
         },
@@ -910,7 +913,7 @@
           "capabilities": [
             "重排序"
           ],
-          "pricing": "按需",
+          "pricing": "¥0.10/次（按需计费）",
           "output": "Ranked documents",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
         },
@@ -921,7 +924,7 @@
           "capabilities": [
             "重排序"
           ],
-          "pricing": "按需",
+          "pricing": "¥0.10/次（按需计费）",
           "output": "Ranked documents",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
         },
@@ -932,7 +935,7 @@
           "capabilities": [
             "重排序"
           ],
-          "pricing": "按需",
+          "pricing": "¥0.10/次（按需计费）",
           "output": "Ranked documents",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
         }
@@ -967,7 +970,7 @@
           "capabilities": [
             "TTS"
           ],
-          "pricing": "按需",
+          "pricing": "¥0.05/千字符（按需计费）",
           "output": "Audio (MP3/WAV/PCM/FLAC/Opus/AAC)",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/audio/create-speech"
         },
@@ -978,7 +981,7 @@
           "capabilities": [
             "STT"
           ],
-          "pricing": "按需",
+          "pricing": "免费（按需计费）",
           "output": "Text (转录文本)",
           "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/audio/create-audio-transcriptions"
         }

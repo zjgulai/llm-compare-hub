@@ -1,0 +1,186 @@
+{
+  "page": "claude-essence",
+  "title": "Claude 用法精粹",
+  "subtitle": "Claude (Anthropic) 使用技巧、最佳实践与资源导航",
+  "updatedAt": "2026-06-09",
+  "sections": [
+    {
+      "id": "getting-started",
+      "name": "入门指南",
+      "description": "Claude 基础对话技巧与核心概念",
+      "color": "blue",
+      "items": [
+        {
+          "section": 0,
+          "title": "Claude 对话入门",
+          "url": "https://docs.anthropic.com/en/docs/chat",
+          "source": "Anthropic Docs",
+          "tags": [
+            "官方",
+            "入门"
+          ],
+          "summary": "官方对话 API 快速开始"
+        },
+        {
+          "section": 0,
+          "title": "System Prompt 编写指南",
+          "url": "https://docs.anthropic.com/en/docs/system-prompts",
+          "source": "Anthropic Docs",
+          "tags": [
+            "官方",
+            "进阶"
+          ],
+          "summary": "如何编写高效的 System Prompt"
+        },
+        {
+          "section": 0,
+          "title": "Claude Fable 5 介绍",
+          "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+          "source": "Anthropic Blog",
+          "tags": [
+            "官方",
+            "模型"
+          ],
+          "summary": "Anthropic 最新推理模型 Fable 5 与 Mythos 5"
+        }
+      ]
+    },
+    {
+      "id": "claude-code",
+      "name": "Claude Code 深入实战",
+      "description": "Agent 工作流、最佳实践与效率工具",
+      "color": "emerald",
+      "items": [
+        {
+          "section": 1,
+          "title": "Claude Code 官方指南",
+          "url": "https://docs.anthropic.com/en/docs/claude-code",
+          "source": "Anthropic Docs",
+          "tags": [
+            "官方",
+            "Claude Code"
+          ],
+          "summary": "Claude Code 的完整使用文档"
+        },
+        {
+          "section": 1,
+          "title": "Thariq 10 条效率建议",
+          "url": "https://x.com/rohanpaul_ai/status/2064425086409679358",
+          "source": "aiho.virxact.com",
+          "tags": [
+            "智能体",
+            "教程/实践",
+            "编码"
+          ],
+          "summary": "Claude Code 团队 Thariq 分享从\"检查对错\"到\"检查方向\"的工作流转变"
+        },
+        {
+          "section": 1,
+          "title": "AgentsView 为 Claude Fable 5 设置自定义价格",
+          "url": "https://simonwillison.net/2026/Jun/9/agentsview-custom-model-price",
+          "source": "Simon Willison Blog",
+          "tags": [
+            "教程/实践",
+            "部署/工程"
+          ],
+          "summary": "在 AgentsView 中为 Fable 5 设置自定义价格追踪 token 使用量"
+        }
+      ]
+    },
+    {
+      "id": "prompting",
+      "name": "提示词工程",
+      "description": "System Prompt、多轮对话与思维链",
+      "color": "purple",
+      "items": [
+        {
+          "section": 2,
+          "title": "Claude Prompting 最佳实践",
+          "url": "https://docs.anthropic.com/en/docs/prompting",
+          "source": "Anthropic Docs",
+          "tags": [
+            "官方",
+            "提示词"
+          ],
+          "summary": "官方提示词工程指南"
+        }
+      ]
+    },
+    {
+      "id": "use-cases",
+      "name": "场景应用",
+      "description": "编码、研究、写作、Agent 开发等具体场景",
+      "color": "amber",
+      "items": [
+        {
+          "section": 3,
+          "title": "Claude + MCP 工具调用",
+          "url": "https://docs.anthropic.com/en/docs/tool-use",
+          "source": "Anthropic Docs",
+          "tags": [
+            "官方",
+            "Agent"
+          ],
+          "summary": "通过 MCP 协议扩展 Claude 能力"
+        },
+        {
+          "section": 3,
+          "title": "Text-To-Lottie: Codex/Claude Code 生成动画",
+          "url": "https://x.com/shao__meng/status/2064508455051043008",
+          "source": "aiho.virxact.com",
+          "tags": [
+            "MCP/工具",
+            "开源/仓库"
+          ],
+          "summary": "Agent Skill + 本地预览 Harness，让 Agent 生成 Lottie JSON 动画并在浏览器实时验收"
+        }
+      ]
+    },
+    {
+      "id": "resources",
+      "name": "资源导航",
+      "description": "官方文档、社区教程与最新动态",
+      "color": "rose",
+      "items": [
+        {
+          "section": 4,
+          "title": "Claude API 参考",
+          "url": "https://platform.claude.com/docs/api",
+          "source": "Anthropic",
+          "tags": [
+            "官方",
+            "API"
+          ],
+          "summary": "完整 API 参考文档"
+        },
+        {
+          "section": 4,
+          "title": "Claude 模型选择指南",
+          "url": "https://www.anthropic.com/claude",
+          "source": "Anthropic",
+          "tags": [
+            "官方",
+            "模型"
+          ],
+          "summary": "Fable / Mythos / Opus / Sonnet / Haiku 对比"
+        },
+        {
+          "section": 4,
+          "title": "Claude 社区教程",
+          "url": "https://claude.com/resources/tutorials",
+          "source": "Anthropic",
+          "tags": [
+            "官方",
+            "教程"
+          ],
+          "summary": "Anthropic 官方教程与使用案例"
+        }
+      ]
+    }
+  ],
+  "infoSources": {
+    "aiho": "https://aihot.virxact.com/",
+    "officialBlog": "https://anthropic.com/blog",
+    "officialDocs": "https://platform.claude.com/docs/docs"
+  }
+}

@@ -1,0 +1,306 @@
+{
+  "platform": "easyrouter",
+  "platformName": "EasyRouter",
+  "platformUrl": "https://easyrouter.io",
+  "docsUrl": "https://docs.easyrouter.io",
+  "apiOverview": {
+    "baseUrl": "https://easyrouter.io/v1",
+    "auth": "认证方式: sk-easyrouter-***",
+    "requestFormat": "OpenAI 兼容格式，全模型享 15% 折扣。$1 USD = 200 Credits"
+  },
+  "categories": [
+    {
+      "id": "chat",
+      "name": "文本对话 API",
+      "description": "EasyRouter 全平台统一入口，聚合多模型 API 提供统一 OpenAI 兼容接口。全模型享 15% 折扣，按 Credit 计费。",
+      "endpoint": "POST /v1/chat/completions",
+      "auth": "Authorization: Bearer sk-easyrouter-***",
+      "commonParams": {
+        "model": "string | 模型 ID",
+        "messages": "array | 对话消息列表",
+        "temperature": "float | 0-2",
+        "max_tokens": "int | 最大生成 token 数",
+        "stream": "bool | 是否流式输出"
+      },
+      "models": [
+        {
+          "modelId": "gpt-5.1-codex-easyrouter",
+          "name": "GPT-5.1 Codex (EasyRouter)",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "代码"
+          ],
+          "variants": [
+            "gpt-5.1-codex-easyrouter"
+          ],
+          "context": "128K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "EasyRouter 独有 Codex 专用代码模型，代码补全和生成针对性优化。",
+          "output": "代码生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "gpt-5.2-codex-easyrouter",
+          "name": "GPT-5.2 Codex (EasyRouter)",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "代码"
+          ],
+          "variants": [
+            "gpt-5.2-codex-easyrouter"
+          ],
+          "context": "128K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "GPT-5.2 Codex，代码理解和多语言支持更强。",
+          "output": "代码生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "gpt-5.3-codex-easyrouter",
+          "name": "GPT-5.3 Codex (EasyRouter)",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "代码"
+          ],
+          "variants": [
+            "gpt-5.3-codex-easyrouter"
+          ],
+          "context": "128K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "GPT-5.3 Codex，最新代码生成模型。",
+          "output": "代码生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "gpt-5.5-easyrouter",
+          "name": "GPT-5.5 (EasyRouter)",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "推理"
+          ],
+          "variants": [
+            "gpt-5.5-easyrouter"
+          ],
+          "context": "256K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入",
+            "system": "string | 系统提示"
+          },
+          "notes": "OpenAI 最新旗舰，通过 EasyRouter 享折扣。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "gpt-5.4-easyrouter",
+          "name": "GPT-5.4 (EasyRouter)",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "推理"
+          ],
+          "variants": [
+            "gpt-5.4-easyrouter"
+          ],
+          "context": "256K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "GPT-5.4，平衡性能与成本。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "gpt-5.4-mini-easyrouter",
+          "name": "GPT-5.4-mini (EasyRouter)",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "轻量"
+          ],
+          "variants": [
+            "gpt-5.4-mini-easyrouter"
+          ],
+          "context": "64K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "GPT-5.4 Mini，低成本版本。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "gpt-5.4-nano-easyrouter",
+          "name": "GPT-5.4-nano (EasyRouter)",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "轻量"
+          ],
+          "variants": [
+            "gpt-5.4-nano-easyrouter"
+          ],
+          "context": "32K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "GPT-5.4 Nano，最经济的选择。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "gpt-5.2-easyrouter",
+          "name": "GPT-5.2 (EasyRouter)",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话"
+          ],
+          "variants": [
+            "gpt-5.2-easyrouter"
+          ],
+          "context": "128K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "GPT-5.2，上代旗舰级。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "claude-haiku-4.5-easyrouter",
+          "name": "Claude Haiku 4.5 (EasyRouter)",
+          "vendor": "Anthropic",
+          "capabilities": [
+            "对话",
+            "轻量"
+          ],
+          "variants": [
+            "claude-haiku-4.5-easyrouter"
+          ],
+          "context": "200K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "Claude Haiku 4.5，轻量快速可通过 EasyRouter 调用。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "claude-opus-4.6-easyrouter",
+          "name": "Claude Opus 4.6 (EasyRouter)",
+          "vendor": "Anthropic",
+          "capabilities": [
+            "对话",
+            "推理",
+            "代码"
+          ],
+          "variants": [
+            "claude-opus-4.6-easyrouter"
+          ],
+          "context": "200K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "Claude Opus 4.6，顶级推理和代码能力。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "claude-opus-4.7-easyrouter",
+          "name": "Claude Opus 4.7 (EasyRouter)",
+          "vendor": "Anthropic",
+          "capabilities": [
+            "对话",
+            "推理",
+            "代码"
+          ],
+          "variants": [
+            "claude-opus-4.7-easyrouter"
+          ],
+          "context": "200K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "Claude Opus 4.7 最新旗舰，通过 EasyRouter 路由。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "claude-sonnet-4.6-easyrouter",
+          "name": "Claude Sonnet 4.6 (EasyRouter)",
+          "vendor": "Anthropic",
+          "capabilities": [
+            "对话",
+            "推理"
+          ],
+          "variants": [
+            "claude-sonnet-4.6-easyrouter"
+          ],
+          "context": "200K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "Claude Sonnet 4.6，平衡速度与质量。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "deepseek-ai/DeepSeek-V4-Flash-easyrouter",
+          "name": "DeepSeek-V4-Flash (EasyRouter)",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "对话",
+            "长上下文"
+          ],
+          "variants": [
+            "deepseek-ai/DeepSeek-V4-Flash-easyrouter"
+          ],
+          "context": "1024K",
+          "pricing": "享 15% 折扣",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "DeepSeek-V4-Flash 1024K 上下文通过 EasyRouter 路由。",
+          "output": "文本生成",
+          "docsUrl": ""
+        }
+      ]
+    }
+  ],
+  "commonApis": [
+    {
+      "name": "创建对话",
+      "endpoint": "POST /v1/chat/completions",
+      "auth": "Authorization: Bearer sk-easyrouter-***",
+      "description": "OpenAI 兼容对话接口，全模型享 15% 折扣"
+    },
+    {
+      "name": "查询余额",
+      "endpoint": "GET /v1/dashboard/billing",
+      "auth": "Authorization: Bearer sk-easyrouter-***",
+      "description": "查询 Credit 余额和消费记录"
+    }
+  ],
+  "notes": "EasyRouter 平台数据基于旧 bundle 提取。需登录 https://easyrouter.io 核实最新模型列表和定价。"
+}

@@ -36,3 +36,16 @@ dist-temp/
 .idea/
 *.swp
 *.swo
+
+# Sisyphus workspace (runtime artifacts)
+.sisyphus/run-continuation/
+
+# Legacy
+models-data.json
+
+# Sisyphus runtime artifacts
+.sisyphus/run-continuation
+.sisyphus/run-continuation/*
+
+# Essence pages cache
+.essence-cache/

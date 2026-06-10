@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Codex — LLM 用法精粹</title>
+<link rel="canonical" href="https://llm.lute-tlz-dddd.top/codex.html"/>
+<style>
+  :root {
+    --page-bg: #f8fafc; --surface: #f1f5f9; --surface-hover: #e2e8f0;
+    --text-primary: #0f172a; --text-secondary: #475569; --text-tertiary: #94a3b8;
+    --text-muted: #cbd5e1;
+    --accent-blue: #3b82f6; --accent-blue-light: #eff6ff;
+    --accent-emerald: #10b981; --accent-emerald-light: #ecfdf5;
+    --accent-purple: #8b5cf6; --accent-purple-light: #f5f3ff;
+    --accent-amber: #f59e0b; --accent-amber-light: #fffbeb;
+    --accent-rose: #f43f5e; --accent-rose-light: #fff1f2;
+    --border-default: #e2e8f0;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Noto Sans SC", sans-serif;
+    --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-family: var(--font-sans); background: var(--page-bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
+  body { min-height: 100vh; }
+
+  /* Header */
+  .header { background: #fff; border-bottom: 1px solid var(--border-default); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); }
+  .header-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .header-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); }
+  .header-brand:hover { opacity: .8; }
+  .header-logo { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: 700; }
+  .header-title { font-size: 18px; font-weight: 600; }
+  .header-title small { font-size: 13px; font-weight: 400; color: var(--text-tertiary); }
+  .header-nav { display: flex; gap: 8px; }
+  .header-nav a { padding: 6px 14px; border-radius: 8px; font-size: 13px; text-decoration: none; color: var(--text-secondary); transition: all .15s; }
+  .header-nav a:hover { background: var(--surface); color: var(--text-primary); }
+  .header-nav a.active { background: var(--accent-blue-light); color: var(--accent-blue); font-weight: 500; }
+
+  /* Hero */
+  .hero { max-width: 1200px; margin: 0 auto; padding: 48px 24px 32px; }
+  .hero h1 { font-size: 32px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 8px; }
+  .hero p { font-size: 15px; color: var(--text-secondary); line-height: 1.6; max-width: 640px; }
+  .hero-meta { display: flex; gap: 24px; margin-top: 12px; font-size: 13px; color: var(--text-tertiary); flex-wrap: wrap; }
+  .hero-meta a { color: var(--accent-blue); text-decoration: none; }
+  .hero-meta a:hover { text-decoration: underline; }
+
+  /* Section tabs */
+  .section-nav { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 16px; }
+  .section-nav::-webkit-scrollbar { display: none; }
+  .section-tab { padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid var(--border-default); background: #fff; color: var(--text-secondary); white-space: nowrap; transition: all .15s; flex-shrink: 0; }
+  .section-tab:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+  .section-tab.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
+
+  /* Content */
+  .content { max-width: 1200px; margin: 0 auto; padding: 0 24px 48px; }
+
+  /* Section */
+  .section { display: none; }
+  .section.active { display: block; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-top: 8px; }
+  .section-indicator { width: 4px; height: 28px; border-radius: 2px; flex-shrink: 0; }
+  .section h2 { font-size: 22px; font-weight: 600; }
+  .section-desc { font-size: 14px; color: var(--text-tertiary); margin-top: 2px; }
+
+  /* Card grid */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+
+  /* Card */
+  .card { background: #fff; border: 1px solid var(--border-default); border-radius: 12px; padding: 20px; transition: box-shadow .2s; display: flex; flex-direction: column; gap: 10px; }
+  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.06); }
+  .card-title { font-size: 15px; font-weight: 600; line-height: 1.4; }
+  .card-title a { color: var(--text-primary); text-decoration: none; }
+  .card-title a:hover { color: var(--accent-blue); }
+  .card-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .card-source { font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 500; letter-spacing: .01em; }
+  .card-source.official { background: var(--accent-blue-light); color: var(--accent-blue); }
+  .card-source.community { background: var(--accent-purple-light); color: var(--accent-purple); }
+  .card-source.aiho { background: var(--accent-amber-light); color: var(--accent-amber); }
+  .card-score { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: #f0fdf4; color: #15803d; font-weight: 600; font-family: var(--font-mono); }
+  .card-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+  .card-tag { font-size: 11px; padding: 1px 6px; border-radius: 4px; background: var(--surface); color: var(--text-tertiary); }
+  .card-summary { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* Footer */
+  .footer { max-width: 1200px; margin: 0 auto; padding: 24px; border-top: 1px solid var(--border-default); font-size: 13px; color: var(--text-tertiary); }
+  .footer a { color: var(--accent-blue); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  /* Loading */
+  .loading { display: flex; align-items: center; justify-content: center; padding: 80px 24px; color: var(--text-tertiary); font-size: 15px; }
+  .loading-spinner { width: 24px; height: 24px; border: 2px solid var(--border-default); border-top-color: var(--accent-blue); border-radius: 50%; animation: spin .6s linear infinite; margin-right: 12px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .hero { padding: 32px 16px 24px; }
+    .hero h1 { font-size: 26px; }
+    .header-inner { padding: 12px 16px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .section-nav { padding: 0 16px; }
+    .content { padding: 0 16px 32px; }
+    .section-tab { font-size: 12px; padding: 6px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <a class="header-brand" href="https://llm.lute-tlz-dddd.top/">
+      <span class="header-logo">L</span>
+      <span class="header-title">Codex <small>用法精粹</small></span>
+    </a>
+    <nav class="header-nav">
+      <a href="https://llm.lute-tlz-dddd.top/">模型选型</a>
+      <a href="claude.html" class="">Claude</a>
+      <a href="codex.html" class="active">Codex</a>
+    </nav>
+  </div>
+</div>
+
+<div class="hero" id="hero">
+  <h1 id="page-title">Codex 用法精粹</h1>
+  <p id="page-subtitle">OpenAI Codex 使用技巧、最佳实践与资源导航</p>
+  <div class="hero-meta" id="hero-meta">
+    <span>最后更新: <span id="last-updated">—</span></span>
+    <span>·</span>
+    <span>数据来源: <a id="source-aiho" href="https://aihot.virxact.com/">aiho.virxact.com</a> + <a id="source-blog" href="https://openai.com/blog">官方博客</a></span>
+  </div>
+</div>
+
+<div class="section-nav" id="section-nav"></div>
+<div class="content" id="content">
+  <div class="loading" id="loading">
+    <div class="loading-spinner"></div>
+    <span>加载中...</span>
+  </div>
+</div>
+
+<div class="footer" id="footer">
+  <p>数据来源: <a href="https://aihot.virxact.com/">AIHOT</a> · <a href="https://openai.com/blog">官方博客</a> · <a href="https://platform.openai.com/docs">官方文档</a></p>
+  <p style="margin-top:4px"><a href="https://llm.lute-tlz-dddd.top/">LLM Compare Hub</a> — 大模型选型指南 &amp; 用法精粹</p>
+</div>
+
+<script>
+const DATA_FILE = './codex-data.json';
+const PAGE_COLOR = 'emerald';
+const accentColors = {
+  blue: ['var(--accent-blue)', 'var(--accent-blue-light)'],
+  emerald: ['var(--accent-emerald)', 'var(--accent-emerald-light)'],
+  purple: ['var(--accent-purple)', 'var(--accent-purple-light)'],
+  amber: ['var(--accent-amber)', 'var(--accent-amber-light)'],
+  rose: ['var(--accent-rose)', 'var(--accent-rose-light)'],
+};
+
+async function load() {
+  try {
+    const resp = await fetch(DATA_FILE);
+    const data = await resp.json();
+    
+    document.getElementById('last-updated').textContent = data.updatedAt;
+    document.getElementById('page-subtitle').textContent = data.subtitle;
+    if (data.page) document.title = data.title + ' — LLM 用法精粹';
+    
+    // Build section nav
+    const nav = document.getElementById('section-nav');
+    data.sections.forEach((s, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'section-tab' + (i === 0 ? ' active' : '');
+      btn.textContent = s.name;
+      btn.onclick = () => switchSection(i, data.sections, nav);
+      nav.appendChild(btn);
+    });
+    
+    // Render sections
+    const content = document.getElementById('content');
+    content.innerHTML = '';
+    data.sections.forEach((section, si) => {
+      const sec = document.createElement('div');
+      sec.className = 'section' + (si === 0 ? ' active' : '');
+      sec.id = 'section-' + section.id;
+      
+      const colors = accentColors[section.color] || accentColors.blue;
+      
+      sec.innerHTML = `
+        <div class="section-header">
+          <div class="section-indicator" style="background:${colors[0]}"></div>
+          <div>
+            <h2>${section.name}</h2>
+            <div class="section-desc">${section.description || ''}</div>
+          </div>
+        </div>
+        <div class="card-grid">
+          ${section.items.map(item => {
+            const sourceClass = item.recommendedBy === 'aiho' ? 'aiho' : 
+                               (item.source || '').includes('官方') ? 'official' : 'community';
+            const scoreBadge = item.score ? `<span class="card-score">✦ ${item.score}</span>` : '';
+            const tags = (item.tags || []).slice(0, 4).map(t => `<span class="card-tag">${t}</span>`).join('');
+            return `
+              <div class="card">
+                <div class="card-title"><a href="${item.url}" target="_blank" rel="noopener">${item.title}</a></div>
+                <div class="card-meta">
+                  <span class="card-source ${sourceClass}">${item.source || (item.recommendedBy || '社区')}</span>
+                  ${scoreBadge}
+                </div>
+                ${tags ? `<div class="card-tags">${tags}</div>` : ''}
+                ${item.summary ? `<div class="card-summary">${item.summary}</div>` : ''}
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+      content.appendChild(sec);
+    });
+    
+  } catch(e) {
+    document.getElementById('content').innerHTML = '<div class="loading" style="color:var(--accent-rose)">⚠️ 数据加载失败: ' + e.message + '</div>';
+    document.getElementById('loading').style.display = 'none';
+  }
+}
+
+function switchSection(idx, sections, nav) {
+  document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.section-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('section-' + sections[idx].id).classList.add('active');
+  nav.children[idx].classList.add('active');
+}
+
+load();
+</script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+{
+  "platform": "bai",
+  "platformName": "BAI",
+  "platformUrl": "https://chat.b.ai",
+  "docsUrl": "https://chat.b.ai/docs",
+  "apiOverview": {
+    "baseUrl": "https://chat.b.ai/api",
+    "auth": "Authorization: Bearer YOUR_API_KEY （获取地址 https://chat.b.ai/key）",
+    "requestFormat": "OpenAI 兼容格式，所有模型同步调用"
+  },
+  "categories": [
+    {
+      "id": "chat",
+      "name": "文本对话 API",
+      "description": "BAI 平台提供多模型对话 API，兼容 OpenAI 格式，无需翻墙。支持 GPT 系列、DeepSeek 系列、Claude 系列等主流模型，以超大上下文窗口为特色",
+      "endpoint": "POST /v1/chat/completions",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "commonParams": {
+        "model": "string | 模型 ID",
+        "messages": "array | 对话消息列表",
+        "temperature": "float | 0-2, 默认 1",
+        "max_tokens": "int | 最大生成 token 数",
+        "stream": "bool | 是否流式输出"
+      },
+      "models": [
+        {
+          "modelId": "gpt-5.5-bai",
+          "name": "GPT-5.5",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "推理"
+          ],
+          "variants": [
+            "gpt-5.5-bai"
+          ],
+          "context": "256K",
+          "pricing": "按 BAI 平台定价",
+          "input": {
+            "prompt": "string | 用户输入",
+            "system": "string | 系统提示"
+          },
+          "notes": "OpenAI 最新旗舰，推理能力与代码能力行业顶级。BAI 同步调用。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "gpt-5.4-bai",
+          "name": "GPT-5.4",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "推理"
+          ],
+          "variants": [
+            "gpt-5.4-bai"
+          ],
+          "context": "256K",
+          "pricing": "按 BAI 平台定价",
+          "input": {
+            "prompt": "string | 用户输入",
+            "system": "string | 系统提示"
+          },
+          "notes": "OpenAI GPT-5.4，上一代旗舰，成本低于 5.5。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "gpt-5.2-bai",
+          "name": "GPT-5.2",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "代码"
+          ],
+          "variants": [
+            "gpt-5.2-bai"
+          ],
+          "context": "128K",
+          "pricing": "按 BAI 平台定价",
+          "input": {
+            "prompt": "string | 用户输入",
+            "system": "string | 系统提示"
+          },
+          "notes": "GPT-5.2，平衡性价比的中间模型。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "gpt-5-nano-bai",
+          "name": "GPT-5-nano",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "轻量"
+          ],
+          "variants": [
+            "gpt-5-nano-bai"
+          ],
+          "context": "32K",
+          "pricing": "按 BAI 平台定价",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "GPT 系列轻量版，成本最低，适合简单对话。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "gpt-5-mini-bai",
+          "name": "GPT-5-mini",
+          "vendor": "OpenAI",
+          "capabilities": [
+            "对话",
+            "轻量"
+          ],
+          "variants": [
+            "gpt-5-mini-bai"
+          ],
+          "context": "32K",
+          "pricing": "按 BAI 平台定价",
+          "input": {
+            "prompt": "string | 用户输入"
+          },
+          "notes": "GPT 系列 Mini 版，高性价比。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "deepseek-ai/DeepSeek-V4-Flash-bai",
+          "name": "DeepSeek-V4-Flash (BAI)",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "对话",
+            "长上下文"
+          ],
+          "variants": [
+            "deepseek-ai/DeepSeek-V4-Flash-bai"
+          ],
+          "context": "1024K",
+          "pricing": "按 BAI 平台定价（通常低于官方）",
+          "input": {
+            "prompt": "string | 用户输入",
+            "system": "string | 系统提示"
+          },
+          "notes": "BAI 专供版 DeepSeek-V4-Flash，支持超大上下文窗口，适合完整代码库分析、长文档摘要。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "deepseek-ai/DeepSeek-V4-Pro-bai",
+          "name": "DeepSeek-V4-Pro (BAI)",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "对话",
+            "推理"
+          ],
+          "variants": [
+            "deepseek-ai/DeepSeek-V4-Pro-bai"
+          ],
+          "context": "1024K",
+          "pricing": "按 BAI 平台定价",
+          "input": {
+            "prompt": "string | 用户输入",
+            "system": "string | 系统提示"
+          },
+          "notes": "DeepSeek-V4-Pro，BAI 平台提供 25% 折扣。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "deepseek-ai/DeepSeek-V3.2-bai",
+          "name": "DeepSeek-V3.2 (BAI)",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "对话"
+          ],
+          "variants": [
+            "deepseek-ai/DeepSeek-V3.2-bai"
+          ],
+          "context": "128K",
+          "pricing": "按 BAI 平台定价",
+          "input": {
+            "prompt": "string | 用户输入",
+            "system": "string | 系统提示"
+          },
+          "notes": "DeepSeek-V3.2，前代旗舰，成本更优。",
+          "output": "文本生成",
+          "docsUrl": ""
+        },
+        {
+          "modelId": "claude-haiku-4.5-bai",
+          "name": "Claude Haiku 4.5 (BAI)",
+          "vendor": "Anthropic",
+          "capabilities": [
+            "对话",
+            "轻量"
+          ],
+          "variants": [
+            "claude-haiku-4.5-bai"
+          ],
+          "context": "200K",
+          "pricing": "按 BAI 平台定价",
+          "input": {
+            "prompt": "string | 用户输入",
+            "system": "string | 系统提示"
+          },
+          "notes": "Anthropic Claude Haiku 4.5，轻量快速，BAI 平台同步调用。",
+          "output": "文本生成",
+          "docsUrl": ""
+        }
+      ]
+    }
+  ],
+  "commonApis": [
+    {
+      "name": "创建对话",
+      "endpoint": "POST /v1/chat/completions",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "description": "创建对话完成请求，支持所有主流模型"
+    },
+    {
+      "name": "查询余额",
+      "endpoint": "GET /v1/dashboard/billing",
+      "auth": "Authorization: Bearer YOUR_API_KEY",
+      "description": "查询当前账户余额和使用量"
+    }
+  ],
+  "notes": "BAI 平台数据基于 Sprint D 旧 bundle 提取。需登录 https://chat.b.ai 核实最新模型列表和定价。"
+}

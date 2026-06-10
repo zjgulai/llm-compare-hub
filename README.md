@@ -1,14 +1,12 @@
-# LLM Compare Hub — 大模型选型指南
+---
 
-> 大模型 API 横向对比、选型参考、费用计算一站式查询平台
-
-## 访问地址
-
-| 环境 | URL | 说明 |
-|------|-----|------|
-| 🏭 **生产（腾讯云）** | **[https://llm.lute-tlz-dddd.top](https://llm.lute-tlz-dddd.top)** | 主部署，nginx 静态服务 |
-| 🌐 **GitHub Pages** | [https://zjgulai.github.io/llm-compare-hub/](https://zjgulai.github.io/llm-compare-hub/) | 自动 CI/CD，push main 即更新 |
-| 🔗 **入口页** | [https://lute-tlz-dddd.top](https://lute-tlz-dddd.top) | 宿主 landing，已展示卡片链接 |
+> **⚠️ 紧急状态：源码已丢失**
+> 
+> Vite+React 源码目录 `/var/folders/wp/.../llm-compare-hub-src` 已被系统清理（~500 行 TSX）。
+> 项目当前处于**数据维护模式**：只能修改 JSON 文件（立即生效），
+> 无法修改 UI 逻辑、修复 bug、新增功能或重建 bundle。
+> 
+> 如需恢复开发能力，需重建 `src/` 项目。参考 [src/package.json](src/package.json) 获取依赖清单。
 
 ---
 
@@ -56,12 +54,12 @@
 
 | 文件 | 内容 | 模型数 | 修改是否立即生效 |
 |------|------|--------|----------------|
-| `api-data.json` | PoYo.ai API 文档（image/video/chat/music/3d/audio）| 68 | ✅ rsync 后立即生效 |
-| `siliconflow-data.json` | 硅基流动 API 文档（chat/image/video/embedding/rerank/audio）| 42 | ✅ rsync 后立即生效 |
+| `api-data.json` | PoYo.ai API 文档（image/video/chat/music/3d/audio）| **71**（+3） | ✅ rsync 后立即生效 |
+| `siliconflow-data.json` | 硅基流动 API 文档（chat/image/video/embedding/rerank/audio）| 65 | ✅ rsync 后立即生效 |
 | `compare-data.json` | 四平台横向对比（TOP13 综合排名 + 14 场景功能排名）| - | ✅ rsync 后立即生效 |
 | `free-models-data.json` | 本地可运行开源模型，含完整规格 | 10 | ✅ rsync 后立即生效 |
-| `bai-data.json` | BAI 平台 API 文档 | **待创建** | - |
-| `easyrouter-data.json` | EasyRouter 平台 API 文档 | **待创建** | - |
+| `bai-data.json` | BAI 平台 API 文档 | 1（骨架）+ 数据待确认 | - |
+| `easyrouter-data.json` | EasyRouter 平台 API 文档 | 4（骨架）+ 数据待确认 | - |
 
 > **重要**：Sprint D（2026-05-28）完成后，所有 JSON 均为 runtime fetch。**修改任意 JSON 文件 + rsync 到服务器即可立即上线，无需重新 build。**
 
@@ -197,14 +195,31 @@ ssh -i ai_video.pem ubuntu@101.34.52.232 "
 
 | 优先级 | 项目 | 描述 | 解决方案 |
 |--------|------|------|---------|
-| 🔴 高 | BAI/EasyRouter 独立 JSON 文件缺失 | `bai-data.json` 和 `easyrouter-data.json` 未创建，两个平台的模型列表页显示空 | 按 api-data.json schema 创建这两个文件，rsync 后立即生效 |
-| 🟡 中 | 51 个模型 docsUrl 为占位符 | `https://docs.poyo.ai` 通用占位，点击无法打开具体文档 | 补充真实文档 URL 到 api-data.json |
-| 🟡 中 | 16 个 siliconflow 模型 pricing="按需" | 价格字段未填充 | 补充实际 ¥ 价格到 siliconflow-data.json（需登录 cloud.siliconflow.cn 核实）|
+| ✅ 已完成 | BAI/EasyRouter 数据补全 | `bai-data.json`（9 模型）+`easyrouter-data.json`（13 模型），已填充 baseUrl 和模型列表 | ✅ chat.b.ai + easyrouter.io |
+| ✅ 已完成 | PoYo.ai docsUrl 全部修复 | 71 个模型的 docsUrl 已从 sitemap 核实并补充 | ✅ 2026-06-09 全部修复 |
+| ✅ 已完成 | SiliconFlow 定价+docsUrl 全部修复 | 16 个模型定价、3 个 docsUrl 已修复 | ✅ 2026-06-09 |
 | 🟢 低 | 源码未纳入 git 管理 | 源码在临时目录，机器重启后丢失 | 将 `llm-compare-hub-src/` 提交到 git 或迁移到 `/Users/lute/project/Agent/product/llm_models_hub/src/` |
 
 > **已解决（2026-05-28）**：~~Bundle 中 Seedream badge 无色~~ ✅ / ~~4/5 JSON 内联进 bundle，修改无效~~ ✅ / ~~免费模型 fetch 错误静默吞掉~~ ✅
 
 ---
+
+
+
+---
+
+## 工具链
+
+| 工具 | 说明 |
+|------|------|
+| `make validate` | 验证所有 JSON 数据结构 + 交叉引用 |
+| `make deploy` | 验证 + rsync 到腾讯云服务器 |
+| `make deploy-dry` | 试运行部署（不实际传输） |
+| `make check` | 检查生产站点和所有 JSON 文件的 HTTP 状态 |
+
+### 数据修复记录
+
+详见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 相关链接
 

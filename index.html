@@ -13,10 +13,33 @@
     <meta property="og:url" content="https://llm.lute-tlz-dddd.top/" />
     <meta property="og:locale" content="zh_CN" />
     <meta name="twitter:card" content="summary_large_image" />
-    <script type="module" crossorigin src="./assets/index-DltUXhyr.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CdBRW1VH.css">
+    <script type="module" crossorigin src="./assets/index-DltUXhyr.js?v=20260610"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CdBRW1VH.css?v=20260610">
   </head>
   <body>
     <div id="root"></div>
-  </body>
+  
+  <!-- Essence pages navigator (static, outside React root) -->
+  <style>
+    .essence-nav { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
+    .essence-nav-btn { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 100px; border: 1px solid var(--border-default,#e2e8f0); background: #fff; color: var(--text-primary,#0f172a); font-size: 13px; font-weight: 500; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,.08); transition: all .2s; cursor: pointer; font-family: -apple-system,BlinkMacSystemFont,"Inter","Noto Sans SC",sans-serif; }
+    .essence-nav-btn:hover { box-shadow: 0 8px 24px rgba(0,0,0,.12); transform: translateY(-1px); }
+    .essence-nav-btn .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .essence-nav-btn .dot.blue { background: #3b82f6; }
+    .essence-nav-btn .dot.emerald { background: #10b981; }
+    .essence-nav-btn .label { font-size: 12px; }
+    @media (max-width: 640px) { .essence-nav { bottom: 16px; right: 16px; } .essence-nav-btn { padding: 8px 14px; font-size: 12px; } }
+  </style>
+  <div class="essence-nav">
+    <a class="essence-nav-btn" href="./claude/" title="Claude 用法精粹">
+      <span class="dot blue"></span>
+      <span>Claude 用法</span>
+    </a>
+    <a class="essence-nav-btn" href="./codex/" title="Codex 用法精粹">
+      <span class="dot emerald"></span>
+      <span>Codex 用法</span>
+    </a>
+  </div>
+
+</body>
 </html>

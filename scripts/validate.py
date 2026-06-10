@@ -1,0 +1,126 @@
+#!/usr/bin/env python3
+"""LLM Compare Hub — Data Validation Script
+
+Validates all JSON data files for structural integrity, cross-references, and consistency.
+Usage:
+    python3 scripts/validate.py          # validate everything
+    python3 scripts/validate.py --quiet  # only show errors
+"""
+
+import json, sys, os
+
+REPO_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FILES = ['api-data.json', 'siliconflow-data.json', 'compare-data.json', 
+         'free-models-data.json', 'bai-data.json', 'easyrouter-data.json']
+
+errors = 0
+warnings = 0
+quiet = '--quiet' in sys.argv
+
+def msg(level, text):
+    global errors, warnings
+    if level == 'ERROR':
+        errors += 1
+        print(f"  ❌ {text}")
+    elif level == 'WARN':
+        warnings += 1
+        if not quiet:
+            print(f"  ⚠️  {text}")
+    else:
+        if not quiet:
+            print(f"  ✅ {text}")
+
+print(f"\n=== LLM Compare Hub Data Validation ===\n")
+
+# 1. Basic JSON parse check
+for fname in FILES:
+    path = os.path.join(REPO_DIR, fname)
+    try:
+        with open(path) as f:
+            data = json.load(f)
+        msg('OK', f"{fname} — valid JSON ({len(json.dumps(data))} bytes)")
+    except FileNotFoundError:
+        msg('WARN', f"{fname} — not found (expected for new files)")
+    except json.JSONDecodeError as e:
+        msg('ERROR', f"{fname} — invalid JSON: {e}")
+
+# 2. Platform data files structure check
+def check_platform(fname, required_keys, require_models=True):
+    path = os.path.join(REPO_DIR, fname)
+    if not os.path.exists(path):
+        return
+    with open(path) as f:
+        d = json.load(f)
+    for k in required_keys:
+        if k not in d:
+            msg('ERROR', f"{fname} — missing key: {k}")
+    if require_models and 'categories' in d:
+        total = sum(len(c.get('models', [])) for c in d['categories'])
+        if total == 0:
+            msg('WARN', f"{fname} — no models in any category (skeleton?)")
+        else:
+            msg('OK', f"{fname} — {total} models across {len(d['categories'])} categories")
+
+check_platform('api-data.json', ['platform', 'platformName', 'platformUrl', 'categories'])
+check_platform('siliconflow-data.json', ['platform', 'platformName', 'platformUrl', 'categories'])
+check_platform('bai-data.json', ['platform', 'platformName', 'platformUrl', 'categories'])
+check_platform('easyrouter-data.json', ['platform', 'platformName', 'platformUrl', 'categories'])
+
+# 3. Cross-reference: compare-data.json modelIds exist in platform files
+platform_data = {}
+for plat_file in ['api-data.json', 'siliconflow-data.json', 'bai-data.json', 'easyrouter-data.json']:
+    path = os.path.join(REPO_DIR, plat_file)
+    if not os.path.exists(path):
+        continue
+    with open(path) as f:
+        d = json.load(f)
+    for cat in d.get('categories', []):
+        for m in cat.get('models', []):
+            platform_data[m.get('modelId', '')] = plat_file
+
+path = os.path.join(REPO_DIR, 'compare-data.json')
+with open(path) as f:
+    comp = json.load(f)
+
+for item in comp.get('overallRanking', []):
+    mid = item.get('modelId', '')
+    if mid:
+        if mid not in platform_data:
+            msg('WARN', f"compare-data overallRanking: '{item['name']}' (modelId={mid}) not in platform data")
+
+for fr in comp.get('functionRanking', []):
+    for r in fr.get('rankings', []):
+        mid = r.get('modelId', '')
+        if mid and mid not in platform_data:
+            msg('WARN', f"compare-data functionRanking [{fr.get('functionId')}]: '{r.get('name')}' not in platform data")
+
+# 4. Check for missing docsUrl on platform models
+for plat_file in ['api-data.json', 'siliconflow-data.json']:
+    path = os.path.join(REPO_DIR, plat_file)
+    with open(path) as f:
+        d = json.load(f)
+    placeholder_count = 0
+    for cat in d.get('categories', []):
+        for m in cat.get('models', []):
+            url = m.get('docsUrl', '')
+            if not url:
+                placeholder_count += 1
+    if placeholder_count:
+        msg('WARN', f"{plat_file}: {placeholder_count} models missing docsUrl")
+    else:
+        msg('OK', f"{plat_file}: all models have docsUrl")
+
+# 5. Check for BAI/EasyRouter URLs
+for plat_file in ['bai-data.json', 'easyrouter-data.json']:
+    path = os.path.join(REPO_DIR, plat_file)
+    with open(path) as f:
+        d = json.load(f)
+    if not d.get('platformUrl'):
+        msg('WARN', f"{plat_file}: platformUrl is empty")
+    else:
+        msg('OK', f"{plat_file}: platformUrl = {d['platformUrl']}")
+
+# Summary
+total = len(FILES)
+print(f"\n=== Summary: {errors} errors, {warnings} warnings ===")
+sys.exit(1 if errors > 0 else 0)
