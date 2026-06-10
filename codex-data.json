@@ -1,185 +1,367 @@
 {
   "page": "codex-essence",
   "title": "Codex 用法精粹",
-  "subtitle": "Codex (OpenAI) 使用技巧、最佳实践与资源导航",
-  "updatedAt": "2026-06-09",
+  "subtitle": "可操作的 OpenAI Codex 技巧、工作流与最佳实践",
+  "updatedAt": "2026-06-10",
   "sections": [
     {
-      "id": "overview",
-      "name": "Codex 概览",
-      "description": "Codex 模型家族、能力边界与最新更新",
+      "id": "getting-started",
+      "name": "快速上手",
+      "description": "连接仓库、理解能力边界、第一个任务",
+      "color": "pink",
+      "items": [
+        {
+          "title": "连接 GitHub：先给 Codex 一个可复现的仓库环境",
+          "url": "",
+          "source": "OpenAI 官方",
+          "tags": [
+            "GitHub",
+            "初始化"
+          ],
+          "summary": "进入 ChatGPT Codex 页面，按 OAuth 流程授权；只授权 Codex 需要工作的仓库，不要给全组织权限。\n\n建议流程：\n1. 先用低风险仓库试运行\n2. 授权最小仓库集合\n3. 在 settings 里配置 setup script、测试命令和 review 开关\n4. 第一个任务先问架构：\n   Summarize this repository architecture and how to run tests. Do not modify files.\n\n先验证 Codex 是否理解项目结构和测试入口，再让它写代码，可显著减少首个 PR 的偏差。"
+        },
+        {
+          "title": "AGENTS.md：给 Codex 写项目说明书",
+          "url": "",
+          "source": "OpenAI 官方",
+          "tags": [
+            "配置",
+            "必做",
+            "项目规范"
+          ],
+          "summary": "在仓库根目录创建 AGENTS.md，写清项目约束、测试命令、禁止区域和 PR 要求。子目录也可以放更具体的 AGENTS.md，越靠近被修改文件的指令优先级越高。\n\n示例：\n# Project instructions\n- Runtime: Node.js 22, pnpm only. Do not use npm or yarn.\n- Style: TypeScript strict mode, no any.\n- Tests: run `pnpm test -- --runInBand` for backend changes.\n- Do not modify `db/migrations/**` unless the task explicitly asks.\n- Before finalizing, summarize changed files and test results.\n\n把隐性团队规范显式化，减少风格不一致、跑错测试、误改敏感目录等问题。"
+        },
+        {
+          "title": "云端环境：setup script 必须能一键冷启动",
+          "url": "",
+          "source": "OpenAI 官方",
+          "tags": [
+            "环境配置",
+            "测试",
+            "依赖"
+          ],
+          "summary": "setup 阶段默认可联网，agent 阶段默认离线；依赖必须在 setup 阶段装好。\n\nNode 项目示例：\ncorepack enable\npnpm install --frozen-lockfile\npnpm build\n\nPython 项目示例：\npython -m pip install -U pip\npip install -r requirements-dev.txt\n\n注意：setup script 和 agent 是不同 Bash session，export FOO=bar 不会自动带入 agent 阶段；需要持久变量时写入 ~/.bashrc。\n\n环境越接近真实 CI，Codex 越能自测和修复。"
+        },
+        {
+          "title": "第一个任务：先读项目，不急着改代码",
+          "url": "",
+          "source": "OpenAI 官方",
+          "tags": [
+            "上手",
+            "安全",
+            "代码库理解"
+          ],
+          "summary": "首次接入新仓库，先发只读任务，让 Codex 输出架构、测试入口和关键风险：\n\n可复制 prompt：\nRead this repository and produce an onboarding note. Do not modify files.\nInclude:\n1. main services/modules\n2. build/test/lint commands\n3. where API routes are defined\n4. risky areas a coding agent should avoid changing without explicit permission\n5. three good starter tasks for Codex\n\n这一步相当于让 Codex 做代码库索引和自我校准，也能暴露 AGENTS.md 或环境配置缺口。"
+        },
+        {
+          "title": "能力边界：当作 junior engineer，而不是自动合并器",
+          "url": "",
+          "source": "OpenAI 官方",
+          "tags": [
+            "边界",
+            "审查",
+            "风险控制"
+          ],
+          "summary": "Codex 能做：阅读仓库、编辑文件、运行测试/linters、修 bug、写小功能、生成 PR、PR review、并行跑多个 sandbox 任务。\n\nCodex 不应直接负责：未经 review 合并生产代码、处理 secrets、决定架构取舍、大范围重构（无测试）、安全敏感逻辑最终判断。\n\n实操原则：\n- 低风险任务：改代码并开 PR\n- 中风险任务：先 plan，再实现\n- 高风险任务：只调查、写测试、给 diff 建议\n\n把自主性限制在可审查范围内，避免看似完成、实际引入隐性风险。"
+        }
+      ]
+    },
+    {
+      "id": "coding-workflows",
+      "name": "编码工作流",
+      "description": "并行分发、分支策略、测试、修 bug 与重构",
       "color": "blue",
       "items": [
         {
-          "section": 0,
-          "title": "Codex 官方概览",
-          "url": "https://openai.com/codex/",
-          "source": "OpenAI",
+          "title": "并行任务分发：一个任务一个 sandbox，不共享上下文",
+          "url": "",
+          "source": "OpenAI 官方",
           "tags": [
-            "官方",
-            "入门"
+            "并行",
+            "任务拆分",
+            "效率"
           ],
-          "summary": "Codex 产品介绍与能力概述"
+          "summary": "把互不依赖的任务拆成多个 Codex cloud tasks 同时运行。每个任务指定独立范围、验收标准和目标分支。\n\n并行任务模板：\nTask: Add unit tests for the pricing calculator only.\nScope: src/pricing/** and tests/pricing/**\nDo not change runtime behavior.\nValidation: run `pnpm test tests/pricing`\nOutput: commit changes and summarize uncovered edge cases.\n\n适合并行：测试补齐、独立 bug、文档更新、lint 修复。\n不适合并行：同一文件大重构、共享 schema 迁移、跨模块架构改造。\n\n把工程吞吐从一个人串行写变成并行 review 多个候选 PR。"
         },
         {
-          "section": 0,
-          "title": "Codex for every role",
-          "url": "https://openai.com/index/codex-for-every-role-tool-workflow/",
-          "source": "OpenAI Blog",
+          "title": "分支策略：Codex 分支要短命、单目的、可丢弃",
+          "url": "",
+          "source": "OpenAI 官方 + 实战经验",
           "tags": [
-            "官方",
-            "更新"
+            "Git",
+            "分支",
+            "PR"
           ],
-          "summary": "2026年6月：Codex 扩展到每一种角色、工具和工作流"
+          "summary": "每个 Codex 任务对应一个短命分支或 PR，不要让多个不相关任务堆在同一分支。\n\n命名建议：codex/<area>-<intent>，例如 codex/auth-fix-refresh-token\n\n工作流：\n1. 从最新 main 创建 Codex 任务\n2. Codex 完成后生成 commit 或 PR\n3. 人类 review diff 和 test log\n4. 追问修改：Address review comments only; do not add new features.\n5. 合并前 rebase 并跑 CI\n\nCodex 输出质量不高时，直接关闭分支重跑，不污染主开发分支。"
         },
         {
-          "section": 0,
-          "title": "Codex on AWS",
-          "url": "https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws/",
-          "source": "OpenAI Blog",
+          "title": "写测试任务：指定行为、边界和禁止改生产代码",
+          "url": "",
+          "source": "OpenAI 官方 + 实战经验",
           "tags": [
-            "官方",
-            "集成"
+            "测试",
+            "TDD",
+            "模板"
           ],
-          "summary": "OpenAI 前沿模型和 Codex 现已可在 AWS 上使用"
+          "summary": "可复制 prompt：\nAdd tests for `src/billing/calculateInvoice.ts`.\nDo not change production code unless a test exposes a clear bug;\nif so, stop and explain before fixing.\nCover:\n1. zero-usage customer\n2. monthly discount applied once\n3. tax rounding to cents\n4. invalid currency throws\nUse existing test style in `tests/billing/`.\nValidation: run `pnpm test tests/billing/calculateInvoice.test.ts`.\n\n技巧：\n- 锁定现有行为：Do not change runtime behavior\n- TDD 修 bug：First add a failing test, then implement the minimal fix\n\n防止 Codex 为了让测试通过而偷偷改业务逻辑。"
+        },
+        {
+          "title": "Bug 修复框架：复现步骤比问题描述更重要",
+          "url": "",
+          "source": "OpenAI 官方 + 实战经验",
+          "tags": [
+            "Bug 修复",
+            "调试",
+            "验收"
+          ],
+          "summary": "可复制 prompt：\nFix bug: checkout crashes when coupon code is lowercase.\nReproduction:\n1. run `pnpm dev`\n2. POST `/api/checkout` with { \"coupon\": \"summer10\" }\n3. expected: applies SUMMER10 discount\n4. actual: 500 TypeError in CouponService.lookup\nConstraints:\n- Keep API response shape unchanged.\n- Prefer a minimal fix in coupon normalization.\n- Add regression test.\nValidation: `pnpm test tests/checkout/coupon.test.ts` and `pnpm typecheck`.\n\n结构：现象、复现、期望、实际、约束、验证命令。\n不要只写 'fix coupon bug'，否则 Codex 会先花大量时间猜。"
+        },
+        {
+          "title": "重构任务：先锁行为，再限定公共接口不变",
+          "url": "",
+          "source": "OpenAI 官方 + 实战经验",
+          "tags": [
+            "重构",
+            "安全边界",
+            "大型任务"
+          ],
+          "summary": "可复制 prompt：\nRefactor `src/search/queryBuilder.ts` for readability.\nNon-goals:\n- Do not change public function signatures.\n- Do not change generated SQL output.\n- Do not touch database migrations or API handlers.\nRequired steps:\n1. Identify current tests that cover this file.\n2. Add characterization tests if coverage is missing.\n3. Refactor in small commits.\n4. Run `pnpm test tests/search`.\n\n大重构先只出 plan：\nDo not edit files yet; propose a decision-complete refactor plan.\n\n把重构从自由发挥变成有护栏的等价变换。"
         }
       ]
     },
     {
-      "id": "coding",
-      "name": "编码工作流",
-      "description": "代码生成、重构、调试与测试",
-      "color": "emerald",
-      "items": [
-        {
-          "section": 1,
-          "title": "Codex API 快速开始",
-          "url": "https://platform.openai.com/docs/quickstart",
-          "source": "OpenAI Docs",
-          "tags": [
-            "官方",
-            "API"
-          ],
-          "summary": "5分钟接入 Codex API"
-        },
-        {
-          "section": 1,
-          "title": "Codex 代码补全与生成指南",
-          "url": "https://platform.openai.com/docs/guides/code",
-          "source": "OpenAI Docs",
-          "tags": [
-            "官方",
-            "编码"
-          ],
-          "summary": "使用 Codex 进行代码补全、生成与重构"
-        }
-      ]
-    },
-    {
-      "id": "agent",
-      "name": "Agent 开发",
-      "description": "工具调用、多步骤工作流与框架集成",
+      "id": "prompting-techniques",
+      "name": "任务描述技巧",
+      "description": "约束范围、验收标准、多步骤拆分与高信号 prompt",
       "color": "purple",
       "items": [
         {
-          "section": 2,
-          "title": "Codex + Function Calling",
-          "url": "https://platform.openai.com/docs/guides/function-calling",
-          "source": "OpenAI Docs",
+          "title": "高质量任务格式：目标 + 范围 + 约束 + 验证",
+          "url": "",
+          "source": "OpenAI 官方",
           "tags": [
-            "官方",
-            "Agent"
+            "Prompt",
+            "任务模板",
+            "最佳实践"
           ],
-          "summary": "Codex 的工具调用与函数调用指南"
+          "summary": "推荐格式：\nGoal: 一句话说明要达成的行为\nContext: 相关业务背景、错误信息、文件路径\nScope: 允许修改的目录/文件\nConstraints: 禁止事项、兼容性要求、风格要求\nValidation: 必须运行的测试/命令\nDefinition of done: 什么算完成\n\n示例：\nGoal: Add CSV export for the orders table.\nScope: src/orders/**, tests/orders/**\nConstraints: preserve existing JSON API; no new runtime dependency.\nValidation: `pnpm test tests/orders` and `pnpm typecheck`.\nDone: tests pass and PR includes usage example.\n\nCodex 最擅长有明确完成条件的任务。"
         },
         {
-          "section": 2,
-          "title": "Text-To-Lottie: Codex/Claude Code 生成动画",
-          "url": "https://x.com/shao__meng/status/2064508455051043008",
-          "source": "aiho.virxact.com",
+          "title": "限制范围：明确允许改什么，比说不要乱改更有效",
+          "url": "",
+          "source": "OpenAI 官方 + 实战经验",
           "tags": [
-            "MCP/工具",
-            "开源/仓库"
+            "约束",
+            "范围控制",
+            "安全"
           ],
-          "summary": "Agent Skill + 本地预览，让 Codex 生成 Lottie JSON 动画"
+          "summary": "可复制写法：\nOnly modify these files:\n- src/components/UserMenu.tsx\n- src/components/UserMenu.test.tsx\nIf you believe another file must change, stop and explain why.\n\n更严格写法：\nDo not edit files outside src/components/UserMenu.tsx. You may read other files for context, but any code change outside that file is out of scope.\n\n不推荐：keep changes small、don't touch unrelated stuff — 太抽象，Codex 不知道你的边界在哪里。\n\n把误改风险从模糊约束变成可检查规则。"
+        },
+        {
+          "title": "验收标准：写成 Codex 可自检的 checklist",
+          "url": "",
+          "source": "OpenAI 官方 + 实战经验",
+          "tags": [
+            "验收",
+            "Definition of Done",
+            "质量"
+          ],
+          "summary": "把'完成'写成可验证条件：\nDefinition of done:\n- `pnpm test tests/auth/session.test.ts` passes.\n- `pnpm typecheck` passes.\n- Existing public API response fields are unchanged.\n- Add one regression test proving expired sessions return 401.\n- Final response lists files changed and commands run.\n\n无法自动测试时定义人工验收：\nDone when Save button is disabled until the form is dirty. Include manual QA steps.\n\nCodex 会围绕 checklist 工作，方便判断是否需要追问修正。"
+        },
+        {
+          "title": "多步骤任务：先让 Codex 产 plan，再批准实现",
+          "url": "",
+          "source": "OpenAI 官方",
+          "tags": [
+            "多步骤",
+            "计划",
+            "大型任务"
+          ],
+          "summary": "涉及多个模块、迁移或架构选择时，先用 planning prompt：\n\nDo not modify files yet. Investigate and propose an implementation plan for adding team-level billing.\nThe plan must include:\n1. files likely to change\n2. data model changes\n3. API changes\n4. tests to add\n5. risks and open questions\nWait for approval before implementation.\n\n批准后再发：\nImplement the approved plan. Keep changes minimal and stop if you discover a required schema change not in the plan.\n\n把高不确定任务拆成调查/决策和执行两段，避免 Codex 在关键架构点上擅自选择。"
+        },
+        {
+          "title": "上下文控制：给文件路径和日志，不要粘贴半个仓库",
+          "url": "",
+          "source": "OpenAI 官方",
+          "tags": [
+            "上下文",
+            "Token",
+            "Prompt"
+          ],
+          "summary": "优先给 Codex 文件路径、错误日志、测试名和业务规则，让 Codex 自己读取 repo。过多粘贴反而挤占 context window。\n\n高效输入：\nFailing command: `pnpm test tests/cart/discount.test.ts`\nFailure: expected total 900, received 1000 in 'applies percentage coupon'.\nLikely files: src/cart/totals.ts, src/cart/coupons.ts\n\n低效输入：把 src/cart 全部源码复制进 prompt。\n\n减少 token 浪费，让 Codex 的上下文窗口留给调查结果和测试输出。"
         }
       ]
     },
     {
-      "id": "integration",
-      "name": "部署与集成",
-      "description": "API 接入、IDE 配置与云平台部署",
-      "color": "amber",
+      "id": "tool-integration",
+      "name": "工具集成",
+      "description": "GitHub Actions、Claude Code、SDK 协作",
+      "color": "teal",
       "items": [
         {
-          "section": 3,
-          "title": "Codex 与 IDE 集成",
-          "url": "https://platform.openai.com/docs/guides/code#ide-integration",
-          "source": "OpenAI Docs",
+          "title": "GitHub PR Review：用 @codex review 做高信号二审",
+          "url": "",
+          "source": "OpenAI 官方",
           "tags": [
-            "官方",
-            "IDE"
+            "GitHub",
+            "Code Review",
+            "PR"
           ],
-          "summary": "将 Codex 集成到 VS Code、Cursor 等 IDE"
+          "summary": "在 Codex settings 中为仓库开启 Code review；PR 中评论触发审查。\n\n聚焦示例：\n@codex review for security regressions and backwards compatibility risks\n\n让 Codex 修复发现：\n@codex fix the P1 issue without changing public API behavior\n\nCodex 作为不会疲劳的二审，尤其适合发现边界条件、并发、权限、回归风险；但最终合并仍应由人类负责。"
         },
         {
-          "section": 3,
-          "title": "Codex 成本优化",
-          "url": "https://platform.openai.com/docs/guides/rate-limits",
-          "source": "OpenAI Docs",
+          "title": "GitHub Actions：在 CI 中运行 Codex 但收紧权限",
+          "url": "",
+          "source": "OpenAI 官方 GitHub Action",
           "tags": [
-            "官方",
-            "性能"
+            "CI/CD",
+            "GitHub Actions",
+            "安全"
           ],
-          "summary": "管理 API 使用配额、缓存策略和成本"
+          "summary": "使用 openai/codex-action 在 workflow 中启动 Codex，把 API key 放入 GitHub Secrets，使用 drop-sudo 安全策略：\n\nname: Codex triage\non:\n  workflow_dispatch:\njobs:\n  codex:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: openai/codex-action@v1\n        with:\n          openai-api-key: ${{ secrets.OPENAI_API_KEY }}\n          prompt: Investigate failing tests and propose a fix. Do not push changes.\n          safety-strategy: drop-sudo\n\n适合自动调查 CI 失败、生成修复建议；不要在未 review 的情况下自动合并 Codex 产物。"
+        },
+        {
+          "title": "Codex SDK：把 agent 嵌进内部工具或自动化平台",
+          "url": "",
+          "source": "OpenAI 官方 SDK",
+          "tags": [
+            "SDK",
+            "TypeScript",
+            "自动化"
+          ],
+          "summary": "使用 @openai/codex-sdk 启动 thread，发送任务，读取 finalResponse：\n\nimport { Codex } from '@openai/codex-sdk';\nconst codex = new Codex();\nconst thread = codex.startThread();\nconst turn = await thread.run('Diagnose the test failure and propose a minimal fix');\nconsole.log(turn.finalResponse);\n\nawait thread.run('Now implement the fix and run the targeted test');\n\n结构化输出示例：\nawait thread.run('Summarize repo status', {\n  outputSchema: {\n    type: 'object',\n    properties: { summary: { type: 'string' }, status: { enum: ['ok', 'action_required'] } },\n    required: ['summary', 'status']\n  }\n});\n\n适合做内部修 CI 按钮、批量迁移助手、自动代码审查平台。"
+        },
+        {
+          "title": "Codex 与 Claude Code 互补：执行 vs 审查",
+          "url": "",
+          "source": "实战经验",
+          "tags": [
+            "多代理",
+            "Claude Code",
+            "协作"
+          ],
+          "summary": "Codex 适合：在 sandbox 中执行明确任务、跑测试、产 PR。\nClaude Code 适合：本地深度交互、长上下文讨论、方案评审、对 Codex diff 做独立 critique。\n\n推荐流程：\n1. Claude Code 帮你把需求拆成决策完整的任务\n2. Codex cloud 并行执行 2-5 个独立任务\n3. Claude Code 或人工 review Codex PR，重点看架构、边界、安全\n4. 对明确 review comments，再让 Codex 修\n\n示例 review prompt：\nReview this Codex-generated diff for hidden behavior changes, overbroad edits, missing tests, and security regressions. Do not modify files.\n\n避免单一 agent 自我确认，执行+审查分工提高可靠性。"
         }
       ]
     },
     {
-      "id": "resources",
-      "name": "资源导航",
-      "description": "官方文档、更新日志与社区实践",
+      "id": "cost-efficiency",
+      "name": "成本效率",
+      "description": "任务粒度、缓存、Token 优化与高 ROI 任务",
+      "color": "warm",
+      "items": [
+        {
+          "title": "任务粒度：30-90 分钟人类任务最适合 Codex",
+          "url": "",
+          "source": "OpenAI 官方 + 实战经验",
+          "tags": [
+            "成本",
+            "任务粒度",
+            "ROI"
+          ],
+          "summary": "好 Codex 任务应该能在 30 分钟 agent 时间内完成，且人类 review diff 不超过 15 分钟。\n\n高性价比任务：\n1. 有复现步骤的 bug\n2. 有现成模式可模仿的 CRUD/API/UI\n3. 测试补齐和回归测试\n4. 机械迁移，如替换 deprecated API\n5. 修 CI 红灯并解释原因\n6. 遗留模块补 characterization tests\n\n不适合直接丢给 Codex：模糊产品需求、跨团队架构迁移、无测试的大型重写。\n\n任务越小、验收越清楚，单位 token 和 review 成本越低。"
+        },
+        {
+          "title": "Token 优化：用路径和日志做索引，不用大段粘贴源码",
+          "url": "",
+          "source": "OpenAI 官方",
+          "tags": [
+            "Token",
+            "上下文窗口",
+            "效率"
+          ],
+          "summary": "把 prompt 控制在目标+文件路径+错误日志+验收标准，让 Codex 自己读取 repo。\n\n高效输入：\nFailing command: `pnpm test tests/cart/discount.test.ts`\nFailure: expected total 900, received 1000.\nLikely files: src/cart/totals.ts, src/cart/coupons.ts\n\n低效输入：把 src/cart 全部源码复制进 prompt。\n\n只有当内容不在仓库中时（如外部 API 规则摘要），才粘贴进 prompt。减少上下文压缩次数，降低模型忽略关键约束的概率。"
+        },
+        {
+          "title": "环境缓存：依赖安装放 setup cache，不每次重装",
+          "url": "",
+          "source": "OpenAI 官方",
+          "tags": [
+            "缓存",
+            "环境",
+            "速度"
+          ],
+          "summary": "把稳定依赖安装放在 Codex environment setup script 中，利用环境缓存：\n\n# setup script\ncorepack enable\npnpm install --frozen-lockfile\npnpm prisma generate\n\n# maintenance script（缓存恢复后的轻量同步）\npnpm prisma generate\n\n缓存失效条件：setup script、maintenance script 或 secrets 变化会让缓存失效；依赖结构变化但缓存没刷新时，手动 Reset cache。\n\n减少每个任务的冷启动时间，让 Codex 把时间花在理解代码上。"
+        },
+        {
+          "title": "非交互任务：一次 prompt 要包含所有限制",
+          "url": "",
+          "source": "OpenAI 官方仓库",
+          "tags": [
+            "自动化",
+            "非交互",
+            "CI"
+          ],
+          "summary": "在 Codex cloud、CI 或批量场景，prompt 必须一次性写完背景、范围、验证和停止条件：\n\nRun non-interactively.\nGoal: 目标\nAllowed edits: 文件/目录\nForbidden edits: 文件/目录\nValidation commands: 命令\nIf validation fails due to unrelated existing failures, report them and do not broaden scope.\nDo not commit secrets or generated build artifacts.\n\n减少 agent 在无人看管时扩大范围；适合夜间批量任务、CI triage、自动草稿 PR。"
+        }
+      ]
+    },
+    {
+      "id": "troubleshooting",
+      "name": "常见问题",
+      "description": "风格偏差、误改文件、超时与安全敏感代码",
       "color": "rose",
       "items": [
         {
-          "section": 4,
-          "title": "OpenAI API 参考",
-          "url": "https://platform.openai.com/docs/api-reference",
-          "source": "OpenAI",
+          "title": "代码不符合项目风格：把风格放进 AGENTS.md 和自动检查",
+          "url": "",
+          "source": "OpenAI 官方",
           "tags": [
-            "官方",
-            "API"
+            "风格",
+            "Lint",
+            "AGENTS.md"
           ],
-          "summary": "完整 API 参考文档"
+          "summary": "不要只在 review 时说风格不对，把规则固化到 AGENTS.md、formatter、linter 中：\n\n## Style\n- Use existing repository patterns before introducing new abstractions.\n- React components use named exports.\n- Do not introduce `any`; use `unknown` plus narrowing.\n- Run `pnpm lint --fix` only on files you changed.\n\n任务追问：\nRevise the diff to match existing patterns in src/components/Button.tsx. Do not change behavior. Run the targeted test again.\n\nCodex 更容易遵守可执行规则；lint/format 让风格问题在 agent 阶段被自动发现。"
         },
         {
-          "section": 4,
-          "title": "Codex 模型与定价",
-          "url": "https://openai.com/pricing",
-          "source": "OpenAI",
+          "title": "Codex 改了不该改的文件：立刻要求回滚越界 diff",
+          "url": "",
+          "source": "OpenAI 官方 + 实战经验",
           "tags": [
-            "官方",
-            "定价"
+            "误改",
+            "回滚",
+            "范围控制"
           ],
-          "summary": "Codex 模型版本和定价信息"
+          "summary": "处理步骤：\n1. 不要继续追加新需求\n2. 指出允许保留的文件\n3. 要求 Codex revert 其他文件\n4. 重新跑范围内测试\n\n可复制 prompt：\nThe changes outside src/auth/session.ts are out of scope. Revert all other files to their original state. Keep only the minimal fix and its regression test. Then run `pnpm test tests/auth/session.test.ts`.\n\n预防写法（放进 AGENTS.md 或任务描述）：\nIf another file seems necessary, stop and ask instead of editing it.\n\n比人工手动挑 diff 更快，也能让 Codex 重新对齐任务边界。"
         },
         {
-          "section": 4,
-          "title": "OpenAI 开发者论坛",
-          "url": "https://community.openai.com/",
-          "source": "OpenAI",
+          "title": "任务超时或卡住：缩小目标并保留调查结果",
+          "url": "",
+          "source": "OpenAI 官方 + 实战经验",
           "tags": [
-            "社区",
-            "支持"
+            "超时",
+            "恢复",
+            "任务拆分"
           ],
-          "summary": "开发者社区讨论与支持"
+          "summary": "任务长时间没有收敛，让 Codex 停止输出调查摘要：\n\nStop implementation work. Summarize:\n1. what you changed so far\n2. commands run and results\n3. current blocker\n4. the smallest next task to make progress\nDo not edit more files.\n\n然后新开更小任务：\nOnly fix the failing SessionStore.refresh test. Ignore UI and docs. Allowed files: src/auth/sessionStore.ts, tests/auth/sessionStore.test.ts\n\n把失败任务转化为可复用调查资产，避免在同一 thread 里累积过多错误假设。"
+        },
+        {
+          "title": "安全敏感代码：让 Codex 写测试和分析，慎让它改核心逻辑",
+          "url": "",
+          "source": "OpenAI 官方 + 实战经验",
+          "tags": [
+            "安全",
+            "Secrets",
+            "权限"
+          ],
+          "summary": "认证、授权、支付、加密、数据删除、审计日志等代码，不要给自由修复任务。\n\nCodex 可以做三件事：补测试、找风险、提出最小 diff；最终实现和合并由资深工程师 review。\n\n安全 prompt：\nAnalyze src/auth/permissions.ts for authorization bypass risks. Do not modify files. Output concrete findings with reproduction scenarios and tests that should be added.\n\n如果允许修改：\nAdd regression tests for the identified authorization bypass. Do not change production authorization logic yet.\n\nSecrets 原则：不要把生产 secrets 放入 prompt；cloud setup secrets 只用于必要安装，遵守最小权限。"
+        },
+        {
+          "title": "结果验证：要求 Codex 提供证据化 final response",
+          "url": "",
+          "source": "OpenAI 官方",
+          "tags": [
+            "验证",
+            "Review",
+            "证据"
+          ],
+          "summary": "不要接受只有 done 的回答。在任务中要求 Codex 最终列出：\n\nIn the final response, include:\n- files changed\n- tests run with pass/fail result\n- behavior changed\n- behavior intentionally unchanged\n- any commands you could not run and why\n\nReview 时检查：\n- diff 是否只覆盖目标\n- 测试是否真的相关\n- 是否有 generated files / lockfile 等噪音\n- 是否修改了 public API 或数据 schema\n\n把 Codex 输出从口头完成变成有证据的工程交付。"
         }
       ]
     }
   ],
   "infoSources": {
-    "aiho": "https://aihot.virxact.com/",
-    "officialBlog": "https://openai.com/blog",
-    "officialDocs": "https://platform.openai.com/docs"
+    "officialDocs": "https://developers.openai.com/codex",
+    "officialBlog": "https://openai.com/blog"
   }
 }
