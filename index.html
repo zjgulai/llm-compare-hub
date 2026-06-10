@@ -16,112 +16,153 @@
     <script type="module" crossorigin src="./assets/index-DltUXhyr.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-CdBRW1VH.css">
     <style>
-      /* ── MKT Warm Theme Override ── */
-      :root {
-        --bg-page: #F7F0EB;
-        --surface: #FFFFFF;
-        --border: #EDE6DF;
-        --brand: #8C2C3E;
-        --accent: #C94F66;
-        --accent-light: #FBE7EA;
-        --text-1: #1D1D1F;
-        --text-2: #6B6B70;
-        --text-3: #999999;
+      /* ─────────────────────────────────────────────
+         DESIGN SYSTEM: Minimal Professional
+         Palette: #111827 header · #FAFAFA bg · #FFFFFF card
+         Accent:  #111827 (dark) / #6366F1 (indigo subtle)
+         Typography: strict 4-level scale
+      ───────────────────────────────────────────── */
+
+      /* 1. Base */
+      body { background-color: #FAFAFA !important; color: #111827 !important; }
+      .min-h-screen { background-color: #FAFAFA !important; }
+
+      /* 2. Header — strip all gradients, go pure dark */
+      .relative.overflow-hidden {
+        background: #111827 !important;
+        background-image: none !important;
+      }
+      /* Kill the glow/aurora decorative divs inside header */
+      .relative.overflow-hidden .absolute.inset-0,
+      .relative.overflow-hidden .absolute.top-0.right-0 {
+        display: none !important;
+      }
+      /* Logo icon: dark bg → small white square */
+      .relative.overflow-hidden .w-10.h-10.rounded-xl,
+      .relative.overflow-hidden .w-8.h-8.rounded-xl,
+      .relative.overflow-hidden .w-10.h-10.rounded-lg {
+        background: rgba(255,255,255,0.10) !important;
+        background-image: none !important;
+      }
+      /* Nav pill icons */
+      .relative.overflow-hidden .w-6.h-6.rounded-md,
+      .relative.overflow-hidden .w-5.h-5.rounded-md {
+        background: rgba(255,255,255,0.08) !important;
+        background-image: none !important;
+      }
+      /* Header text colors */
+      .relative.overflow-hidden .text-xl.font-bold { color: #FFFFFF !important; }
+      .relative.overflow-hidden p,
+      .relative.overflow-hidden .text-sm,
+      .relative.overflow-hidden .text-xs { color: rgba(255,255,255,0.55) !important; }
+
+      /* 3. Sticky tab-bar */
+      .sticky.top-0 {
+        background: rgba(250,250,250,0.95) !important;
+        background-image: none !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border-bottom: 1px solid #E5E7EB !important;
       }
 
-      body { background-color: #F7F0EB !important; color: #1D1D1F !important; }
-
-      /* App root container */
-      .min-h-screen { background-color: #F7F0EB !important; }
-
-      /* Pill tabs — 默认态：白底暖边框 */
+      /* 4. Pill tabs — clean monochrome */
       .pill-tab {
-        background-color: #FFFFFF !important;
-        color: #6B6B70 !important;
-        border-color: #EDE6DF !important;
+        background-color: transparent !important;
+        color: #6B7280 !important;
+        border-color: #E5E7EB !important;
+        font-weight: 500 !important;
       }
       .pill-tab:hover {
-        background-color: #FBE7EA !important;
-        color: #C94F66 !important;
-        border-color: #C94F66 !important;
+        background-color: #F3F4F6 !important;
+        color: #111827 !important;
+        border-color: #D1D5DB !important;
       }
-      /* Pill tab 激活态 → mkt 玫红 */
       .pill-tab.active {
-        background-color: #C94F66 !important;
+        background-color: #111827 !important;
         color: #FFFFFF !important;
-        border-color: #C94F66 !important;
+        border-color: #111827 !important;
       }
 
-      /* Cards */
+      /* 5. Cards */
       .card-elevated {
-        border-color: #EDE6DF !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.03) !important;
+        background-color: #FFFFFF !important;
+        border-color: #E5E7EB !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,.04) !important;
       }
       .card-elevated:hover {
-        border-color: #C94F66 !important;
-        box-shadow: 0 8px 24px -4px rgba(140,44,62,.12) !important;
+        border-color: #9CA3AF !important;
+        box-shadow: 0 4px 16px rgba(0,0,0,.06) !important;
       }
 
-      /* Common Tailwind overrides */
-      .bg-slate-50, .bg-gray-50 { background-color: #F7F0EB !important; }
-      .bg-slate-100, .bg-gray-100 { background-color: #F0E8E3 !important; }
-      .border-slate-200, .border-gray-200, .border-slate-100 { border-color: #EDE6DF !important; }
+      /* 6. Page background variants */
+      .bg-slate-50, .bg-gray-50   { background-color: #FAFAFA !important; }
+      .bg-slate-100, .bg-gray-100 { background-color: #F3F4F6 !important; }
+      .bg-white { background-color: #FFFFFF !important; }
 
-      .text-slate-900, .text-gray-900 { color: #1D1D1F !important; }
-      .text-slate-600, .text-gray-600, .text-slate-500, .text-gray-500 { color: #6B6B70 !important; }
-      .text-slate-400, .text-gray-400 { color: #999999 !important; }
+      /* 7. Borders */
+      .border-slate-200, .border-gray-200, .border-slate-100 { border-color: #E5E7EB !important; }
 
-      /* Blue/Indigo → mkt 玫红 */
-      .text-blue-600, .text-indigo-600 { color: #C94F66 !important; }
-      .text-blue-700, .text-indigo-700 { color: #8C2C3E !important; }
-      .bg-blue-600, .bg-indigo-600 { background-color: #C94F66 !important; }
-      .bg-blue-50, .bg-indigo-50 { background-color: #FBE7EA !important; }
-      .bg-blue-100, .bg-indigo-100 { background-color: #FBE7EA !important; }
-      .border-blue-600, .border-indigo-600 { border-color: #C94F66 !important; }
+      /* 8. Typography scale */
+      .text-slate-900, .text-gray-900 { color: #111827 !important; }
+      .text-slate-700, .text-gray-700 { color: #374151 !important; }
+      .text-slate-600, .text-gray-600, .text-slate-500, .text-gray-500 { color: #6B7280 !important; }
+      .text-slate-400, .text-gray-400 { color: #9CA3AF !important; }
 
-      .hover\:bg-blue-700:hover, .hover\:bg-indigo-700:hover { background-color: #8C2C3E !important; }
-      .hover\:text-blue-600:hover, .hover\:text-indigo-600:hover { color: #C94F66 !important; }
+      /* 9. Replace pink/blue/indigo accent → indigo-600 subtle */
+      .text-blue-600, .text-indigo-600, .text-pink-600 { color: #4F46E5 !important; }
+      .text-blue-700, .text-indigo-700 { color: #4338CA !important; }
+      .bg-blue-600, .bg-indigo-600   { background-color: #4F46E5 !important; }
+      .bg-blue-50,  .bg-indigo-50    { background-color: #EEF2FF !important; }
+      .bg-blue-100, .bg-indigo-100   { background-color: #E0E7FF !important; }
+      .border-blue-600, .border-indigo-600 { border-color: #4F46E5 !important; }
+      .hover\:bg-blue-700:hover, .hover\:bg-indigo-700:hover { background-color: #4338CA !important; }
+      .hover\:text-blue-600:hover   { color: #4F46E5 !important; }
 
-      /* Shadows */
-      .shadow-sm { box-shadow: 0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.03) !important; }
+      /* 10. Shadows → minimal */
+      .shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,.04) !important; }
       .hover\:shadow-md:hover, .hover\:shadow-lg:hover {
-        box-shadow: 0 8px 24px -4px rgba(140,44,62,.12) !important;
+        box-shadow: 0 4px 16px rgba(0,0,0,.06) !important;
       }
 
-      /* Essence nav floating buttons */
+      /* 11. Dividers */
+      .h-px { background: #E5E7EB !important; background-image: none !important; }
+
+      /* 12. Essence nav — minimal chip */
       .essence-nav-btn {
-        background: rgba(255,255,255,0.96) !important;
-        border-color: #EDE6DF !important;
-        color: #1D1D1F !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,.07) !important;
+        background: #FFFFFF !important;
+        border: 1px solid #E5E7EB !important;
+        color: #374151 !important;
+        box-shadow: 0 1px 4px rgba(0,0,0,.06) !important;
+        font-size: 12px !important;
       }
       .essence-nav-btn:hover {
-        box-shadow: 0 8px 24px -4px rgba(140,44,62,.12) !important;
-        color: #C94F66 !important;
-        border-color: #C94F66 !important;
+        border-color: #111827 !important;
+        color: #111827 !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,.1) !important;
+        transform: translateY(-1px);
       }
+      .essence-nav-btn .dot.blue,
+      .essence-nav-btn .dot.emerald { background: #111827 !important; }
     </style>
   </head>
   <body>
     <div id="root"></div>
 
-  <!-- Essence pages navigator (static, outside React root) -->
+  <!-- Essence pages navigator -->
   <style>
-    .essence-nav { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
-    .essence-nav-btn { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 100px; border: 1px solid #EDE6DF; background: rgba(255,255,255,0.96); color: #1D1D1F; font-size: 13px; font-weight: 500; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,.07); transition: all .2s; cursor: pointer; font-family: -apple-system,BlinkMacSystemFont,"Inter","Noto Sans SC",sans-serif; }
-    .essence-nav-btn:hover { box-shadow: 0 8px 24px -4px rgba(140,44,62,.12); transform: translateY(-1px); color: #C94F66; border-color: #C94F66; }
-    .essence-nav-btn .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .essence-nav-btn .dot.blue { background: #C94F66; }
-    .essence-nav-btn .dot.emerald { background: #8C2C3E; }
-    @media (max-width: 640px) { .essence-nav { bottom: 16px; right: 16px; } .essence-nav-btn { padding: 8px 14px; font-size: 12px; } }
+    .essence-nav { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 6px; }
+    .essence-nav-btn { display: flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 8px; border: 1px solid #E5E7EB; background: #FFFFFF; color: #374151; font-size: 12px; font-weight: 500; text-decoration: none; box-shadow: 0 1px 4px rgba(0,0,0,.06); transition: all .15s; cursor: pointer; font-family: -apple-system,BlinkMacSystemFont,"Inter","Noto Sans SC",sans-serif; letter-spacing: .01em; }
+    .essence-nav-btn:hover { border-color: #111827; color: #111827; box-shadow: 0 2px 8px rgba(0,0,0,.1); transform: translateY(-1px); }
+    .essence-nav-btn .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; background: #111827; }
+    @media (max-width: 640px) { .essence-nav { bottom: 16px; right: 16px; } }
   </style>
   <div class="essence-nav">
     <a class="essence-nav-btn" href="./claude/" title="Claude 用法精粹">
-      <span class="dot blue"></span>
+      <span class="dot"></span>
       <span>Claude 用法</span>
     </a>
     <a class="essence-nav-btn" href="./codex/" title="Codex 用法精粹">
-      <span class="dot emerald"></span>
+      <span class="dot"></span>
       <span>Codex 用法</span>
     </a>
   </div>
