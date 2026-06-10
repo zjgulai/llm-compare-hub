@@ -1,21 +1,30 @@
 .PHONY: validate deploy check clean
 
+# SSH key: 优先使用 ~/.ssh/llm-compare-hub.pem，回退 ai_video.pem
+SSH_KEY := $(shell test -f ~/.ssh/llm-compare-hub.pem && echo ~/.ssh/llm-compare-hub.pem || echo ai_video.pem)
+SSH_CMD := ssh -i $(SSH_KEY) -o StrictHostKeyChecking=no
+RSYNC_CMD := rsync -avz -e "$(SSH_CMD)"
+REMOTE := ubuntu@101.34.52.232
+REMOTE_DIR := /opt/llm-compare-hub/html
+
 validate:
 	@echo "🔍 Validating all JSON data files..."
 	@python3 scripts/validate.py
 
 deploy: validate
-	@echo "🚀 Deploying to Tencent Cloud..."
-	@test -f ~/.ssh/llm-compare-hub.pem || test -f ai_video.pem || (echo "❌ SSH key not found (~/.ssh/llm-compare-hub.pem or ai_video.pem)"; exit 1)
-	@rsync -avz -e "ssh -i ~/.ssh/llm-compare-hub.pem -o StrictHostKeyChecking=no" \
+	@echo "🚀 Deploying to Tencent Cloud (key: $(SSH_KEY))..."
+	@test -f $(SSH_KEY) || (echo "❌ SSH key not found: $(SSH_KEY)"; exit 1)
+	@$(RSYNC_CMD) \
 		--exclude='.git' \
 		--exclude='*.pem' \
 		--exclude='.DS_Store' \
 		--exclude='.sisyphus' \
 		--exclude='node_modules' \
-		./ ubuntu@101.34.52.232:/opt/llm-compare-hub/html/
-	@ssh -i ~/.ssh/llm-compare-hub.pem ubuntu@101.34.52.232 \
-		"chmod 755 /opt/llm-compare-hub/html && chmod 755 /opt/llm-compare-hub/html/assets && chmod 644 /opt/llm-compare-hub/html/assets/*"
+		--exclude='src/node_modules' \
+		--exclude='.essence-cache' \
+		./ $(REMOTE):$(REMOTE_DIR)/
+	@$(SSH_CMD) $(REMOTE) \
+		"find $(REMOTE_DIR) -type d -exec chmod 755 {} \; && find $(REMOTE_DIR) -type f -exec chmod 644 {} \;"
 	@echo "✅ Deploy complete!"
 
 redirect-dirs:
@@ -24,12 +33,14 @@ redirect-dirs:
 
 deploy-dry:
 	@echo "🧪 Dry-run deploy..."
-	@rsync -avz --dry-run -e "ssh -i ~/.ssh/llm-compare-hub.pem" \
+	@$(RSYNC_CMD) --dry-run \
 		--exclude='.git' \
 		--exclude='*.pem' \
 		--exclude='.DS_Store' \
 		--exclude='.sisyphus' \
-		./ ubuntu@101.34.52.232:/opt/llm-compare-hub/html/
+		--exclude='node_modules' \
+		--exclude='src/node_modules' \
+		./ $(REMOTE):$(REMOTE_DIR)/
 	@echo "✅ Dry-run complete"
 
 check:

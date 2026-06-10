@@ -1,1 +1,10 @@
-import { defineConfig } from 'vite'\nimport react from '@vitejs/plugin-react'\n\n// https://vitejs.dev/config/\nexport default defineConfig({\n  plugins: [react()],\n  build: {\n    outDir: '../',\n    emptyOutDir: false, // 关键：不能清空父目录\n  }\n})\n
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    outDir: "../",
+    emptyOutDir: false,
+  }
+})
