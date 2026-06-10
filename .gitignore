@@ -49,3 +49,10 @@ models-data.json
 
 # Essence pages cache
 .essence-cache/
+
+# Playwright MCP runtime artifacts
+.playwright-mcp/
+
+# Temp scripts
+*.py
+!scripts/*.py

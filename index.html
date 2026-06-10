@@ -15,19 +15,104 @@
     <meta name="twitter:card" content="summary_large_image" />
     <script type="module" crossorigin src="./assets/index-DltUXhyr.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-CdBRW1VH.css">
+    <style>
+      /* ── MKT Warm Theme Override ── */
+      :root {
+        --bg-page: #F7F0EB;
+        --surface: #FFFFFF;
+        --border: #EDE6DF;
+        --brand: #8C2C3E;
+        --accent: #C94F66;
+        --accent-light: #FBE7EA;
+        --text-1: #1D1D1F;
+        --text-2: #6B6B70;
+        --text-3: #999999;
+      }
+
+      body { background-color: #F7F0EB !important; color: #1D1D1F !important; }
+
+      /* App root container */
+      .min-h-screen { background-color: #F7F0EB !important; }
+
+      /* Pill tabs — 默认态：白底暖边框 */
+      .pill-tab {
+        background-color: #FFFFFF !important;
+        color: #6B6B70 !important;
+        border-color: #EDE6DF !important;
+      }
+      .pill-tab:hover {
+        background-color: #FBE7EA !important;
+        color: #C94F66 !important;
+        border-color: #C94F66 !important;
+      }
+      /* Pill tab 激活态 → mkt 玫红 */
+      .pill-tab.active {
+        background-color: #C94F66 !important;
+        color: #FFFFFF !important;
+        border-color: #C94F66 !important;
+      }
+
+      /* Cards */
+      .card-elevated {
+        border-color: #EDE6DF !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.03) !important;
+      }
+      .card-elevated:hover {
+        border-color: #C94F66 !important;
+        box-shadow: 0 8px 24px -4px rgba(140,44,62,.12) !important;
+      }
+
+      /* Common Tailwind overrides */
+      .bg-slate-50, .bg-gray-50 { background-color: #F7F0EB !important; }
+      .bg-slate-100, .bg-gray-100 { background-color: #F0E8E3 !important; }
+      .border-slate-200, .border-gray-200, .border-slate-100 { border-color: #EDE6DF !important; }
+
+      .text-slate-900, .text-gray-900 { color: #1D1D1F !important; }
+      .text-slate-600, .text-gray-600, .text-slate-500, .text-gray-500 { color: #6B6B70 !important; }
+      .text-slate-400, .text-gray-400 { color: #999999 !important; }
+
+      /* Blue/Indigo → mkt 玫红 */
+      .text-blue-600, .text-indigo-600 { color: #C94F66 !important; }
+      .text-blue-700, .text-indigo-700 { color: #8C2C3E !important; }
+      .bg-blue-600, .bg-indigo-600 { background-color: #C94F66 !important; }
+      .bg-blue-50, .bg-indigo-50 { background-color: #FBE7EA !important; }
+      .bg-blue-100, .bg-indigo-100 { background-color: #FBE7EA !important; }
+      .border-blue-600, .border-indigo-600 { border-color: #C94F66 !important; }
+
+      .hover\:bg-blue-700:hover, .hover\:bg-indigo-700:hover { background-color: #8C2C3E !important; }
+      .hover\:text-blue-600:hover, .hover\:text-indigo-600:hover { color: #C94F66 !important; }
+
+      /* Shadows */
+      .shadow-sm { box-shadow: 0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.03) !important; }
+      .hover\:shadow-md:hover, .hover\:shadow-lg:hover {
+        box-shadow: 0 8px 24px -4px rgba(140,44,62,.12) !important;
+      }
+
+      /* Essence nav floating buttons */
+      .essence-nav-btn {
+        background: rgba(255,255,255,0.96) !important;
+        border-color: #EDE6DF !important;
+        color: #1D1D1F !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,.07) !important;
+      }
+      .essence-nav-btn:hover {
+        box-shadow: 0 8px 24px -4px rgba(140,44,62,.12) !important;
+        color: #C94F66 !important;
+        border-color: #C94F66 !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
-  
+
   <!-- Essence pages navigator (static, outside React root) -->
   <style>
     .essence-nav { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
-    .essence-nav-btn { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 100px; border: 1px solid var(--border-default,#e2e8f0); background: #fff; color: var(--text-primary,#0f172a); font-size: 13px; font-weight: 500; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,.08); transition: all .2s; cursor: pointer; font-family: -apple-system,BlinkMacSystemFont,"Inter","Noto Sans SC",sans-serif; }
-    .essence-nav-btn:hover { box-shadow: 0 8px 24px rgba(0,0,0,.12); transform: translateY(-1px); }
+    .essence-nav-btn { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 100px; border: 1px solid #EDE6DF; background: rgba(255,255,255,0.96); color: #1D1D1F; font-size: 13px; font-weight: 500; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,.07); transition: all .2s; cursor: pointer; font-family: -apple-system,BlinkMacSystemFont,"Inter","Noto Sans SC",sans-serif; }
+    .essence-nav-btn:hover { box-shadow: 0 8px 24px -4px rgba(140,44,62,.12); transform: translateY(-1px); color: #C94F66; border-color: #C94F66; }
     .essence-nav-btn .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .essence-nav-btn .dot.blue { background: #3b82f6; }
-    .essence-nav-btn .dot.emerald { background: #10b981; }
-    .essence-nav-btn .label { font-size: 12px; }
+    .essence-nav-btn .dot.blue { background: #C94F66; }
+    .essence-nav-btn .dot.emerald { background: #8C2C3E; }
     @media (max-width: 640px) { .essence-nav { bottom: 16px; right: 16px; } .essence-nav-btn { padding: 8px 14px; font-size: 12px; } }
   </style>
   <div class="essence-nav">
