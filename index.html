@@ -16,133 +16,130 @@
     <script type="module" crossorigin src="./assets/index-DltUXhyr.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-CdBRW1VH.css">
     <style>
-      /* ─────────────────────────────────────────────
-         DESIGN SYSTEM: Minimal Professional
-         Palette: #111827 header · #FAFAFA bg · #FFFFFF card
-         Accent:  #111827 (dark) / #6366F1 (indigo subtle)
-         Typography: strict 4-level scale
-      ───────────────────────────────────────────── */
+      /* mkt token 精确复刻
+         bg:     #FBF8F5   nav: rgba(255,255,255,.9)
+         accent: #C25B6E   card: #FFFFFF  border: rgba(0,0,0,.07)
+         text-1: #231A1A   text-2: #6B6B70  text-3: #9CA3AF        */
 
-      /* 1. Base */
-      body { background-color: #FAFAFA !important; color: #111827 !important; }
-      .min-h-screen { background-color: #FAFAFA !important; }
+      body { background-color: #FBF8F5 !important; color: #231A1A !important; }
+      .min-h-screen { background-color: #FBF8F5 !important; }
 
-      /* 2. Header — strip all gradients, go pure dark */
+      /* Header — white/translucent, no gradient */
       .relative.overflow-hidden {
-        background: #111827 !important;
+        background: rgba(255,255,255,0.95) !important;
         background-image: none !important;
+        border-bottom: 1px solid rgba(0,0,0,.06) !important;
+        box-shadow: 0 1px 0 rgba(0,0,0,.04) !important;
       }
-      /* Kill the glow/aurora decorative divs inside header */
       .relative.overflow-hidden .absolute.inset-0,
-      .relative.overflow-hidden .absolute.top-0.right-0 {
-        display: none !important;
-      }
-      /* Logo icon: dark bg → small white square */
+      .relative.overflow-hidden .absolute.top-0.right-0 { display: none !important; }
+
+      /* Logo icon */
       .relative.overflow-hidden .w-10.h-10.rounded-xl,
       .relative.overflow-hidden .w-8.h-8.rounded-xl,
       .relative.overflow-hidden .w-10.h-10.rounded-lg {
-        background: rgba(255,255,255,0.10) !important;
+        background: rgba(194,91,110,.12) !important;
         background-image: none !important;
       }
-      /* Nav pill icons */
       .relative.overflow-hidden .w-6.h-6.rounded-md,
       .relative.overflow-hidden .w-5.h-5.rounded-md {
-        background: rgba(255,255,255,0.08) !important;
+        background: rgba(194,91,110,.1) !important;
         background-image: none !important;
       }
-      /* Header text colors */
-      .relative.overflow-hidden .text-xl.font-bold { color: #FFFFFF !important; }
-      .relative.overflow-hidden p,
-      .relative.overflow-hidden .text-sm,
-      .relative.overflow-hidden .text-xs { color: rgba(255,255,255,0.55) !important; }
 
-      /* 3. Sticky tab-bar */
+      /* Header text → dark on light bg */
+      .relative.overflow-hidden .text-xl.font-bold { color: #231A1A !important; }
+      .relative.overflow-hidden p,
+      .relative.overflow-hidden .text-sm { color: #6B6B70 !important; }
+      .relative.overflow-hidden .text-xs { color: #9CA3AF !important; }
+      .relative.overflow-hidden .text-white { color: #231A1A !important; }
+
+      /* Sticky nav bar */
       .sticky.top-0 {
-        background: rgba(250,250,250,0.95) !important;
+        background: rgba(251,248,245,.96) !important;
         background-image: none !important;
         backdrop-filter: blur(12px) !important;
         -webkit-backdrop-filter: blur(12px) !important;
-        border-bottom: 1px solid #E5E7EB !important;
+        border-bottom: 1px solid rgba(0,0,0,.06) !important;
       }
 
-      /* 4. Pill tabs — clean monochrome */
+      /* Pill tabs */
       .pill-tab {
         background-color: transparent !important;
-        color: #6B7280 !important;
-        border-color: #E5E7EB !important;
+        color: #6B6B70 !important;
+        border-color: rgba(0,0,0,.1) !important;
         font-weight: 500 !important;
       }
       .pill-tab:hover {
-        background-color: #F3F4F6 !important;
-        color: #111827 !important;
-        border-color: #D1D5DB !important;
+        background-color: rgba(194,91,110,.08) !important;
+        color: #C25B6E !important;
+        border-color: rgba(194,91,110,.3) !important;
       }
       .pill-tab.active {
-        background-color: #111827 !important;
+        background-color: #C25B6E !important;
         color: #FFFFFF !important;
-        border-color: #111827 !important;
+        border-color: #C25B6E !important;
       }
 
-      /* 5. Cards */
+      /* Cards */
       .card-elevated {
         background-color: #FFFFFF !important;
-        border-color: #E5E7EB !important;
-        box-shadow: 0 1px 2px rgba(0,0,0,.04) !important;
+        border-color: rgba(0,0,0,.07) !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,.04) !important;
       }
       .card-elevated:hover {
-        border-color: #9CA3AF !important;
-        box-shadow: 0 4px 16px rgba(0,0,0,.06) !important;
+        border-color: rgba(194,91,110,.3) !important;
+        box-shadow: 0 4px 16px rgba(194,91,110,.08) !important;
       }
 
-      /* 6. Page background variants */
-      .bg-slate-50, .bg-gray-50   { background-color: #FAFAFA !important; }
-      .bg-slate-100, .bg-gray-100 { background-color: #F3F4F6 !important; }
+      /* Background variants */
+      .bg-slate-50, .bg-gray-50   { background-color: #FBF8F5 !important; }
+      .bg-slate-100, .bg-gray-100 { background-color: #F4EFE9 !important; }
       .bg-white { background-color: #FFFFFF !important; }
 
-      /* 7. Borders */
-      .border-slate-200, .border-gray-200, .border-slate-100 { border-color: #E5E7EB !important; }
+      /* Borders */
+      .border-slate-200, .border-gray-200, .border-slate-100 { border-color: rgba(0,0,0,.07) !important; }
 
-      /* 8. Typography scale */
-      .text-slate-900, .text-gray-900 { color: #111827 !important; }
-      .text-slate-700, .text-gray-700 { color: #374151 !important; }
-      .text-slate-600, .text-gray-600, .text-slate-500, .text-gray-500 { color: #6B7280 !important; }
+      /* Typography */
+      .text-slate-900, .text-gray-900 { color: #231A1A !important; }
+      .text-slate-700, .text-gray-700 { color: #3D2E2E !important; }
+      .text-slate-600, .text-gray-600, .text-slate-500, .text-gray-500 { color: #6B6B70 !important; }
       .text-slate-400, .text-gray-400 { color: #9CA3AF !important; }
 
-      /* 9. Replace pink/blue/indigo accent → indigo-600 subtle */
-      .text-blue-600, .text-indigo-600, .text-pink-600 { color: #4F46E5 !important; }
-      .text-blue-700, .text-indigo-700 { color: #4338CA !important; }
-      .bg-blue-600, .bg-indigo-600   { background-color: #4F46E5 !important; }
-      .bg-blue-50,  .bg-indigo-50    { background-color: #EEF2FF !important; }
-      .bg-blue-100, .bg-indigo-100   { background-color: #E0E7FF !important; }
-      .border-blue-600, .border-indigo-600 { border-color: #4F46E5 !important; }
-      .hover\:bg-blue-700:hover, .hover\:bg-indigo-700:hover { background-color: #4338CA !important; }
-      .hover\:text-blue-600:hover   { color: #4F46E5 !important; }
+      /* Accent (replace blue/indigo → mkt 玫红) */
+      .text-blue-600, .text-indigo-600, .text-pink-600 { color: #C25B6E !important; }
+      .text-blue-700, .text-indigo-700 { color: #A84A5A !important; }
+      .bg-blue-600, .bg-indigo-600   { background-color: #C25B6E !important; }
+      .bg-blue-50, .bg-indigo-50     { background-color: rgba(194,91,110,.08) !important; }
+      .bg-blue-100, .bg-indigo-100   { background-color: rgba(194,91,110,.12) !important; }
+      .border-blue-600, .border-indigo-600 { border-color: #C25B6E !important; }
+      .hover\:bg-blue-700:hover      { background-color: #A84A5A !important; }
+      .hover\:text-blue-600:hover    { color: #C25B6E !important; }
 
-      /* 10. Shadows → minimal */
-      .shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,.04) !important; }
+      /* Shadows */
+      .shadow-sm { box-shadow: 0 1px 3px rgba(0,0,0,.04) !important; }
       .hover\:shadow-md:hover, .hover\:shadow-lg:hover {
-        box-shadow: 0 4px 16px rgba(0,0,0,.06) !important;
+        box-shadow: 0 4px 16px rgba(194,91,110,.1) !important;
       }
 
-      /* 11. Dividers */
-      .h-px { background: #E5E7EB !important; background-image: none !important; }
+      /* Dividers */
+      .h-px { background: rgba(0,0,0,.06) !important; background-image: none !important; }
 
-      /* 12. Essence nav — minimal chip */
+      /* Essence nav */
       .essence-nav-btn {
-        background: #FFFFFF !important;
-        border: 1px solid #E5E7EB !important;
-        color: #374151 !important;
+        background: rgba(255,255,255,.95) !important;
+        border: 1px solid rgba(0,0,0,.08) !important;
+        color: #3D2E2E !important;
         box-shadow: 0 1px 4px rgba(0,0,0,.06) !important;
         font-size: 12px !important;
       }
       .essence-nav-btn:hover {
-        border-color: #111827 !important;
-        color: #111827 !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,.1) !important;
+        border-color: #C25B6E !important;
+        color: #C25B6E !important;
+        box-shadow: 0 2px 8px rgba(194,91,110,.12) !important;
         transform: translateY(-1px);
       }
-      .essence-nav-btn .dot.blue,
-      .essence-nav-btn .dot.emerald { background: #111827 !important; }
+      .essence-nav-btn .dot { background: #C25B6E !important; }
     </style>
   </head>
   <body>
