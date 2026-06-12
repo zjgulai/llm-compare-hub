@@ -1,28 +1,37 @@
-.PHONY: validate deploy check clean
+.PHONY: validate typecheck build verify-assets release deploy deploy-dry check check-exposure clean
 
-# SSH key: 优先使用 ~/.ssh/llm-compare-hub.pem，回退 ai_video.pem
-SSH_KEY := $(shell test -f ~/.ssh/llm-compare-hub.pem && echo ~/.ssh/llm-compare-hub.pem || echo ai_video.pem)
+# SSH key: keep production credentials outside the worktree.
+SSH_KEY := $(HOME)/.ssh/llm-compare-hub.pem
 SSH_CMD := ssh -i $(SSH_KEY) -o StrictHostKeyChecking=no
 RSYNC_CMD := rsync -avz -e "$(SSH_CMD)"
 REMOTE := ubuntu@101.34.52.232
 REMOTE_DIR := /opt/llm-compare-hub/html
+RELEASE_DIR := release
 
 validate:
 	@echo "🔍 Validating all JSON data files..."
 	@python3 scripts/validate.py
 
-deploy: validate
+typecheck:
+	@echo "🧪 Type-checking React source..."
+	@cd src && npx tsc --noEmit
+
+build: typecheck
+	@echo "🏗️  Building React source to dist/..."
+	@npm --prefix src run build
+
+verify-assets:
+	@echo "🔗 Verifying index.html asset references..."
+	@python3 scripts/verify_assets.py
+
+release: validate verify-assets
+	@echo "📦 Building clean release artifact..."
+	@python3 scripts/build_release.py
+
+deploy: release
 	@echo "🚀 Deploying to Tencent Cloud (key: $(SSH_KEY))..."
 	@test -f $(SSH_KEY) || (echo "❌ SSH key not found: $(SSH_KEY)"; exit 1)
-	@$(RSYNC_CMD) \
-		--exclude='.git' \
-		--exclude='*.pem' \
-		--exclude='.DS_Store' \
-		--exclude='.sisyphus' \
-		--exclude='node_modules' \
-		--exclude='src/node_modules' \
-		--exclude='.essence-cache' \
-		./ $(REMOTE):$(REMOTE_DIR)/
+	@$(RSYNC_CMD) --delete $(RELEASE_DIR)/ $(REMOTE):$(REMOTE_DIR)/
 	@$(SSH_CMD) $(REMOTE) \
 		"find $(REMOTE_DIR) -type d -exec chmod 755 {} \; && find $(REMOTE_DIR) -type f -exec chmod 644 {} \;"
 	@echo "✅ Deploy complete!"
@@ -32,15 +41,9 @@ redirect-dirs:
 	@echo "✅ (claude/index.html, codex/index.html already in project root)"
 
 deploy-dry:
-	@echo "🧪 Dry-run deploy..."
-	@$(RSYNC_CMD) --dry-run \
-		--exclude='.git' \
-		--exclude='*.pem' \
-		--exclude='.DS_Store' \
-		--exclude='.sisyphus' \
-		--exclude='node_modules' \
-		--exclude='src/node_modules' \
-		./ $(REMOTE):$(REMOTE_DIR)/
+	@echo "🧪 Dry-run deploy from $(RELEASE_DIR)/..."
+	@$(MAKE) --no-print-directory release >/dev/null
+	@$(RSYNC_CMD) --dry-run --delete $(RELEASE_DIR)/ $(REMOTE):$(REMOTE_DIR)/
 	@echo "✅ Dry-run complete"
 
 check:
@@ -52,9 +55,16 @@ check:
 		echo "  $$f: $$code"; \
 	done
 
+check-exposure:
+	@echo "🔒 Checking blocked development artifacts..."
+	@for p in README.md AUDIT.md Makefile scripts/validate.py src/App.tsx .github/workflows/deploy.yml .essence-cache/aiho_claude.json data/api-data.json .DS_Store; do \
+		code=$$(curl -sk -o /dev/null -w "%{http_code}" https://llm.lute-tlz-dddd.top/$$p); \
+		echo "  /$$p: $$code"; \
+	done
+
 clean:
 	@echo "🧹 Cleaning up..."
-	@rm -rf node_modules dist
+	@rm -rf node_modules dist release
 	@echo "✅ Clean complete"
 
 # ── Essence pages ──────────────────────────────────────
@@ -69,4 +79,3 @@ update-essence-offline:
 	@echo "📡 Updating with curated data only..."
 	@python3 scripts/update-essence.py --offline
 	@echo "✅ Essence data updated (offline)"
-

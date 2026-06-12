@@ -82,17 +82,53 @@ path = os.path.join(REPO_DIR, 'compare-data.json')
 with open(path) as f:
     comp = json.load(f)
 
+VALID_COMPARE_TYPES = {'text', 'image', 'video', 'audio', 'music', 'speech', 'embedding', 'ranking', '3d'}
+
+def check_modalities(owner, item):
+    mod = item.get('modalities')
+    if not isinstance(mod, dict):
+        msg('ERROR', f"{owner}: missing modalities")
+        return
+
+    if not isinstance(mod.get('multimodal'), bool):
+        msg('ERROR', f"{owner}: modalities.multimodal must be boolean")
+
+    for key in ['input', 'output']:
+        values = mod.get(key)
+        if not isinstance(values, list) or not values:
+            msg('ERROR', f"{owner}: modalities.{key} must be a non-empty list")
+            continue
+        invalid = [value for value in values if value not in VALID_COMPARE_TYPES]
+        if invalid:
+            msg('ERROR', f"{owner}: invalid modalities.{key}: {invalid}")
+
+    if not mod.get('note'):
+        msg('ERROR', f"{owner}: modalities.note is required")
+
 for item in comp.get('overallRanking', []):
     mid = item.get('modelId', '')
+    check_modalities(f"compare-data overallRanking: '{item.get('name')}'", item)
     if mid:
         if mid not in platform_data:
             msg('WARN', f"compare-data overallRanking: '{item['name']}' (modelId={mid}) not in platform data")
+
+for cat in comp.get('categories', []):
+    for item in cat.get('models', []):
+        check_modalities(
+            f"compare-data categories [{cat.get('categoryId')}]: '{item.get('name')}'",
+            item,
+        )
 
 for fr in comp.get('functionRanking', []):
     for r in fr.get('rankings', []):
         mid = r.get('modelId', '')
         if mid and mid not in platform_data:
             msg('WARN', f"compare-data functionRanking [{fr.get('functionId')}]: '{r.get('name')}' not in platform data")
+    for r in fr.get('topModels', []):
+        check_modalities(
+            f"compare-data functionRanking [{fr.get('functionId')}]: '{r.get('name')}'",
+            r,
+        )
 
 # 4. Check for missing docsUrl on platform models
 for plat_file in ['api-data.json', 'siliconflow-data.json']:

@@ -1,6 +1,39 @@
 import { useState, useEffect } from 'react';
-import { CompareData } from '../types';
+import type { CompareData, CompareModalities } from '../types';
 import { fetchCompareData, getVendorColor } from '../data';
+
+const dataTypeLabels: Record<string, string> = {
+  text: 'Text',
+  image: 'Image',
+  video: 'Video',
+  audio: 'Audio',
+  music: 'Music',
+  speech: 'Speech',
+  embedding: 'Embedding',
+  ranking: 'Ranking',
+  '3d': '3D',
+};
+
+const formatTypes = (values: string[]) =>
+  values.map((value) => dataTypeLabels[value] ?? value).join(' + ');
+
+const ModalityBadges = ({ modalities }: { modalities?: CompareModalities }) => {
+  if (!modalities) return null;
+
+  return (
+    <div className="flex flex-wrap gap-1.5 mb-2" title={modalities.note}>
+      <span className={`px-2 py-0.5 rounded text-xs font-medium border ${modalities.multimodal ? 'bg-purple-50 text-purple-700 border-purple-100' : 'bg-gray-50 text-gray-600 border-gray-100'}`}>
+        {modalities.multimodal ? 'Multimodal' : 'Single / data'}
+      </span>
+      <span className="px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+        In: {formatTypes(modalities.input)}
+      </span>
+      <span className="px-2 py-0.5 rounded text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
+        Out: {formatTypes(modalities.output)}
+      </span>
+    </div>
+  );
+};
 
 export const CompareView = () => {
   const [data, setData] = useState<CompareData | null>(null);
@@ -66,8 +99,12 @@ export const CompareView = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  {category.models.map((model) => (
-                    <tr key={model.modelId} className="hover:bg-gray-50 transition-colors">
+                  {category.models.map((model) => {
+                    const vendor = model.vendor ?? model.platformName ?? model.platform;
+                    const score = model.overallScore ?? model.score ?? 0;
+
+                    return (
+                    <tr key={model.modelId ?? `${category.categoryId}-${model.rank}-${model.name}`} className="hover:bg-gray-50 transition-colors">
                       <td className="py-4 pr-4">
                         <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full font-bold ${model.rank === 1 ? 'bg-yellow-100 text-yellow-700' : model.rank === 2 ? 'bg-gray-200 text-gray-700' : model.rank === 3 ? 'bg-orange-100 text-orange-800' : 'bg-gray-100 text-gray-500'}`}>
                           {model.rank}
@@ -76,35 +113,36 @@ export const CompareView = () => {
                       <td className="py-4 pr-4">
                         <div className="font-bold text-gray-900 text-lg mb-1">{model.name}</div>
                         <div className="flex items-center gap-2 mb-2">
-                          <span className={`px-2 py-0.5 rounded text-xs font-medium ${getVendorColor(model.vendor)}`}>{model.vendor}</span>
-                          <span className="text-xs text-gray-500 font-mono truncate max-w-[200px]" title={model.modelId}>{model.modelId}</span>
+                          <span className={`px-2 py-0.5 rounded text-xs font-medium ${getVendorColor(vendor)}`}>{vendor}</span>
+                          {model.modelId && <span className="text-xs text-gray-500 font-mono truncate max-w-[200px]" title={model.modelId}>{model.modelId}</span>}
                         </div>
-                        <div className="text-sm text-gray-600 line-clamp-1">{model.bestFor}</div>
+                        <ModalityBadges modalities={model.modalities} />
+                        {model.bestFor && <div className="text-sm text-gray-600 line-clamp-1">{model.bestFor}</div>}
                       </td>
                       <td className="py-4 pr-4 hidden md:table-cell">
-                        <span className="font-medium text-gray-800">{model.platformName}</span>
+                        <span className="font-medium text-gray-800">{model.platformName ?? model.platform}</span>
                       </td>
                       <td className="py-4 pr-4 hidden lg:table-cell text-sm text-gray-600">
-                        {model.context}
+                        {model.context ?? '-'}
                       </td>
                       <td className="py-4 pr-4">
                         <div className="flex items-center gap-2 mb-1">
-                          <div className="text-2xl font-black text-gray-900">{model.overallScore}</div>
+                          <div className="text-2xl font-black text-gray-900">{score}</div>
                           <div className="text-xs text-gray-500">/ 100</div>
                         </div>
                         <div className="flex gap-1 text-xs">
                           <span title={model.stabilityReason} className="cursor-help px-1.5 py-0.5 bg-blue-50 text-blue-700 rounded border border-blue-100">
-                            Stab: {model.stability}/5
+                            Stab: {model.stability ?? '-'}/5
                           </span>
                           <span title={model.valueReason} className="cursor-help px-1.5 py-0.5 bg-green-50 text-green-700 rounded border border-green-100">
-                            Val: {model.valueScore}/5
+                            Val: {model.valueScore ?? '-'}/5
                           </span>
                         </div>
                       </td>
                       <td className="py-4 pr-4 text-sm">
-                        <div className="font-medium text-gray-900">{model.priceNote}</div>
+                        <div className="font-medium text-gray-900">{model.priceNote ?? model.pricing ?? '-'}</div>
                         <div className="mt-2 space-y-1">
-                          {model.pros.slice(0, 2).map((pro, idx) => (
+                          {(model.pros ?? []).slice(0, 2).map((pro, idx) => (
                             <div key={idx} className="flex items-start gap-1 text-green-700 text-xs">
                               <svg className="w-3.5 h-3.5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                               <span className="line-clamp-1">{pro}</span>
@@ -113,7 +151,8 @@ export const CompareView = () => {
                         </div>
                       </td>
                     </tr>
-                  ))}
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -123,4 +162,3 @@ export const CompareView = () => {
     </div>
   );
 };
-

@@ -1,229 +1,152 @@
----
+# LLM Models Hub
 
-> **⚠️ 紧急状态：源码已丢失**
-> 
-> Vite+React 源码目录 `/var/folders/wp/.../llm-compare-hub-src` 已被系统清理（~500 行 TSX）。
-> 项目当前处于**数据维护模式**：只能修改 JSON 文件（立即生效），
-> 无法修改 UI 逻辑、修复 bug、新增功能或重建 bundle。
-> 
-> 如需恢复开发能力，需重建 `src/` 项目。参考 [src/package.json](src/package.json) 获取依赖清单。
-
----
+大模型选型与用法精粹静态站点。主生产入口是 `https://llm.lute-tlz-dddd.top/`，GitHub Pages 是镜像发布目标，不作为 canonical SEO 入口。
 
 ## 功能概览
 
-| 页面 | 功能 | 数据来源 |
-|------|------|---------|
-| **模型列表** | PoYo.ai / 硅基流动 / BAI / EasyRouter 四平台全量模型，含分类筛选、关键词搜索、curl 示例一键复制 | **runtime fetch**（各平台 JSON）|
-| **对比排序** | 综合 TOP13 / 按类别对比 / 14大功能场景排序，稳定性+性价比双维度评分 | **runtime fetch**（compare-data.json）|
-| **免费模型** | 10个可本地运行的开源模型（Apple Silicon 优化），含完整规格/安装命令 | **runtime fetch**（free-models-data.json）|
+| 页面 | 路径 | 内容 | 数据来源 |
+| --- | --- | --- | --- |
+| 模型列表 | `/` | PoYo.ai、硅基流动、BAI、EasyRouter 模型查询、分类筛选、curl 示例 | runtime JSON |
+| 对比排序 | `/` 内 Tab | 综合 TOP、类别对比、功能场景排序；显式标注多模态、输入类型和输出类型 | `compare-data.json` |
+| 免费本地模型 | `/` 内 Tab | Apple Silicon 可运行开源模型、规格和安装命令 | `free-models-data.json` |
+| Claude 用法精粹 | `/claude.html` | Claude API/工程实践卡片 | `claude-data.json` |
+| Codex 用法精粹 | `/codex.html` | Codex 工作流/工程实践卡片 | `codex-data.json` |
 
----
+## 当前架构
 
-## 技术架构
-
-```
-纯静态站点（Vite + React 19 重建，2026-05-28）
-├── index.html                        # SPA 入口，lang=zh-CN，含 SEO/OG meta
-├── assets/
-│   ├── index-DltUXhyr.js            # React 主包（~194KB，含路由和公共依赖）
-│   ├── index-CdBRW1VH.css           # Tailwind CSS（~20KB）
-│   ├── CompareView-BlF0-htG.js      # 对比排序页（懒加载 chunk）
-│   ├── FreeModelsView-DsAg-F9x.js   # 免费模型页（懒加载 chunk）
-│   ├── ModelListView-Dw6-gfbn.js    # 模型列表页（懒加载 chunk）
-│   └── constants-O-8j2ZiH.js       # 共享常量（vendor badge、platform map）
-├── api-data.json                     # PoYo.ai API 文档（runtime fetch）
-├── siliconflow-data.json             # 硅基流动 API 文档（runtime fetch）
-├── compare-data.json                 # 横向对比数据（runtime fetch）
-├── free-models-data.json             # 本地免费模型（runtime fetch）
-├── favicon.svg                       # LLM Hub 图标
-├── robots.txt                        # 爬虫配置
-└── sitemap.xml                       # SEO 站点地图
+```text
+source repo
+├── index.html                  # 当前生产 SPA 入口，canonical 指向主站
+├── assets/                     # 当前生产 bundle snapshot
+├── *.json                      # runtime 数据文件
+├── claude.html / codex.html    # 精粹页
+├── claude/ / codex/            # 短路径跳转页
+├── src/                        # 可 typecheck/build 的 React 重建源码
+├── scripts/
+│   ├── validate.py             # JSON 数据校验
+│   ├── verify_assets.py        # 递归校验生产 asset 引用
+│   └── build_release.py        # 生成干净 release artifact
+└── release/                    # 生成产物，gitignored，仅部署该目录
 ```
 
-**前端框架**：React 19 + Vite 8 + TypeScript  
-**样式**：Tailwind CSS v4  
-**数据**：全部 JSON 运行时 fetch，无后端，无数据库
+重要约束：
 
-> ⚠️ `models-data.json` 和 `bai-data.json` / `easyrouter-data.json` 目前**不存在**于仓库。
-> BAI/EasyRouter 平台数据下一步需创建独立 JSON 文件（当前 fetch 失败时 graceful fallback 为 null，UI 显示"该平台数据暂未加载"）。
+- `release/` 是唯一部署物。腾讯云和 GitHub Pages 都应只发布 `release/`，不要发布仓库根目录。
+- 根 `index.html` 当前引用的是生产中文 UI bundle snapshot：`assets/index-DltUXhyr.js` 和 `assets/index-CdBRW1VH.css`。
+- `src/` 目前能通过 typecheck/build，但它是英文重建版，不是当前生产中文 UI 的完整可信源码。修改生产 UI 前，应先让 `src/` 与生产 UI 对齐，或明确替换生产 bundle 的产品决策。
+- 生产站点不应公开 `src/`、`scripts/`、`.github/`、文档、缓存或本地工具文件。
 
----
+## 发布链路
 
-## 数据文件说明
-
-| 文件 | 内容 | 模型数 | 修改是否立即生效 |
-|------|------|--------|----------------|
-| `api-data.json` | PoYo.ai API 文档（image/video/chat/music/3d/audio）| **71**（+3） | ✅ rsync 后立即生效 |
-| `siliconflow-data.json` | 硅基流动 API 文档（chat/image/video/embedding/rerank/audio）| 65 | ✅ rsync 后立即生效 |
-| `compare-data.json` | 四平台横向对比（TOP13 综合排名 + 14 场景功能排名）| - | ✅ rsync 后立即生效 |
-| `free-models-data.json` | 本地可运行开源模型，含完整规格 | 10 | ✅ rsync 后立即生效 |
-| `bai-data.json` | BAI 平台 API 文档 | 1（骨架）+ 数据待确认 | - |
-| `easyrouter-data.json` | EasyRouter 平台 API 文档 | 4（骨架）+ 数据待确认 | - |
-
-> **重要**：Sprint D（2026-05-28）完成后，所有 JSON 均为 runtime fetch。**修改任意 JSON 文件 + rsync 到服务器即可立即上线，无需重新 build。**
-
----
-
-## 源码位置
-
-源码在临时目录（非 git 管理），需保存以便下次开发：
-
-```
-/var/folders/wp/t77hdxr93bs86v8r0dbwf8940000gn/T/opencode/llm-compare-hub-src/
-├── src/
-│   ├── main.tsx           # React 入口
-│   ├── App.tsx            # 主布局 + Tab 导航
-│   ├── ModelListView.tsx  # 模型列表页
-│   ├── CompareView.tsx    # 对比排序页
-│   ├── FreeModelsView.tsx # 免费模型页
-│   ├── data.ts            # 所有 JSON fetch 逻辑（D2 runtime fetch 核心）
-│   ├── constants.ts       # vendor badge map（含 Seedream 修复）、platform map、curl 生成
-│   ├── types.ts           # TypeScript 类型定义
-│   └── index.css          # Tailwind v4 + CSS 变量 + 自定义类
-├── vite.config.ts         # base: './' 相对路径
-└── package.json           # React 19, Vite 8, Tailwind 4
+```mermaid
+flowchart LR
+  A["Repo files"] --> B["make validate"]
+  B --> C["make verify-assets"]
+  C --> D["make release"]
+  D --> E["release/"]
+  E --> F["Tencent Cloud /opt/llm-compare-hub/html"]
+  E --> G["GitHub Pages artifact"]
 ```
 
-**下次开发前先将源码提交到 git 或复制到项目目录。**
-
----
-
-## 开发工作流
-
-### 数据更新（无需 build）
+### 本地验证
 
 ```bash
-cd /Users/lute/project/Agent/product/llm_models_hub
-
-# 1. 直接修改 JSON 文件
-vim api-data.json  # 或 compare-data.json / free-models-data.json 等
-
-# 2. 验证 JSON 有效
-python3 -c "import json; json.load(open('api-data.json')); print('valid')"
-
-# 3. 同步到服务器（立即生效）
-rsync -avz -e "ssh -i ai_video.pem" \
-  --exclude='.git' --exclude='*.pem' --exclude='.DS_Store' --exclude='.sisyphus' \
-  ./ ubuntu@101.34.52.232:/opt/llm-compare-hub/html/
-
-# 4. 确认权限
-ssh -i ai_video.pem ubuntu@101.34.52.232 \
-  "chmod 755 /opt/llm-compare-hub/html && chmod 755 /opt/llm-compare-hub/html/assets"
-
-# 5. 验证
-curl -sk -o /dev/null -w "%{http_code}" https://llm.lute-tlz-dddd.top/api-data.json
+make validate
+make verify-assets
+make typecheck
+make build
+make release
 ```
 
-### UI 功能开发（需要 build）
+### 腾讯云部署
 
 ```bash
-# 进入源码目录（临时，需先保存到正式位置）
-cd /var/folders/.../llm-compare-hub-src
-
-# 开发模式
-npm run dev
-
-# 构建
-npm run build
-
-# 替换产物
-cp dist/assets/* /Users/lute/project/Agent/product/llm_models_hub/assets/
-cp dist/index.html /Users/lute/project/Agent/product/llm_models_hub/index.html
-
-# 同步到服务器
-rsync -avz -e "ssh -i ai_video.pem" \
-  --exclude='.git' --exclude='*.pem' --exclude='.DS_Store' --exclude='.sisyphus' \
-  /Users/lute/project/Agent/product/llm_models_hub/ \
-  ubuntu@101.34.52.232:/opt/llm-compare-hub/html/
-
-# 修复权限（新 assets 文件权限为 644，目录需 755）
-ssh -i ai_video.pem ubuntu@101.34.52.232 \
-  "chmod 755 /opt/llm-compare-hub/html/assets && chmod 644 /opt/llm-compare-hub/html/assets/*"
+make deploy-dry
+make deploy
+make check
+make check-exposure
 ```
 
----
+部署使用 `~/.ssh/llm-compare-hub.pem`，不会读取工作区内的私钥。`make deploy` 会先生成 `release/`，再用 `rsync --delete release/` 同步到腾讯云静态目录。
 
-## 生产部署（腾讯云 101.34.52.232）
+### GitHub Pages
 
-### 服务器信息
+`.github/workflows/deploy.yml` 在 push 到 `main` 后执行：
 
-| 项目 | 值 |
-|------|-----|
-| 服务器 | 101.34.52.232 (VM-0-16-ubuntu, Ubuntu 22.04) |
-| 用户 | ubuntu |
-| SSH Key | `ai_video.pem`（本地，已 gitignore）|
+1. `npm ci --prefix src`
+2. `make validate`
+3. `make verify-assets`
+4. `make build`
+5. `make release`
+6. 上传 `release/`
+
+GitHub Pages 是镜像发布目标。页面 canonical、robots 和 sitemap 均指向 `https://llm.lute-tlz-dddd.top/` 主站，避免重复索引。
+
+## 数据文件
+
+| 文件 | 内容 | 当前规模 |
+| --- | --- | --- |
+| `api-data.json` | PoYo.ai 模型/API 文档 | 71 models |
+| `siliconflow-data.json` | 硅基流动模型/API 文档 | 65 models |
+| `bai-data.json` | BAI 模型/API 文档 | 9 models |
+| `easyrouter-data.json` | EasyRouter 模型/API 文档 | 13 models |
+| `compare-data.json` | 跨平台排序、类别和功能场景推荐；包含 `modalities` 输入/输出类型标注 | TOP/分类/功能榜 |
+| `free-models-data.json` | 本地免费模型推荐 | 10 models |
+| `claude-data.json` | Claude 用法精粹 | 卡片数据 |
+| `codex-data.json` | Codex 用法精粹 | 卡片数据 |
+
+数据修改流程：
+
+```bash
+make validate
+make release
+make deploy-dry
+make deploy
+```
+
+所有 JSON 都是 runtime fetch；数据文件更新不需要重建 React bundle，但仍必须重新生成 `release/` 并部署。
+
+## SEO 策略
+
+- 主 canonical：`https://llm.lute-tlz-dddd.top/`
+- `robots.txt` 指向主站 sitemap：`https://llm.lute-tlz-dddd.top/sitemap.xml`
+- `sitemap.xml` 只收录主站 URL：
+  - `/`
+  - `/claude.html`
+  - `/codex.html`
+- `/claude/` 和 `/codex/` 是跳转页，不进入 sitemap。
+
+## 生产环境
+
+| 项目 | 当前值 |
+| --- | --- |
 | 静态文件目录 | `/opt/llm-compare-hub/html/` |
-| 反向代理 | `ai_video_nginx` 容器（与其他应用共用，在 `/opt/ai-video/deploy/lighthouse/` 管理）|
-| SSL 证书 | Let's Encrypt `*.lute-tlz-dddd.top`，有效至 2026-08-26 |
+| 发布源 | 本地/CI 生成的 `release/` |
+| 反向代理 | 共享 nginx 容器 `ai_video_nginx` |
+| 主站域名 | `https://llm.lute-tlz-dddd.top/` |
+| 镜像域名 | `https://zjgulai.github.io/llm-compare-hub/` |
 
-### nginx 配置位置（只读参考，勿随意修改）
+nginx 对 `src/`、`scripts/`、`.github/`、`.essence-cache/`、文档和隐藏文件有额外 404 拦截；但正确做法仍是只发布 `release/`。
 
-```
-/opt/ai-video/deploy/lighthouse/nginx.conf              # 主配置，含 llm server block（行 270）
-/opt/ai-video/deploy/lighthouse/docker-compose.prod.yml # nginx volume mount（行 131）
-```
+## 工具目标
 
-修改 nginx 配置后须执行：
-```bash
-ssh -i ai_video.pem ubuntu@101.34.52.232 "
-  docker exec ai_video_nginx nginx -t && \
-  docker exec ai_video_nginx nginx -s reload
-"
-```
+| 命令 | 作用 |
+| --- | --- |
+| `make validate` | 校验 JSON 结构、模型数量、对比页 modalities 和部分交叉引用 |
+| `make verify-assets` | 递归检查 `index.html` 和 JS chunks 引用的 assets 是否存在 |
+| `make typecheck` | 对 `src/` 执行 TypeScript 检查 |
+| `make build` | 将 `src/` 构建到 `dist/`，不影响生产根入口 |
+| `make release` | 生成干净发布目录 `release/` |
+| `make deploy-dry` | 预演腾讯云发布与远端删除 |
+| `make deploy` | 发布 `release/` 到腾讯云并清理远端残留 |
+| `make check` | 检查主站和核心 JSON HTTP 状态 |
+| `make check-exposure` | 检查开发材料是否仍不可公网访问 |
 
-### 服务器现有应用（不可污染）
+## 剩余高优先级事项
 
-| 容器前缀 | 域名 | 说明 |
-|---------|------|------|
-| `ai_video_*` | video.lute-tlz-dddd.top | AI 视频生成平台 |
-| `voc_superset*` | voc.lute-tlz-dddd.top | 客户声音分析 |
-| `promptforge_*` | kg.lute-tlz-dddd.top | 灵词知识库 |
-| `ai_video_nginx` | 所有域名共用 | 全局唯一入口 |
+1. 轮换曾经出现在 git remote URL 中的 GitHub token。
+2. 轮换生产 nginx 配置里硬编码的第三方 API key，并迁移到安全注入方式。
+3. 决定 `src/` 的下一步：要么复刻当前中文生产 UI，要么正式以 `src/` 重建版替换生产 UI。
+4. 为 JSON 增加 schema/Pydantic 级别校验，覆盖更多字段完整度、modelId 交叉引用和数据来源可信度。
 
----
-
-## GitHub Pages 自动部署
-
-- **触发**：push 到 `main` 分支自动触发
-- **配置**：`.github/workflows/deploy.yml`
-- **注意**：GitHub Pages 部署的是**当前 git 仓库的静态文件**（含已编译的 bundle），与腾讯云服务器独立，互不影响
-
----
-
-## 已知技术债务
-
-| 优先级 | 项目 | 描述 | 解决方案 |
-|--------|------|------|---------|
-| ✅ 已完成 | BAI/EasyRouter 数据补全 | `bai-data.json`（9 模型）+`easyrouter-data.json`（13 模型），已填充 baseUrl 和模型列表 | ✅ chat.b.ai + easyrouter.io |
-| ✅ 已完成 | PoYo.ai docsUrl 全部修复 | 71 个模型的 docsUrl 已从 sitemap 核实并补充 | ✅ 2026-06-09 全部修复 |
-| ✅ 已完成 | SiliconFlow 定价+docsUrl 全部修复 | 16 个模型定价、3 个 docsUrl 已修复 | ✅ 2026-06-09 |
-| 🟢 低 | 源码未纳入 git 管理 | 源码在临时目录，机器重启后丢失 | 将 `llm-compare-hub-src/` 提交到 git 或迁移到 `/Users/lute/project/Agent/product/llm_models_hub/src/` |
-
-> **已解决（2026-05-28）**：~~Bundle 中 Seedream badge 无色~~ ✅ / ~~4/5 JSON 内联进 bundle，修改无效~~ ✅ / ~~免费模型 fetch 错误静默吞掉~~ ✅
-
----
-
-
-
----
-
-## 工具链
-
-| 工具 | 说明 |
-|------|------|
-| `make validate` | 验证所有 JSON 数据结构 + 交叉引用 |
-| `make deploy` | 验证 + rsync 到腾讯云服务器 |
-| `make deploy-dry` | 试运行部署（不实际传输） |
-| `make check` | 检查生产站点和所有 JSON 文件的 HTTP 状态 |
-
-### 数据修复记录
-
-详见 [CHANGELOG.md](CHANGELOG.md)。
-
-## 相关链接
-
-- [PoYo.ai](https://poyo.ai/zh) | [PoYo API 文档](https://docs.poyo.ai)
-- [硅基流动](https://www.siliconflow.cn) | [硅基 API 文档](https://docs.siliconflow.cn)
-- [GitHub 仓库](https://github.com/zjgulai/llm-compare-hub)
-- [Lute 数据科学平台入口](https://lute-tlz-dddd.top)
+更多审计记录见 [AUDIT.md](AUDIT.md)，变更记录见 [CHANGELOG.md](CHANGELOG.md)。

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FreeModelsData } from '../types';
+import type { FreeModelsData } from '../types';
 import { fetchFreeModelsData } from '../data';
 
 export const FreeModelsView = () => {
@@ -117,4 +117,3 @@ export const FreeModelsView = () => {
     </div>
   );
 };
-

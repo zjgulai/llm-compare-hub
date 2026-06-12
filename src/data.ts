@@ -1,4 +1,4 @@
-import { PlatformData, FreeModelsData, CompareData } from './types';
+import type { PlatformData, FreeModelsData, CompareData } from './types';
 
 export const fetchPlatformData = async (platformId: string): Promise<PlatformData> => {
   const response = await fetch(`/${platformId}-data.json`);
@@ -51,4 +51,3 @@ export const PLATFORMS = [
   { id: 'bai', name: 'BAI', color: 'bg-orange-100 text-orange-800' },
   { id: 'easyrouter', name: 'EasyRouter', color: 'bg-purple-100 text-purple-800' },
 ];
-

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { PlatformData } from '../types';
+import type { PlatformData } from '../types';
 import { fetchPlatformData, PLATFORMS, getVendorColor } from '../data';
 
 export const ModelListView = () => {
@@ -220,4 +220,3 @@ export const ModelListView = () => {
     </div>
   );
 }
-

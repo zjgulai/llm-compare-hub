@@ -1,1 +1,173 @@
-export interface ModelVariant {\n  modelId: string;\n  name: string;\n  vendor: string;\n  type?: string;\n  pricing?: string;\n  docsUrl?: string;\n  curlExample?: string;\n  capabilities?: string[];\n  variants?: string[];\n  input?: Record<string, string>;\n  notes?: string;\n  output?: string;\n  context?: string;\n}\n\nexport interface Category {\n  id: string;\n  name: string;\n  description: string;\n  endpoint: string;\n  auth: string;\n  commonParams: Record<string, string>;\n  models: ModelVariant[];\n}\n\nexport interface PlatformData {\n  platform: string;\n  platformName: string;\n  platformUrl: string;\n  docsUrl: string;\n  apiOverview: {\n    baseUrl: string;\n    authentication: {\n      type: string;\n      header: string;\n      note: string;\n    };\n    architecture?: string;\n    asyncModels?: string;\n    syncModels?: string;\n  };\n  categories: Category[];\n}\n\nexport interface FreeModel {\n  rank: number;\n  modelId: string;\n  name: string;\n  vendor: string;\n  baseModel: string;\n  type: string;\n  architecture: string;\n  parameters: {\n    total: string;\n    experts?: number;\n    activePerToken?: string;\n  };\n  context: string;\n  capabilities: string[];\n  license: string;\n  huggingface: string;\n  notes: string;\n  output: string;\n  install: string;\n  baseModelUrl: string;\n  diskSize: string;\n  ramUsage: string;\n  speed: string;\n  requirements: string;\n  quantization?: {\n    method?: string;\n    via?: string;\n    recommended?: string;\n    available?: string[];\n    recommendedSize?: string;\n    technique?: string;\n    groupSize?: number;\n    calibration?: string;\n  };\n  sampler?: {\n    chat?: string;\n    reasoning?: string;\n    vision?: string;\n    thinking?: string;\n  };\n  usage: string;\n  paper?: string;\n  ollamaUrl?: string;\n}\n\nexport interface FreeModelsData {\n  categoryId: string;\n  categoryName: string;\n  nameEn: string;\n  description: string;\n  models: FreeModel[];\n}\n\nexport interface CompareModel {\n  rank: number;\n  name: string;\n  modelId: string;\n  platform: string;\n  platformName: string;\n  vendor: string;\n  category: string;\n  capabilities: string[];\n  context: string;\n  inputPrice: number;\n  outputPrice: number;\n  priceNote: string;\n  stability: number;\n  stabilityReason: string;\n  valueScore: number;\n  valueReason: string;\n  overallScore: number;\n  pros: string[];\n  cons: string[];\n  bestFor: string;\n  docsUrl: string;\n}\n\nexport interface CompareCategory {\n  categoryId: string;\n  categoryName: string;\n  icon: string;\n  winner: string;\n  summary: string;\n  models: CompareModel[];\n}\n\nexport interface CompareData {\n  lastUpdated: string;\n  methodology: {\n    stabilityScoring: string;\n    valueScoring: string;\n  };\n  categories: CompareCategory[];\n}\n
+export interface ModelVariant {
+  modelId: string;
+  name: string;
+  vendor: string;
+  type?: string;
+  pricing?: string;
+  docsUrl?: string;
+  curlExample?: string;
+  capabilities?: string[];
+  variants?: string[];
+  input?: Record<string, string>;
+  notes?: string;
+  output?: string;
+  context?: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  description: string;
+  endpoint: string;
+  auth: string;
+  commonParams: Record<string, string>;
+  models: ModelVariant[];
+}
+
+export interface PlatformData {
+  platform: string;
+  platformName: string;
+  platformUrl: string;
+  docsUrl: string;
+  apiOverview: {
+    baseUrl: string;
+    authentication: {
+      type: string;
+      header: string;
+      note: string;
+    };
+    architecture?: string;
+    asyncModels?: string;
+    syncModels?: string;
+  };
+  categories: Category[];
+}
+
+export interface FreeModel {
+  rank: number;
+  modelId: string;
+  name: string;
+  vendor: string;
+  baseModel: string;
+  type: string;
+  architecture: string;
+  parameters: {
+    total: string;
+    experts?: number;
+    activePerToken?: string;
+  };
+  context: string;
+  capabilities: string[];
+  license: string;
+  huggingface: string;
+  notes: string;
+  output: string;
+  install: string;
+  baseModelUrl: string;
+  diskSize: string;
+  ramUsage: string;
+  speed: string;
+  requirements: string;
+  quantization?: {
+    method?: string;
+    via?: string;
+    recommended?: string;
+    available?: string[];
+    recommendedSize?: string;
+    technique?: string;
+    groupSize?: number;
+    calibration?: string;
+  };
+  sampler?: {
+    chat?: string;
+    reasoning?: string;
+    vision?: string;
+    thinking?: string;
+  };
+  usage: string;
+  paper?: string;
+  ollamaUrl?: string;
+}
+
+export interface FreeModelsData {
+  categoryId: string;
+  categoryName: string;
+  nameEn: string;
+  description: string;
+  models: FreeModel[];
+}
+
+export type CompareDataType =
+  | "text"
+  | "image"
+  | "video"
+  | "audio"
+  | "music"
+  | "speech"
+  | "embedding"
+  | "ranking"
+  | "3d";
+
+export interface CompareModalities {
+  multimodal: boolean;
+  input: CompareDataType[];
+  output: CompareDataType[];
+  note: string;
+}
+
+export interface CompareModel {
+  rank: number;
+  name: string;
+  modelId?: string;
+  platform: string;
+  platformName?: string;
+  vendor?: string;
+  category?: string;
+  capabilities?: string[];
+  context?: string;
+  inputPrice?: number;
+  outputPrice?: number;
+  priceNote?: string;
+  stability?: number;
+  stabilityReason?: string;
+  valueScore?: number;
+  valueReason?: string;
+  overallScore?: number;
+  score?: number;
+  tag?: string;
+  why?: string;
+  pricing?: string;
+  pros?: string[];
+  cons?: string[];
+  bestFor?: string;
+  docsUrl?: string;
+  modalities?: CompareModalities;
+}
+
+export interface CompareCategory {
+  categoryId: string;
+  categoryName: string;
+  icon: string;
+  winner: string;
+  summary: string;
+  models: CompareModel[];
+}
+
+export interface CompareFunctionRanking {
+  functionId: string;
+  functionName: string;
+  icon: string;
+  description?: string;
+  topModels: CompareModel[];
+}
+
+export interface CompareData {
+  lastUpdated: string;
+  methodology: {
+    stabilityScoring: string;
+    valueScoring: string;
+  };
+  categories: CompareCategory[];
+  overallRanking: CompareModel[];
+  functionRanking: CompareFunctionRanking[];
+}

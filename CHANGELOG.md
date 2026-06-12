@@ -1,10 +1,53 @@
 # Changelog
 
+## 2026-06-12 — Compare page multimodal/data-type visibility
+
+### Added
+- Added structured `modalities` metadata to all compare-page entries: overall ranking, category ranking, and function-scene ranking.
+- Production compare UI now shows whether each entry is multimodal, plus supported input and output data types.
+- `scripts/validate.py` now fails if compare entries are missing modalities metadata or contain invalid data type values.
+- Source `CompareData` TypeScript types now include `overallRanking`, `functionRanking`, and modalities.
+
+### Verified
+- Tencent Cloud production deployed from `release/`.
+- Online `compare-data.json` and `assets/CompareView-BlF0-htG.js` hashes match local release files.
+- `make validate`, `make verify-assets`, `make typecheck`, `make build`, `make release`, `make deploy`, `make check`, and `make check-exposure` passed.
+
+## 2026-06-11 — Debt remediation: release-first deployment + docs/SEO alignment
+
+### Fixed
+- Removed the obsolete "source lost / data-maintenance only" status from README.
+- Set Tencent Cloud main site as the canonical SEO target.
+- Updated `robots.txt` to point to `https://llm.lute-tlz-dddd.top/sitemap.xml`.
+- Updated `sitemap.xml` to include only primary-domain URLs: `/`, `/claude.html`, `/codex.html`.
+- Restored current production asset snapshot into the repo so a fresh checkout has all files referenced by `index.html`.
+- Fixed `src/types.ts` formatting so `make typecheck` passes.
+- Moved Vite build output to `dist/` instead of writing into the repository root.
+
+### Added
+- `scripts/verify_assets.py` for recursive production asset graph validation.
+- `scripts/build_release.py` for generating a clean `release/` deployment artifact.
+- `make typecheck`, `make build`, `make verify-assets`, and `make release`.
+- Release-only GitHub Pages workflow: CI now uploads `release/`, not the repository root.
+- Release-only Tencent Cloud deploy: `make deploy` now syncs `release/` with `rsync --delete`.
+
+### Security / Operations
+- Deleted the duplicate worktree SSH key copy and standardized on `~/.ssh/llm-compare-hub.pem`.
+- Cleaned the local `origin` URL so it no longer embeds a GitHub token.
+- Added nginx blocking for development artifacts under the `llm.lute-tlz-dddd.top` vhost.
+- Cleaned Tencent Cloud static directory so only the 22 public release files remain.
+- Production backup before cleanup: `/opt/llm-compare-hub/backups/html-before-release-20260611122711.tar.gz`.
+
+### Still required
+- Rotate the GitHub token that previously appeared in the local remote URL.
+- Rotate the hardcoded third-party API key in the shared production nginx configuration.
+- Decide whether to rebuild `src/` to match the current Chinese production UI or intentionally replace the production bundle with the current `src/` implementation.
+
 ## 2026-06-09 — Sprint F: 深度审计 + 全维度修复
 
 ### 审计结果
-- **源码已丢失**：`llm-compare-hub-src` 临时目录已被系统清理（~500 行 TSX）
-- 项目进入**数据维护模式**（仅 JSON 修改可用，无法构建 bundle）
+- 当时判断：`llm-compare-hub-src` 临时目录已被系统清理，项目只能进行数据维护。
+- 当前状态：此判断已被 2026-06-11 的 release-first 修复更新；仓库中已有可 typecheck/build 的 `src/`，但它仍不是当前中文生产 UI 的完整可信源码。
 
 ### Fixed
 - **api-data.json**: 新增 3 个模型（Grok Imagine Video 1.5, Veo 3.1 Official, AI Video Upscaler）

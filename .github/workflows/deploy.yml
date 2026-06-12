@@ -24,8 +24,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: src/package-lock.json
+
+      - name: Install frontend dependencies
+        run: npm ci --prefix src
+
       - name: Validate JSON data files
-        run: python3 scripts/validate.py
+        run: make validate
+
+      - name: Verify production asset graph
+        run: make verify-assets
+
+      - name: Type-check and build source
+        run: make build
+
+      - name: Build release artifact
+        run: make release
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -33,7 +52,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: 'release'
 
       - name: Deploy to GitHub Pages
         id: deployment

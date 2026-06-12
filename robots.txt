@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zjgulai.github.io/llm-compare-hub/sitemap.xml
+Sitemap: https://llm.lute-tlz-dddd.top/sitemap.xml
