@@ -48,7 +48,11 @@
           "notes": "gpt-image-2-edit需要image_urls参数(支持多图); quality控制质量; resolution控制输出分辨率和credits消耗",
           "pricing": "2 credits/per gen | Low: 1K=2cr,2K=4cr,4K=8cr | Medium: 1K=3cr,2K=6cr,4K=12cr | High: 1K=12cr,2K=24cr,4K=48cr | ~60% cheaper than official",
           "output": "Image (PNG/JPEG)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/gpt-image-2"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/gpt-image-2",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "nano-banana",
@@ -68,7 +72,11 @@
           "notes": "基于Gemini 2.5 Flash, 支持text-to-image和image-to-image",
           "pricing": "$0.025/次 -36%",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/nano-banana"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/nano-banana",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "nano-banana-2-api",
@@ -85,7 +93,11 @@
           },
           "pricing": "$0.025/次 -69%",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/nano-banana-2"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/nano-banana-2",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "gpt-image-1-5-api",
@@ -102,7 +114,11 @@
           },
           "pricing": "$0.01/次 -23%",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/gpt-image-1.5"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/gpt-image-1.5",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "gpt-4o-image-api",
@@ -119,7 +135,11 @@
           },
           "pricing": "$0.02/次 -80%",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/gpt-4o-image"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/gpt-4o-image",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "kling-o3-image",
@@ -136,7 +156,11 @@
           },
           "pricing": "$0.018/次 -37%",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/kling-o3"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/kling-o3",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "kling-o1-image",
@@ -153,7 +177,11 @@
           },
           "pricing": "$0.018/次 -37%",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/kling-o1"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/kling-o1",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "seedream-4-5-api",
@@ -170,7 +198,11 @@
           },
           "pricing": "$0.025/次 -37.5%",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/seedream-4-5"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/seedream-4-5",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "seedream-5-0-lite-api",
@@ -187,7 +219,11 @@
           },
           "pricing": "$0.025/次 -29%",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/seedream-5-0-lite"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/seedream-5-0-lite",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "seedream-4",
@@ -204,7 +240,11 @@
           },
           "pricing": "$0.025/次",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/seedream-4"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/seedream-4",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "z-image",
@@ -221,7 +261,11 @@
           },
           "pricing": "$0.01/次",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/z-image"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/z-image",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "wan-2-7-image",
@@ -238,7 +282,11 @@
           },
           "pricing": "$0.021/次 -30%",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/wan-2-7-image"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/wan-2-7-image",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "flux-2",
@@ -262,7 +310,11 @@
           "notes": "32B参数图像生成模型; flux-2-pro-edit支持最多8张输入图的多参考编辑; flux-2-flex可调节速度vs质量平衡",
           "pricing": "$0.03/次",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/flux-2"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/flux-2",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "flux-kontext-pro",
@@ -287,7 +339,11 @@
           "notes": "flux-kontext-pro-edit和flux-kontext-max-edit需要image_urls, 仅使用image_urls[0]作为输入图片",
           "pricing": "$0.04/次",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/flux-kontext"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/flux-kontext",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "grok-imagine-image",
@@ -308,7 +364,11 @@
           "notes": "支持text-to-image和image-to-image; image-to-image需要image_urls(单张, jpeg/png/webp, max 10MB)",
           "pricing": "$0.03/次 -57%",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/grok-imagine-image"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/grok-imagine-image",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "nano-banana-2-new",
@@ -325,7 +385,11 @@
           },
           "pricing": "$0.025/次",
           "output": "Image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/nano-banana-2-new"
+          "docsUrl": "https://docs.poyo.ai/api-manual/image-series/nano-banana-2-new",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "image-translator",
@@ -344,7 +408,11 @@
           "notes": "图像翻译，将图片中的文字翻译为目标语言",
           "pricing": "$0.05/次",
           "output": "Translated Image",
-          "docsUrl": "https://poyo.ai/models/image-translator"
+          "docsUrl": "https://poyo.ai/models/image-translator",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         }
       ]
     },
@@ -387,7 +455,11 @@
           "notes": "image_urls与reference_*_urls互斥不能同时使用; seedance-2-fast仅支持480p和720p; 支持音频生成",
           "pricing": "20 credits/second | 480p: 10cr/s(video输入)/20cr/s(无video) | 720p: 20cr/s/40cr/s | 1080p: 45cr/s/90cr/s",
           "output": "Video (MP4) with optional audio",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/seedance-2"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/seedance-2",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "sora-2",
@@ -404,7 +476,11 @@
           },
           "pricing": "$0.025/次 -95%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/sora-2"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/sora-2",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "sora-2-pro",
@@ -421,7 +497,11 @@
           },
           "pricing": "$0.50/次 -95%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/sora-2-pro"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/sora-2-pro",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "sora-2-official",
@@ -443,7 +523,11 @@
           },
           "pricing": "48 credits/4s | 96cr/8s | 144cr/12s | 192cr/16s | 240cr/20s | $0.06/秒, 40% cheaper than fal.ai",
           "output": "Video with optional audio",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/sora-2-official"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/sora-2-official",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "veo3.1-fast",
@@ -468,7 +552,11 @@
           "notes": "所有模型支持text-to-video; veo3.1-fast和veo3.1-quality支持image-to-video; 支持4K输出; 视频URL有效期24小时",
           "pricing": "$0.05/次 -87%",
           "output": "Video (MP4), 4K支持",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/veo-3-1"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/veo-3-1",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "kling-2.1/standard",
@@ -491,7 +579,11 @@
           "notes": "standard不支持end_image_url, pro支持首尾帧",
           "pricing": "30 credits/5s standard | pro从55 credits起 | 50% cheaper than fal.ai",
           "output": "Video (MP4)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-2-1"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-2-1",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "kling-2-6",
@@ -510,7 +602,11 @@
           },
           "pricing": "$0.325/次 -7%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-2-6"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-2-6",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "kling-2-5-turbo-pro",
@@ -529,7 +625,11 @@
           },
           "pricing": "$0.21/次 -40%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-2-5-turbo-pro"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-2-5-turbo-pro",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "kling-3-api",
@@ -548,7 +648,11 @@
           },
           "pricing": "$0.135/次 -20%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-3-0"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-3-0",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "kling-3-0-motion-control",
@@ -566,7 +670,11 @@
           },
           "pricing": "$0.045/次 -64%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-3-0-motion-control"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-3-0-motion-control",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "kling-2-6-motion-control",
@@ -584,7 +692,11 @@
           },
           "pricing": "$0.04/次 -30%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-2.6-motion-control"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-2.6-motion-control",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "kling-o3-api",
@@ -601,7 +713,11 @@
           },
           "pricing": "$0.05/次",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-o3"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-o3",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "seedance-1-0-pro",
@@ -620,7 +736,11 @@
           },
           "pricing": "$0.105/次 -83%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/seedance-1.0-pro"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/seedance-1.0-pro",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "seedance-1-5-pro",
@@ -639,7 +759,11 @@
           },
           "pricing": "$0.045/次 -24%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/seedance-1-5-pro"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/seedance-1-5-pro",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "wan-2-2-fast",
@@ -656,7 +780,11 @@
           },
           "pricing": "$0.03/次",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/wan2.2-image-to-video-fast"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/wan2.2-image-to-video-fast",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "wan-2-5",
@@ -675,7 +803,11 @@
           },
           "pricing": "$0.15/次 -40%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/wan2.5-image-to-video"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/wan2.5-image-to-video",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "wan-2-6",
@@ -694,7 +826,11 @@
           },
           "pricing": "$0.40/次 -20%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/wan-2-6"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/wan-2-6",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "wan-animate",
@@ -712,7 +848,11 @@
           },
           "pricing": "$0.035/次 -12%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/wan-animate"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/wan-animate",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "hailuo-02",
@@ -731,7 +871,11 @@
           },
           "pricing": "$0.035/次 -22%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/hailuo-02"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/hailuo-02",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "hailuo-2-3",
@@ -750,7 +894,11 @@
           },
           "pricing": "$0.175/次 -38%",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/hailuo-2-3"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/hailuo-2-3",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "runway-gen-4-5",
@@ -769,7 +917,11 @@
           },
           "pricing": "$0.375/次",
           "output": "Video",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/runway-gen-4-5"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/runway-gen-4-5",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "wan-2-7-video",
@@ -789,7 +941,11 @@
           "pricing": "$0.060/sec (720p) | $0.090/sec (1080p)",
           "output": "Video",
           "docsUrl": "https://docs.poyo.ai/api-manual/video-series/wan-2-7-video",
-          "pricingNote": "按秒计费，与 Wan 2.5/2.6 格式一致。720p $0.060/s，1080p $0.090/s，官方 Fal 原价 $0.100/s，PoYo 享 -40% 折扣"
+          "pricingNote": "按秒计费，与 Wan 2.5/2.6 格式一致。720p $0.060/s，1080p $0.090/s，官方 Fal 原价 $0.100/s，PoYo 享 -40% 折扣",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "kling-avatar-2.0",
@@ -808,7 +964,11 @@
           "notes": "Kling数字人生成/Avatar生成模型",
           "pricing": "$0.035/次 -38%",
           "output": "Video / Avatar",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-avatar-2-0"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/kling-avatar-2-0",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "video-translator",
@@ -827,7 +987,11 @@
           "notes": "视频翻译，将视频中的语音和字幕翻译为目标语言",
           "pricing": "$0.075/次",
           "output": "Translated Video",
-          "docsUrl": "https://poyo.ai/models/video-translator"
+          "docsUrl": "https://poyo.ai/models/video-translator",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "grok-imagine-video-1-5",
@@ -849,7 +1013,11 @@
           "notes": "仅支持Image-to-Video; 480p $0.072/s 或 720p $0.125/s; 输入图片$0.010/张",
           "pricing": "$0.072/sec (480p) | $0.125/sec (720p) | +$0.010/input image",
           "output": "Video (MP4) 含可选音频",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/grok-imagine-video-1-5"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/grok-imagine-video-1-5",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "veo-3-1-official",
@@ -877,7 +1045,11 @@
           "notes": "包含4个tier: fast/lite/quality/extend; quality支持4K; extend续写最长至30秒",
           "pricing": "因tier/分辨率/音频而异: fast $0.05/sec起, lite $0.018/sec起, quality $0.12/sec起, extend $0.05/sec起",
           "output": "Video (MP4) 含可选音频",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/veo-3-1-official"
+          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/veo-3-1-official",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "video-upscaler",
@@ -900,7 +1072,9 @@
           "docsUrl": "https://docs.poyo.ai/api-manual/overview",
           "docsUrlNeedsReview": true,
           "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "happy-horse",
@@ -924,7 +1098,11 @@
           "pricing": "720p $0.080/秒 | 1080p $0.160/秒 | 视频编辑 720p $0.160/秒 | 1080p $0.320/秒 | -43% vs fal",
           "output": "Video (MP4) | 720p $0.080/sec, 1080p $0.160/sec",
           "docsUrl": "https://docs.poyo.ai/api-manual/video-series/happy-horse",
-          "notes": "Alibaba 视频生成模型，支持720p和1080p输出，支持视频编辑模式"
+          "notes": "Alibaba 视频生成模型，支持720p和1080p输出，支持视频编辑模式",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         }
       ]
     },
@@ -965,7 +1143,11 @@
           "notes": "与Claude Messages API格式完全兼容, 支持多轮对话和单轮查询, 支持文本和图像的多模态内容",
           "pricing": "$0.004/1K 输入 ($4/$20 per 1M input/output)",
           "output": "Text / Code (同步返回)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/claude-messages"
+          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/claude-messages",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "claude-4-6-api",
@@ -984,7 +1166,11 @@
           },
           "pricing": "$0.001/1K input -40%",
           "output": "Text (同步返回)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/chat-completions"
+          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/chat-completions",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "claude-4-5-api",
@@ -1003,7 +1189,11 @@
           },
           "pricing": "$0.001/1K input",
           "output": "Text (同步返回)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/chat-completions"
+          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/chat-completions",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "gemini-3-api",
@@ -1029,7 +1219,11 @@
           "notes": "使用Google Native API格式, 同步处理实时响应; streamGenerateContent支持流式输出",
           "pricing": "1 credits/1K input (Flash: $0.4/$2.4, Pro: $0.8/$4.8 per 1M)",
           "output": "Text / Code (同步返回)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/gemini-native-format"
+          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/gemini-native-format",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "gpt-5.5",
@@ -1052,7 +1246,11 @@
           "notes": "OpenAI GPT-5.5 系列模型",
           "pricing": "$0.003/1K 输入 -40%",
           "output": "Text / Code (同步返回)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/chat-completions"
+          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/chat-completions",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "gemini-3.5-flash",
@@ -1072,7 +1270,11 @@
           "notes": "Google Gemini 3.5 Flash，速度快、性价比高",
           "pricing": "$0.0009/1K 输入 -40%",
           "output": "Text / Code (同步返回)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/gemini-native-format"
+          "docsUrl": "https://docs.poyo.ai/api-manual/chat-series/gemini-native-format",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         }
       ]
     },
@@ -1115,7 +1317,11 @@
           "notes": "Custom Mode: custom_mode=true时, instrumental=true需要style+title; instrumental=false需要style+prompt+title; Non-custom Mode: prompt最多500字符; 不同mv版本字符限制不同",
           "pricing": "20 credits/次",
           "output": "Audio (MP3/WAV)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-music"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-music",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "extend-music",
@@ -1133,7 +1339,11 @@
           },
           "pricing": "$0.10/次",
           "output": "Audio",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/extend-music"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/extend-music",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "upload-and-cover-audio",
@@ -1151,7 +1361,11 @@
           },
           "pricing": "$0.10/次",
           "output": "Audio",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/upload-and-cover-audio"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/upload-and-cover-audio",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "upload-and-extend-audio",
@@ -1169,7 +1383,11 @@
           },
           "pricing": "$0.10/次",
           "output": "Audio",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/upload-and-extend-audio"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/upload-and-extend-audio",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "add-instrumental",
@@ -1186,7 +1404,11 @@
           },
           "pricing": "$0.10/次",
           "output": "Audio with instrumental track",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/add-instrumental"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/add-instrumental",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "add-vocals",
@@ -1204,7 +1426,11 @@
           },
           "pricing": "$0.10/次",
           "output": "Audio with vocals",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/add-vocals"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/add-vocals",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "get-timestamped-lyrics",
@@ -1221,7 +1447,11 @@
           },
           "pricing": "$0.005/次",
           "output": "Timestamped lyrics (LRC format)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/get-timestamped-lyrics"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/get-timestamped-lyrics",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "boost-music-style",
@@ -1239,7 +1469,11 @@
           },
           "pricing": "$0.005/次",
           "output": "Audio",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/boost-music-style"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/boost-music-style",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "generate-music-cover",
@@ -1256,7 +1490,11 @@
           },
           "pricing": "$0.005/次",
           "output": "Album cover image",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-music-cover"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-music-cover",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "replace-section",
@@ -1276,7 +1514,11 @@
           },
           "pricing": "$0.05/次",
           "output": "Audio",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/replace-section"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/replace-section",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "generate-persona",
@@ -1293,7 +1535,11 @@
           },
           "pricing": "$0.005/次",
           "output": "Persona ID",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-persona"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-persona",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "generate-lyrics",
@@ -1311,7 +1557,11 @@
           },
           "pricing": "$0.005/次",
           "output": "Lyrics text",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-lyrics"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/generate-lyrics",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "convert-to-wav",
@@ -1328,7 +1578,11 @@
           },
           "pricing": "$0.005/次",
           "output": "WAV audio file",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/convert-to-wav"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/convert-to-wav",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "vocal-remover-api",
@@ -1345,7 +1599,11 @@
           },
           "pricing": "$0.075/次",
           "output": "Instrumental audio (vocals removed)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/vocal-remover"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/vocal-remover",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "create-music-video",
@@ -1363,7 +1621,11 @@
           },
           "pricing": "$0.02/次",
           "output": "Video (MP4)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/create-music-video"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/create-music-video",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "minimax-music-2.6",
@@ -1382,7 +1644,9 @@
           "output": "Audio",
           "docsUrl": "https://docs.poyo.ai/api-manual/music-series/minimax-music-2.6",
           "sourceUrl": "https://docs.poyo.ai/api-manual/music-series/minimax-music-2.6",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-docs"
         }
       ]
     },
@@ -1416,7 +1680,11 @@
           "notes": "Meshy 3D生成模型，支持文本和图片输入生成3D模型",
           "pricing": "按次计费",
           "output": "3D Model (GLB/OBJ)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/3d-series/meshy-6-3d"
+          "docsUrl": "https://docs.poyo.ai/api-manual/3d-series/meshy-6-3d",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "tripo-h31-3d",
@@ -1436,7 +1704,11 @@
           "notes": "Tripo3D高保真3D生成模型",
           "pricing": "按次计费",
           "output": "3D Model (GLB/OBJ)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/3d-series/tripo-h31-3d"
+          "docsUrl": "https://docs.poyo.ai/api-manual/3d-series/tripo-h31-3d",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "tripo-p1-3d",
@@ -1456,7 +1728,11 @@
           "notes": "Tripo3D快速3D生成模型",
           "pricing": "按次计费",
           "output": "3D Model (GLB/OBJ)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/3d-series/tripo-p1-3d"
+          "docsUrl": "https://docs.poyo.ai/api-manual/3d-series/tripo-p1-3d",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         }
       ]
     },
@@ -1490,7 +1766,11 @@
           "notes": "ElevenLabs V3 文本转语音，支持多种音色和语言",
           "pricing": "$0.08/次 -20%",
           "output": "Audio (MP3/WAV)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/elevenlabs-v3-tts"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/elevenlabs-v3-tts",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         }
       ]
     }
