@@ -446,8 +446,9 @@ sitemap.xml
 | --- | --- |
 | workflow 内容检查 | 已包含 `Configure Chrome for UI smoke checks`、`CHROME_PATH` 和 `make smoke-ui` |
 | `CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' make smoke-ui` | 通过 |
+| GitHub Pages workflow run `27463360482` | 成功，runner 使用 `/usr/bin/google-chrome-stable` 并完成 `make smoke-ui` |
 
 后续债务：
 
-1. GitHub Pages workflow 需要在 push 后观察一次远端实跑结果。
+1. 为 UI smoke 失败场景上传截图 artifact，便于远端 CI 失败复盘。
 2. 如果未来 runner 镜像移除 Chrome/Chromium，可改为显式 setup Chrome action 或安装固定浏览器包。

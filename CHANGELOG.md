@@ -8,6 +8,7 @@
 
 ### Verified
 - 本地使用显式 `CHROME_PATH` 执行 `make smoke-ui` 通过。
+- GitHub Pages workflow run `27463360482` 成功，runner 使用 `/usr/bin/google-chrome-stable` 并完成 `make smoke-ui`。
 
 ## 2026-06-13 — UI smoke automation and assets 404 hardening
 
