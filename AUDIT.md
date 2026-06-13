@@ -26,7 +26,7 @@
 4. **构建事实**：Vite 输出目录已固定到 `dist/`，Tailwind v4 通过 `@tailwindcss/vite` 编译 utilities，构建不会覆盖仓库根入口。
 5. **文档事实**：README、CHANGELOG 和本审计已更新最新状态；历史 `.sisyphus` 计划仅作为归档参考。
 
-这些 P0 发布风险已通过 release-only 链路、源码 UI 复核和构建工具链修复降级；当前主要剩余风险转为凭据轮换、自动化视觉回归、可访问性门禁和持续数据时效复核。
+这些 P0 发布风险已通过 release-only 链路、源码 UI 复核、构建工具链修复和 UI smoke 自动化降级；当前主要剩余风险转为凭据轮换、CI 中的浏览器环境标准化、可访问性深度门禁和持续数据时效复核。
 
 ## 2. 债务清单
 
@@ -44,7 +44,7 @@
 | D-10 | 文档债务 | 已缓解/P2 | README/CHANGELOG/AUDIT 已更新 release-first 与源码 UI 最新状态；历史计划仍作为归档存在 | 后续需要维护“以当前 README/AUDIT 为准”的约束 |
 | D-11 | 文档债务 | P1 | `robots.txt` 指向 GitHub Pages sitemap；`sitemap.xml` 未覆盖 `claude`/`codex` 页面 | 已通过 Phase 3 缓解；后续需随新增页面维护 sitemap |
 | D-12 | 技术债务 | P2 | `scripts/validate.py` 已增强为轻量 schema 校验器；BAI/EasyRouter/PoYo/SiliconFlow 已补齐 provenance 字段 | 数据质量已从人工检查转向 CI 门禁；后续风险集中在 provenance 时效复核、价格漂移与来源页语义变化 |
-| D-13 | 工程债务 | P2 | 无 lint、formatter、单元测试、视觉回归、可访问性检查 | UI 回归只能靠人工发现 |
+| D-13 | 工程债务 | 已缓解/P2 | 已新增 `make smoke-ui` 与 `make smoke-ui-production` 做核心 UI/移动端/基础可访问性冒烟；仍缺 CI 级视觉基线和深度 a11y 审计 | 高风险 UI 回归已有本地/生产命令兜底，细粒度视觉漂移仍需后续治理 |
 | D-14 | 脆弱点债务 | P2 | nginx 是多应用共享入口，单配置文件承载多个业务 | 任一 vhost 配置错误可能影响全站入口 |
 
 ## 3. 治理路线
@@ -382,7 +382,50 @@ sitemap.xml
 
 后续债务：
 
-1. 增加 Playwright/Browser 自动化脚本，固化当前人工验收断言。
+1. 将 `make smoke-ui` 的 Chrome 环境要求在 CI 中标准化后接入 GitHub Pages workflow。
 2. 增加视觉回归截图基线，覆盖首页、对比页三模式和免费模型页。
-3. 补充可访问性检查，尤其是按钮 aria name、颜色对比度和键盘导航。
-4. 优化 nginx `/assets/*` 缺失文件行为；当前旧 hash URL 不再对应真实文件，但会被 SPA fallback 返回 `index.html`。
+3. 补充更深的可访问性检查，尤其是颜色对比度、焦点顺序和键盘导航。
+
+## 12. UI smoke 自动化与 assets 404 硬化记录
+
+> 执行时间：2026-06-13
+
+已完成：
+
+1. 新增 `scripts/ui_smoke_check.mjs`，通过 Chrome headless/CDP 执行可重复 UI 冒烟检查。
+2. 新增 `make smoke-ui`：本地生成 `release/`，启动临时静态服务，并检查：
+   - 中文导航、搜索占位符和首页调用概览；
+   - PoYo.ai 数据加载不再失败；
+   - 对比页综合 TOP、按类别对比、按功能排序三种模式均显示输入/输出类型；
+   - 免费本地模型页显示安装和使用示例；
+   - 390px 移动视口无横向溢出；
+   - 按钮/input 具备基础可访问性命名；
+   - 缺失 `/assets/*` 返回 404。
+3. 新增 `make smoke-ui-production`，对腾讯云生产域名执行同一组检查。
+4. 腾讯云 `llm.lute-tlz-dddd.top` vhost 新增 `/assets/` 精确规则：
+   - 真实 hash 资源继续 200；
+   - 缺失 hash 资源直接 404；
+   - `/assets/` 响应保留 `Cache-Control`、`X-Content-Type-Options`、`X-Frame-Options` 与 CSP 安全头。
+
+远端备份：
+
+- `/opt/ai-video/deploy/lighthouse/nginx.conf.bak-assets-404-20260613174152`
+- `/opt/ai-video/deploy/lighthouse/nginx.conf.bak-assets-csp-fix-20260613174240`
+
+验证通过：
+
+| 检查项 | 结果 |
+| --- | --- |
+| `make smoke-ui` | 通过，生成桌面与移动截图到 `artifacts/ui-smoke/` |
+| `make smoke-ui-production` | 通过 |
+| 新 CSS/JS asset | 200，content-type 分别为 `text/css` 与 `application/javascript` |
+| 旧 hash asset / 缺失 asset | 404 |
+| `/assets/` 安全头 | CSP 保持 `'self'` / `'unsafe-inline'` 引号语义，且保留 nosniff 与 DENY |
+| `make check` | 腾讯云主站、GitHub Pages 与 6 个核心 JSON 均为 200 |
+| `make check-exposure` | 开发材料路径仍为 404 |
+
+后续债务：
+
+1. 将 UI smoke 接入 CI 前，需要固定 GitHub runner 的 Chrome/Chromium 可用性。
+2. 当前截图是冒烟产物而非像素基线；后续可增加阈值化视觉 diff。
+3. 当前 a11y 检查覆盖命名和布局溢出；后续可增加颜色对比度和键盘路径检查。

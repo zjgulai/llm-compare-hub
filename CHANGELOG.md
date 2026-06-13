@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-06-13 — UI smoke automation and assets 404 hardening
+
+### Added
+- 新增 `scripts/ui_smoke_check.mjs`，使用本机 Chrome headless 执行桌面/移动 UI 冒烟检查，并输出截图到 `artifacts/ui-smoke/`。
+- 新增 `make smoke-ui`，先生成本地 `release/`，再验证中文导航、PoYo.ai 数据加载、对比页三模式、多模态输入/输出、免费模型页、基础可访问性命名、移动端横向溢出和缺失 asset 404。
+- 新增 `make smoke-ui-production`，对腾讯云生产域名执行同一组浏览器冒烟检查。
+
+### Fixed
+- 腾讯云 `llm.lute-tlz-dddd.top` 的 nginx vhost 新增 `/assets/` 精确规则，缺失 hash 资源不再被 SPA fallback 返回 `index.html`。
+- `/assets/` 真实 release 资源保留长期 immutable 缓存和原有安全头。
+
+### Verified
+- `make smoke-ui` 通过，本地桌面与 390px 移动截图均生成。
+- `make smoke-ui-production` 通过。
+- 生产 `assets/index-B8PoeCzJ.css` 与 `assets/index-TVkii31w.js` 返回 200；旧 hash 与缺失 asset 返回 404。
+- 远端 nginx 配置已通过 `nginx -t` 并 reload，备份保存在 `/opt/ai-video/deploy/lighthouse/nginx.conf.bak-assets-404-20260613174152` 与 `/opt/ai-video/deploy/lighthouse/nginx.conf.bak-assets-csp-fix-20260613174240`。
+
 ## 2026-06-13 — Source UI localization and Tailwind build recovery
 
 ### Fixed

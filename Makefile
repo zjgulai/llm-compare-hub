@@ -1,4 +1,4 @@
-.PHONY: validate validate-provenance provenance-report typecheck build verify-assets release deploy deploy-dry check check-exposure clean weekly-snapshot data-update-check data-update-dry data-update-deploy
+.PHONY: validate validate-provenance provenance-report typecheck build verify-assets smoke-ui smoke-ui-production release deploy deploy-dry check check-exposure clean weekly-snapshot data-update-check data-update-dry data-update-deploy
 
 # SSH key: keep production credentials outside the worktree.
 PREFERRED_SSH_KEY := /Users/lute/project/Agent/product/llm_models_hub/ai_video.pem
@@ -35,6 +35,14 @@ build: typecheck
 verify-assets:
 	@echo "🔗 Verifying index.html asset references..."
 	@python3 scripts/verify_assets.py
+
+smoke-ui: release
+	@echo "🖥️  Running local UI smoke checks..."
+	@node scripts/ui_smoke_check.mjs
+
+smoke-ui-production:
+	@echo "🖥️  Running production UI smoke checks..."
+	@node scripts/ui_smoke_check.mjs --base-url https://llm.lute-tlz-dddd.top/
 
 release: validate build verify-assets
 	@echo "📦 Building clean release artifact..."
