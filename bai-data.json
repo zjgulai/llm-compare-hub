@@ -42,7 +42,9 @@
           },
           "notes": "OpenAI 最新旗舰，推理能力与代码能力行业顶级。BAI 同步调用。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.b.ai/llmservice/api/",
+          "sourceUrl": "https://docs.b.ai/llmservice/api/",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "gpt-5.4-bai",
@@ -63,7 +65,9 @@
           },
           "notes": "OpenAI GPT-5.4，上一代旗舰，成本低于 5.5。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.b.ai/llmservice/api/",
+          "sourceUrl": "https://docs.b.ai/llmservice/api/",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "gpt-5.2-bai",
@@ -84,7 +88,9 @@
           },
           "notes": "GPT-5.2，平衡性价比的中间模型。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.b.ai/llmservice/api/",
+          "sourceUrl": "https://docs.b.ai/llmservice/api/",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "gpt-5-nano-bai",
@@ -104,7 +110,9 @@
           },
           "notes": "GPT 系列轻量版，成本最低，适合简单对话。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.b.ai/llmservice/api/",
+          "sourceUrl": "https://docs.b.ai/llmservice/api/",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "gpt-5-mini-bai",
@@ -124,7 +132,9 @@
           },
           "notes": "GPT 系列 Mini 版，高性价比。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.b.ai/llmservice/api/",
+          "sourceUrl": "https://docs.b.ai/llmservice/api/",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "deepseek-ai/DeepSeek-V4-Flash-bai",
@@ -145,7 +155,9 @@
           },
           "notes": "BAI 专供版 DeepSeek-V4-Flash，支持超大上下文窗口，适合完整代码库分析、长文档摘要。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.b.ai/llmservice/api/",
+          "sourceUrl": "https://docs.b.ai/llmservice/api/",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "deepseek-ai/DeepSeek-V4-Pro-bai",
@@ -166,7 +178,9 @@
           },
           "notes": "DeepSeek-V4-Pro，BAI 平台提供 25% 折扣。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.b.ai/llmservice/api/",
+          "sourceUrl": "https://docs.b.ai/llmservice/api/",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "deepseek-ai/DeepSeek-V3.2-bai",
@@ -186,7 +200,9 @@
           },
           "notes": "DeepSeek-V3.2，前代旗舰，成本更优。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.b.ai/llmservice/api/",
+          "sourceUrl": "https://docs.b.ai/llmservice/api/",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "claude-haiku-4.5-bai",
@@ -207,7 +223,9 @@
           },
           "notes": "Anthropic Claude Haiku 4.5，轻量快速，BAI 平台同步调用。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.b.ai/llmservice/api/",
+          "sourceUrl": "https://docs.b.ai/llmservice/api/",
+          "verifiedAt": "2026-06-12"
         }
       ]
     }

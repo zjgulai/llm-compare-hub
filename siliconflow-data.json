@@ -198,7 +198,13 @@
           "context": "256K",
           "pricing": "输入 ¥6.5/M | 输出 ¥27/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "deprecated": true,
+          "availability": "deprecated",
+          "deprecatedAt": "2026-06-11",
+          "replacementModelId": "Pro/moonshotai/Kimi-K2.6",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "moonshotai/Kimi-K2-Thinking",
@@ -211,7 +217,13 @@
           "context": "256K",
           "pricing": "输入 ¥2/M | 输出 ¥16/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "deprecated": true,
+          "availability": "deprecated",
+          "deprecatedAt": "2026-05-15",
+          "replacementModelId": "moonshotai/Kimi-K2.6",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "moonshotai/Kimi-K2-Instruct-0905",
@@ -223,7 +235,13 @@
           "context": "128K",
           "pricing": "输入 ¥5/M | 输出 ¥20/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "deprecated": true,
+          "availability": "deprecated",
+          "deprecatedAt": "2026-05-15",
+          "replacementModelId": "moonshotai/Kimi-K2.6",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "zai-org/GLM-5.1",
@@ -271,7 +289,13 @@
           "context": "198K",
           "pricing": "输入 ¥4/M | 输出 ¥22/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "deprecated": true,
+          "availability": "deprecated",
+          "deprecatedAt": "2026-06-11",
+          "replacementModelId": "Pro/zai-org/GLM-5.1",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "zai-org/GLM-4.7",
@@ -295,7 +319,13 @@
           "context": "198K",
           "pricing": "输入 ¥4/M | 输出 ¥16/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "deprecated": true,
+          "availability": "deprecated",
+          "deprecatedAt": "2026-06-11",
+          "replacementModelId": "Pro/zai-org/GLM-5.1",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "zai-org/GLM-4.6",
@@ -307,7 +337,13 @@
           "context": "198K",
           "pricing": "输入 ¥4/M | 输出 ¥18/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "deprecated": true,
+          "availability": "deprecated",
+          "deprecatedAt": "2026-05-15",
+          "replacementModelId": "zai-org/GLM-5.1",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "Pro/zai-org/GLM-4.6",
@@ -332,7 +368,13 @@
           "context": "128K",
           "pricing": "输入 ¥2.5/M | 输出 ¥10/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "deprecated": true,
+          "availability": "deprecated",
+          "deprecatedAt": "2026-05-15",
+          "replacementModelId": "deepseek-ai/DeepSeek-R1",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "THUDM/GLM-4-32B-0414",
@@ -527,7 +569,13 @@
           "context": "32K",
           "pricing": "输入 ¥0.5/M | 输出 ¥1/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "deprecated": true,
+          "availability": "deprecated",
+          "deprecatedAt": "2026-04-29",
+          "replacementModelId": "deepseek-ai/DeepSeek-V4-Pro",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "Qwen/Qwen2.5-Math-72B",
@@ -867,7 +915,13 @@
           "context": "512",
           "pricing": "¥0.05/M tokens（按需计费）",
           "output": "Vector",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings",
+          "deprecated": true,
+          "availability": "deprecated",
+          "deprecatedAt": "2026-06-11",
+          "replacementModelId": "BAAI/bge-m3",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12"
         }
       ]
     },

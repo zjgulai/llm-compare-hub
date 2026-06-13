@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-09",
+  "lastUpdated": "2026-06-12",
   "methodology": {
     "stabilityScoring": "基于API架构成熟度、平台SLA保障、用户反馈、模型可用率综合评估。硅基流动采用标准OpenAI格式+国内CDN+Pro高可用版本，稳定性普遍高于PoYo的异步轮询架构。",
     "valueScoring": "基于每1M token/每次请求的成本、上下文长度、输出质量、功能丰富度综合计算。价格按实时汇率折算为人民币。"
@@ -25,8 +25,8 @@
             "长上下文"
           ],
           "context": "1024K",
-          "inputPrice": 1.0,
-          "outputPrice": 2.0,
+          "inputPrice": 1,
+          "outputPrice": 2,
           "priceNote": "输入 ¥1/M | 输出 ¥2/M",
           "stability": 5,
           "stabilityReason": "硅基流动Pro版本+国内CDN，标准OpenAI格式，SLA保障高",
@@ -71,8 +71,8 @@
             "数学"
           ],
           "context": "64K",
-          "inputPrice": 4.0,
-          "outputPrice": 16.0,
+          "inputPrice": 4,
+          "outputPrice": 16,
           "priceNote": "输入 ¥4/M | 输出 ¥16/M",
           "stability": 5,
           "stabilityReason": "硅基流动Pro版本，推理模型中稳定性最高",
@@ -115,7 +115,7 @@
           ],
           "context": "256K",
           "inputPrice": 6.5,
-          "outputPrice": 27.0,
+          "outputPrice": 27,
           "priceNote": "输入 ¥6.5/M | 输出 ¥27/M",
           "stability": 4.5,
           "stabilityReason": "Moonshot官方直连，硅基流动Pro版本保障",
@@ -157,8 +157,8 @@
             "对话"
           ],
           "context": "198K",
-          "inputPrice": 6.0,
-          "outputPrice": 28.0,
+          "inputPrice": 6,
+          "outputPrice": 28,
           "priceNote": "输入 ¥6/M | 输出 ¥28/M",
           "stability": 4.5,
           "stabilityReason": "智谱官方模型，硅基流动Pro版高可用",
@@ -202,8 +202,8 @@
             "多模态"
           ],
           "context": "40K",
-          "inputPrice": 1.0,
-          "outputPrice": 5.0,
+          "inputPrice": 1,
+          "outputPrice": 5,
           "priceNote": "输入 ¥1/M | 输出 ¥5/M",
           "stability": 4.5,
           "stabilityReason": "阿里云官方模型，稳定性有保障",
@@ -247,8 +247,8 @@
             "代码"
           ],
           "context": "200K",
-          "inputPrice": 28.0,
-          "outputPrice": 140.0,
+          "inputPrice": 28,
+          "outputPrice": 140,
           "priceNote": "$4/$20 per 1M tokens (~¥28/¥140)",
           "stability": 3.5,
           "stabilityReason": "PoYo异步架构，需轮询状态，海外链路可能波动",
@@ -295,7 +295,7 @@
           ],
           "context": "128K",
           "inputPrice": 2.8,
-          "outputPrice": 17.0,
+          "outputPrice": 17,
           "priceNote": "$0.4/$2.4 per 1M tokens (~¥2.8/¥17)",
           "stability": 3.5,
           "stabilityReason": "PoYo异步架构，Google Native格式兼容性一般",
@@ -348,7 +348,7 @@
             "Image to Image"
           ],
           "inputPrice": 0,
-          "outputPrice": 14.0,
+          "outputPrice": 14,
           "priceNote": "2 credits/次 (~¥0.14/次起，按质量/分辨率递增)",
           "stability": 4,
           "stabilityReason": "OpenAI官方模型，PoYo稳定代理",
@@ -392,7 +392,7 @@
             "Text to Image"
           ],
           "inputPrice": 0,
-          "outputPrice": 21.0,
+          "outputPrice": 21,
           "priceNote": "$0.03/次 (~¥0.21/次)",
           "stability": 4,
           "stabilityReason": "Black Forest Labs官方，PoYo代理稳定",
@@ -477,7 +477,7 @@
             "Text to Image"
           ],
           "inputPrice": 0,
-          "outputPrice": 7.0,
+          "outputPrice": 7,
           "priceNote": "$0.01/次 (~¥0.07/次)",
           "stability": 3.5,
           "stabilityReason": "PoYo异步架构，需轮询获取结果",
@@ -561,7 +561,7 @@
             "Image to Image"
           ],
           "inputPrice": 0,
-          "outputPrice": 21.0,
+          "outputPrice": 21,
           "priceNote": "$0.03/次 (~¥0.21/次), -57%",
           "stability": 3.5,
           "stabilityReason": "xAI模型，PoYo代理，海外链路",
@@ -614,7 +614,7 @@
             "Image to Video"
           ],
           "inputPrice": 0,
-          "outputPrice": 42.0,
+          "outputPrice": 42,
           "priceNote": "48cr/4s = ~¥0.24/4s (~¥0.06/秒), 比fal.ai便宜40%",
           "stability": 4,
           "stabilityReason": "OpenAI官方，PoYo稳定代理，支持最长20秒",
@@ -661,7 +661,7 @@
             "Image to Video"
           ],
           "inputPrice": 0,
-          "outputPrice": 50.0,
+          "outputPrice": 50,
           "priceNote": "20cr/秒 (~¥0.10-0.45/秒按分辨率)",
           "stability": 3.8,
           "stabilityReason": "Seedance官方，PoYo代理，支持480p/720p/1080p",
@@ -709,7 +709,7 @@
             "Image to Video"
           ],
           "inputPrice": 0,
-          "outputPrice": 15.0,
+          "outputPrice": 15,
           "priceNote": "30cr/5s standard (~¥0.15/5s)",
           "stability": 4,
           "stabilityReason": "Kling官方，PoYo代理，国内模型相对延迟低",
@@ -753,7 +753,7 @@
             "Image to Video"
           ],
           "inputPrice": 0,
-          "outputPrice": 35.0,
+          "outputPrice": 35,
           "priceNote": "$0.05/次 (~¥0.35/次), -87%",
           "stability": 3.5,
           "stabilityReason": "Google Veo，PoYo代理，支持4K输出",
@@ -1084,7 +1084,7 @@
             "音乐生成"
           ],
           "inputPrice": 0,
-          "outputPrice": 20.0,
+          "outputPrice": 20,
           "priceNote": "20 credits/次 (~¥0.20/次)",
           "stability": 4,
           "stabilityReason": "Suno AI底层，PoYo稳定代理",
@@ -1119,7 +1119,7 @@
         {
           "rank": 2,
           "name": "Vocal Remover",
-          "modelId": "vocal-remover",
+          "modelId": "vocal-remover-api",
           "platform": "poyo",
           "platformName": "PoYo.ai",
           "vendor": "PoYo",
@@ -1160,7 +1160,7 @@
         {
           "rank": 3,
           "name": "MiniMax Music 2.6",
-          "modelId": "minimax-music-2-6",
+          "modelId": "minimax-music-2.6",
           "platform": "poyo",
           "platformName": "PoYo.ai",
           "vendor": "MiniMax",
@@ -1169,7 +1169,7 @@
             "音乐生成"
           ],
           "inputPrice": 0,
-          "outputPrice": 10.0,
+          "outputPrice": 10,
           "priceNote": "$0.10/次 (~¥0.70/次)",
           "stability": 3.8,
           "stabilityReason": "MiniMax官方，PoYo代理",
@@ -1185,7 +1185,7 @@
             "不如Suno生态成熟"
           ],
           "bestFor": "中文歌曲生成、必须使用MiniMax的场景",
-          "docsUrl": "https://docs.poyo.ai",
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/minimax-music-2.6",
           "modalities": {
             "multimodal": true,
             "input": [
@@ -1235,7 +1235,8 @@
           "text"
         ],
         "note": "单模态/专用数据类型：输入 文本；输出 文本"
-      }
+      },
+      "modelId": "deepseek-ai/DeepSeek-V4-Pro-easyrouter"
     },
     {
       "rank": 3,
@@ -1307,7 +1308,8 @@
           "text"
         ],
         "note": "单模态/专用数据类型：输入 文本；输出 文本"
-      }
+      },
+      "modelId": "deepseek-ai/DeepSeek-V4-Flash-bai"
     },
     {
       "rank": 7,
@@ -1489,7 +1491,7 @@
         {
           "rank": 3,
           "name": "DeepSeek-V4-Flash (BAI)",
-          "modelId": "deepseek-v4-flash",
+          "modelId": "deepseek-ai/DeepSeek-V4-Flash-bai",
           "platform": "bai",
           "score": 91,
           "tag": "BAI超大上下文",
@@ -1611,7 +1613,7 @@
         {
           "rank": 2,
           "name": "DeepSeek-V4-Pro (EasyRouter)",
-          "modelId": "deepseek-v4-pro",
+          "modelId": "deepseek-ai/DeepSeek-V4-Pro-easyrouter",
           "platform": "easyrouter",
           "score": 95,
           "tag": "企业级+75%OFF",
@@ -1668,7 +1670,7 @@
         {
           "rank": 5,
           "name": "DeepSeek-V4-Flash (BAI)",
-          "modelId": "deepseek-v4-flash",
+          "modelId": "deepseek-ai/DeepSeek-V4-Flash-bai",
           "platform": "bai",
           "score": 90,
           "tag": "超大上下文",
@@ -1793,7 +1795,7 @@
         {
           "rank": 3,
           "name": "GPT-5.1 Codex (EasyRouter)",
-          "modelId": "gpt-5.1-codex",
+          "modelId": "gpt-5.1-codex-easyrouter",
           "platform": "easyrouter",
           "score": 93,
           "tag": "专用代码模型",
@@ -1810,13 +1812,12 @@
           }
         },
         {
-          "rank": 4,
-          "name": "Qwen2.5-Coder-32B",
-          "modelId": "Qwen/Qwen2.5-Coder-32B-Instruct",
+          "name": "DeepSeek-V4-Pro",
+          "modelId": "deepseek-ai/DeepSeek-V4-Pro",
           "platform": "siliconflow",
-          "score": 91,
-          "tag": "专用代码模型",
-          "why": "阿里巴巴专用代码模型，32B参数，代码补全和生成能力出色，仅¥0.5/¥1 per 1M",
+          "score": 92,
+          "tag": "长上下文代码强模型",
+          "why": "替代已下线的 Qwen2.5-Coder-32B；1049K 上下文，代码与推理能力兼备，硅基流动价格约 ¥1.25/¥2.50 per 1M，适合复杂代码生成、重构和代码库分析",
           "modalities": {
             "multimodal": false,
             "input": [
@@ -1826,12 +1827,13 @@
               "text"
             ],
             "note": "单模态/专用数据类型：输入 文本；输出 文本"
-          }
+          },
+          "rank": 4
         },
         {
           "rank": 5,
           "name": "GPT-5.2 Codex (EasyRouter)",
-          "modelId": "gpt-5.2-codex",
+          "modelId": "gpt-5.2-codex-easyrouter",
           "platform": "easyrouter",
           "score": 91,
           "tag": "Codex 升级版",
@@ -1887,13 +1889,12 @@
           }
         },
         {
-          "rank": 8,
-          "name": "GLM-Z1-32B-0414",
-          "modelId": "THUDM/GLM-Z1-32B-0414",
+          "name": "GLM-5.1",
+          "modelId": "zai-org/GLM-5.1",
           "platform": "siliconflow",
-          "score": 84,
-          "tag": "推理+代码",
-          "why": "智谱推理版本，32B参数，代码和数学推理能力均衡",
+          "score": 85,
+          "tag": "中文Agent代码",
+          "why": "替代已下线的 GLM-Z1-32B；198K 上下文，中文 Agent、工具调用和工程问答场景稳定，适合作为智谱路线的可用版本",
           "modalities": {
             "multimodal": false,
             "input": [
@@ -1903,7 +1904,8 @@
               "text"
             ],
             "note": "单模态/专用数据类型：输入 文本；输出 文本"
-          }
+          },
+          "rank": 8
         }
       ]
     },
@@ -1934,69 +1936,69 @@
         },
         {
           "rank": 2,
-          "name": "Kimi-K2-Thinking",
-          "modelId": "moonshotai/Kimi-K2-Thinking",
-          "platform": "siliconflow",
-          "score": 92,
-          "tag": "中文推理强",
-          "why": "Moonshot推理版本，中文数学和逻辑推理表现出色，256K上下文",
-          "modalities": {
-            "multimodal": false,
-            "input": [
-              "text"
-            ],
-            "output": [
-              "text"
-            ],
-            "note": "单模态/专用数据类型：输入 文本；输出 文本"
-          }
-        },
-        {
-          "rank": 3,
-          "name": "GLM-Z1-32B-0414",
-          "modelId": "THUDM/GLM-Z1-32B-0414",
-          "platform": "siliconflow",
-          "score": 89,
-          "tag": "32B推理",
-          "why": "智谱Z1推理系列，32B参数，推理和数学能力均衡，价格适中",
-          "modalities": {
-            "multimodal": false,
-            "input": [
-              "text"
-            ],
-            "output": [
-              "text"
-            ],
-            "note": "单模态/专用数据类型：输入 文本；输出 文本"
-          }
-        },
-        {
-          "rank": 4,
-          "name": "Qwen2.5-Math-72B",
-          "modelId": "Qwen/Qwen2.5-Math-72B",
-          "platform": "siliconflow",
-          "score": 88,
-          "tag": "数学专用",
-          "why": "阿里巴巴专用数学模型，72B参数，数学竞赛题表现出色",
-          "modalities": {
-            "multimodal": false,
-            "input": [
-              "text"
-            ],
-            "output": [
-              "text"
-            ],
-            "note": "单模态/专用数据类型：输入 文本；输出 文本"
-          }
-        },
-        {
-          "rank": 5,
           "name": "Claude Opus 4.7",
           "modelId": "claude-opus-4-7",
           "platform": "poyo",
           "score": 90,
           "tag": "推理顶级但贵",
           "why": "Claude推理能力全球顶级，但价格极贵（¥28/¥140 per 1M），性价比不如DeepSeek-R1",
+          "modalities": {
+            "multimodal": false,
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ],
+            "note": "单模态/专用数据类型：输入 文本；输出 文本"
+          }
+        },
+        {
+          "name": "Kimi-K2.6",
+          "modelId": "moonshotai/Kimi-K2.6",
+          "platform": "siliconflow",
+          "score": 90,
+          "tag": "Kimi替代版本",
+          "why": "替代已下线的 Kimi-K2-Thinking；256K 长上下文，中文推理、长文分析和复杂问答能力稳定，适合 Moonshot 路线延续",
+          "modalities": {
+            "multimodal": false,
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ],
+            "note": "单模态/专用数据类型：输入 文本；输出 文本"
+          },
+          "rank": 3
+        },
+        {
+          "name": "GLM-5.1",
+          "modelId": "zai-org/GLM-5.1",
+          "platform": "siliconflow",
+          "score": 89,
+          "tag": "智谱替代版本",
+          "why": "替代已下线的 GLM-Z1-32B；198K 上下文，适合中文逻辑分析、Agent 推理和工具调用场景",
+          "modalities": {
+            "multimodal": false,
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ],
+            "note": "单模态/专用数据类型：输入 文本；输出 文本"
+          },
+          "rank": 4
+        },
+        {
+          "rank": 5,
+          "name": "Qwen2.5-Math-72B",
+          "modelId": "Qwen/Qwen2.5-Math-72B",
+          "platform": "siliconflow",
+          "score": 88,
+          "tag": "数学专用",
+          "why": "阿里巴巴专用数学模型，72B参数，数学竞赛题表现出色",
           "modalities": {
             "multimodal": false,
             "input": [
@@ -2334,7 +2336,7 @@
         {
           "rank": 2,
           "name": "MiniMax Music 2.6",
-          "modelId": "minimax-music-2-6",
+          "modelId": "minimax-music-2.6",
           "platform": "poyo",
           "score": 86,
           "tag": "中文音乐",
@@ -2348,7 +2350,8 @@
               "audio"
             ],
             "note": "多模态：输入 文本；输出 音频"
-          }
+          },
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/minimax-music-2.6"
         },
         {
           "rank": 3,
@@ -2585,25 +2588,6 @@
         },
         {
           "rank": 5,
-          "name": "bce-embedding-base_v1",
-          "modelId": "netease-youdao/bce-embedding-base_v1",
-          "platform": "siliconflow",
-          "score": 84,
-          "tag": "网易有道",
-          "why": "网易有道嵌入模型，中文场景优化",
-          "modalities": {
-            "multimodal": false,
-            "input": [
-              "text"
-            ],
-            "output": [
-              "embedding"
-            ],
-            "note": "单模态/专用数据类型：输入 文本；输出 向量"
-          }
-        },
-        {
-          "rank": 6,
           "name": "bge-large-zh-v1.5",
           "modelId": "BAAI/bge-large-zh-v1.5",
           "platform": "siliconflow",
@@ -2822,7 +2806,7 @@
         {
           "rank": 1,
           "name": "Vocal Remover",
-          "modelId": "vocal-remover",
+          "modelId": "vocal-remover-api",
           "platform": "poyo",
           "score": 90,
           "tag": "人声分离",

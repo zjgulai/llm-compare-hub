@@ -41,7 +41,9 @@
           },
           "notes": "EasyRouter 独有 Codex 专用代码模型，代码补全和生成针对性优化。",
           "output": "代码生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "gpt-5.2-codex-easyrouter",
@@ -61,7 +63,9 @@
           },
           "notes": "GPT-5.2 Codex，代码理解和多语言支持更强。",
           "output": "代码生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "gpt-5.3-codex-easyrouter",
@@ -81,7 +85,9 @@
           },
           "notes": "GPT-5.3 Codex，最新代码生成模型。",
           "output": "代码生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "gpt-5.5-easyrouter",
@@ -102,7 +108,9 @@
           },
           "notes": "OpenAI 最新旗舰，通过 EasyRouter 享折扣。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "gpt-5.4-easyrouter",
@@ -122,7 +130,9 @@
           },
           "notes": "GPT-5.4，平衡性能与成本。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "gpt-5.4-mini-easyrouter",
@@ -142,7 +152,9 @@
           },
           "notes": "GPT-5.4 Mini，低成本版本。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "gpt-5.4-nano-easyrouter",
@@ -162,7 +174,9 @@
           },
           "notes": "GPT-5.4 Nano，最经济的选择。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "gpt-5.2-easyrouter",
@@ -181,7 +195,9 @@
           },
           "notes": "GPT-5.2，上代旗舰级。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "claude-haiku-4.5-easyrouter",
@@ -201,7 +217,9 @@
           },
           "notes": "Claude Haiku 4.5，轻量快速可通过 EasyRouter 调用。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "claude-opus-4.6-easyrouter",
@@ -222,7 +240,9 @@
           },
           "notes": "Claude Opus 4.6，顶级推理和代码能力。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "claude-opus-4.7-easyrouter",
@@ -243,7 +263,9 @@
           },
           "notes": "Claude Opus 4.7 最新旗舰，通过 EasyRouter 路由。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "claude-sonnet-4.6-easyrouter",
@@ -263,7 +285,33 @@
           },
           "notes": "Claude Sonnet 4.6，平衡速度与质量。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
+        },
+        {
+          "modelId": "deepseek-ai/DeepSeek-V4-Pro-easyrouter",
+          "name": "DeepSeek-V4-Pro (EasyRouter)",
+          "vendor": "DeepSeek",
+          "capabilities": [
+            "对话",
+            "推理",
+            "长上下文"
+          ],
+          "variants": [
+            "deepseek-ai/DeepSeek-V4-Pro-easyrouter"
+          ],
+          "context": "1024K",
+          "pricing": "享 25% 折扣",
+          "input": {
+            "prompt": "string | 用户输入",
+            "system": "string | 系统提示"
+          },
+          "notes": "DeepSeek-V4-Pro 1024K 上下文通过 EasyRouter 路由，适合高质量推理、复杂分析和代码任务。",
+          "output": "文本生成",
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "deepseek-ai/DeepSeek-V4-Flash-easyrouter",
@@ -283,7 +331,9 @@
           },
           "notes": "DeepSeek-V4-Flash 1024K 上下文通过 EasyRouter 路由。",
           "output": "文本生成",
-          "docsUrl": ""
+          "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
+          "verifiedAt": "2026-06-12"
         }
       ]
     }

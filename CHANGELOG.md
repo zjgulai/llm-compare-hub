@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-06-12 — Data refresh safety fixes
+
+### Fixed
+- Repaired PoYo docs URLs for MiniMax Music 2.6 and AI Video Upscaler fallback.
+- Added docs URLs for all BAI and EasyRouter model entries.
+- Fixed compare-data modelId references so all compare entries with modelId resolve to platform data.
+- Added DeepSeek-V4-Pro to EasyRouter platform data to match existing compare recommendations.
+- Replaced or removed discontinued models from code, reasoning, and RAG function rankings.
+
+### Data Governance
+- Marked confirmed SiliconFlow discontinued models with `deprecated`, `availability`, `deprecatedAt`, and `replacementModelId`.
+- Added optional `python3 scripts/validate.py --check-urls` docsUrl HTTP validation.
+- `make validate` now warns when deprecated models remain in compare rankings.
+- Function rankings now avoid recommending models already marked as discontinued in platform data.
+
 ## 2026-06-12 — Compare page multimodal/data-type visibility
 
 ### Added

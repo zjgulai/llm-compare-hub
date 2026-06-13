@@ -894,10 +894,13 @@
             "scale": "int | 放大倍数（1-8，默认2）",
             "callback_url": "string | 回调通知URL（可选）"
           },
-          "notes": "按输出分辨率计费; 支持1x-8x放大; 比fal便宜37.5%",
+          "notes": "按输出分辨率计费; 支持1x-8x放大; 比fal便宜37.5% Docs URL fallback: specific video-upscaler page returned 404 on 2026-06-12; using PoYo API overview pending provider-specific page confirmation.",
           "pricing": "$0.0005/输出MP (0.1 credits/MP) | -37.5% vs fal",
           "output": "Upscaled Video (MP4)",
-          "docsUrl": "https://docs.poyo.ai/api-manual/video-series/video-upscaler"
+          "docsUrl": "https://docs.poyo.ai/api-manual/overview",
+          "docsUrlNeedsReview": true,
+          "sourceUrl": "https://docs.poyo.ai/api-manual/overview",
+          "verifiedAt": "2026-06-12"
         },
         {
           "modelId": "happy-horse",
@@ -1363,21 +1366,23 @@
           "docsUrl": "https://docs.poyo.ai/api-manual/music-series/create-music-video"
         },
         {
-          "modelId": "minimax-music-2-6",
+          "modelId": "minimax-music-2.6",
           "name": "MiniMax Music 2.6",
           "vendor": "MiniMax",
           "capabilities": [
             "Music"
           ],
           "variants": [
-            "minimax-music-2-6"
+            "minimax-music-2.6"
           ],
           "input": {
             "prompt": "string"
           },
           "pricing": "$0.10/次",
           "output": "Audio",
-          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/minimax-music-2-6"
+          "docsUrl": "https://docs.poyo.ai/api-manual/music-series/minimax-music-2.6",
+          "sourceUrl": "https://docs.poyo.ai/api-manual/music-series/minimax-music-2.6",
+          "verifiedAt": "2026-06-12"
         }
       ]
     },
