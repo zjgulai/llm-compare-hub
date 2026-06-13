@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type KeyboardEvent } from 'react';
 import type { CompareData, CompareDataType, CompareModel, CompareModalities } from '../types';
 import { fetchCompareData, getPlatformMeta } from '../data';
 
@@ -21,6 +21,8 @@ const modeTabs: Array<{ id: CompareMode; label: string }> = [
   { id: 'category', label: '按类别对比' },
   { id: 'function', label: '按功能排序' },
 ];
+
+const toDomId = (value: string) => value.replace(/[^a-zA-Z0-9_-]+/g, '-').replace(/^-|-$/g, '') || 'model';
 
 const formatTypes = (values: string[] = []) =>
   values.map((value) => dataTypeLabels[value as CompareDataType] ?? value).join(' + ') || '—';
@@ -97,14 +99,15 @@ const ModelRow = ({ model, rankFallback }: { model: CompareModel; rankFallback?:
   const rank = model.rank ?? rankFallback ?? 0;
   const description = model.why ?? model.bestFor;
   const price = model.priceNote ?? model.pricing;
+  const headingId = `compare-card-${toDomId(`${rank}-${model.name}`)}`;
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4">
+    <div role="article" data-model-card="true" aria-labelledby={headingId} className="rounded-lg border border-slate-200 bg-white p-4">
       <div className="flex items-start gap-3">
         <RankBadge rank={rank} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <h4 className="text-base font-semibold text-slate-950">{model.name}</h4>
+            <h4 id={headingId} className="text-base font-semibold text-slate-950">{model.name}</h4>
             <PlatformBadge platformId={model.platform} />
             {model.tag && (
               <span className="rounded border border-rose-200 bg-rose-50 px-2 py-0.5 text-xs font-medium text-rose-700">
@@ -131,6 +134,21 @@ export const CompareView = () => {
   const [data, setData] = useState<CompareData | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeMode, setActiveMode] = useState<CompareMode>('overall');
+
+  const handleModeKeyDown = (event: KeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
+    const lastIndex = modeTabs.length - 1;
+    let nextIndex = currentIndex;
+
+    if (event.key === 'ArrowRight') nextIndex = currentIndex === lastIndex ? 0 : currentIndex + 1;
+    else if (event.key === 'ArrowLeft') nextIndex = currentIndex === 0 ? lastIndex : currentIndex - 1;
+    else if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = lastIndex;
+    else return;
+
+    event.preventDefault();
+    setActiveMode(modeTabs[nextIndex].id);
+    document.getElementById(`compare-tab-${modeTabs[nextIndex].id}`)?.focus();
+  };
 
   useEffect(() => {
     const loadData = async () => {
@@ -183,11 +201,19 @@ export const CompareView = () => {
             <p className="text-sm leading-relaxed text-emerald-800">{data.methodology.valueScoring}</p>
           </div>
         </div>
-        <div className="mt-4 flex gap-1 overflow-x-auto rounded-lg border border-slate-200 bg-slate-100 p-1">
-          {modeTabs.map((tab) => (
+        <div aria-label="对比模式" role="tablist" className="mt-4 flex gap-1 overflow-x-auto rounded-lg border border-slate-200 bg-slate-100 p-1">
+          {modeTabs.map((tab, index) => (
             <button
+              id={`compare-tab-${tab.id}`}
               key={tab.id}
+              type="button"
+              role="tab"
+              data-compare-tab="true"
+              aria-selected={activeMode === tab.id}
+              aria-controls={`compare-panel-${tab.id}`}
+              tabIndex={activeMode === tab.id ? 0 : -1}
               onClick={() => setActiveMode(tab.id)}
+              onKeyDown={(event) => handleModeKeyDown(event, index)}
               className={`min-w-32 flex-1 whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                 activeMode === tab.id
                   ? 'bg-white text-rose-700 shadow-sm'
@@ -201,7 +227,7 @@ export const CompareView = () => {
       </section>
 
       {activeMode === 'overall' && (
-        <section className="space-y-3">
+        <section id="compare-panel-overall" role="tabpanel" aria-labelledby="compare-tab-overall" className="space-y-3">
           <div className="rounded-lg border border-slate-200 bg-white p-5">
             <h3 className="text-base font-semibold text-slate-950">综合 TOP {overallRanking.length}</h3>
             <p className="mt-1 text-sm text-slate-500">跨平台综合排序，适合先快速缩小候选模型范围。</p>
@@ -215,7 +241,7 @@ export const CompareView = () => {
       )}
 
       {activeMode === 'category' && (
-        <section className="space-y-4">
+        <section id="compare-panel-category" role="tabpanel" aria-labelledby="compare-tab-category" className="space-y-4">
           <div className="rounded-lg border border-slate-200 bg-white p-5">
             <h3 className="text-base font-semibold text-slate-950">按类别对比</h3>
             <p className="mt-1 text-sm text-slate-500">同一模型可能在多个类别上榜，建议结合价格、上下文和输入/输出类型一起看。</p>
@@ -242,7 +268,7 @@ export const CompareView = () => {
       )}
 
       {activeMode === 'function' && (
-        <section className="space-y-4">
+        <section id="compare-panel-function" role="tabpanel" aria-labelledby="compare-tab-function" className="space-y-4">
           <div className="rounded-lg border border-slate-200 bg-white p-5">
             <h3 className="text-base font-semibold text-slate-950">按功能排序</h3>
             <p className="mt-1 text-sm text-slate-500">按业务场景筛选候选模型，适合从“我要完成什么任务”倒推选型。</p>

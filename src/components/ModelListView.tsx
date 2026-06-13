@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import type { Category, ModelVariant, PlatformData } from '../types';
 import { fetchPlatformData, PLATFORMS, getVendorColor } from '../data';
 
+const toDomId = (value: string) => value.replace(/[^a-zA-Z0-9_-]+/g, '-').replace(/^-|-$/g, '') || 'model';
+
 const buildCurlExample = (data: PlatformData, category: Category, model: ModelVariant) => {
   if (model.curlExample) return model.curlExample;
 
@@ -145,11 +147,19 @@ export const ModelListView = () => {
           <p className="mb-6 text-slate-600">{category.description}</p>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {category.models.map((model) => (
-              <div key={model.modelId} className="flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md">
+            {category.models.map((model) => {
+              const headingId = `model-card-${toDomId(category.id)}-${toDomId(model.modelId)}`;
+              return (
+              <div
+                key={model.modelId}
+                role="article"
+                data-model-card="true"
+                aria-labelledby={headingId}
+                className="flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md"
+              >
                 <div className="p-5 flex-grow">
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="truncate pr-2 text-lg font-bold text-slate-950" title={model.name}>{model.name}</h3>
+                    <h3 id={headingId} className="truncate pr-2 text-lg font-bold text-slate-950" title={model.name}>{model.name}</h3>
                     <span className={`px-2 py-1 rounded text-xs font-medium whitespace-nowrap ${getVendorColor(model.vendor)}`}>
                       {model.vendor}
                     </span>
@@ -194,7 +204,7 @@ export const ModelListView = () => {
                     href={model.docsUrl || data.docsUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-sm font-medium text-rose-700 hover:text-rose-900"
+                    className="flex min-h-8 items-center gap-1 text-sm font-medium text-rose-700 hover:text-rose-900"
                   >
                     <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                     文档
@@ -212,7 +222,8 @@ export const ModelListView = () => {
                   </button>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       ))}

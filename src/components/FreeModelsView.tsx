@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import type { FreeModelsData } from '../types';
 import { fetchFreeModelsData } from '../data';
 
+const toDomId = (value: string) => value.replace(/[^a-zA-Z0-9_-]+/g, '-').replace(/^-|-$/g, '') || 'model';
+
 export const FreeModelsView = () => {
   const [data, setData] = useState<FreeModelsData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -39,8 +41,16 @@ export const FreeModelsView = () => {
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-        {data.models.map((model) => (
-          <div key={model.modelId} className="flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+        {data.models.map((model) => {
+          const headingId = `free-model-card-${toDomId(model.modelId)}`;
+          return (
+          <div
+            key={model.modelId}
+            role="article"
+            data-model-card="true"
+            aria-labelledby={headingId}
+            className="flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm"
+          >
             <div className="p-6 flex-grow">
               <div className="flex justify-between items-start mb-4">
                 <div>
@@ -48,7 +58,7 @@ export const FreeModelsView = () => {
                     <span className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white">
                       {model.rank}
                     </span>
-                    <h3 className="text-2xl font-bold text-slate-950">{model.name}</h3>
+                    <h3 id={headingId} className="text-2xl font-bold text-slate-950">{model.name}</h3>
                   </div>
                   <div className="ml-10 font-mono text-sm text-slate-500">{model.baseModel}</div>
                 </div>
@@ -120,7 +130,8 @@ export const FreeModelsView = () => {
               )}
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

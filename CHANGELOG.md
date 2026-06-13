@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-06-13 — Accessibility smoke gate and semantic UI hardening
+
+### Added
+- `scripts/ui_smoke_check.mjs` 新增可访问性审计：landmark、主导航 tablist、对比模式 tablist、tabpanel 关联、可访问名称、颜色对比度、移动端触控目标和模型卡片扫描性。
+- UI smoke 新增键盘路径检查：主导航支持 `Tab`、左右方向键切换；对比页三种模式支持方向键和 `Home` 返回首项。
+
+### Changed
+- 主导航和对比页模式切换改为显式 `tablist` / `tab` / `tabpanel` 语义，并同步 `aria-selected`、`aria-controls`、`aria-labelledby`。
+- 模型列表、对比排序和免费本地模型的模型卡片改为可扫描的 `article`，并由卡片标题提供可访问名称。
+- 移动端模型卡片“文档”链接增加最小触控高度，避免 390px 视口下触控目标过小。
+
+### Verified
+- 本地 `make smoke-ui` 通过，覆盖桌面、390px 移动、核心视图 a11y、键盘路径和视觉 diff。
+- Browser 本地 release 快照确认主导航、对比模式和模型卡片均暴露为正确语义结构。
+
 ## 2026-06-13 — Threshold visual diff baselines
 
 ### Added

@@ -26,7 +26,7 @@
 4. **构建事实**：Vite 输出目录已固定到 `dist/`，Tailwind v4 通过 `@tailwindcss/vite` 编译 utilities，构建不会覆盖仓库根入口。
 5. **文档事实**：README、CHANGELOG 和本审计已更新最新状态；历史 `.sisyphus` 计划仅作为归档参考。
 
-这些 P0 发布风险已通过 release-only 链路、源码 UI 复核、构建工具链修复、CI UI smoke 门禁和阈值化视觉 diff 降级；当前主要剩余风险转为凭据轮换、可访问性深度门禁和持续数据时效复核。
+这些 P0 发布风险已通过 release-only 链路、源码 UI 复核、构建工具链修复、CI UI smoke 门禁、阈值化视觉 diff 和核心视图 a11y 门禁降级；当前主要剩余风险转为凭据轮换、更多页面/断点的可访问性扩展和持续数据时效复核。
 
 ## 2. 债务清单
 
@@ -34,17 +34,17 @@
 | --- | --- | --- | --- | --- |
 | D-01 | 脆弱点债务 | 已缓解/P1 | 生产曾公开发布 `README.md`、`AUDIT.md`、`Makefile`、`scripts/*.py`、`src/*.tsx`、`.github/workflows/deploy.yml`、`.essence-cache/*.json` 等开发材料；当前 release-only 部署和 nginx deny 已阻断 | 后续需防止部署边界回退 |
 | D-02 | 工程债务 | 已缓解/P2 | `release/` 现在由 `dist/` 构建生成；根入口与根 assets 仅作 legacy fallback | 后续风险转为 legacy fallback 维护成本 |
-| D-03 | 技术债务 | 已缓解/P2 | `src/` 已可 typecheck/build，并完成中文 UI 与对比页模式复核 | 仍缺自动化视觉回归和可访问性门禁 |
+| D-03 | 技术债务 | 已缓解/P2 | `src/` 已可 typecheck/build，并完成中文 UI、对比页模式、视觉 diff 与核心视图 a11y 门禁 | 后续需扩展到更多页面和移动断点 |
 | D-04 | 工程债务 | 已缓解/P2 | Vite `outDir` 已改为 `dist/`，不会覆盖仓库根目录 | 仍需保持 release-only 发布边界 |
 | D-05 | 脆弱点债务 | P0 | 本地曾在 git remote URL 中嵌入 GitHub token；生产共享 nginx 配置中存在硬编码 API key；工作区保留 SSH 私钥 | 凭据泄露后可导致仓库或服务被控；已清理 remote，但仍需轮换凭据 |
 | D-06 | 工程债务 | 已缓解/P2 | 腾讯云部署已改为 `release/` + `rsync --delete` | 后续需保持备份与回滚演练 |
 | D-07 | 项目管理债务 | 已缓解/P2 | GitHub Pages 已定位为镜像发布目标，主 canonical 是腾讯云 | 仍需关注镜像发布延迟和失败告警 |
-| D-08 | 工程债务 | P2 | CI 已跑数据校验、provenance、typecheck、build、asset release；仍缺 secret scan、视觉回归和可访问性检查 | UI/安全回归仍依赖人工复核 |
+| D-08 | 工程债务 | P2 | CI 已跑数据校验、provenance、typecheck、build、asset release、UI smoke、视觉 diff 与核心 a11y 检查；仍缺 secret scan | 安全凭据与 secret 泄漏回归仍依赖人工复核 |
 | D-09 | 技术债务 | P1 | 数据 fetch 使用绝对根路径 `/xxx-data.json` | 自有根域可用，GitHub Pages 子路径部署存在环境耦合风险 |
 | D-10 | 文档债务 | 已缓解/P2 | README/CHANGELOG/AUDIT 已更新 release-first 与源码 UI 最新状态；历史计划仍作为归档存在 | 后续需要维护“以当前 README/AUDIT 为准”的约束 |
 | D-11 | 文档债务 | P1 | `robots.txt` 指向 GitHub Pages sitemap；`sitemap.xml` 未覆盖 `claude`/`codex` 页面 | 已通过 Phase 3 缓解；后续需随新增页面维护 sitemap |
 | D-12 | 技术债务 | P2 | `scripts/validate.py` 已增强为轻量 schema 校验器；BAI/EasyRouter/PoYo/SiliconFlow 已补齐 provenance 字段 | 数据质量已从人工检查转向 CI 门禁；后续风险集中在 provenance 时效复核、价格漂移与来源页语义变化 |
-| D-13 | 工程债务 | 已缓解/P2 | `make smoke-ui` 已接入 GitHub Pages workflow，并对桌面/移动截图执行阈值化视觉 diff；`make smoke-ui-production` 可做生产冒烟 | 高风险 UI 回归已有 CI/本地/生产命令兜底，深度 a11y 仍需后续治理 |
+| D-13 | 工程债务 | 已缓解/P2 | `make smoke-ui` 已接入 GitHub Pages workflow，并对桌面/移动截图执行阈值化视觉 diff 和核心 a11y 门禁；`make smoke-ui-production` 可做生产冒烟 | 高风险 UI 回归已有 CI/本地/生产命令兜底 |
 | D-14 | 脆弱点债务 | P2 | nginx 是多应用共享入口，单配置文件承载多个业务 | 任一 vhost 配置错误可能影响全站入口 |
 
 ## 3. 治理路线
@@ -426,7 +426,7 @@ sitemap.xml
 后续债务：
 
 1. 当前截图是冒烟产物而非像素基线；后续可增加阈值化视觉 diff。
-2. 当前 a11y 检查覆盖命名和布局溢出；后续可增加颜色对比度和键盘路径检查。
+2. 当前基础 a11y 检查已在 Phase 15 扩展为核心视图门禁；后续可继续覆盖 Claude/Codex 精粹页和更多移动断点。
 
 ## 13. GitHub Pages UI smoke 门禁记录
 
@@ -478,3 +478,38 @@ sitemap.xml
 
 1. 当前视觉基线只覆盖首页首屏；后续可扩展到对比页三模式和免费模型页。
 2. 当前差异阈值偏向“阻止大面积回归”；如需精细审美回归，可引入更严格的分区阈值。
+
+## 15. 核心视图可访问性门禁记录
+
+> 执行时间：2026-06-13
+
+已完成：
+
+1. `scripts/ui_smoke_check.mjs` 新增核心 a11y 审计，覆盖：
+   - `html lang`、`header`、`main`、`footer` landmark；
+   - 主导航 `tablist` / `tab` / `tabpanel` 语义；
+   - 对比页三种模式的独立 `tablist` / `tab` / `tabpanel` 语义；
+   - 按钮、链接、输入框可访问名称；
+   - 颜色对比度阈值；
+   - 390px 移动视口下可交互元素最小触控目标；
+   - 模型数据卡片的 `article` 与标题关联。
+2. `src/App.tsx` 主导航补充 `aria-label="主导航"`、`role="tablist"`、`aria-selected`、`aria-controls`、`tabpanel` 关联，并支持左右方向键、`Home`、`End`。
+3. `src/components/CompareView.tsx` 对比页模式切换补充 `aria-label="对比模式"`、`data-compare-tab`、`role="tab"`、`tabpanel` 关联，并支持方向键。
+4. 模型列表、对比榜单和免费本地模型卡片均改为 `role="article"`，通过标题 `id` 与 `aria-labelledby` 建立可扫描结构。
+5. 移动端模型卡片“文档”链接增加 `min-h-8`，修复 390px 视口下约 20px 高度的触控目标问题。
+
+验证通过：
+
+| 检查项 | 结果 |
+| --- | --- |
+| 红灯验证 1 | 新 a11y 门禁先失败于主导航缺少 tab 语义 |
+| 红灯验证 2 | 对比页模式控件先失败于缺少 `aria-label="对比模式"` 与 tab 语义 |
+| 红灯验证 3 | 模型卡片先失败于缺少可扫描 `article` 结构 |
+| `make smoke-ui` | 通过，覆盖桌面、移动、核心视图 a11y、键盘路径和视觉 diff |
+| Browser 本地 release 快照 | 主导航为 `tablist`，对比模式为独立 `tablist`，模型卡片为 `article`，无横向溢出 |
+
+后续债务：
+
+1. 将 a11y 门禁扩展到 `/claude.html`、`/codex.html` 精粹页。
+2. 增加更多移动断点，例如 360px 和 768px。
+3. 如后续引入 axe-core 或 Lighthouse，可将当前轻量 DOM 门禁作为快速前置检查，重型审计作为定期任务。

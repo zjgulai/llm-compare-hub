@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type KeyboardEvent } from 'react';
 import { ModelListView } from './components/ModelListView';
 import { CompareView } from './components/CompareView';
 import { FreeModelsView } from './components/FreeModelsView';
@@ -13,6 +13,22 @@ function App() {
     { id: 'compare', label: '对比排序' },
     { id: 'free', label: '免费本地模型' },
   ];
+  const activeTabLabel = navItems.find((item) => item.id === activeTab)?.label ?? '模型列表';
+
+  const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
+    const lastIndex = navItems.length - 1;
+    let nextIndex = currentIndex;
+
+    if (event.key === 'ArrowRight') nextIndex = currentIndex === lastIndex ? 0 : currentIndex + 1;
+    else if (event.key === 'ArrowLeft') nextIndex = currentIndex === 0 ? lastIndex : currentIndex - 1;
+    else if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = lastIndex;
+    else return;
+
+    event.preventDefault();
+    setActiveTab(navItems[nextIndex].id);
+    document.getElementById(`main-tab-${navItems[nextIndex].id}`)?.focus();
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
@@ -31,11 +47,18 @@ function App() {
                 <p className="text-xs text-slate-500">大模型 API 选型、对比与本地模型参考</p>
               </div>
             </div>
-            <nav className="flex gap-1 overflow-x-auto rounded-lg border border-slate-200 bg-slate-100 p-1">
-              {navItems.map((item) => (
+            <nav aria-label="主导航" role="tablist" className="flex gap-1 overflow-x-auto rounded-lg border border-slate-200 bg-slate-100 p-1">
+              {navItems.map((item, index) => (
                 <button
+                  id={`main-tab-${item.id}`}
                   key={item.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === item.id}
+                  aria-controls={`main-panel-${item.id}`}
+                  tabIndex={activeTab === item.id ? 0 : -1}
                   onClick={() => setActiveTab(item.id)}
+                  onKeyDown={(event) => handleTabKeyDown(event, index)}
                   className={`whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                     activeTab === item.id
                       ? 'bg-white text-rose-700 shadow-sm'
@@ -50,7 +73,13 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main
+        id={`main-panel-${activeTab}`}
+        role="tabpanel"
+        aria-labelledby={`main-tab-${activeTab}`}
+        aria-label={activeTabLabel}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
+      >
         {activeTab === 'models' && <ModelListView />}
         {activeTab === 'compare' && <CompareView />}
         {activeTab === 'free' && <FreeModelsView />}

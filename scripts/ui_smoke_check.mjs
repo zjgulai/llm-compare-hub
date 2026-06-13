@@ -497,6 +497,37 @@ const clickButton = async (client, label) => {
   })()`);
 };
 
+const selectedTabLabel = async (client, selector) => {
+  const encoded = JSON.stringify(selector);
+  return evaluate(client, `(() => {
+    const root = document.querySelector(${encoded});
+    const selected = root?.querySelector("[role='tab'][aria-selected='true']");
+    return selected?.textContent?.trim() ?? "";
+  })()`);
+};
+
+const activeElementLabel = async (client) => evaluate(client, `(() => {
+  const element = document.activeElement;
+  return element?.textContent?.trim() || element?.getAttribute("aria-label") || element?.getAttribute("placeholder") || "";
+})()`);
+
+const pressKey = async (client, key) => {
+  const keyCodes = { Tab: 9, Enter: 13, Space: 32 };
+  const code = key === " " ? "Space" : key;
+  await client.send("Input.dispatchKeyEvent", {
+    type: "keyDown",
+    key,
+    code,
+    windowsVirtualKeyCode: keyCodes[key] ?? 0,
+  });
+  await client.send("Input.dispatchKeyEvent", {
+    type: "keyUp",
+    key,
+    code,
+    windowsVirtualKeyCode: keyCodes[key] ?? 0,
+  });
+};
+
 const pageState = async (client) => evaluate(client, `(() => {
   const text = document.body.innerText;
   const search = document.querySelector("input[type='text']");
@@ -520,6 +551,169 @@ const pageState = async (client) => evaluate(client, `(() => {
     styles: Array.from(document.querySelectorAll("link[rel='stylesheet']")).map((link) => link.href),
   };
 })()`);
+
+const accessibilityAudit = async (client, { mobile = false } = {}) => evaluate(client, `(() => {
+  const issues = [];
+  const visible = (element) => {
+    const style = window.getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+    return style.display !== "none" && style.visibility !== "hidden" && rect.width > 0 && rect.height > 0;
+  };
+  const nameOf = (element) => {
+    const labelledBy = element.getAttribute("aria-labelledby");
+    if (labelledBy) {
+      const text = labelledBy
+        .split(/\\s+/)
+        .map((id) => document.getElementById(id)?.textContent?.trim() ?? "")
+        .filter(Boolean)
+        .join(" ");
+      if (text) return text;
+    }
+    return (
+      element.getAttribute("aria-label") ||
+      element.textContent ||
+      element.getAttribute("title") ||
+      element.getAttribute("placeholder") ||
+      ""
+    ).trim();
+  };
+  const selectorName = (element) => {
+    const name = nameOf(element);
+    if (name) return name.slice(0, 40);
+    return element.id || element.className || element.tagName.toLowerCase();
+  };
+  const parseRgb = (value) => {
+    const match = value.match(/rgba?\\(([^)]+)\\)/);
+    if (!match) return null;
+    const [r, g, b, a = "1"] = match[1].split(",").map((part) => Number.parseFloat(part.trim()));
+    if (![r, g, b, a].every(Number.isFinite)) return null;
+    return { r, g, b, a };
+  };
+  const blendedBackground = (element) => {
+    let current = element;
+    while (current && current !== document.documentElement) {
+      const color = parseRgb(window.getComputedStyle(current).backgroundColor);
+      if (color && color.a > 0) return color;
+      current = current.parentElement;
+    }
+    return { r: 255, g: 255, b: 255, a: 1 };
+  };
+  const luminance = ({ r, g, b }) => {
+    const channel = (value) => {
+      const normalized = value / 255;
+      return normalized <= 0.03928 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+    };
+    return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
+  };
+  const contrastRatio = (fg, bg) => {
+    const light = Math.max(luminance(fg), luminance(bg));
+    const dark = Math.min(luminance(fg), luminance(bg));
+    return (light + 0.05) / (dark + 0.05);
+  };
+
+  if (document.documentElement.lang !== "zh-CN") issues.push("html lang should be zh-CN");
+  if (document.querySelectorAll("main").length !== 1) issues.push("page should expose exactly one main landmark");
+  if (!document.querySelector("header")) issues.push("page should expose a header landmark");
+  if (!document.querySelector("footer")) issues.push("page should expose a footer landmark");
+
+  const primaryNav = document.querySelector("nav[aria-label='主导航']");
+  if (!primaryNav) {
+    issues.push("primary navigation should have aria-label='主导航'");
+  } else if (primaryNav.getAttribute("role") !== "tablist") {
+    issues.push("primary navigation should use role='tablist'");
+  }
+
+  const tabs = primaryNav ? Array.from(primaryNav.querySelectorAll("[role='tab']")) : [];
+  if (tabs.length < 3) issues.push("primary views should expose at least three role='tab' controls");
+  const selectedTabs = tabs.filter((tab) => tab.getAttribute("aria-selected") === "true");
+  if (tabs.length && selectedTabs.length !== 1) issues.push("exactly one primary tab should be selected");
+  for (const tab of tabs) {
+    const controls = tab.getAttribute("aria-controls");
+    if (!controls) issues.push(\`tab "\${selectorName(tab)}" should declare aria-controls\`);
+  }
+  for (const tab of selectedTabs) {
+    const controls = tab.getAttribute("aria-controls");
+    if (!controls || !document.getElementById(controls)) issues.push(\`selected tab "\${selectorName(tab)}" should reference the active panel\`);
+  }
+
+  const panels = Array.from(document.querySelectorAll("main[role='tabpanel']"));
+  if (panels.length !== 1) issues.push("active view should expose exactly one role='tabpanel'");
+  for (const panel of panels) {
+    const labelledBy = panel.getAttribute("aria-labelledby");
+    if (!labelledBy || !document.getElementById(labelledBy)) issues.push("tabpanel should reference its selected tab");
+  }
+
+  const compareHeading = Array.from(document.querySelectorAll("h2, h3"))
+    .some((heading) => heading.textContent?.trim() === "模型对比排序");
+  if (compareHeading) {
+    const compareModes = document.querySelector("[aria-label='对比模式']");
+    if (!compareModes) {
+      issues.push("compare mode controls should have aria-label='对比模式'");
+    } else if (compareModes.getAttribute("role") !== "tablist") {
+      issues.push("compare mode controls should use role='tablist'");
+    }
+
+    const compareTabs = Array.from(document.querySelectorAll("[data-compare-tab='true']"));
+    if (compareTabs.length !== 3) issues.push("compare page should expose three accessible mode tabs");
+    const selectedCompareTabs = compareTabs.filter((tab) => tab.getAttribute("aria-selected") === "true");
+    if (compareTabs.length && selectedCompareTabs.length !== 1) issues.push("exactly one compare mode tab should be selected");
+    for (const tab of compareTabs) {
+      if (tab.getAttribute("role") !== "tab") issues.push(\`compare mode "\${selectorName(tab)}" should use role='tab'\`);
+      if (!tab.getAttribute("aria-controls")) issues.push(\`compare mode "\${selectorName(tab)}" should declare aria-controls\`);
+    }
+    for (const tab of selectedCompareTabs) {
+      const controls = tab.getAttribute("aria-controls");
+      if (!controls || !document.getElementById(controls)) issues.push(\`selected compare mode "\${selectorName(tab)}" should reference the active panel\`);
+    }
+  }
+
+  const interactives = Array.from(document.querySelectorAll("button, a[href], input, select, textarea, [role='button'], [role='tab']"))
+    .filter(visible);
+  for (const element of interactives) {
+    if (!nameOf(element)) issues.push(\`\${selectorName(element)} is missing an accessible name\`);
+    if (${mobile ? "true" : "false"}) {
+      const rect = element.getBoundingClientRect();
+      if (rect.width < 32 || rect.height < 32) {
+        issues.push(\`\${selectorName(element)} touch target is too small: \${Math.round(rect.width)}x\${Math.round(rect.height)}\`);
+      }
+    }
+  }
+
+  const textNodes = Array.from(document.querySelectorAll("body *"))
+    .filter((element) => visible(element) && nameOf(element) && window.getComputedStyle(element).fontSize);
+  for (const element of textNodes) {
+    const style = window.getComputedStyle(element);
+    const fontSize = Number.parseFloat(style.fontSize);
+    if (!Number.isFinite(fontSize) || fontSize < 12) continue;
+    const foreground = parseRgb(style.color);
+    const background = blendedBackground(element);
+    if (!foreground || !background) continue;
+    const ratio = contrastRatio(foreground, background);
+    const threshold = fontSize >= 18 || style.fontWeight >= 700 ? 3 : 4.5;
+    if (ratio < threshold) {
+      issues.push(\`low contrast \${ratio.toFixed(2)} for "\${selectorName(element)}"\`);
+    }
+  }
+
+  const requiresModelCards = ["调用概览", "综合 TOP", "免费大模型"].some((marker) => document.body.innerText.includes(marker));
+  const dataCards = Array.from(document.querySelectorAll("[data-model-card='true']")).filter(visible);
+  if (requiresModelCards && dataCards.length === 0) issues.push("model data views should expose scannable model cards");
+  for (const card of dataCards) {
+    if (card.getAttribute("role") !== "article") issues.push("model data card should use role='article'");
+    const heading = card.querySelector("h3[id], h4[id]");
+    if (!heading) issues.push("model data card should include an id-backed heading");
+    if (heading && card.getAttribute("aria-labelledby") !== heading.id) {
+      issues.push(\`model data card "\${selectorName(heading)}" should be labelled by its heading\`);
+    }
+  }
+
+  return { issues };
+})()`);
+
+const assertAccessibilityAudit = async (client, options) => {
+  const { issues } = await accessibilityAudit(client, options);
+  assert(issues.length === 0, `Accessibility audit failed:\n${issues.join("\n")}`);
+};
 
 const captureScreenshot = async (client, filename) => {
   const screenshot = await client.send("Page.captureScreenshot", { format: "png", fromSurface: true }, 10000);
@@ -598,6 +792,43 @@ const handleVisualBaselines = async (options) => {
   }
 };
 
+const assertPrimaryKeyboardNavigation = async (client) => {
+  await evaluate(client, "document.body.focus()");
+  await pressKey(client, "Tab");
+  assert(await activeElementLabel(client) === "模型列表", "Tab should focus the selected primary tab first");
+
+  await pressKey(client, "ArrowRight");
+  await waitForText(client, "模型对比排序");
+  assert(await selectedTabLabel(client, "nav[aria-label='主导航']") === "对比排序", "ArrowRight should select the next primary tab");
+  assert(await activeElementLabel(client) === "对比排序", "ArrowRight should keep focus on the selected primary tab");
+
+  await pressKey(client, "ArrowRight");
+  await waitForText(client, "免费大模型");
+  assert(await selectedTabLabel(client, "nav[aria-label='主导航']") === "免费本地模型", "ArrowRight should wrap through primary tabs");
+
+  await pressKey(client, "ArrowLeft");
+  await waitForText(client, "模型对比排序");
+  assert(await selectedTabLabel(client, "nav[aria-label='主导航']") === "对比排序", "ArrowLeft should select the previous primary tab");
+
+  await clickButton(client, "模型列表");
+  await waitForText(client, "调用概览 - 硅基流动");
+};
+
+const assertCompareModeKeyboardNavigation = async (client) => {
+  await evaluate(client, "document.getElementById('compare-tab-overall')?.focus()");
+  await pressKey(client, "ArrowRight");
+  await waitForText(client, "胜出方：");
+  assert(await selectedTabLabel(client, "[aria-label='对比模式']") === "按类别对比", "ArrowRight should select the next compare mode");
+
+  await pressKey(client, "ArrowRight");
+  await waitForText(client, "按业务场景筛选");
+  assert(await selectedTabLabel(client, "[aria-label='对比模式']") === "按功能排序", "ArrowRight should advance compare modes");
+
+  await pressKey(client, "Home");
+  await waitForText(client, "综合 TOP");
+  assert(await selectedTabLabel(client, "[aria-label='对比模式']") === "综合 TOP", "Home should return to the first compare mode");
+};
+
 const expectedAssets = async () => {
   const index = await readFile(path.join(RELEASE_DIR, "index.html"), "utf8");
   return Array.from(index.matchAll(/(?:src|href)="\.\/(assets\/[^"]+)"/g), (match) => match[1]).sort();
@@ -638,6 +869,8 @@ const runDesktopChecks = async (client, baseUrl) => {
   assert(initial.unnamedButtons === 0, `${initial.unnamedButtons} button(s) are missing accessible names`);
   assert(initial.unlabeledInputs === 0, `${initial.unlabeledInputs} input(s) are missing labels/placeholders`);
   await assertPageAssets(client, baseUrl);
+  await assertAccessibilityAudit(client, { mobile: false });
+  await assertPrimaryKeyboardNavigation(client);
 
   await clickButton(client, "PoYo.ai");
   await waitForText(client, "调用概览 - PoYo.ai");
@@ -651,21 +884,26 @@ const runDesktopChecks = async (client, baseUrl) => {
   assert(compareTop.text.includes("综合 TOP") && compareTop.text.includes("按类别对比") && compareTop.text.includes("按功能排序"), "Compare modes should be visible");
   assert(compareTop.text.includes("输入：") && compareTop.text.includes("输出："), "Overall compare mode should show input/output types");
   assert(compareTop.text.includes("支持多模态") || compareTop.text.includes("单模态/专用数据"), "Overall compare mode should show modality support");
+  await assertAccessibilityAudit(client, { mobile: false });
+  await assertCompareModeKeyboardNavigation(client);
 
   await clickButton(client, "按类别对比");
   await waitForText(client, "胜出方：");
   const category = await pageState(client);
   assert(category.text.includes("输入：") && category.text.includes("输出："), "Category compare mode should show input/output types");
+  await assertAccessibilityAudit(client, { mobile: false });
 
   await clickButton(client, "按功能排序");
   await waitForText(client, "按业务场景筛选");
   const functionMode = await pageState(client);
   assert(functionMode.text.includes("长文本") && functionMode.text.includes("输入：") && functionMode.text.includes("输出："), "Function compare mode should show scene and input/output types");
+  await assertAccessibilityAudit(client, { mobile: false });
 
   await clickButton(client, "免费本地模型");
   await waitForText(client, "免费大模型");
   const freeModels = await pageState(client);
   assert(freeModels.text.includes("# 安装") && freeModels.text.includes("# 使用示例"), "Free model cards should show install and usage commands");
+  await assertAccessibilityAudit(client, { mobile: false });
 };
 
 const runMobileChecks = async (client, baseUrl) => {
@@ -683,6 +921,7 @@ const runMobileChecks = async (client, baseUrl) => {
   assert(state.text.includes("大模型 API 选型、对比与本地模型参考"), "Mobile subtitle should be visible");
   assert(state.scrollWidth <= state.viewportWidth + 1, `Mobile layout overflows horizontally: ${state.scrollWidth} > ${state.viewportWidth}`);
   assert(state.text.includes("模型列表") && state.text.includes("对比排序") && state.text.includes("免费本地模型"), "Mobile nav labels should be visible");
+  await assertAccessibilityAudit(client, { mobile: true });
 };
 
 const main = async () => {
