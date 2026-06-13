@@ -382,9 +382,8 @@ sitemap.xml
 
 后续债务：
 
-1. 为 UI smoke 失败场景上传截图 artifact，便于远端 CI 失败复盘。
-2. 增加视觉回归截图基线，覆盖首页、对比页三模式和免费模型页。
-3. 补充更深的可访问性检查，尤其是颜色对比度、焦点顺序和键盘导航。
+1. 增加视觉回归截图基线，覆盖首页、对比页三模式和免费模型页。
+2. 补充更深的可访问性检查，尤其是颜色对比度、焦点顺序和键盘导航。
 
 ## 12. UI smoke 自动化与 assets 404 硬化记录
 
@@ -426,9 +425,8 @@ sitemap.xml
 
 后续债务：
 
-1. 为 UI smoke 失败场景上传截图 artifact，便于远端 CI 失败复盘。
-2. 当前截图是冒烟产物而非像素基线；后续可增加阈值化视觉 diff。
-3. 当前 a11y 检查覆盖命名和布局溢出；后续可增加颜色对比度和键盘路径检查。
+1. 当前截图是冒烟产物而非像素基线；后续可增加阈值化视觉 diff。
+2. 当前 a11y 检查覆盖命名和布局溢出；后续可增加颜色对比度和键盘路径检查。
 
 ## 13. GitHub Pages UI smoke 门禁记录
 
@@ -439,6 +437,7 @@ sitemap.xml
 1. GitHub Pages deploy workflow 在 `make data-update-check` 后增加 Chrome/Chromium 探测步骤。
 2. workflow 会将探测到的浏览器路径写入 `CHROME_PATH`，供 `scripts/ui_smoke_check.mjs` 使用。
 3. workflow 在 `Setup Pages` 和上传 artifact 前执行 `make smoke-ui`，确保镜像发布前已真实打开本地 `release/` 并完成 UI 冒烟检查。
+4. workflow 在失败时上传 `artifacts/ui-smoke/` 为 `ui-smoke-screenshots-${{ github.run_id }}`，保留 7 天，便于远端 CI 失败复盘。
 
 本地验证通过：
 
@@ -450,5 +449,5 @@ sitemap.xml
 
 后续债务：
 
-1. 为 UI smoke 失败场景上传截图 artifact，便于远端 CI 失败复盘。
-2. 如果未来 runner 镜像移除 Chrome/Chromium，可改为显式 setup Chrome action 或安装固定浏览器包。
+1. 如果未来 runner 镜像移除 Chrome/Chromium，可改为显式 setup Chrome action 或安装固定浏览器包。
+2. 当前 artifact 只在失败时上传；如需长期视觉审计，可增加成功运行的截图 artifact 或阈值化视觉 diff。

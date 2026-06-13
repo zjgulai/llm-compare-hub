@@ -5,6 +5,7 @@
 ### Changed
 - GitHub Pages deploy workflow 在上传 artifact 前会探测 `google-chrome-stable`、`google-chrome`、`chromium` 或 `chromium-browser`，并写入 `CHROME_PATH`。
 - GitHub Pages deploy workflow 现在执行 `make smoke-ui`，把本地 release UI 冒烟检查纳入镜像发布门禁。
+- GitHub Pages deploy workflow 在失败时上传 `artifacts/ui-smoke/` 为 `ui-smoke-screenshots-${{ github.run_id }}`，保留 7 天用于截图复盘。
 
 ### Verified
 - 本地使用显式 `CHROME_PATH` 执行 `make smoke-ui` 通过。

@@ -214,7 +214,7 @@ python3 scripts/weekly_data_snapshot.py --date 2026-06-12 --stale-days 45 --outp
 
 1. 轮换曾经出现在 git remote URL 中的 GitHub token。
 2. 轮换生产 nginx 配置里硬编码的第三方 API key，并迁移到安全注入方式。
-3. 为 UI smoke 失败场景上传截图 artifact，并继续扩展为阈值化视觉 diff。
+3. 继续扩展 UI smoke 为阈值化视觉 diff，并补充更深的可访问性检查。
 4. `make validate-provenance` 已接入发布链路；继续保持 provenance 字段的 `high/medium` 与 `verifiedAt` 的时效复核。
 
 更多审计记录见 [AUDIT.md](AUDIT.md)，变更记录见 [CHANGELOG.md](CHANGELOG.md)。
