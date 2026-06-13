@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-06-12 — Data provenance and drift monitoring
+
+### Added
+- Added provenance validation fields: `sourceUrl`, `verifiedAt`, `confidence`, and `sourceType`.
+- Added provenance coverage reporting via `scripts/provenance_report.py`.
+- Added source URL drift monitoring via `scripts/check_data_drift.py` and `data-provenance-snapshots.json`.
+- Added scheduled/manual GitHub Actions workflow `Data drift monitor`.
+- Added `make validate-provenance` strict provenance preflight for future full-coverage enforcement.
+
+### Data Governance
+- BAI and EasyRouter now have full model-level provenance coverage.
+- PoYo now has medium-or-higher provenance coverage for every model; entries requiring follow-up retain review flags.
+- SiliconFlow confirmed discontinued and replacement models now carry official release-note provenance; remaining SiliconFlow entries stay visible in the provenance report.
+
 ## 2026-06-12 — JSON schema validation hardening
 
 ### Added

@@ -150,11 +150,29 @@ python3 scripts/validate.py --check-urls
 
 该命令会抽查唯一 `docsUrl` 的 HTTP 状态，适合数据更新批次发布前使用。
 
+### 数据 provenance 与漂移监控
+
+- `sourceUrl`: 字段来源或验证入口。
+- `verifiedAt`: 最近人工或脚本验证日期，格式 `YYYY-MM-DD`。
+- `confidence`: `high`、`medium`、`low`。
+- `sourceType`: `official-docs`、`official-release-notes`、`official-api-list`、`vendor-site`、`curated-manual`。
+
+常用命令：
+
+```bash
+python3 scripts/provenance_report.py
+python3 scripts/check_data_drift.py
+python3 scripts/check_data_drift.py --update-snapshot
+make validate-provenance
+```
+
+`make validate-provenance` 是严格门禁预演：当前不会接入发布链路，直到所有 provider 都补齐 provenance。`check_data_drift.py` 会报告来源页 hash 变化；这类 `DRIFT` 输出用于人工复核，不会自动修改数据。
+
 ## 剩余高优先级事项
 
 1. 轮换曾经出现在 git remote URL 中的 GitHub token。
 2. 轮换生产 nginx 配置里硬编码的第三方 API key，并迁移到安全注入方式。
 3. 决定 `src/` 的下一步：要么复刻当前中文生产 UI，要么正式以 `src/` 重建版替换生产 UI。
-4. 继续增强 JSON 数据治理：为来源可信度、字段 provenance、模型可用性漂移增加更细颗粒度校验。
+4. 继续补齐 SiliconFlow 剩余模型 provenance，并将严格 provenance 门禁接入 CI。
 
 更多审计记录见 [AUDIT.md](AUDIT.md)，变更记录见 [CHANGELOG.md](CHANGELOG.md)。
