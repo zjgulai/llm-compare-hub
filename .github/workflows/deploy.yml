@@ -37,6 +37,9 @@ jobs:
       - name: Validate JSON data files
         run: make validate
 
+      - name: Validate provenance coverage
+        run: make validate-provenance
+
       - name: Verify production asset graph
         run: make verify-assets
 

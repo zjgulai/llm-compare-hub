@@ -76,7 +76,11 @@
           "context": "1024K",
           "pricing": "输入 ¥1/M | 输出 ¥2/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "deepseek-ai/DeepSeek-V3.2",
@@ -88,7 +92,11 @@
           "context": "128K",
           "pricing": "输入 ¥2/M | 输出 ¥3/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Pro/deepseek-ai/DeepSeek-V3.2",
@@ -100,7 +108,11 @@
           "context": "128K",
           "pricing": "输入 ¥8.5/M | 输出 ¥30/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "deepseek-ai/DeepSeek-V3.1-Terminus",
@@ -112,7 +124,11 @@
           "context": "64K",
           "pricing": "输入 ¥1/M | 输出 ¥2/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Pro/deepseek-ai/DeepSeek-V3.1-Terminus",
@@ -124,7 +140,11 @@
           "context": "64K",
           "pricing": "输入 ¥5/M | 输出 ¥30/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "deepseek-ai/DeepSeek-R1",
@@ -137,7 +157,11 @@
           "context": "64K",
           "pricing": "输入 ¥4/M | 输出 ¥16/M",
           "output": "Text (含reasoning_content)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Pro/deepseek-ai/DeepSeek-R1",
@@ -150,7 +174,11 @@
           "context": "64K",
           "pricing": "输入 ¥4/M | 输出 ¥16/M",
           "output": "Text (含reasoning_content)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "moonshotai/Kimi-K2.6",
@@ -178,7 +206,11 @@
           "context": "256K",
           "pricing": "输入 ¥6.5/M | 输出 ¥27/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "moonshotai/Kimi-K2.5",
@@ -190,7 +222,11 @@
           "context": "256K",
           "pricing": "输入 ¥4/M | 输出 ¥21/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Pro/moonshotai/Kimi-K2.5",
@@ -279,7 +315,11 @@
           "context": "198K",
           "pricing": "输入 ¥6/M | 输出 ¥28/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "zai-org/GLM-5",
@@ -291,7 +331,11 @@
           "context": "198K",
           "pricing": "输入 ¥5.6/M | 输出 ¥25/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Pro/zai-org/GLM-5",
@@ -323,7 +367,11 @@
           "context": "198K",
           "pricing": "输入 ¥5/M | 输出 ¥22/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Pro/zai-org/GLM-4.7",
@@ -375,7 +423,11 @@
           "context": "198K",
           "pricing": "输入 ¥4/M | 输出 ¥18/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "THUDM/GLM-Z1-32B-0414",
@@ -408,7 +460,11 @@
           "context": "128K",
           "pricing": "输入 ¥2.5/M | 输出 ¥10/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "THUDM/GLM-Z1-9B-0414",
@@ -421,7 +477,11 @@
           "context": "128K",
           "pricing": "输入 ¥1/M | 输出 ¥4/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "THUDM/GLM-4-9B-0414",
@@ -433,7 +493,11 @@
           "context": "128K",
           "pricing": "输入 ¥1/M | 输出 ¥4/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "MiniMaxAI/MiniMax-M2.5",
@@ -445,7 +509,11 @@
           "context": "192K",
           "pricing": "输入 ¥2.1/M | 输出 ¥8.4/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Pro/MiniMaxAI/MiniMax-M2.5",
@@ -457,7 +525,11 @@
           "context": "512K",
           "pricing": "输入 ¥5/M | 输出 ¥20/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen3.6-35B-A3B",
@@ -469,7 +541,11 @@
           "context": "256K",
           "pricing": "输入 ¥1/M | 输出 ¥5/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen3.6-27B",
@@ -481,7 +557,11 @@
           "context": "256K",
           "pricing": "输入 ¥2.5/M | 输出 ¥10/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen3.5-397B-A17B",
@@ -493,7 +573,11 @@
           "context": "128K",
           "pricing": "输入 ¥1/M | 输出 ¥5/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen3.5-122B-A10B",
@@ -505,7 +589,11 @@
           "context": "128K",
           "pricing": "输入 ¥2.5/M | 输出 ¥10/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen3.5-35B-A3B",
@@ -517,7 +605,11 @@
           "context": "128K",
           "pricing": "输入 ¥1/M | 输出 ¥5/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen3-VL-32B-Instruct",
@@ -530,7 +622,11 @@
           "context": "40K",
           "pricing": "输入 ¥1/M | 输出 ¥5/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen2.5-72B-Instruct",
@@ -542,7 +638,11 @@
           "context": "64K",
           "pricing": "输入 ¥1/M | 输出 ¥2/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen2.5-14B-Instruct",
@@ -554,7 +654,11 @@
           "context": "64K",
           "pricing": "输入 ¥1/M | 输出 ¥2/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen2.5-7B-Instruct",
@@ -566,7 +670,11 @@
           "context": "32K",
           "pricing": "输入 ¥0.5/M | 输出 ¥1/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Pro/Qwen/Qwen2.5-7B-Instruct",
@@ -578,7 +686,11 @@
           "context": "32K",
           "pricing": "输入 ¥0.5/M | 输出 ¥1/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen2.5-Coder-32B-Instruct",
@@ -612,7 +724,11 @@
           "context": "32K",
           "pricing": "输入 ¥1/M | 输出 ¥2/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "deepseek-ai/DeepSeek-V4-Pro",
@@ -646,7 +762,11 @@
           "pricing": "输入 ¥1.8/M | 输出 ¥14.4/M（估算，$0.25/$2.00，×7.2）",
           "output": "Text",
           "notes": "Qwen3.5 密集 27B 模型，综合能力均衡，2026-04-24 上线",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen3.5-9B",
@@ -660,7 +780,11 @@
           "pricing": "输入 ¥0.72/M | 输出 ¥1.08/M（估算，$0.10/$0.15，×7.2）",
           "output": "Text",
           "notes": "Qwen3.5 轻量版，9B 参数，极低价格，适合高并发轻量任务，2026-04-24 上线",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         }
       ]
     },
@@ -704,7 +828,11 @@
           ],
           "pricing": "¥0.30/次（按需计费）",
           "output": "Image (URL有效1小时)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen-Image-Edit",
@@ -716,7 +844,11 @@
           ],
           "pricing": "¥0.30/次（按需计费）",
           "output": "Image (URL有效1小时)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen-Image-Max-360p",
@@ -727,7 +859,11 @@
           ],
           "pricing": "¥0.30/次（按需计费）",
           "output": "Image (URL有效1小时)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen-Image-Max-720p",
@@ -738,7 +874,11 @@
           ],
           "pricing": "¥0.30/次（按需计费）",
           "output": "Image (URL有效1小时)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Tongyi-MAI/Z-Image-Turbo",
@@ -749,7 +889,11 @@
           ],
           "pricing": "输入 ¥0/M | 输出 ¥0.1/M",
           "output": "Image (URL有效1小时)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Tongyi-MAI/Z-Image",
@@ -760,7 +904,11 @@
           ],
           "pricing": "输入 ¥0/M | 输出 ¥0.3/M",
           "output": "Image (URL有效1小时)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Kwai-Kolors/Kolors",
@@ -771,7 +919,11 @@
           ],
           "pricing": "¥0.50/次（按需计费，当前免费开放）",
           "output": "Image (URL有效1小时)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "baidu/ERNIE-Image-Turbo",
@@ -782,7 +934,11 @@
           ],
           "pricing": "输入 ¥0/M | 输出 ¥0.11/M",
           "output": "Image (URL有效1小时)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/images/images-generations",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         }
       ]
     },
@@ -816,7 +972,11 @@
           ],
           "pricing": "¥2.00/次（按需计费）",
           "output": "Video (MP4, 10分钟有效)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Wan-AI/Wan2.2-T2V-A14B",
@@ -827,7 +987,11 @@
           ],
           "pricing": "¥2.00/次（按需计费）",
           "output": "Video (MP4, 10分钟有效)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         }
       ]
     },
@@ -887,7 +1051,11 @@
           "context": "512",
           "pricing": "¥0.5/M tokens",
           "output": "Vector (1024维)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "BAAI/bge-m3",
@@ -915,7 +1083,11 @@
           "context": "8192",
           "pricing": "¥0.5/M tokens",
           "output": "Vector (1024维)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen3-Embedding-4B",
@@ -927,7 +1099,11 @@
           "context": "32768",
           "pricing": "¥0.50/M tokens（按需计费）",
           "output": "Vector",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen3-Embedding-0.6B",
@@ -939,7 +1115,11 @@
           "context": "32768",
           "pricing": "¥0.50/M tokens（按需计费）",
           "output": "Vector",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "netease-youdao/bce-embedding-base_v1",
@@ -996,7 +1176,11 @@
           ],
           "pricing": "¥0.10/次（按需计费）",
           "output": "Ranked documents",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "BAAI/bge-reranker-v2-m3",
@@ -1007,7 +1191,11 @@
           ],
           "pricing": "¥0.10/次（按需计费）",
           "output": "Ranked documents",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen3-Reranker-4B",
@@ -1018,7 +1206,11 @@
           ],
           "pricing": "¥0.10/次（按需计费）",
           "output": "Ranked documents",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "Qwen/Qwen3-Reranker-0.6B",
@@ -1029,7 +1221,11 @@
           ],
           "pricing": "¥0.10/次（按需计费）",
           "output": "Ranked documents",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         }
       ]
     },
@@ -1064,7 +1260,11 @@
           ],
           "pricing": "¥0.05/千字符（按需计费）",
           "output": "Audio (MP3/WAV/PCM/FLAC/Opus/AAC)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/audio/create-speech"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/audio/create-speech",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/audio/create-speech",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         },
         {
           "modelId": "FunAudioLLM/SenseVoiceSmall",
@@ -1075,7 +1275,11 @@
           ],
           "pricing": "免费（按需计费）",
           "output": "Text (转录文本)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/audio/create-audio-transcriptions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/audio/create-audio-transcriptions",
+          "sourceUrl": "https://docs.siliconflow.cn/cn/api-reference/audio/create-audio-transcriptions",
+          "verifiedAt": "2026-06-13",
+          "confidence": "medium",
+          "sourceType": "official-docs"
         }
       ]
     }

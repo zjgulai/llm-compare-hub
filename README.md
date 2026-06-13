@@ -166,13 +166,13 @@ python3 scripts/check_data_drift.py --update-snapshot
 make validate-provenance
 ```
 
-`make validate-provenance` 是严格门禁预演：当前不会接入发布链路，直到所有 provider 都补齐 provenance。`check_data_drift.py` 会报告来源页 hash 变化；这类 `DRIFT` 输出用于人工复核，不会自动修改数据。
+`make validate-provenance` 已接入发布链路（`Deploy to GitHub Pages`）作为严格 provenance 门禁。`check_data_drift.py` 会报告来源页 hash 变化；这类 `DRIFT` 输出用于人工复核，不会自动修改数据。
 
 ## 剩余高优先级事项
 
 1. 轮换曾经出现在 git remote URL 中的 GitHub token。
 2. 轮换生产 nginx 配置里硬编码的第三方 API key，并迁移到安全注入方式。
 3. 决定 `src/` 的下一步：要么复刻当前中文生产 UI，要么正式以 `src/` 重建版替换生产 UI。
-4. 继续补齐 SiliconFlow 剩余模型 provenance，并将严格 provenance 门禁接入 CI。
+4. `make validate-provenance` 已接入发布链路；继续保持 provenance 字段的 `high/medium` 与 `verifiedAt` 的时效复核。
 
 更多审计记录见 [AUDIT.md](AUDIT.md)，变更记录见 [CHANGELOG.md](CHANGELOG.md)。

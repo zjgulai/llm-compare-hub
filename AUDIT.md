@@ -43,7 +43,7 @@
 | D-09 | 技术债务 | P1 | 数据 fetch 使用绝对根路径 `/xxx-data.json` | 自有根域可用，GitHub Pages 子路径部署存在环境耦合风险 |
 | D-10 | 文档债务 | P1 | README/CHANGELOG/历史计划包含过期结论和旧流程 | 已通过 Phase 3 缓解；历史计划仍作为归档存在 |
 | D-11 | 文档债务 | P1 | `robots.txt` 指向 GitHub Pages sitemap；`sitemap.xml` 未覆盖 `claude`/`codex` 页面 | 已通过 Phase 3 缓解；后续需随新增页面维护 sitemap |
-| D-12 | 技术债务 | P2 | `scripts/validate.py` 已增强为轻量 schema 校验器；BAI/EasyRouter/PoYo 已补 provenance，SiliconFlow 已覆盖确认下线与替代模型；新增 drift monitor 和 strict provenance 预演门禁 | 数据质量已从人工检查转向 CI 门禁；后续风险集中在 SiliconFlow 剩余模型 provenance、价格漂移和来源页语义变化 |
+| D-12 | 技术债务 | P2 | `scripts/validate.py` 已增强为轻量 schema 校验器；BAI/EasyRouter/PoYo/SiliconFlow 已补齐 provenance 字段 | 数据质量已从人工检查转向 CI 门禁；后续风险集中在 provenance 时效复核、价格漂移与来源页语义变化 |
 | D-13 | 工程债务 | P2 | 无 lint、formatter、单元测试、视觉回归、可访问性检查 | UI 回归只能靠人工发现 |
 | D-14 | 脆弱点债务 | P2 | nginx 是多应用共享入口，单配置文件承载多个业务 | 任一 vhost 配置错误可能影响全站入口 |
 
