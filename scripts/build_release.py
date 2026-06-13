@@ -12,9 +12,9 @@ from verify_assets import JS_IMPORT_RE, HTML_ASSET_RE, clean_ref
 
 REPO = Path(__file__).resolve().parents[1]
 RELEASE = REPO / "release"
+DIST_INDEX = REPO / "dist" / "index.html"
 
 PUBLIC_FILES = [
-    "index.html",
     "favicon.svg",
     "robots.txt",
     "sitemap.xml",
@@ -31,6 +31,10 @@ PUBLIC_FILES = [
     "claude/index.html",
     "codex/index.html",
 ]
+
+
+def get_release_entry_html() -> Path:
+    return DIST_INDEX if DIST_INDEX.is_file() else REPO / "index.html"
 
 FORBIDDEN_PARTS = {
     ".git",
@@ -54,16 +58,15 @@ FORBIDDEN_NAMES = {
 }
 
 
-def copy_file(rel: str) -> None:
-    src = REPO / rel
+def copy_file(src: Path, release_rel: str) -> None:
     if not src.is_file():
-        raise FileNotFoundError(rel)
-    dst = RELEASE / rel
+        raise FileNotFoundError(str(src))
+    dst = RELEASE / release_rel
     dst.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(src, dst)
 
 
-def collect_assets() -> list[str]:
+def collect_assets(index_file: Path) -> list[tuple[Path, str]]:
     queue: list[Path] = []
     seen: set[Path] = set()
 
@@ -77,15 +80,15 @@ def collect_assets() -> list[str]:
             seen.add(resolved)
             queue.append(resolved)
 
-    for ref in HTML_ASSET_RE.findall((REPO / "index.html").read_text()):
-        add(REPO / clean_ref(ref))
+    for ref in HTML_ASSET_RE.findall(index_file.read_text()):
+        add((index_file.parent / clean_ref(ref)).resolve())
 
-    ordered: list[str] = []
+    ordered: list[tuple[Path, str]] = []
     while queue:
         path = queue.pop(0)
         if not path.exists():
             raise FileNotFoundError(path.relative_to(REPO))
-        ordered.append(str(path.relative_to(REPO)))
+        ordered.append((path, str(path.relative_to(index_file.parent))))
         if path.suffix == ".js":
             for ref in JS_IMPORT_RE.findall(path.read_text(errors="ignore")):
                 if ref.startswith("./"):
@@ -111,10 +114,12 @@ def main() -> int:
         shutil.rmtree(RELEASE)
     RELEASE.mkdir()
 
+    entry_html = get_release_entry_html()
+    copy_file(entry_html, "index.html")
     for rel in PUBLIC_FILES:
-        copy_file(rel)
-    for rel in collect_assets():
-        copy_file(rel)
+        copy_file(REPO / rel, rel)
+    for src, rel in collect_assets(entry_html):
+        copy_file(src, rel)
 
     assert_clean_release()
     files = sorted(str(p.relative_to(RELEASE)) for p in RELEASE.rglob("*") if p.is_file())

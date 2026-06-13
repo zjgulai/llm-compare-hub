@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 
 
 REPO = Path(__file__).resolve().parents[1]
+DIST_INDEX = REPO / "dist" / "index.html"
 HTML_ASSET_RE = re.compile(r"""(?:src|href)=["'](?:\./)?(assets/[^"']+)["']""")
 JS_IMPORT_RE = re.compile(r"""(?:from|import\()\s*["'`](\./[^"'`]+)["'`]""")
 
@@ -32,14 +33,23 @@ def add_ref(queue: list[Path], seen: set[Path], path: Path) -> None:
         queue.append(resolved)
 
 
+def get_index_html_files() -> list[Path]:
+    if DIST_INDEX.is_file():
+        return [DIST_INDEX]
+    return [REPO / "index.html"]
+
+
+def collect_refs(index_file: Path, queue: list[Path], seen: set[Path]) -> None:
+    for ref in HTML_ASSET_RE.findall(index_file.read_text()):
+        add_ref(queue, seen, index_file.parent / clean_ref(ref))
+
+
 def main() -> int:
     missing = False
     queue: list[Path] = []
     seen: set[Path] = set()
-
-    index = REPO / "index.html"
-    for ref in HTML_ASSET_RE.findall(index.read_text()):
-        add_ref(queue, seen, REPO / clean_ref(ref))
+    for index_file in get_index_html_files():
+        collect_refs(index_file, queue, seen)
 
     checked: list[Path] = []
     while queue:
