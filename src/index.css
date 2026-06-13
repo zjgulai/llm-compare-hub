@@ -7,3 +7,14 @@
   --color-warning: #f59e0b;
   --color-error: #ef4444;
 }
+
+html {
+  background: #f8fafc;
+}
+
+body {
+  margin: 0;
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: Inter, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}

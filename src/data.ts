@@ -1,11 +1,19 @@
 import type { PlatformData, FreeModelsData, CompareData } from './types';
 
+const PLATFORM_DATA_FILES: Record<string, string> = {
+  poyo: 'api-data.json',
+  siliconflow: 'siliconflow-data.json',
+  bai: 'bai-data.json',
+  easyrouter: 'easyrouter-data.json',
+};
+
 const dataUrl = (fileName: string) => {
   return new URL(fileName, new URL('.', window.location.href)).toString();
 };
 
 export const fetchPlatformData = async (platformId: string): Promise<PlatformData> => {
-  const response = await fetch(dataUrl(`${platformId}-data.json`));
+  const fileName = PLATFORM_DATA_FILES[platformId] ?? `${platformId}-data.json`;
+  const response = await fetch(dataUrl(fileName));
   if (!response.ok) {
     throw new Error(`Failed to fetch data for ${platformId}`);
   }
@@ -50,8 +58,13 @@ export const getVendorColor = (vendorName: string): string => {
 };
 
 export const PLATFORMS = [
-  { id: 'siliconflow', name: '硅基流动', color: 'bg-green-100 text-green-800' },
-  { id: 'poyo', name: 'PoYo.ai', color: 'bg-blue-100 text-blue-800' },
-  { id: 'bai', name: 'BAI', color: 'bg-orange-100 text-orange-800' },
-  { id: 'easyrouter', name: 'EasyRouter', color: 'bg-purple-100 text-purple-800' },
+  { id: 'siliconflow', name: '硅基流动', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
+  { id: 'poyo', name: 'PoYo.ai', color: 'bg-rose-50 text-rose-700 border-rose-200' },
+  { id: 'bai', name: 'BAI', color: 'bg-amber-50 text-amber-700 border-amber-200' },
+  { id: 'easyrouter', name: 'EasyRouter', color: 'bg-sky-50 text-sky-700 border-sky-200' },
 ];
+
+export const getPlatformMeta = (platformId?: string) => {
+  const platform = PLATFORMS.find((item) => item.id === platformId);
+  return platform ?? { id: platformId ?? 'unknown', name: platformId ?? '未知平台', color: 'bg-gray-50 text-gray-700 border-gray-200' };
+};

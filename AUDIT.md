@@ -1,6 +1,6 @@
 # LLM Models Hub — 深度债务审计与治理计划
 
-> 审计日期：2026-06-11  
+> 审计日期：初始 2026-06-11；最新复核 2026-06-13
 > 范围：本地仓库、腾讯云生产站点、GitHub Pages 发布链路、部署脚本、文档与数据资产  
 > 原则：本报告不记录任何密钥明文；所有 secret 仅按风险类别描述。
 
@@ -12,36 +12,36 @@
 | 生产服务器 | Ubuntu 22.04，nginx 容器 `ai_video_nginx`，磁盘 `/` 使用 45%，可用内存约 3.4GiB，swap 已满 |
 | TLS | Let's Encrypt 证书有效期至 2026-09-07，SAN 覆盖 `llm.lute-tlz-dddd.top` |
 | 安全头 | 有 `X-Content-Type-Options`、`X-Frame-Options`、CSP；但 CSP 仍含 `unsafe-inline` |
-| GitHub Pages | 线上仍是 2026-05-28 旧版本；本地 `main` 领先 `origin/main` 7 个 commit |
-| 本地依赖 | `npm audit` 0 漏洞；React 19.2.7、Vite 6.4.3、TypeScript 5.9.3 |
+| GitHub Pages | 作为镜像发布目标；push 到 `main` 后通过 `make data-update-check` 上传 `release/` |
+| 本地依赖 | `npm audit` 0 漏洞；React 19.2.7、Vite 8.0.16、TypeScript 5.9.3、Tailwind Vite plugin 4.3.1 |
 | 本地安全即时处理 | 已将 `origin` 从带 token URL 改为标准 HTTPS URL；仍需在 GitHub 侧轮换该 token |
 
 ## 1. 核心诊断
 
 项目的主要风险不是单点 bug，而是多套“事实来源”同时存在并相互漂移：
 
-1. **生产事实**：腾讯云当前可访问的是根目录 `index.html` + 旧 hash bundle + runtime JSON + essence 静态页。
-2. **仓库事实**：`index.html` 指向 `assets/index-DltUXhyr.js` 和 `assets/index-CdBRW1VH.css`，但这两个文件不在当前 git 跟踪的 `assets/` 中。
-3. **源码事实**：`src/` 已存在，但不是当前生产 bundle 的可信源码；`src/App.tsx` 是英文 UI，生产 bundle 是中文 UI。
-4. **构建事实**：`src/vite.config.ts` 会把产物输出到仓库根目录，Vite 已警告可能覆盖源文件；实际构建会改写根 `index.html`。
-5. **文档事实**：`README.md`、`CHANGELOG.md`、旧 `.sisyphus` 计划和旧审计仍描述“源码丢失”等过期状态。
+1. **生产事实**：腾讯云主站由干净 `release/` artifact 发布，runtime JSON 与静态入口共同构成当前产品事实。
+2. **仓库事实**：根 `index.html` 和根 `assets/` 仅保留为 legacy fallback；正常发布优先使用 `dist/` 生成的 `release/`。
+3. **源码事实**：`src/` 已恢复为当前可信 UI 修改入口，主应用、模型列表、对比排序和免费本地模型页已完成中文文案与基础视觉一致性复核。
+4. **构建事实**：Vite 输出目录已固定到 `dist/`，Tailwind v4 通过 `@tailwindcss/vite` 编译 utilities，构建不会覆盖仓库根入口。
+5. **文档事实**：README、CHANGELOG 和本审计已更新最新状态；历史 `.sisyphus` 计划仅作为归档参考。
 
-这导致当前生产可用性依赖“远端残留文件”，而不是依赖一个可复现、可审计、可回滚的发布产物。
+这些 P0 发布风险已通过 release-only 链路、源码 UI 复核和构建工具链修复降级；当前主要剩余风险转为凭据轮换、自动化视觉回归、可访问性门禁和持续数据时效复核。
 
 ## 2. 债务清单
 
 | ID | 类别 | 严重度 | 发现 | 影响 |
 | --- | --- | --- | --- | --- |
-| D-01 | 脆弱点债务 | P0 | 生产站公开发布 `README.md`、`AUDIT.md`、`Makefile`、`scripts/*.py`、`src/*.tsx`、`.github/workflows/deploy.yml`、`.essence-cache/*.json` 等开发材料 | 扩大攻击面，泄露部署方式、目录结构、历史信息和内部流程 |
-| D-02 | 工程债务 | P0 | `index.html` 引用的生产 JS/CSS 不在本地 git 跟踪文件中 | fresh clone 或重新部署会缺资源；生产依赖远端旧文件残留 |
-| D-03 | 技术债务 | P0 | `src/` 与生产 bundle 不一致，且 `src/types.ts` 含字面量 `\n`，`tsc --noEmit` 失败 | 源码不可作为可信修改入口，UI 改动存在回归风险 |
-| D-04 | 工程债务 | P0 | Vite `outDir: "../"` 指向仓库根目录 | 构建会覆盖根 `index.html` 并污染发布目录 |
+| D-01 | 脆弱点债务 | 已缓解/P1 | 生产曾公开发布 `README.md`、`AUDIT.md`、`Makefile`、`scripts/*.py`、`src/*.tsx`、`.github/workflows/deploy.yml`、`.essence-cache/*.json` 等开发材料；当前 release-only 部署和 nginx deny 已阻断 | 后续需防止部署边界回退 |
+| D-02 | 工程债务 | 已缓解/P2 | `release/` 现在由 `dist/` 构建生成；根入口与根 assets 仅作 legacy fallback | 后续风险转为 legacy fallback 维护成本 |
+| D-03 | 技术债务 | 已缓解/P2 | `src/` 已可 typecheck/build，并完成中文 UI 与对比页模式复核 | 仍缺自动化视觉回归和可访问性门禁 |
+| D-04 | 工程债务 | 已缓解/P2 | Vite `outDir` 已改为 `dist/`，不会覆盖仓库根目录 | 仍需保持 release-only 发布边界 |
 | D-05 | 脆弱点债务 | P0 | 本地曾在 git remote URL 中嵌入 GitHub token；生产共享 nginx 配置中存在硬编码 API key；工作区保留 SSH 私钥 | 凭据泄露后可导致仓库或服务被控；已清理 remote，但仍需轮换凭据 |
-| D-06 | 工程债务 | P1 | 腾讯云部署目录存在旧 `data/`、旧 assets、源码、脚本和文档，且当前 `make deploy` 没有 `--delete` | 线上状态不可预测，旧资源可继续被访问 |
-| D-07 | 项目管理债务 | P1 | 本地 `main` 领先远端 7 个 commit，GitHub Pages 仍为旧版 | 双生产入口不一致，自动部署承诺失效 |
-| D-08 | 工程债务 | P1 | CI 只跑 JSON 验证，不跑 typecheck/build/asset 引用检查/secret scan | 会把不可构建或资源缺失的版本放行 |
+| D-06 | 工程债务 | 已缓解/P2 | 腾讯云部署已改为 `release/` + `rsync --delete` | 后续需保持备份与回滚演练 |
+| D-07 | 项目管理债务 | 已缓解/P2 | GitHub Pages 已定位为镜像发布目标，主 canonical 是腾讯云 | 仍需关注镜像发布延迟和失败告警 |
+| D-08 | 工程债务 | P2 | CI 已跑数据校验、provenance、typecheck、build、asset release；仍缺 secret scan、视觉回归和可访问性检查 | UI/安全回归仍依赖人工复核 |
 | D-09 | 技术债务 | P1 | 数据 fetch 使用绝对根路径 `/xxx-data.json` | 自有根域可用，GitHub Pages 子路径部署存在环境耦合风险 |
-| D-10 | 文档债务 | P1 | README/CHANGELOG/历史计划包含过期结论和旧流程 | 已通过 Phase 3 缓解；历史计划仍作为归档存在 |
+| D-10 | 文档债务 | 已缓解/P2 | README/CHANGELOG/AUDIT 已更新 release-first 与源码 UI 最新状态；历史计划仍作为归档存在 | 后续需要维护“以当前 README/AUDIT 为准”的约束 |
 | D-11 | 文档债务 | P1 | `robots.txt` 指向 GitHub Pages sitemap；`sitemap.xml` 未覆盖 `claude`/`codex` 页面 | 已通过 Phase 3 缓解；后续需随新增页面维护 sitemap |
 | D-12 | 技术债务 | P2 | `scripts/validate.py` 已增强为轻量 schema 校验器；BAI/EasyRouter/PoYo/SiliconFlow 已补齐 provenance 字段 | 数据质量已从人工检查转向 CI 门禁；后续风险集中在 provenance 时效复核、价格漂移与来源页语义变化 |
 | D-13 | 工程债务 | P2 | 无 lint、formatter、单元测试、视觉回归、可访问性检查 | UI 回归只能靠人工发现 |
@@ -351,3 +351,38 @@ sitemap.xml
 1. 继续轮换历史 GitHub token 与生产 nginx 中的硬编码第三方 API key。
 2. 对 `src/` 做中文文案和视觉一致性复核，避免源码构建切换后产品体验漂移。
 3. 为 `make data-update-deploy` 增加部署前远端备份目标，进一步缩短生产回滚时间。
+
+## 11. 源码 UI 中文化与 Tailwind 构建修复记录
+
+> 执行时间：2026-06-13
+
+已完成：
+
+1. `src/App.tsx`、`ModelListView`、`CompareView`、`FreeModelsView` 完成中文文案与工具型视觉风格复核。
+2. 源码版对比页恢复并显式展示三个模式：综合 TOP、按类别对比、按功能排序。
+3. 三个对比模式均显示统一的多模态 badge：是否支持多模态、输入数据类型、输出数据类型。
+4. 修复 PoYo.ai 数据文件映射，`poyo` 平台现在加载 `api-data.json`。
+5. 接入 `@tailwindcss/vite` 并升级 Vite / React plugin，修复 Tailwind v4 utilities 未编译导致的页面样式失效问题。
+
+本地验证通过：
+
+| 检查项 | 结果 |
+| --- | --- |
+| `make typecheck` | 通过 |
+| `make data-update-check` | 通过 |
+| Browser 桌面预览 | 中文导航、PoYo.ai 数据、三种对比模式、多模态输入/输出、免费模型页均可见；控制台无 error |
+| Browser 390px 移动预览 | 无横向溢出；中文导航、副标题、搜索占位符和调用概览可见 |
+| `npm --prefix src audit --audit-level=high` | 0 vulnerabilities |
+| `make deploy-dry` | 只更新 release 范围文件，并预期删除旧 bundle |
+| `make deploy` | 腾讯云部署成功，release 文件数 18 |
+| `make check` | 腾讯云主站、GitHub Pages 与 6 个核心 JSON 均为 200 |
+| `make check-exposure` | README、AUDIT、Makefile、scripts、src、.github、缓存和旧 data 路径均为 404 |
+| 生产哈希校验 | `index.html`、`assets/index-B8PoeCzJ.css`、`assets/index-TVkii31w.js` 与本地 release 一致 |
+| Browser 生产实点 | PoYo.ai、综合 TOP、按类别对比、按功能排序、免费模型页均可切换；控制台无 error |
+
+后续债务：
+
+1. 增加 Playwright/Browser 自动化脚本，固化当前人工验收断言。
+2. 增加视觉回归截图基线，覆盖首页、对比页三模式和免费模型页。
+3. 补充可访问性检查，尤其是按钮 aria name、颜色对比度和键盘导航。
+4. 优化 nginx `/assets/*` 缺失文件行为；当前旧 hash URL 不再对应真实文件，但会被 SPA fallback 返回 `index.html`。

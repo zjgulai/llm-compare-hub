@@ -37,7 +37,7 @@ source repo
 - `release/` 是唯一部署物。腾讯云和 GitHub Pages 都应只发布 `release/`，不要发布仓库根目录。
 - 正常发布流程会先执行 `make build`，再把 `dist/index.html` 和 `dist/assets/` 拍平到 `release/index.html` 与 `release/assets/`。
 - 根 `index.html` 和根 `assets/` 仅作为 legacy fallback；不要把它们当作新的生产 UI 修改入口。
-- `src/` 是当前可构建源码入口；若产品要恢复全中文体验，应在 `src/` 内完成 UI 文案与视觉一致性修复后再发布。
+- `src/` 是当前可信 UI 修改入口；主应用、模型列表、对比排序和免费本地模型页已完成中文文案与基础视觉一致性复核。
 - 生产站点不应公开 `src/`、`scripts/`、`.github/`、文档、缓存或本地工具文件。
 
 ## 发布链路
@@ -207,7 +207,8 @@ python3 scripts/weekly_data_snapshot.py --date 2026-06-12 --stale-days 45 --outp
 
 1. 轮换曾经出现在 git remote URL 中的 GitHub token。
 2. 轮换生产 nginx 配置里硬编码的第三方 API key，并迁移到安全注入方式。
-3. 完成 `src/` 的中文文案与视觉一致性复核，确保当前源码 UI 与目标产品体验一致。
+3. 补充自动化视觉回归和可访问性检查，降低后续 UI 改动只能依赖人工截图复核的风险。
 4. `make validate-provenance` 已接入发布链路；继续保持 provenance 字段的 `high/medium` 与 `verifiedAt` 的时效复核。
+5. 优化 nginx `/assets/*` 缺失文件行为，避免旧 hash 资源路径被 SPA fallback 返回 `index.html`。
 
 更多审计记录见 [AUDIT.md](AUDIT.md)，变更记录见 [CHANGELOG.md](CHANGELOG.md)。

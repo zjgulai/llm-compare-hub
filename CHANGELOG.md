@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-06-13 — Source UI localization and Tailwind build recovery
+
+### Fixed
+- 修复源码版 PoYo.ai 平台数据映射：`poyo` 现在加载 `api-data.json`，不再请求不存在的 `poyo-data.json`。
+- 接入 `@tailwindcss/vite`，修复 Tailwind v4 utilities 未编译导致的页面样式失效问题。
+- 升级前端构建链到 Vite 8.0.16 与 `@vitejs/plugin-react` 6.0.2，`npm audit` 回到 0 漏洞。
+
+### Changed
+- `src/` 主应用、模型列表、对比排序和免费本地模型页完成中文文案与工具型视觉风格复核。
+- 源码版对比页恢复三个显式模式：综合 TOP、按类别对比、按功能排序。
+- 对比页三个模式均显示是否支持多模态，以及输入/输出数据类型 badge。
+
+### Verified
+- 本地 `release/` 预览已用 Browser 检查桌面与 390px 移动视口。
+- 已验证 PoYo.ai 数据可加载、三种对比模式可切换、多模态输入/输出字段可见、免费模型页中文内容可见，且控制台无 error。
+- 腾讯云生产站点已部署并复验：入口、新 JS/CSS 与本地 `release/` 哈希一致，核心 JSON 200，开发材料仍为 404。
+
 ## 2026-06-13 — Data update acceptance workflow and rollback runbook
 
 ### Added

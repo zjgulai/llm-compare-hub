@@ -1,36 +1,128 @@
-import { useState, useEffect } from 'react';
-import type { CompareData, CompareModalities } from '../types';
-import { fetchCompareData, getVendorColor } from '../data';
+import { useEffect, useState } from 'react';
+import type { CompareData, CompareDataType, CompareModel, CompareModalities } from '../types';
+import { fetchCompareData, getPlatformMeta } from '../data';
 
-const dataTypeLabels: Record<string, string> = {
-  text: 'Text',
-  image: 'Image',
-  video: 'Video',
-  audio: 'Audio',
-  music: 'Music',
-  speech: 'Speech',
-  embedding: 'Embedding',
-  ranking: 'Ranking',
+type CompareMode = 'overall' | 'category' | 'function';
+
+const dataTypeLabels: Record<CompareDataType, string> = {
+  text: '文本',
+  image: '图像',
+  video: '视频',
+  audio: '音频',
+  music: '音乐',
+  speech: '语音',
+  embedding: '向量',
+  ranking: '排序',
   '3d': '3D',
 };
 
-const formatTypes = (values: string[]) =>
-  values.map((value) => dataTypeLabels[value] ?? value).join(' + ');
+const modeTabs: Array<{ id: CompareMode; label: string }> = [
+  { id: 'overall', label: '综合 TOP' },
+  { id: 'category', label: '按类别对比' },
+  { id: 'function', label: '按功能排序' },
+];
+
+const formatTypes = (values: string[] = []) =>
+  values.map((value) => dataTypeLabels[value as CompareDataType] ?? value).join(' + ') || '—';
+
+const getScore = (model: CompareModel) => model.overallScore ?? model.score;
+
+const scoreTone = (score?: number) => {
+  if (!score) return 'text-slate-500';
+  if (score >= 90) return 'text-emerald-700';
+  if (score >= 80) return 'text-sky-700';
+  if (score >= 70) return 'text-amber-700';
+  return 'text-slate-600';
+};
+
+const RankBadge = ({ rank }: { rank: number }) => (
+  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white">
+    {rank}
+  </span>
+);
+
+const PlatformBadge = ({ platformId }: { platformId?: string }) => {
+  const platform = getPlatformMeta(platformId);
+  return (
+    <span className={`rounded border px-2 py-0.5 text-xs font-medium ${platform.color}`}>
+      {platform.name}
+    </span>
+  );
+};
 
 const ModalityBadges = ({ modalities }: { modalities?: CompareModalities }) => {
-  if (!modalities) return null;
+  if (!modalities) {
+    return (
+      <div className="mt-2 flex flex-wrap gap-1.5">
+        <span className="rounded border border-amber-200 bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">
+          能力类型待补充
+        </span>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex flex-wrap gap-1.5 mb-2" title={modalities.note}>
-      <span className={`px-2 py-0.5 rounded text-xs font-medium border ${modalities.multimodal ? 'bg-purple-50 text-purple-700 border-purple-100' : 'bg-gray-50 text-gray-600 border-gray-100'}`}>
-        {modalities.multimodal ? 'Multimodal' : 'Single / data'}
+    <div className="mt-2 flex flex-wrap gap-1.5" title={modalities.note}>
+      <span className={`rounded border px-2 py-0.5 text-xs font-medium ${
+        modalities.multimodal
+          ? 'border-fuchsia-200 bg-fuchsia-50 text-fuchsia-700'
+          : 'border-slate-200 bg-slate-50 text-slate-600'
+      }`}>
+        {modalities.multimodal ? '支持多模态' : '单模态/专用数据'}
       </span>
-      <span className="px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
-        In: {formatTypes(modalities.input)}
+      <span className="rounded border border-sky-200 bg-sky-50 px-2 py-0.5 text-xs font-medium text-sky-700">
+        输入：{formatTypes(modalities.input)}
       </span>
-      <span className="px-2 py-0.5 rounded text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
-        Out: {formatTypes(modalities.output)}
+      <span className="rounded border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700">
+        输出：{formatTypes(modalities.output)}
       </span>
+    </div>
+  );
+};
+
+const ScoreBar = ({ score }: { score?: number }) => {
+  if (!score) return null;
+  return (
+    <div className="mt-2 flex items-center gap-2">
+      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100">
+        <div className="h-full rounded-full bg-rose-600" style={{ width: `${Math.min(score, 100)}%` }} />
+      </div>
+      <span className={`min-w-10 text-right text-sm font-bold ${scoreTone(score)}`}>{score}</span>
+    </div>
+  );
+};
+
+const ModelRow = ({ model, rankFallback }: { model: CompareModel; rankFallback?: number }) => {
+  const score = getScore(model);
+  const rank = model.rank ?? rankFallback ?? 0;
+  const description = model.why ?? model.bestFor;
+  const price = model.priceNote ?? model.pricing;
+
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-4">
+      <div className="flex items-start gap-3">
+        <RankBadge rank={rank} />
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <h4 className="text-base font-semibold text-slate-950">{model.name}</h4>
+            <PlatformBadge platformId={model.platform} />
+            {model.tag && (
+              <span className="rounded border border-rose-200 bg-rose-50 px-2 py-0.5 text-xs font-medium text-rose-700">
+                {model.tag}
+              </span>
+            )}
+          </div>
+          {model.modelId && (
+            <div className="mt-1 truncate font-mono text-xs text-slate-500" title={model.modelId}>
+              {model.modelId}
+            </div>
+          )}
+          <ModalityBadges modalities={model.modalities} />
+          {description && <p className="mt-2 text-sm leading-relaxed text-slate-600">{description}</p>}
+          {price && <p className="mt-2 font-mono text-xs text-emerald-700">{price}</p>}
+          <ScoreBar score={score} />
+        </div>
+      </div>
     </div>
   );
 };
@@ -38,6 +130,7 @@ const ModalityBadges = ({ modalities }: { modalities?: CompareModalities }) => {
 export const CompareView = () => {
   const [data, setData] = useState<CompareData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [activeMode, setActiveMode] = useState<CompareMode>('overall');
 
   useEffect(() => {
     const loadData = async () => {
@@ -46,6 +139,7 @@ export const CompareView = () => {
         setData(result);
       } catch (error) {
         console.error('Failed to load compare data:', error);
+        setData(null);
       } finally {
         setLoading(false);
       }
@@ -53,112 +147,121 @@ export const CompareView = () => {
     loadData();
   }, []);
 
-  if (loading) return <div className="flex justify-center p-12"><div className="animate-spin h-8 w-8 border-4 border-blue-500 rounded-full border-t-transparent"></div></div>;
-  if (!data) return <div className="text-center p-12 text-red-500">Failed to load data</div>;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-12 text-sm text-slate-500">
+        <div className="mr-3 h-8 w-8 animate-spin rounded-full border-4 border-rose-200 border-t-rose-600" />
+        正在加载对比数据...
+      </div>
+    );
+  }
+
+  if (!data) {
+    return <div className="rounded-lg border border-red-200 bg-red-50 p-8 text-center text-red-700">对比数据加载失败，请稍后重试。</div>;
+  }
+
+  const overallRanking = data.overallRanking ?? [];
+  const functionRanking = data.functionRanking ?? [];
 
   return (
-    <div className="space-y-12">
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Methodology</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-700">
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-            <h3 className="font-semibold text-blue-900 mb-2">Stability Scoring</h3>
-            <p>{data.methodology.stabilityScoring}</p>
+    <div className="space-y-6">
+      <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="text-lg font-semibold text-slate-950">模型对比排序</h2>
+            <p className="text-sm text-slate-500">综合评分、类别榜和功能场景榜均显式展示多模态与输入/输出数据类型。</p>
           </div>
-          <div className="bg-green-50 p-4 rounded-lg border border-green-100">
-            <h3 className="font-semibold text-green-900 mb-2">Value Scoring</h3>
-            <p>{data.methodology.valueScoring}</p>
+          <div className="text-xs text-slate-500">更新：{data.lastUpdated}</div>
+        </div>
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+          <div className="rounded-lg border border-sky-100 bg-sky-50 p-4">
+            <h3 className="mb-1 text-sm font-semibold text-sky-950">稳定性评分</h3>
+            <p className="text-sm leading-relaxed text-sky-800">{data.methodology.stabilityScoring}</p>
+          </div>
+          <div className="rounded-lg border border-emerald-100 bg-emerald-50 p-4">
+            <h3 className="mb-1 text-sm font-semibold text-emerald-950">性价比评分</h3>
+            <p className="text-sm leading-relaxed text-emerald-800">{data.methodology.valueScoring}</p>
           </div>
         </div>
-        <div className="mt-4 text-xs text-gray-500 text-right">Last updated: {data.lastUpdated}</div>
-      </div>
-
-      {data.categories.map((category) => (
-        <div key={category.categoryId} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="bg-gray-50 p-6 border-b border-gray-200">
-            <div className="flex items-center gap-3 mb-2">
-              <h2 className="text-2xl font-bold text-gray-900">{category.categoryName}</h2>
-              <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-bold rounded-full uppercase tracking-wider">
-                Winner: {category.winner}
-              </span>
-            </div>
-            <p className="text-gray-600">{category.summary}</p>
-          </div>
-          
-          <div className="p-6">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b-2 border-gray-200 text-sm text-gray-500 uppercase tracking-wider">
-                    <th className="pb-3 pr-4 font-semibold w-16">Rank</th>
-                    <th className="pb-3 pr-4 font-semibold">Model</th>
-                    <th className="pb-3 pr-4 font-semibold hidden md:table-cell">Platform</th>
-                    <th className="pb-3 pr-4 font-semibold hidden lg:table-cell">Context</th>
-                    <th className="pb-3 pr-4 font-semibold">Score</th>
-                    <th className="pb-3 pr-4 font-semibold">Pricing</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {category.models.map((model) => {
-                    const vendor = model.vendor ?? model.platformName ?? model.platform;
-                    const score = model.overallScore ?? model.score ?? 0;
-
-                    return (
-                    <tr key={model.modelId ?? `${category.categoryId}-${model.rank}-${model.name}`} className="hover:bg-gray-50 transition-colors">
-                      <td className="py-4 pr-4">
-                        <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full font-bold ${model.rank === 1 ? 'bg-yellow-100 text-yellow-700' : model.rank === 2 ? 'bg-gray-200 text-gray-700' : model.rank === 3 ? 'bg-orange-100 text-orange-800' : 'bg-gray-100 text-gray-500'}`}>
-                          {model.rank}
-                        </span>
-                      </td>
-                      <td className="py-4 pr-4">
-                        <div className="font-bold text-gray-900 text-lg mb-1">{model.name}</div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className={`px-2 py-0.5 rounded text-xs font-medium ${getVendorColor(vendor)}`}>{vendor}</span>
-                          {model.modelId && <span className="text-xs text-gray-500 font-mono truncate max-w-[200px]" title={model.modelId}>{model.modelId}</span>}
-                        </div>
-                        <ModalityBadges modalities={model.modalities} />
-                        {model.bestFor && <div className="text-sm text-gray-600 line-clamp-1">{model.bestFor}</div>}
-                      </td>
-                      <td className="py-4 pr-4 hidden md:table-cell">
-                        <span className="font-medium text-gray-800">{model.platformName ?? model.platform}</span>
-                      </td>
-                      <td className="py-4 pr-4 hidden lg:table-cell text-sm text-gray-600">
-                        {model.context ?? '-'}
-                      </td>
-                      <td className="py-4 pr-4">
-                        <div className="flex items-center gap-2 mb-1">
-                          <div className="text-2xl font-black text-gray-900">{score}</div>
-                          <div className="text-xs text-gray-500">/ 100</div>
-                        </div>
-                        <div className="flex gap-1 text-xs">
-                          <span title={model.stabilityReason} className="cursor-help px-1.5 py-0.5 bg-blue-50 text-blue-700 rounded border border-blue-100">
-                            Stab: {model.stability ?? '-'}/5
-                          </span>
-                          <span title={model.valueReason} className="cursor-help px-1.5 py-0.5 bg-green-50 text-green-700 rounded border border-green-100">
-                            Val: {model.valueScore ?? '-'}/5
-                          </span>
-                        </div>
-                      </td>
-                      <td className="py-4 pr-4 text-sm">
-                        <div className="font-medium text-gray-900">{model.priceNote ?? model.pricing ?? '-'}</div>
-                        <div className="mt-2 space-y-1">
-                          {(model.pros ?? []).slice(0, 2).map((pro, idx) => (
-                            <div key={idx} className="flex items-start gap-1 text-green-700 text-xs">
-                              <svg className="w-3.5 h-3.5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
-                              <span className="line-clamp-1">{pro}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </td>
-                    </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <div className="mt-4 flex gap-1 overflow-x-auto rounded-lg border border-slate-200 bg-slate-100 p-1">
+          {modeTabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveMode(tab.id)}
+              className={`min-w-32 flex-1 whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                activeMode === tab.id
+                  ? 'bg-white text-rose-700 shadow-sm'
+                  : 'text-slate-600 hover:bg-white/70 hover:text-slate-950'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
-      ))}
+      </section>
+
+      {activeMode === 'overall' && (
+        <section className="space-y-3">
+          <div className="rounded-lg border border-slate-200 bg-white p-5">
+            <h3 className="text-base font-semibold text-slate-950">综合 TOP {overallRanking.length}</h3>
+            <p className="mt-1 text-sm text-slate-500">跨平台综合排序，适合先快速缩小候选模型范围。</p>
+          </div>
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+            {overallRanking.map((model, index) => (
+              <ModelRow key={`${model.name}-${index}`} model={model} rankFallback={index + 1} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {activeMode === 'category' && (
+        <section className="space-y-4">
+          <div className="rounded-lg border border-slate-200 bg-white p-5">
+            <h3 className="text-base font-semibold text-slate-950">按类别对比</h3>
+            <p className="mt-1 text-sm text-slate-500">同一模型可能在多个类别上榜，建议结合价格、上下文和输入/输出类型一起看。</p>
+          </div>
+          {data.categories.map((category) => (
+            <div key={category.categoryId} className="rounded-lg border border-slate-200 bg-white p-5">
+              <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                <div>
+                  <h4 className="text-lg font-semibold text-slate-950">{category.categoryName}</h4>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-600">{category.summary}</p>
+                </div>
+                <span className="w-fit rounded border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                  胜出方：{category.winner}
+                </span>
+              </div>
+              <div className="grid grid-cols-1 gap-3">
+                {category.models.map((model, index) => (
+                  <ModelRow key={`${category.categoryId}-${model.name}-${index}`} model={model} rankFallback={index + 1} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {activeMode === 'function' && (
+        <section className="space-y-4">
+          <div className="rounded-lg border border-slate-200 bg-white p-5">
+            <h3 className="text-base font-semibold text-slate-950">按功能排序</h3>
+            <p className="mt-1 text-sm text-slate-500">按业务场景筛选候选模型，适合从“我要完成什么任务”倒推选型。</p>
+          </div>
+          {functionRanking.map((section) => (
+            <div key={section.functionId} className="rounded-lg border border-slate-200 bg-white p-5">
+              <div className="mb-4">
+                <h4 className="text-lg font-semibold text-slate-950">{section.functionName}</h4>
+                {section.description && <p className="mt-1 text-sm leading-relaxed text-slate-600">{section.description}</p>}
+              </div>
+              <div className="grid grid-cols-1 gap-3">
+                {section.topModels.map((model, index) => (
+                  <ModelRow key={`${section.functionId}-${model.name}-${index}`} model={model} rankFallback={index + 1} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
     </div>
   );
 };

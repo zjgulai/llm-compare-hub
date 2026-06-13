@@ -1,6 +1,29 @@
 import { useState, useEffect } from 'react';
-import type { PlatformData } from '../types';
+import type { Category, ModelVariant, PlatformData } from '../types';
 import { fetchPlatformData, PLATFORMS, getVendorColor } from '../data';
+
+const buildCurlExample = (data: PlatformData, category: Category, model: ModelVariant) => {
+  if (model.curlExample) return model.curlExample;
+
+  const headers = `  -H "Authorization: Bearer YOUR_API_KEY" \\\n  -H "Content-Type: application/json"`;
+  if (data.platform === 'siliconflow' || data.platform === 'bai' || data.platform === 'easyrouter') {
+    return `curl "${data.apiOverview.baseUrl}/chat/completions" \\\n${headers} \\\n  -d '${JSON.stringify({
+      model: model.modelId,
+      messages: [{ role: 'user', content: '你好，请用一句话介绍这个模型。' }],
+    }, null, 2)}'`;
+  }
+
+  if (data.platform === 'poyo' && category.id === 'image') {
+    return `curl "${data.apiOverview.baseUrl}/api/generate/submit" \\\n${headers} \\\n  -d '${JSON.stringify({
+      model: model.modelId,
+      input: { prompt: '一只在书桌旁工作的橘猫，写实风格' },
+    }, null, 2)}'`;
+  }
+
+  return `curl "${data.apiOverview.baseUrl}" \\\n${headers} \\\n  -d '${JSON.stringify({
+    model: model.modelId,
+  }, null, 2)}'`;
+};
 
 export const ModelListView = () => {
   const [activePlatform, setActivePlatform] = useState(PLATFORMS[0].id);
@@ -17,6 +40,7 @@ export const ModelListView = () => {
         setData(result);
       } catch (error) {
         console.error('Failed to load platform data:', error);
+        setData(null);
       } finally {
         setLoading(false);
       }
@@ -25,11 +49,16 @@ export const ModelListView = () => {
   }, [activePlatform]);
 
   if (loading) {
-    return <div className="flex justify-center p-12"><div className="animate-spin h-8 w-8 border-4 border-blue-500 rounded-full border-t-transparent"></div></div>;
+    return (
+      <div className="flex items-center justify-center p-12 text-sm text-slate-500">
+        <div className="mr-3 h-8 w-8 animate-spin rounded-full border-4 border-rose-200 border-t-rose-600" />
+        正在加载模型数据...
+      </div>
+    );
   }
 
   if (!data) {
-    return <div className="text-center p-12 text-red-500">Failed to load data</div>;
+    return <div className="rounded-lg border border-red-200 bg-red-50 p-8 text-center text-red-700">数据加载失败，请稍后重试。</div>;
   }
 
   const categories = data.categories || [];
@@ -49,17 +78,21 @@ export const ModelListView = () => {
     if (filteredModels.length === 0) return null;
     
     return { ...category, models: filteredModels };
-  }).filter(Boolean);
+  }).filter((category): category is Category => Boolean(category));
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+      <div className="flex flex-col items-start justify-between gap-4 rounded-lg border border-slate-200 bg-white p-4 shadow-sm md:flex-row md:items-center">
         <div className="flex flex-wrap gap-2">
           {PLATFORMS.map(platform => (
             <button
               key={platform.id}
               onClick={() => setActivePlatform(platform.id)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${activePlatform === platform.id ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+              className={`rounded-md border px-4 py-2 text-sm font-medium transition-colors ${
+                activePlatform === platform.id
+                  ? 'border-rose-600 bg-rose-600 text-white'
+                  : `${platform.color} hover:bg-white`
+              }`}
             >
               {platform.name}
             </button>
@@ -68,79 +101,81 @@ export const ModelListView = () => {
         <div className="w-full md:w-64 relative">
           <input
             type="text"
-            placeholder="Search models..."
+            placeholder="搜索模型、Model ID 或厂商"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+            className="w-full rounded-md border border-slate-300 px-4 py-2 pl-10 text-sm outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-100"
           />
-          <svg className="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          <svg className="absolute left-3 top-2.5 h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
         </div>
       </div>
 
       <div className="flex flex-wrap gap-2 mb-6">
         <button 
           onClick={() => setActiveCategory('all')} 
-          className={`px-3 py-1 text-sm rounded-full ${activeCategory === 'all' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+          className={`rounded-md px-3 py-1.5 text-sm font-medium ${activeCategory === 'all' ? 'bg-slate-900 text-white' : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'}`}
         >
-          All Categories
+          全部类别
         </button>
         {categories.map(cat => (
           <button 
             key={cat.id}
             onClick={() => setActiveCategory(cat.id)}
-            className={`px-3 py-1 text-sm rounded-full ${activeCategory === cat.id ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+            className={`rounded-md px-3 py-1.5 text-sm font-medium ${activeCategory === cat.id ? 'bg-slate-900 text-white' : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'}`}
           >
             {cat.name}
           </button>
         ))}
       </div>
 
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-8">
-        <h3 className="font-semibold text-blue-900 mb-2">API Overview - {data.platformName}</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-800">
-          <div><span className="font-medium">Base URL:</span> {data.apiOverview.baseUrl}</div>
-          <div><span className="font-medium">Auth:</span> {data.apiOverview.authentication.header}</div>
-          {data.apiOverview.architecture && <div className="md:col-span-2"><span className="font-medium">Architecture:</span> {data.apiOverview.architecture}</div>}
+      <div className="mb-8 rounded-lg border border-rose-100 bg-rose-50 p-4">
+        <h3 className="mb-2 font-semibold text-rose-950">调用概览 - {data.platformName}</h3>
+        <div className="grid grid-cols-1 gap-4 text-sm text-rose-900 md:grid-cols-2">
+          <div><span className="font-medium">Base URL：</span>{data.apiOverview.baseUrl}</div>
+          <div><span className="font-medium">认证方式：</span>{data.apiOverview.authentication.header}</div>
+          {data.apiOverview.architecture && <div className="md:col-span-2"><span className="font-medium">架构：</span>{data.apiOverview.architecture}</div>}
+          {data.apiOverview.asyncModels && <div><span className="font-medium">异步模型：</span>{data.apiOverview.asyncModels}</div>}
+          {data.apiOverview.syncModels && <div><span className="font-medium">同步模型：</span>{data.apiOverview.syncModels}</div>}
         </div>
       </div>
 
-      {filteredCategories.map((category: any) => (
+      {filteredCategories.map((category) => (
         <div key={category.id} className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2 pb-2 border-b">{category.name}</h2>
-          <p className="text-gray-600 mb-6">{category.description}</p>
+          <h2 className="mb-2 border-b border-slate-200 pb-2 text-2xl font-bold text-slate-950">{category.name}</h2>
+          <p className="mb-6 text-slate-600">{category.description}</p>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {category.models.map((model: any) => (
-              <div key={model.modelId} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+            {category.models.map((model) => (
+              <div key={model.modelId} className="flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md">
                 <div className="p-5 flex-grow">
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-lg font-bold text-gray-900 truncate pr-2" title={model.name}>{model.name}</h3>
+                    <h3 className="truncate pr-2 text-lg font-bold text-slate-950" title={model.name}>{model.name}</h3>
                     <span className={`px-2 py-1 rounded text-xs font-medium whitespace-nowrap ${getVendorColor(model.vendor)}`}>
                       {model.vendor}
                     </span>
                   </div>
                   
-                  <div className="text-sm text-gray-500 mb-4 font-mono truncate" title={model.modelId}>
+                  <div className="mb-4 truncate font-mono text-sm text-slate-500" title={model.modelId}>
                     {model.modelId}
                   </div>
                   
                   <div className="space-y-3 text-sm">
                     {model.context && (
                       <div className="flex items-start">
-                        <span className="text-gray-400 w-5 inline-block mr-1">⚡</span>
-                        <span className="text-gray-700"><span className="font-medium">Context:</span> {model.context}</span>
+                        <span className="mr-2 mt-1 h-2 w-2 shrink-0 rounded-full bg-rose-500" />
+                        <span className="text-slate-700"><span className="font-medium">上下文：</span>{model.context}</span>
                       </div>
                     )}
                     {model.pricing && (
                       <div className="flex items-start">
-                        <span className="text-gray-400 w-5 inline-block mr-1">💰</span>
-                        <span className="text-gray-700 line-clamp-2" title={model.pricing}><span className="font-medium">Price:</span> {model.pricing}</span>
+                        <span className="mr-2 mt-1 h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
+                        <span className="line-clamp-2 text-slate-700" title={model.pricing}><span className="font-medium">价格：</span>{model.pricing}</span>
                       </div>
                     )}
                     {model.output && (
                       <div className="flex items-start">
-                        <span className="text-gray-400 w-5 inline-block mr-1">📤</span>
-                        <span className="text-gray-700"><span className="font-medium">Output:</span> {model.output}</span>
+                        <span className="mr-2 mt-1 h-2 w-2 shrink-0 rounded-full bg-sky-500" />
+                        <span className="text-slate-700"><span className="font-medium">输出：</span>{model.output}</span>
                       </div>
                     )}
                   </div>
@@ -148,60 +183,32 @@ export const ModelListView = () => {
                   {model.capabilities && model.capabilities.length > 0 && (
                     <div className="mt-4 flex flex-wrap gap-1">
                       {model.capabilities.map((cap: string, i: number) => (
-                        <span key={i} className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-xs border border-gray-200">{cap}</span>
+                        <span key={i} className="rounded border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs text-slate-600">{cap}</span>
                       ))}
                     </div>
                   )}
                 </div>
                 
-                <div className="bg-gray-50 px-5 py-3 border-t border-gray-200 flex justify-between items-center">
+                <div className="flex items-center justify-between border-t border-slate-200 bg-slate-50 px-5 py-3">
                   <a 
                     href={model.docsUrl || data.docsUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center gap-1"
+                    className="flex items-center gap-1 text-sm font-medium text-rose-700 hover:text-rose-900"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                    Docs
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    文档
                   </a>
                   <button 
                     onClick={() => {
-                      let curl = '';
-                      if (data.platform === 'siliconflow' || data.platform === 'bai') {
-                        curl = `curl ${data.apiOverview.baseUrl}/chat/completions \
-  -H Authorization: Bearer YOUR_API_KEY \
-  -H Content-Type: application/json \
-  -d '{
-    model: ${model.modelId},
-    messages: [
-      {role: user, content: Hello!}
-    ]
-  }'`;
-                      } else if (data.platform === 'poyo' && category.id === 'image') {
-                        curl = `curl ${data.apiOverview.baseUrl}/api/generate/submit \
-  -H Authorization: Bearer YOUR_API_KEY \
-  -H Content-Type: application/json \
-  -d '{
-    model: ${model.modelId},
-    input: {
-      prompt: A cute cat
-    }
-  }'`;
-                      } else {
-                         curl = `curl ${data.apiOverview.baseUrl} \
-  -H Authorization: Bearer YOUR_API_KEY \
-  -H Content-Type: application/json \
-  -d '{
-    model: ${model.modelId}
-  }'`;
-                      }
+                      const curl = buildCurlExample(data, category, model);
                       navigator.clipboard.writeText(curl);
-                      alert('cURL copied to clipboard!');
+                      alert('cURL 已复制到剪贴板');
                     }}
-                    className="text-gray-600 hover:text-gray-900 bg-white border border-gray-300 px-3 py-1.5 rounded text-sm font-medium shadow-sm flex items-center gap-1"
+                    className="flex items-center gap-1 rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 shadow-sm hover:text-slate-950"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-                    cURL
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                    复制 cURL
                   </button>
                 </div>
               </div>
@@ -211,10 +218,10 @@ export const ModelListView = () => {
       ))}
       
       {filteredCategories.length === 0 && (
-        <div className="text-center py-20 text-gray-500 bg-white rounded-xl border border-gray-100">
-          <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          <h3 className="text-lg font-medium text-gray-900 mb-1">No models found</h3>
-          <p>Try adjusting your search or category filter</p>
+        <div className="rounded-lg border border-slate-200 bg-white py-20 text-center text-slate-500">
+          <svg className="mx-auto mb-4 h-16 w-16 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <h3 className="mb-1 text-lg font-medium text-slate-950">没有匹配模型</h3>
+          <p>可以调整搜索词或切换分类继续查看。</p>
         </div>
       )}
     </div>
