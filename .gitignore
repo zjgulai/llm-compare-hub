@@ -32,6 +32,7 @@ dist/
 release/
 tmp/
 dist-temp/
+artifacts/
 
 # Editor
 .vscode/

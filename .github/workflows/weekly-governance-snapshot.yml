@@ -1,0 +1,31 @@
+name: Weekly data governance snapshot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 4 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Update drift snapshot
+        run: |
+          python3 scripts/check_data_drift.py --update-snapshot
+
+      - name: Generate weekly snapshot report
+        run: |
+          python3 scripts/weekly_data_snapshot.py --output-dir artifacts/weekly --stale-days 30
+
+      - name: Upload governance artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-data-governance-report
+          path: artifacts/weekly
+          retention-days: 14

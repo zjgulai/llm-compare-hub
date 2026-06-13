@@ -1,4 +1,4 @@
-.PHONY: validate validate-provenance typecheck build verify-assets release deploy deploy-dry check check-exposure clean
+.PHONY: validate validate-provenance typecheck build verify-assets release deploy deploy-dry check check-exposure clean weekly-snapshot
 
 # SSH key: keep production credentials outside the worktree.
 SSH_KEY := $(HOME)/.ssh/llm-compare-hub.pem
@@ -49,6 +49,10 @@ deploy-dry:
 	@$(MAKE) --no-print-directory release >/dev/null
 	@$(RSYNC_CMD) --dry-run --delete $(RELEASE_DIR)/ $(REMOTE):$(REMOTE_DIR)/
 	@echo "✅ Dry-run complete"
+
+weekly-snapshot:
+	@echo "📅 Generating weekly governance snapshot..."
+	@python3 scripts/weekly_data_snapshot.py --output-dir artifacts/weekly
 
 check:
 	@echo "🩺 Checking production site..."

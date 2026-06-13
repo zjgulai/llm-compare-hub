@@ -167,6 +167,29 @@ python3 scripts/check_data_drift.py --update-snapshot
 make validate-provenance
 ```
 
+## 周报与周度治理快照
+
+```bash
+# 生成周度快照（JSON + Markdown）
+make weekly-snapshot
+
+# 指定文件日期与过期阈值
+python3 scripts/weekly_data_snapshot.py --date 2026-06-12 --stale-days 45 --output-dir artifacts/weekly
+```
+
+`weekly_data_snapshot.py` 会：
+
+- 统计各类 JSON 的文件哈希和模型规模（含分类分布、弃用模型数量）；
+- 统计平台模型的 provenance 覆盖率和 `verifiedAt` 超过阈值的样本；
+- 汇总 compare 页的 multimodal / 输入输出类型覆盖；
+- 汇总 `data-provenance-snapshots.json` 漂移结果（含失败 URL）；
+- 与上一次周报文件做差异（文件 hash / 模型数 / 分类数）；
+- 输出：
+  - `artifacts/weekly/data-snapshot-<YYYY-MM-DD>.json`
+  - `artifacts/weekly/data-snapshot-<YYYY-MM-DD>.md`
+- 如需手工复盘，可直接套用
+  [周度数据治理模板](docs/templates/weekly-data-governance-template.md)。
+
 `make validate-provenance` 已接入发布链路（`Deploy to GitHub Pages`）作为严格 provenance 门禁。`check_data_drift.py` 会报告来源页 hash 变化；这类 `DRIFT` 输出用于人工复核，不会自动修改数据。
 
 ## 剩余高优先级事项

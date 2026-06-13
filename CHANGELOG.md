@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-06-13 — 周报治理快照与发布流程补齐
+
+### Added
+- 新增 `scripts/weekly_data_snapshot.py`，用于生成周度数据治理快照（JSON + Markdown）。
+- 新增 `make weekly-snapshot`，内置报告输出路径为 `artifacts/weekly`。
+- 新增 `weekly-governance-snapshot` GitHub Actions 工作流，定期采集漂移快照并上传周报制品。
+
+### Data Governance
+- 报表默认包含：平台模型规模、provenance 覆盖、compare 多模态能力覆盖、漂移源状态与与上周差异。
+- 对 `artifacts/weekly/` 输出目录已加入 `.gitignore`，避免本地快照污染工作树。
+
 ## 2026-06-12 — Data provenance and drift monitoring
 
 ### Added
