@@ -1,4 +1,4 @@
-.PHONY: validate validate-provenance typecheck build verify-assets release deploy deploy-dry check check-exposure clean weekly-snapshot
+.PHONY: validate validate-provenance provenance-report typecheck build verify-assets release deploy deploy-dry check check-exposure clean weekly-snapshot data-update-check data-update-dry data-update-deploy
 
 # SSH key: keep production credentials outside the worktree.
 PREFERRED_SSH_KEY := /Users/lute/project/Agent/product/llm_models_hub/ai_video.pem
@@ -20,6 +20,10 @@ validate-provenance:
 	@echo "🔎 Validating strict provenance coverage..."
 	@python3 scripts/validate.py --strict-provenance
 
+provenance-report:
+	@echo "📊 Reporting provenance coverage..."
+	@python3 scripts/provenance_report.py
+
 typecheck:
 	@echo "🧪 Type-checking React source..."
 	@cd src && npx tsc --noEmit
@@ -32,7 +36,7 @@ verify-assets:
 	@echo "🔗 Verifying index.html asset references..."
 	@python3 scripts/verify_assets.py
 
-release: validate verify-assets
+release: validate build verify-assets
 	@echo "📦 Building clean release artifact..."
 	@python3 scripts/build_release.py
 
@@ -57,6 +61,29 @@ deploy-dry:
 weekly-snapshot:
 	@echo "📅 Generating weekly governance snapshot..."
 	@python3 scripts/weekly_data_snapshot.py --output-dir artifacts/weekly
+
+data-update-check:
+	@echo "🧭 Running data update acceptance workflow..."
+	@$(MAKE) --no-print-directory validate
+	@$(MAKE) --no-print-directory validate-provenance
+	@$(MAKE) --no-print-directory provenance-report
+	@$(MAKE) --no-print-directory weekly-snapshot
+	@$(MAKE) --no-print-directory release
+	@echo "✅ Data update acceptance workflow complete"
+
+data-update-dry:
+	@echo "🧪 Running data update dry-run deployment workflow..."
+	@$(MAKE) --no-print-directory data-update-check
+	@$(MAKE) --no-print-directory deploy-dry
+	@echo "✅ Data update dry-run workflow complete"
+
+data-update-deploy:
+	@echo "🚀 Running data update production deployment workflow..."
+	@$(MAKE) --no-print-directory data-update-check
+	@$(MAKE) --no-print-directory deploy
+	@$(MAKE) --no-print-directory check
+	@$(MAKE) --no-print-directory check-exposure
+	@echo "✅ Data update production workflow complete"
 
 check:
 	@echo "🩺 Checking production site..."

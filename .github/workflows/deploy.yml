@@ -34,20 +34,8 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci --prefix src
 
-      - name: Validate JSON data files
-        run: make validate
-
-      - name: Validate provenance coverage
-        run: make validate-provenance
-
-      - name: Verify production asset graph
-        run: make verify-assets
-
-      - name: Type-check and build source
-        run: make build
-
-      - name: Build release artifact
-        run: make release
+      - name: Run data update acceptance workflow
+        run: make data-update-check
 
       - name: Setup Pages
         uses: actions/configure-pages@v6

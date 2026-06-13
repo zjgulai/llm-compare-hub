@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-06-13 — Data update acceptance workflow and rollback runbook
+
+### Added
+- 新增 `make provenance-report`，可直接输出平台模型 provenance 覆盖情况。
+- 新增 `make data-update-check`，统一执行数据校验、严格 provenance、覆盖报告、治理快照、源码构建和 release 打包。
+- 新增 `make data-update-dry` 与 `make data-update-deploy`，用于数据更新批次的部署演练和正式生产验收。
+- 新增 `docs/ROLLBACK.md`，记录腾讯云静态站点的回滚边界、已知良好 commit 回滚、服务器备份回滚和验收步骤。
+
+### Changed
+- `make release` 现在会先执行 `make build`，确保发布物优先来自 Vite `dist/` 构建产物。
+- GitHub Pages workflow 收敛为 `make data-update-check`，避免本地和 CI 的验收流程分叉。
+- README 已更新为当前发布事实：`dist/index.html` 与 `dist/assets/` 会被拍平到 `release/` 根目录，根 `index.html` 和根 `assets/` 只作为 legacy fallback。
+
 ## 2026-06-13 — 周报治理快照与发布流程补齐
 
 ### Added

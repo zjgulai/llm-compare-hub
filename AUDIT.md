@@ -320,5 +320,34 @@ sitemap.xml
 后续债务：
 
 1. `functionRanking.topModels` 的 modelId 交叉引用仍有少量历史不一致，当前未在本轮强制启用 warning；建议下一步统一 compare-data 与平台数据的 modelId。
-2. 生产中文 UI 仍以 bundle snapshot 为准，`src/` 不是完全可信的生产 UI 源码；建议继续推进源码与生产 UI 对齐。
+2. 生产发布链路已切到 `src/` 构建产物；仍需继续复核中文文案与视觉一致性，避免产品体验漂移。
 3. 多模态字段目前由现有产品描述和模型场景推断，下一步应增加 `sourceUrl`、`verifiedAt`、`confidence` 以降低人工判断漂移。
+
+## 10. 数据更新验收与回滚治理记录
+
+> 执行时间：2026-06-13
+
+已完成：
+
+1. `make release` 已收敛为“validate -> build -> verify-assets -> build_release”，发布物优先来自 Vite `dist/` 构建产物。
+2. 新增 `make provenance-report`，快速输出四个平台模型的 provenance 覆盖。
+3. 新增 `make data-update-check`，统一执行数据校验、严格 provenance、覆盖报告、治理快照、源码构建和 release 打包。
+4. 新增 `make data-update-dry` 与 `make data-update-deploy`，把数据更新的部署演练和正式验收流程固化为命令。
+5. GitHub Pages workflow 已收敛到 `make data-update-check`，避免 CI 与本地流程分叉。
+6. 新增 `docs/ROLLBACK.md`，明确只回滚 `/opt/llm-compare-hub/html/` 静态站点，不触碰共享 nginx/Docker/其他应用目录。
+
+验证通过：
+
+| 检查项 | 结果 |
+| --- | --- |
+| `make data-update-check` | 通过 |
+| provenance 覆盖 | `api`、`siliconflow`、`bai`、`easyrouter` 均为 100% |
+| `make deploy-dry` | 通过，仅预演 LLM release 文件范围 |
+| `make check` | 腾讯云主站 200，GitHub Pages 200，核心 JSON 200 |
+| `make check-exposure` | 开发材料仍为 404 |
+
+后续债务：
+
+1. 继续轮换历史 GitHub token 与生产 nginx 中的硬编码第三方 API key。
+2. 对 `src/` 做中文文案和视觉一致性复核，避免源码构建切换后产品体验漂移。
+3. 为 `make data-update-deploy` 增加部署前远端备份目标，进一步缩短生产回滚时间。
