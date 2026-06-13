@@ -43,7 +43,7 @@
 | D-09 | 技术债务 | P1 | 数据 fetch 使用绝对根路径 `/xxx-data.json` | 自有根域可用，GitHub Pages 子路径部署存在环境耦合风险 |
 | D-10 | 文档债务 | P1 | README/CHANGELOG/历史计划包含过期结论和旧流程 | 已通过 Phase 3 缓解；历史计划仍作为归档存在 |
 | D-11 | 文档债务 | P1 | `robots.txt` 指向 GitHub Pages sitemap；`sitemap.xml` 未覆盖 `claude`/`codex` 页面 | 已通过 Phase 3 缓解；后续需随新增页面维护 sitemap |
-| D-12 | 技术债务 | P2 | `scripts/validate.py` 覆盖 JSON 解析和部分交叉引用，但未强制 BAI/EasyRouter docsUrl、schema 版本、字段完整度 | 数据质量依赖人工检查 |
+| D-12 | 技术债务 | P2 | `scripts/validate.py` 已增强为轻量 schema 校验器，覆盖字段完整度、modelId 唯一性/交叉引用、docsUrl、rank 顺序、modalities 和 deprecated 元数据；仍需继续补 provenance 与漂移监控 | 数据质量已从人工检查转向 CI 门禁，后续风险集中在来源可信度和模型状态漂移 |
 | D-13 | 工程债务 | P2 | 无 lint、formatter、单元测试、视觉回归、可访问性检查 | UI 回归只能靠人工发现 |
 | D-14 | 脆弱点债务 | P2 | nginx 是多应用共享入口，单配置文件承载多个业务 | 任一 vhost 配置错误可能影响全站入口 |
 
@@ -94,7 +94,7 @@
 1. 重写 README：当前架构、真实部署目录、构建/部署流程、主站与 Pages 关系、禁止发布内容。
 2. 更新 CHANGELOG：标记“源码丢失”结论已过期，记录 `src/` 与生产不一致的新事实。
 3. 增加架构图：浏览器、静态文件、runtime JSON、nginx、GitHub Pages、腾讯云目录映射。
-4. 为 JSON 增加 schema 或 Pydantic 校验，强制关键字段、URL、modelId 唯一性、跨文件引用。
+4. 继续增强 JSON 数据治理：补充来源可信度、字段 provenance、模型可用性漂移和价格变动监控。
 5. 建立数据来源字段：`sourceUrl`、`verifiedAt`、`confidence`，降低人工维护漂移。
 
 验收：新成员只看 README + Makefile 就能安全完成一次 dry-run 部署。

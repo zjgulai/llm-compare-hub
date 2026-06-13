@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-06-12 — JSON schema validation hardening
+
+### Added
+- Expanded `scripts/validate.py` into a lightweight schema validator for platform, compare, and free-model JSON data.
+- Validation now checks required root/category/model fields, URL and date formats, rank sequences, modelId uniqueness, compare cross-references, modalities, deprecated model metadata, and docsUrl completeness.
+
 ## 2026-06-12 — GitHub Actions Node 24 runtime compatibility
 
 ### Changed

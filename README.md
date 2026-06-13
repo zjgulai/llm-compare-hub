@@ -132,7 +132,7 @@ nginx 对 `src/`、`scripts/`、`.github/`、`.essence-cache/`、文档和隐藏
 
 | 命令 | 作用 |
 | --- | --- |
-| `make validate` | 校验 JSON 结构、模型数量、对比页 modalities 和部分交叉引用 |
+| `make validate` | 校验 JSON 结构、schema 字段完整度、模型数量、modelId 唯一性/交叉引用、对比页 modalities 和弃用模型残留 |
 | `make verify-assets` | 递归检查 `index.html` 和 JS chunks 引用的 assets 是否存在 |
 | `make typecheck` | 对 `src/` 执行 TypeScript 检查 |
 | `make build` | 将 `src/` 构建到 `dist/`，不影响生产根入口 |
@@ -155,6 +155,6 @@ python3 scripts/validate.py --check-urls
 1. 轮换曾经出现在 git remote URL 中的 GitHub token。
 2. 轮换生产 nginx 配置里硬编码的第三方 API key，并迁移到安全注入方式。
 3. 决定 `src/` 的下一步：要么复刻当前中文生产 UI，要么正式以 `src/` 重建版替换生产 UI。
-4. 为 JSON 增加 schema/Pydantic 级别校验，覆盖更多字段完整度、modelId 交叉引用和数据来源可信度。
+4. 继续增强 JSON 数据治理：为来源可信度、字段 provenance、模型可用性漂移增加更细颗粒度校验。
 
 更多审计记录见 [AUDIT.md](AUDIT.md)，变更记录见 [CHANGELOG.md](CHANGELOG.md)。
