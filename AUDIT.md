@@ -26,7 +26,7 @@
 4. **构建事实**：Vite 输出目录已固定到 `dist/`，Tailwind v4 通过 `@tailwindcss/vite` 编译 utilities，构建不会覆盖仓库根入口。
 5. **文档事实**：README、CHANGELOG 和本审计已更新最新状态；历史 `.sisyphus` 计划仅作为归档参考。
 
-这些 P0 发布风险已通过 release-only 链路、源码 UI 复核、构建工具链修复和 UI smoke 自动化降级；当前主要剩余风险转为凭据轮换、CI 中的浏览器环境标准化、可访问性深度门禁和持续数据时效复核。
+这些 P0 发布风险已通过 release-only 链路、源码 UI 复核、构建工具链修复和 CI UI smoke 门禁降级；当前主要剩余风险转为凭据轮换、可访问性深度门禁、视觉 diff 基线和持续数据时效复核。
 
 ## 2. 债务清单
 
@@ -44,7 +44,7 @@
 | D-10 | 文档债务 | 已缓解/P2 | README/CHANGELOG/AUDIT 已更新 release-first 与源码 UI 最新状态；历史计划仍作为归档存在 | 后续需要维护“以当前 README/AUDIT 为准”的约束 |
 | D-11 | 文档债务 | P1 | `robots.txt` 指向 GitHub Pages sitemap；`sitemap.xml` 未覆盖 `claude`/`codex` 页面 | 已通过 Phase 3 缓解；后续需随新增页面维护 sitemap |
 | D-12 | 技术债务 | P2 | `scripts/validate.py` 已增强为轻量 schema 校验器；BAI/EasyRouter/PoYo/SiliconFlow 已补齐 provenance 字段 | 数据质量已从人工检查转向 CI 门禁；后续风险集中在 provenance 时效复核、价格漂移与来源页语义变化 |
-| D-13 | 工程债务 | 已缓解/P2 | 已新增 `make smoke-ui` 与 `make smoke-ui-production` 做核心 UI/移动端/基础可访问性冒烟；仍缺 CI 级视觉基线和深度 a11y 审计 | 高风险 UI 回归已有本地/生产命令兜底，细粒度视觉漂移仍需后续治理 |
+| D-13 | 工程债务 | 已缓解/P2 | `make smoke-ui` 已接入 GitHub Pages workflow；`make smoke-ui-production` 可做生产冒烟；仍缺视觉 diff 基线和深度 a11y 审计 | 高风险 UI 回归已有 CI/本地/生产命令兜底，细粒度视觉漂移仍需后续治理 |
 | D-14 | 脆弱点债务 | P2 | nginx 是多应用共享入口，单配置文件承载多个业务 | 任一 vhost 配置错误可能影响全站入口 |
 
 ## 3. 治理路线
@@ -382,7 +382,7 @@ sitemap.xml
 
 后续债务：
 
-1. 将 `make smoke-ui` 的 Chrome 环境要求在 CI 中标准化后接入 GitHub Pages workflow。
+1. 为 UI smoke 失败场景上传截图 artifact，便于远端 CI 失败复盘。
 2. 增加视觉回归截图基线，覆盖首页、对比页三模式和免费模型页。
 3. 补充更深的可访问性检查，尤其是颜色对比度、焦点顺序和键盘导航。
 
@@ -426,6 +426,28 @@ sitemap.xml
 
 后续债务：
 
-1. 将 UI smoke 接入 CI 前，需要固定 GitHub runner 的 Chrome/Chromium 可用性。
+1. 为 UI smoke 失败场景上传截图 artifact，便于远端 CI 失败复盘。
 2. 当前截图是冒烟产物而非像素基线；后续可增加阈值化视觉 diff。
 3. 当前 a11y 检查覆盖命名和布局溢出；后续可增加颜色对比度和键盘路径检查。
+
+## 13. GitHub Pages UI smoke 门禁记录
+
+> 执行时间：2026-06-13
+
+已完成：
+
+1. GitHub Pages deploy workflow 在 `make data-update-check` 后增加 Chrome/Chromium 探测步骤。
+2. workflow 会将探测到的浏览器路径写入 `CHROME_PATH`，供 `scripts/ui_smoke_check.mjs` 使用。
+3. workflow 在 `Setup Pages` 和上传 artifact 前执行 `make smoke-ui`，确保镜像发布前已真实打开本地 `release/` 并完成 UI 冒烟检查。
+
+本地验证通过：
+
+| 检查项 | 结果 |
+| --- | --- |
+| workflow 内容检查 | 已包含 `Configure Chrome for UI smoke checks`、`CHROME_PATH` 和 `make smoke-ui` |
+| `CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' make smoke-ui` | 通过 |
+
+后续债务：
+
+1. GitHub Pages workflow 需要在 push 后观察一次远端实跑结果。
+2. 如果未来 runner 镜像移除 Chrome/Chromium，可改为显式 setup Chrome action 或安装固定浏览器包。

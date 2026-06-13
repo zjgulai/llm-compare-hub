@@ -37,6 +37,24 @@ jobs:
       - name: Run data update acceptance workflow
         run: make data-update-check
 
+      - name: Configure Chrome for UI smoke checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          for candidate in google-chrome-stable google-chrome chromium chromium-browser; do
+            if command -v "$candidate" >/dev/null 2>&1; then
+              chrome_path="$(command -v "$candidate")"
+              echo "CHROME_PATH=$chrome_path" >> "$GITHUB_ENV"
+              "$chrome_path" --version
+              exit 0
+            fi
+          done
+          echo "Chrome or Chromium is required for make smoke-ui" >&2
+          exit 1
+
+      - name: Run local UI smoke checks
+        run: make smoke-ui
+
       - name: Setup Pages
         uses: actions/configure-pages@v6
 

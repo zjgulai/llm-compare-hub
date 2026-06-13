@@ -84,7 +84,9 @@ make smoke-ui-production
 
 1. `npm ci --prefix src`
 2. `make data-update-check`
-3. 上传 `release/`
+3. 探测 Chrome/Chromium 并设置 `CHROME_PATH`
+4. `make smoke-ui`
+5. 上传 `release/`
 
 GitHub Pages 是镜像发布目标。页面 canonical、robots 和 sitemap 均指向 `https://llm.lute-tlz-dddd.top/` 主站，避免重复索引。
 
@@ -212,7 +214,7 @@ python3 scripts/weekly_data_snapshot.py --date 2026-06-12 --stale-days 45 --outp
 
 1. 轮换曾经出现在 git remote URL 中的 GitHub token。
 2. 轮换生产 nginx 配置里硬编码的第三方 API key，并迁移到安全注入方式。
-3. 将 `make smoke-ui` 的 Chrome 环境要求在 CI 中标准化后，再接入 GitHub Pages workflow。
+3. 为 UI smoke 失败场景上传截图 artifact，并继续扩展为阈值化视觉 diff。
 4. `make validate-provenance` 已接入发布链路；继续保持 provenance 字段的 `high/medium` 与 `verifiedAt` 的时效复核。
 
 更多审计记录见 [AUDIT.md](AUDIT.md)，变更记录见 [CHANGELOG.md](CHANGELOG.md)。
