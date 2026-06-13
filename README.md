@@ -161,6 +161,7 @@ python3 scripts/validate.py --check-urls
 
 ```bash
 python3 scripts/provenance_report.py
+python3 scripts/provenance_report.py --stale-days 60
 python3 scripts/check_data_drift.py
 python3 scripts/check_data_drift.py --update-snapshot
 make validate-provenance
