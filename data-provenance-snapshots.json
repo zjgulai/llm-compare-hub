@@ -1,4 +1,818 @@
 {
   "generatedAt": "2026-06-12",
-  "sources": {}
+  "sources": {
+    "https://docs.b.ai/llmservice/api/": {
+      "status": 200,
+      "sha256": "db96c4c6c36059263b82796ba4f6beb8cf5b6471764899af71e4b0c44b86da6a",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "bai-data.json:claude-haiku-4.5-bai:docsUrl",
+        "bai-data.json:claude-haiku-4.5-bai:sourceUrl",
+        "bai-data.json:deepseek-ai/DeepSeek-V3.2-bai:docsUrl",
+        "bai-data.json:deepseek-ai/DeepSeek-V3.2-bai:sourceUrl",
+        "bai-data.json:deepseek-ai/DeepSeek-V4-Flash-bai:docsUrl",
+        "bai-data.json:deepseek-ai/DeepSeek-V4-Flash-bai:sourceUrl",
+        "bai-data.json:deepseek-ai/DeepSeek-V4-Pro-bai:docsUrl",
+        "bai-data.json:deepseek-ai/DeepSeek-V4-Pro-bai:sourceUrl",
+        "bai-data.json:gpt-5-mini-bai:docsUrl",
+        "bai-data.json:gpt-5-mini-bai:sourceUrl",
+        "bai-data.json:gpt-5-nano-bai:docsUrl",
+        "bai-data.json:gpt-5-nano-bai:sourceUrl",
+        "bai-data.json:gpt-5.2-bai:docsUrl",
+        "bai-data.json:gpt-5.2-bai:sourceUrl",
+        "bai-data.json:gpt-5.4-bai:docsUrl",
+        "bai-data.json:gpt-5.4-bai:sourceUrl",
+        "bai-data.json:gpt-5.5-bai:docsUrl",
+        "bai-data.json:gpt-5.5-bai:sourceUrl"
+      ]
+    },
+    "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels": {
+      "status": 200,
+      "sha256": "97aa257a655900a6e8688a62c473e1a16141fcea96142142a399b585df757e9a",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "easyrouter-data.json:claude-haiku-4.5-easyrouter:docsUrl",
+        "easyrouter-data.json:claude-haiku-4.5-easyrouter:sourceUrl",
+        "easyrouter-data.json:claude-opus-4.6-easyrouter:docsUrl",
+        "easyrouter-data.json:claude-opus-4.6-easyrouter:sourceUrl",
+        "easyrouter-data.json:claude-opus-4.7-easyrouter:docsUrl",
+        "easyrouter-data.json:claude-opus-4.7-easyrouter:sourceUrl",
+        "easyrouter-data.json:claude-sonnet-4.6-easyrouter:docsUrl",
+        "easyrouter-data.json:claude-sonnet-4.6-easyrouter:sourceUrl",
+        "easyrouter-data.json:deepseek-ai/DeepSeek-V4-Flash-easyrouter:docsUrl",
+        "easyrouter-data.json:deepseek-ai/DeepSeek-V4-Flash-easyrouter:sourceUrl",
+        "easyrouter-data.json:deepseek-ai/DeepSeek-V4-Pro-easyrouter:docsUrl",
+        "easyrouter-data.json:deepseek-ai/DeepSeek-V4-Pro-easyrouter:sourceUrl",
+        "easyrouter-data.json:gpt-5.1-codex-easyrouter:docsUrl",
+        "easyrouter-data.json:gpt-5.1-codex-easyrouter:sourceUrl",
+        "easyrouter-data.json:gpt-5.2-codex-easyrouter:docsUrl",
+        "easyrouter-data.json:gpt-5.2-codex-easyrouter:sourceUrl",
+        "easyrouter-data.json:gpt-5.2-easyrouter:docsUrl",
+        "easyrouter-data.json:gpt-5.2-easyrouter:sourceUrl",
+        "easyrouter-data.json:gpt-5.3-codex-easyrouter:docsUrl",
+        "easyrouter-data.json:gpt-5.3-codex-easyrouter:sourceUrl",
+        "easyrouter-data.json:gpt-5.4-easyrouter:docsUrl",
+        "easyrouter-data.json:gpt-5.4-easyrouter:sourceUrl",
+        "easyrouter-data.json:gpt-5.4-mini-easyrouter:docsUrl",
+        "easyrouter-data.json:gpt-5.4-mini-easyrouter:sourceUrl",
+        "easyrouter-data.json:gpt-5.4-nano-easyrouter:docsUrl",
+        "easyrouter-data.json:gpt-5.4-nano-easyrouter:sourceUrl",
+        "easyrouter-data.json:gpt-5.5-easyrouter:docsUrl",
+        "easyrouter-data.json:gpt-5.5-easyrouter:sourceUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/3d-series/meshy-6-3d": {
+      "status": 200,
+      "sha256": "a1f8a2ad89ea0c7721f72989321347d9b8c8d03aa0ba5466f431e259d469f0ac",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:meshy-6-3d:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/3d-series/tripo-h31-3d": {
+      "status": 200,
+      "sha256": "4f70aa656103e74e8d14de2f879390f6bb6195187592093ff7ddae8d2f1ce7fd",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:tripo-h31-3d:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/3d-series/tripo-p1-3d": {
+      "status": 200,
+      "sha256": "ce0e58a63582279ffe0287e7a2f571a16b5b41173ce1f82386cdf1dd8c85bd31",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:tripo-p1-3d:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/chat-series/chat-completions": {
+      "status": 200,
+      "sha256": "e5119cc8a5dfe15996abd8fcacef406787c53e1e816391fc6d2373b7ab7deaa5",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:claude-4-5-api:docsUrl",
+        "api-data.json:claude-4-6-api:docsUrl",
+        "api-data.json:gpt-5.5:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/chat-series/claude-messages": {
+      "status": 200,
+      "sha256": "d8bd582c1f7e3e7457b7da67ff11d3936c51021e342db5b97056a9342ae1701b",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:claude-opus-4-7:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/chat-series/gemini-native-format": {
+      "status": 200,
+      "sha256": "945e7470cd4487bd3ebb1b3e54b9c151bac83530a68618fcb6d0abc20029730f",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:gemini-3-api:docsUrl",
+        "api-data.json:gemini-3.5-flash:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/flux-2": {
+      "status": 200,
+      "sha256": "e55f9b98ba510e2732ff660417bfd7fca91bb071f1f3cf6ed13353eeb4c25920",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:flux-2:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/flux-kontext": {
+      "status": 200,
+      "sha256": "1fcdd1f578873f23892265c4d7c2db8a98b2b73462fbdd385efb1f7e6944e254",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:flux-kontext-pro:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/gpt-4o-image": {
+      "status": 200,
+      "sha256": "48b6103167e085587e0fac786f6e61d5714a3b23d881d5646947e657e5727ecc",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:gpt-4o-image-api:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/gpt-image-1.5": {
+      "status": 200,
+      "sha256": "5bb61902bf2f9e3ce917b382043b6b80a85ed582fcc8d75b05d8152b781f29ea",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:gpt-image-1-5-api:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/gpt-image-2": {
+      "status": 200,
+      "sha256": "dc835fa835322b04fb0e903e2b7accad3784ce8bf4372c384c3b686cc27f7f0c",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:gpt-image-2:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/grok-imagine-image": {
+      "status": 200,
+      "sha256": "5996af053e6f2640ef0dd2977d5b0ace3a7b55a1100049e11cb1ebe8d3b63918",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:grok-imagine-image:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/kling-o1": {
+      "status": 200,
+      "sha256": "98cbdbe65e4cd0de669a0598ba106b714905095c7e2f2aa2d5703278e454f033",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:kling-o1-image:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/kling-o3": {
+      "status": 200,
+      "sha256": "94707fd5f5e8e9a79446f69820beb22b58d2266bc1d647d7d9a83672df2b1665",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:kling-o3-image:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/nano-banana": {
+      "status": 200,
+      "sha256": "6afe22d7f84f7e184a7f43a25d0023ced5e39e5fed76baa481ee052f182bd45c",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:nano-banana:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/nano-banana-2": {
+      "status": 200,
+      "sha256": "dafbbff089dd91f5f656ce5b07f94fab2f0110dff0516f81ad003cdcdd7c59ad",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:nano-banana-2-api:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/nano-banana-2-new": {
+      "status": 200,
+      "sha256": "4e61943b5b396f488b35c3cd6db448d7153576c6658c2dbe76bb7579c4cc947b",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:nano-banana-2-new:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/seedream-4": {
+      "status": 200,
+      "sha256": "bedf89ff06465ac46183fd7842013cd05b72b9dc483b336e8011f1b0eef4e278",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:seedream-4:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/seedream-4-5": {
+      "status": 200,
+      "sha256": "93abcfe6b44b02461086d7dc6967cc571ad99f96c3ea48f76e8b6d576c2bdcbe",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:seedream-4-5-api:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/seedream-5-0-lite": {
+      "status": 200,
+      "sha256": "0b4f7a8ea2b5af11032408058369ee33ba97cfc574c6556c5968031566978fd0",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:seedream-5-0-lite-api:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/wan-2-7-image": {
+      "status": 200,
+      "sha256": "c00ffe37421365cde436b424e4c68410c61f65e9e7609e044cb2212d60a11526",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:wan-2-7-image:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/image-series/z-image": {
+      "status": 200,
+      "sha256": "8b2098041415839e7c323ec4e269aa6d7c957068543692796e7520eaba20c543",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:z-image:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/add-instrumental": {
+      "status": 200,
+      "sha256": "734114079b535f23491db6f2c06b9793762e84df4df167e1cef04de9e514b6d3",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:add-instrumental:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/add-vocals": {
+      "status": 200,
+      "sha256": "e92c5de89e350b9074b1831826854059735d8e9a59bf0816a62c29d1007e7680",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:add-vocals:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/boost-music-style": {
+      "status": 200,
+      "sha256": "b06d4ed36a3865d6da26d8ba73546037803b9326a0c584214de58e722b55de63",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:boost-music-style:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/convert-to-wav": {
+      "status": 200,
+      "sha256": "caf963482af8c0717f81068e01c589f6841c85901e84ac3ea5020ff827622dff",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:convert-to-wav:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/create-music-video": {
+      "status": 200,
+      "sha256": "b667eccbc75c96c68689fdb0217cda9ee384856ca849f60ef5f6c0dbc4fa340f",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:create-music-video:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/elevenlabs-v3-tts": {
+      "status": 200,
+      "sha256": "6e98911978bdab3249ffc97f785ef10d98ddef3fc02acb1df4681753e95b7f52",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:elevenlabs-v3-tts:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/extend-music": {
+      "status": 200,
+      "sha256": "50b3665d048c22e1c9364f1e92973f52d6e5930fe120f7837dfda14f16acfcbc",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:extend-music:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/generate-lyrics": {
+      "status": 200,
+      "sha256": "d100225626616e658708487c3a3e4bf3e1c4ebdf911f43272ed13ab948f99ef6",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:generate-lyrics:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/generate-music": {
+      "status": 200,
+      "sha256": "61a452c303c3bef2ff5f3b0ed731f9ce4362c91ce554f99846adbb37c45d9ace",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:generate-music:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/generate-music-cover": {
+      "status": 200,
+      "sha256": "4e1ed84948a5c698a539ac4741381e9dbf103c203ebc485ae6d9ec68762f40ac",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:generate-music-cover:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/generate-persona": {
+      "status": 200,
+      "sha256": "32bb0534d13fa482dcca355555e7011a305c4f96f37c43887f2b600356c02f8d",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:generate-persona:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/get-timestamped-lyrics": {
+      "status": 200,
+      "sha256": "74ba901cfb3437b8e920eafdb1d11ec8d985a1bd86f90fa6c27d2a5e6b922225",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:get-timestamped-lyrics:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/minimax-music-2.6": {
+      "status": 200,
+      "sha256": "6e578c0ab117759c8b1777c34c4a303eaf86a093d3cc0523f2c0ffa9f01e26ed",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:minimax-music-2.6:docsUrl",
+        "api-data.json:minimax-music-2.6:sourceUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/replace-section": {
+      "status": 200,
+      "sha256": "4893dbf395f702d72546204687a346b9e5d4fa53e9aaa92e64d2c97797807e78",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:replace-section:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/upload-and-cover-audio": {
+      "status": 200,
+      "sha256": "00a0b1cf77df1d911f4e13f45ccc1e387c47fbcceb1bc0a596dcea623d97f8ed",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:upload-and-cover-audio:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/upload-and-extend-audio": {
+      "status": 200,
+      "sha256": "874936b579df00ccc050fe607c9887b02eae868d23d3e6b0ac8c7577643d6238",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:upload-and-extend-audio:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/music-series/vocal-remover": {
+      "status": 200,
+      "sha256": "ea98c942069db25f18571a7cb5c156dbb3676f95461845cbc85e52a165f952b1",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:vocal-remover-api:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/overview": {
+      "status": 200,
+      "sha256": "92dbc2ad30b52a47368055a1fa56e8bc80dd306a3b53432aee71c97e954828cb",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:add-instrumental:sourceUrl",
+        "api-data.json:add-vocals:sourceUrl",
+        "api-data.json:boost-music-style:sourceUrl",
+        "api-data.json:claude-4-5-api:sourceUrl",
+        "api-data.json:claude-4-6-api:sourceUrl",
+        "api-data.json:claude-opus-4-7:sourceUrl",
+        "api-data.json:convert-to-wav:sourceUrl",
+        "api-data.json:create-music-video:sourceUrl",
+        "api-data.json:elevenlabs-v3-tts:sourceUrl",
+        "api-data.json:extend-music:sourceUrl",
+        "api-data.json:flux-2:sourceUrl",
+        "api-data.json:flux-kontext-pro:sourceUrl",
+        "api-data.json:gemini-3-api:sourceUrl",
+        "api-data.json:gemini-3.5-flash:sourceUrl",
+        "api-data.json:generate-lyrics:sourceUrl",
+        "api-data.json:generate-music-cover:sourceUrl",
+        "api-data.json:generate-music:sourceUrl",
+        "api-data.json:generate-persona:sourceUrl",
+        "api-data.json:get-timestamped-lyrics:sourceUrl",
+        "api-data.json:gpt-4o-image-api:sourceUrl",
+        "api-data.json:gpt-5.5:sourceUrl",
+        "api-data.json:gpt-image-1-5-api:sourceUrl",
+        "api-data.json:gpt-image-2:sourceUrl",
+        "api-data.json:grok-imagine-image:sourceUrl",
+        "api-data.json:grok-imagine-video-1-5:sourceUrl",
+        "api-data.json:hailuo-02:sourceUrl",
+        "api-data.json:hailuo-2-3:sourceUrl",
+        "api-data.json:happy-horse:sourceUrl",
+        "api-data.json:image-translator:sourceUrl",
+        "api-data.json:kling-2-5-turbo-pro:sourceUrl",
+        "api-data.json:kling-2-6-motion-control:sourceUrl",
+        "api-data.json:kling-2-6:sourceUrl",
+        "api-data.json:kling-2.1/standard:sourceUrl",
+        "api-data.json:kling-3-0-motion-control:sourceUrl",
+        "api-data.json:kling-3-api:sourceUrl",
+        "api-data.json:kling-avatar-2.0:sourceUrl",
+        "api-data.json:kling-o1-image:sourceUrl",
+        "api-data.json:kling-o3-api:sourceUrl",
+        "api-data.json:kling-o3-image:sourceUrl",
+        "api-data.json:meshy-6-3d:sourceUrl",
+        "api-data.json:nano-banana-2-api:sourceUrl",
+        "api-data.json:nano-banana-2-new:sourceUrl",
+        "api-data.json:nano-banana:sourceUrl",
+        "api-data.json:replace-section:sourceUrl",
+        "api-data.json:runway-gen-4-5:sourceUrl",
+        "api-data.json:seedance-1-0-pro:sourceUrl",
+        "api-data.json:seedance-1-5-pro:sourceUrl",
+        "api-data.json:seedance-2:sourceUrl",
+        "api-data.json:seedream-4-5-api:sourceUrl",
+        "api-data.json:seedream-4:sourceUrl",
+        "api-data.json:seedream-5-0-lite-api:sourceUrl",
+        "api-data.json:sora-2-official:sourceUrl",
+        "api-data.json:sora-2-pro:sourceUrl",
+        "api-data.json:sora-2:sourceUrl",
+        "api-data.json:tripo-h31-3d:sourceUrl",
+        "api-data.json:tripo-p1-3d:sourceUrl",
+        "api-data.json:upload-and-cover-audio:sourceUrl",
+        "api-data.json:upload-and-extend-audio:sourceUrl",
+        "api-data.json:veo-3-1-official:sourceUrl",
+        "api-data.json:veo3.1-fast:sourceUrl",
+        "api-data.json:video-translator:sourceUrl",
+        "api-data.json:video-upscaler:docsUrl",
+        "api-data.json:video-upscaler:sourceUrl",
+        "api-data.json:vocal-remover-api:sourceUrl",
+        "api-data.json:wan-2-2-fast:sourceUrl",
+        "api-data.json:wan-2-5:sourceUrl",
+        "api-data.json:wan-2-6:sourceUrl",
+        "api-data.json:wan-2-7-image:sourceUrl",
+        "api-data.json:wan-2-7-video:sourceUrl",
+        "api-data.json:wan-animate:sourceUrl",
+        "api-data.json:z-image:sourceUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/grok-imagine-video-1-5": {
+      "status": 200,
+      "sha256": "b4066b90829578aae3c19f85747b28e73539c1cd88a3bbde8dafbbf2a102841e",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:grok-imagine-video-1-5:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/hailuo-02": {
+      "status": 200,
+      "sha256": "b19fa8ba6bd42d8575fb90844e8134a45087df22b7338faeed947140d34f09ce",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:hailuo-02:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/hailuo-2-3": {
+      "status": 200,
+      "sha256": "d519ae4a96ec1a6d02f76d85e33e6421c3c5c75de8cc397cd255bd687851e12e",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:hailuo-2-3:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/happy-horse": {
+      "status": 200,
+      "sha256": "699372601388a01a465198dcae02dedcd8ae79f87ba1315c3ddec58e76f79314",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:happy-horse:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/kling-2-1": {
+      "status": 200,
+      "sha256": "2a822e6b25058ce7051c1b74401939d0f02adeba2948c1f689e9f2790fa842f3",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:kling-2.1/standard:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/kling-2-5-turbo-pro": {
+      "status": 200,
+      "sha256": "ea9860bde766913af82201faa8d38b5e1ad02378ce1f851f31baf4371f923818",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:kling-2-5-turbo-pro:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/kling-2-6": {
+      "status": 200,
+      "sha256": "3899f727d5464e0df34f142db8d877c023b28b1ca4d6d3e33fc2c8edd2c38dfa",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:kling-2-6:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/kling-2.6-motion-control": {
+      "status": 200,
+      "sha256": "b3a54716d44b606833e241f5cade6cd9a9d81cfebfc44babdcde65aa607124af",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:kling-2-6-motion-control:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/kling-3-0": {
+      "status": 200,
+      "sha256": "4311315eb40f61769f36e85db8234af7aa3c2f58723d64980be3f836af7a8acd",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:kling-3-api:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/kling-3-0-motion-control": {
+      "status": 200,
+      "sha256": "7c24bf3108daa9192a2d53bd75d06d1353455ba9256a2cd3f8cf05679e691085",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:kling-3-0-motion-control:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/kling-avatar-2-0": {
+      "status": 200,
+      "sha256": "eb59f27b06642d881523583ae656bec1adb8972dbbaf48886cf7677ec1a00fb8",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:kling-avatar-2.0:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/kling-o3": {
+      "status": 200,
+      "sha256": "2adbbb39cbc1c73d8a62fbcce52f5d5397c32ec0aab8f4482cdf00f8ce619852",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:kling-o3-api:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/runway-gen-4-5": {
+      "status": 200,
+      "sha256": "6db697ed4ca77ca83b7df21016283ff6e43f284ff51e9aafeea74430478786a6",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:runway-gen-4-5:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/seedance-1-5-pro": {
+      "status": 200,
+      "sha256": "f951e4b5cfa75aa6563fe6adfdc6f699a67e14a90d0d7070c6eed0a78bd5f50e",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:seedance-1-5-pro:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/seedance-1.0-pro": {
+      "status": 200,
+      "sha256": "f3dc21ba65524a4ac964fe64de6c027cb497824a4630d1aed56692f76ac8a9e3",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:seedance-1-0-pro:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/seedance-2": {
+      "status": 200,
+      "sha256": "162a3ef14e92f4ff6bc508acc6f7ce8fa3b79ea35fc5e8c2686b7c8537e3eeae",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:seedance-2:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/sora-2": {
+      "status": 200,
+      "sha256": "38dad1f8094ab5c948d6b3b28782fce87da6b5672eff022d779347ef5e7adf00",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:sora-2:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/sora-2-official": {
+      "status": 200,
+      "sha256": "3958b664112d1829ff337380c0f1988086b8460e897cfd946b34ec54972cfd98",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:sora-2-official:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/sora-2-pro": {
+      "status": 200,
+      "sha256": "257c92a59288425bec40f505e9c2949da162e2e0524e05c1da02e6db02a5c7be",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:sora-2-pro:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/veo-3-1": {
+      "status": 200,
+      "sha256": "fcd08d2b9a63e332b681950ed8f3f4b63e76bf118050ceee7bae4b53cda54542",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:veo3.1-fast:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/veo-3-1-official": {
+      "status": 200,
+      "sha256": "d5681d7902c8263598a122f88726ef63c5114ab5c8e8cd45e4bdb3dad0f9423a",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:veo-3-1-official:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/wan-2-6": {
+      "status": 200,
+      "sha256": "d9a4ea465e80672b4f8789a80a8ea8203f44b884918f9fe524c9731549c3fff0",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:wan-2-6:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/wan-2-7-video": {
+      "status": 200,
+      "sha256": "9dca77e2c5240032aafedf33aa1700ea23bd2ea1c7a6ae5c1b81f49682dc29f3",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:wan-2-7-video:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/wan-animate": {
+      "status": 200,
+      "sha256": "5438c9c518d9cf8cc458c92df39335f827e711307bdb0abe9eba43f742d870ac",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:wan-animate:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/wan2.2-image-to-video-fast": {
+      "status": 200,
+      "sha256": "47af6d50becc42872d31b8380ce266a6e80c68a06bef178028ceca10a28b49b0",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:wan-2-2-fast:docsUrl"
+      ]
+    },
+    "https://docs.poyo.ai/api-manual/video-series/wan2.5-image-to-video": {
+      "status": 200,
+      "sha256": "5db51f7729294b07443d9ea131bdbdbbd7f1e21cfae75e6da6cb8a4c77a0e588",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:wan-2-5:docsUrl"
+      ]
+    },
+    "https://docs.siliconflow.cn/cn/api-reference/audio/create-audio-transcriptions": {
+      "status": 200,
+      "sha256": "9063afe7efc9da0ac9a9dd04bf5b571cc200b340d9fed0b599a663043fa9b4de",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "siliconflow-data.json:FunAudioLLM/SenseVoiceSmall:docsUrl"
+      ]
+    },
+    "https://docs.siliconflow.cn/cn/api-reference/audio/create-speech": {
+      "status": 200,
+      "sha256": "050fe90b36587c73feb76af2d16501543045a87c07b1adc255213bf279ffe592",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "siliconflow-data.json:FunAudioLLM/CosyVoice2-0.5B:docsUrl"
+      ]
+    },
+    "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions": {
+      "status": 200,
+      "sha256": "3d34ccc4aeb46b841df0f05c68f94f4e3ea688423207cd1aa495ff2fbfe9b854",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "siliconflow-data.json:MiniMaxAI/MiniMax-M2.5:docsUrl",
+        "siliconflow-data.json:Pro/MiniMaxAI/MiniMax-M2.5:docsUrl",
+        "siliconflow-data.json:Pro/Qwen/Qwen2.5-7B-Instruct:docsUrl",
+        "siliconflow-data.json:Pro/deepseek-ai/DeepSeek-R1:docsUrl",
+        "siliconflow-data.json:Pro/deepseek-ai/DeepSeek-V3.1-Terminus:docsUrl",
+        "siliconflow-data.json:Pro/deepseek-ai/DeepSeek-V3.2:docsUrl",
+        "siliconflow-data.json:Pro/moonshotai/Kimi-K2.5:docsUrl",
+        "siliconflow-data.json:Pro/moonshotai/Kimi-K2.6:docsUrl",
+        "siliconflow-data.json:Pro/zai-org/GLM-4.6:docsUrl",
+        "siliconflow-data.json:Pro/zai-org/GLM-4.7:docsUrl",
+        "siliconflow-data.json:Pro/zai-org/GLM-5.1:docsUrl",
+        "siliconflow-data.json:Pro/zai-org/GLM-5:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen2.5-14B-Instruct:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen2.5-72B-Instruct:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen2.5-7B-Instruct:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen2.5-Coder-32B-Instruct:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen2.5-Math-72B:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen3-VL-32B-Instruct:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen3.5-122B-A10B:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen3.5-27B:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen3.5-35B-A3B:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen3.5-397B-A17B:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen3.5-9B:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen3.6-27B:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen3.6-35B-A3B:docsUrl",
+        "siliconflow-data.json:THUDM/GLM-4-32B-0414:docsUrl",
+        "siliconflow-data.json:THUDM/GLM-4-9B-0414:docsUrl",
+        "siliconflow-data.json:THUDM/GLM-Z1-32B-0414:docsUrl",
+        "siliconflow-data.json:THUDM/GLM-Z1-9B-0414:docsUrl",
+        "siliconflow-data.json:deepseek-ai/DeepSeek-R1:docsUrl",
+        "siliconflow-data.json:deepseek-ai/DeepSeek-V3.1-Terminus:docsUrl",
+        "siliconflow-data.json:deepseek-ai/DeepSeek-V3.2:docsUrl",
+        "siliconflow-data.json:deepseek-ai/DeepSeek-V4-Flash:docsUrl",
+        "siliconflow-data.json:deepseek-ai/DeepSeek-V4-Pro:docsUrl",
+        "siliconflow-data.json:moonshotai/Kimi-K2-Instruct-0905:docsUrl",
+        "siliconflow-data.json:moonshotai/Kimi-K2-Thinking:docsUrl",
+        "siliconflow-data.json:moonshotai/Kimi-K2.5:docsUrl",
+        "siliconflow-data.json:moonshotai/Kimi-K2.6:docsUrl",
+        "siliconflow-data.json:zai-org/GLM-4.6:docsUrl",
+        "siliconflow-data.json:zai-org/GLM-4.7:docsUrl",
+        "siliconflow-data.json:zai-org/GLM-5.1:docsUrl",
+        "siliconflow-data.json:zai-org/GLM-5:docsUrl"
+      ]
+    },
+    "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings": {
+      "status": 200,
+      "sha256": "770f70b32b7e94331720a71a79ebcabc2519352bdd5cdd309efdd5c9833fb43e",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "siliconflow-data.json:BAAI/bge-large-en-v1.5:docsUrl",
+        "siliconflow-data.json:BAAI/bge-large-zh-v1.5:docsUrl",
+        "siliconflow-data.json:BAAI/bge-m3:docsUrl",
+        "siliconflow-data.json:Pro/BAAI/bge-m3:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen3-Embedding-0.6B:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen3-Embedding-4B:docsUrl",
+        "siliconflow-data.json:netease-youdao/bce-embedding-base_v1:docsUrl"
+      ]
+    },
+    "https://docs.siliconflow.cn/cn/api-reference/images/images-generations": {
+      "status": 200,
+      "sha256": "df078aa9a730b6757a3817e87c40e38155796f91497fb4a87d9825f71402533c",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "siliconflow-data.json:Kwai-Kolors/Kolors:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen-Image-Edit-2509:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen-Image-Edit:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen-Image-Max-360p:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen-Image-Max-720p:docsUrl",
+        "siliconflow-data.json:Tongyi-MAI/Z-Image-Turbo:docsUrl",
+        "siliconflow-data.json:Tongyi-MAI/Z-Image:docsUrl",
+        "siliconflow-data.json:baidu/ERNIE-Image-Turbo:docsUrl"
+      ]
+    },
+    "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank": {
+      "status": 200,
+      "sha256": "3d654a51ac85905d14712de857aa0ca512b88d4ce4ee32bfdbf2f4e9e76b857b",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "siliconflow-data.json:BAAI/bge-reranker-v2-m3:docsUrl",
+        "siliconflow-data.json:Pro/BAAI/bge-reranker-v2-m3:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen3-Reranker-0.6B:docsUrl",
+        "siliconflow-data.json:Qwen/Qwen3-Reranker-4B:docsUrl"
+      ]
+    },
+    "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit": {
+      "status": 200,
+      "sha256": "3ff8935c6f6e1811ea5e4facdfde2b3d8b4c00bcb36dc8c316b271834326dca7",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "siliconflow-data.json:Wan-AI/Wan2.2-I2V-A14B:docsUrl",
+        "siliconflow-data.json:Wan-AI/Wan2.2-T2V-A14B:docsUrl"
+      ]
+    },
+    "https://docs.siliconflow.cn/en/release-notes/overview": {
+      "status": 200,
+      "sha256": "38f762109bcdbc65c79fe0eee946e81dee04fbb40dabf3748b4ab1b652e69d14",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "siliconflow-data.json:BAAI/bge-large-zh-v1.5:sourceUrl",
+        "siliconflow-data.json:BAAI/bge-m3:sourceUrl",
+        "siliconflow-data.json:Pro/moonshotai/Kimi-K2.5:sourceUrl",
+        "siliconflow-data.json:Pro/zai-org/GLM-4.7:sourceUrl",
+        "siliconflow-data.json:Pro/zai-org/GLM-5:sourceUrl",
+        "siliconflow-data.json:Qwen/Qwen2.5-Coder-32B-Instruct:sourceUrl",
+        "siliconflow-data.json:THUDM/GLM-Z1-32B-0414:sourceUrl",
+        "siliconflow-data.json:deepseek-ai/DeepSeek-V4-Pro:sourceUrl",
+        "siliconflow-data.json:moonshotai/Kimi-K2-Instruct-0905:sourceUrl",
+        "siliconflow-data.json:moonshotai/Kimi-K2-Thinking:sourceUrl",
+        "siliconflow-data.json:moonshotai/Kimi-K2.6:sourceUrl",
+        "siliconflow-data.json:netease-youdao/bce-embedding-base_v1:sourceUrl",
+        "siliconflow-data.json:zai-org/GLM-4.6:sourceUrl",
+        "siliconflow-data.json:zai-org/GLM-5.1:sourceUrl"
+      ]
+    },
+    "https://poyo.ai/models/image-translator": {
+      "status": 200,
+      "sha256": "17dcd1837c87eb71be7ae4981c59fa53f0e456e679fdb175b3a15790310c8f18",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:image-translator:docsUrl"
+      ]
+    },
+    "https://poyo.ai/models/video-translator": {
+      "status": 200,
+      "sha256": "7eb26f0dd05317479956d66df866ee490bbf3353b5a8a08e336f0a3efdef4d64",
+      "checkedAt": "2026-06-12",
+      "owners": [
+        "api-data.json:video-translator:docsUrl"
+      ]
+    }
+  }
 }
