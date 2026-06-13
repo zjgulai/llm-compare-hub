@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-06-12 — GitHub Actions Node 24 runtime compatibility
+
+### Changed
+- Upgraded GitHub Pages workflow actions to Node 24-compatible major versions:
+  `actions/checkout@v6`, `actions/setup-node@v6`, `actions/configure-pages@v6`,
+  `actions/upload-pages-artifact@v5`, and `actions/deploy-pages@v5`.
+
 ## 2026-06-12 — Data refresh safety fixes
 
 ### Fixed
