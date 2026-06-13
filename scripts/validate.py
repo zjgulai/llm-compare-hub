@@ -46,6 +46,14 @@ VALID_COMPARE_TYPES = {
     'ranking',
     '3d',
 }
+VALID_CONFIDENCE = {'high', 'medium', 'low'}
+VALID_SOURCE_TYPES = {
+    'official-docs',
+    'official-release-notes',
+    'official-api-list',
+    'vendor-site',
+    'curated-manual',
+}
 ISO_DATE_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 
 PLATFORM_MODEL_STRINGS = {
@@ -193,6 +201,18 @@ def expect_iso_date(obj, owner, key, required=True):
     return True
 
 
+def expect_choice(obj, owner, key, choices, required=True):
+    if key not in obj:
+        if required:
+            msg('ERROR', f"{owner} missing required field: {key}")
+        return False
+    value = obj.get(key)
+    if value not in choices:
+        msg('ERROR', f"{owner_key(owner, key)} must be one of {sorted(choices)}")
+        return False
+    return True
+
+
 def expect_string_list(obj, owner, key, required=True):
     if key not in obj:
         if required:
@@ -220,6 +240,26 @@ def check_duplicate(owner, value, seen):
         msg('ERROR', f"{owner}: duplicate value '{value}' also seen at {seen[value]}")
         return
     seen[value] = owner
+
+
+def check_provenance(owner, item, required=False):
+    has_structured = any(key in item for key in ['confidence', 'sourceType'])
+
+    if 'sourceUrl' in item:
+        expect_url(item, owner, 'sourceUrl')
+    if 'verifiedAt' in item:
+        expect_iso_date(item, owner, 'verifiedAt')
+
+    if required or has_structured:
+        expect_url(item, owner, 'sourceUrl')
+        expect_iso_date(item, owner, 'verifiedAt')
+        expect_choice(item, owner, 'confidence', VALID_CONFIDENCE)
+        expect_choice(item, owner, 'sourceType', VALID_SOURCE_TYPES)
+
+    if item.get('confidence') == 'high' and not str(item.get('sourceType', '')).startswith('official-'):
+        msg('ERROR', f"{owner}.confidence=high requires an official sourceType")
+    if item.get('confidence') == 'low' and is_blank(item.get('notes')):
+        msg('ERROR', f"{owner}.confidence=low requires notes")
 
 
 def load_json_files():
@@ -296,6 +336,7 @@ def check_platform_file(fname, data):
                 docs_urls.append((fname, model.get('name'), model['docsUrl']))
             expect_url(model, model_owner, 'sourceUrl', required=False)
             expect_iso_date(model, model_owner, 'verifiedAt', required=False)
+            check_provenance(model_owner, model, required=False)
 
             if 'docsUrlNeedsReview' in model:
                 expect_bool(model, model_owner, 'docsUrlNeedsReview')
@@ -400,6 +441,7 @@ def check_compare_data(comp, platform_data):
         expect_number(item, item_owner, 'score', minimum=0, maximum=100)
         expect_string(item, item_owner, 'tag')
         expect_string(item, item_owner, 'modelId', required=False)
+        check_provenance(item_owner, item, required=False)
         check_compare_model_ref(item_owner, item, platform_data)
 
     category_ids = {}
@@ -426,6 +468,7 @@ def check_compare_data(comp, platform_data):
             for key in ['inputPrice', 'outputPrice']:
                 expect_number(item, item_owner, key, minimum=0)
             expect_url(item, item_owner, 'docsUrl')
+            check_provenance(item_owner, item, required=False)
             check_compare_model_ref(item_owner, item, platform_data, warn_missing=False)
 
     function_ids = {}
@@ -446,6 +489,7 @@ def check_compare_data(comp, platform_data):
                 expect_string(item, item_owner, key)
             expect_number(item, item_owner, 'score', minimum=0, maximum=100)
             expect_url(item, item_owner, 'docsUrl', required=False)
+            check_provenance(item_owner, item, required=False)
             check_compare_model_ref(item_owner, item, platform_data, warn_missing=False)
 
 
@@ -483,6 +527,7 @@ def check_free_models(data):
             expect_string_list(model, item_owner, key)
         for key in ['huggingface', 'baseModelUrl', 'ollamaUrl']:
             expect_url(model, item_owner, key, required=False)
+        check_provenance(item_owner, model, required=False)
         if model.get('modelId'):
             check_duplicate(f"{item_owner}.modelId", model['modelId'], model_ids)
 
