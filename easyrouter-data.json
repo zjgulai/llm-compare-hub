@@ -43,7 +43,9 @@
           "output": "代码生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "gpt-5.2-codex-easyrouter",
@@ -65,7 +67,9 @@
           "output": "代码生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "gpt-5.3-codex-easyrouter",
@@ -87,7 +91,9 @@
           "output": "代码生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "gpt-5.5-easyrouter",
@@ -110,7 +116,9 @@
           "output": "文本生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "gpt-5.4-easyrouter",
@@ -132,7 +140,9 @@
           "output": "文本生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "gpt-5.4-mini-easyrouter",
@@ -154,7 +164,9 @@
           "output": "文本生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "gpt-5.4-nano-easyrouter",
@@ -176,7 +188,9 @@
           "output": "文本生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "gpt-5.2-easyrouter",
@@ -197,7 +211,9 @@
           "output": "文本生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "claude-haiku-4.5-easyrouter",
@@ -219,7 +235,9 @@
           "output": "文本生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "claude-opus-4.6-easyrouter",
@@ -242,7 +260,9 @@
           "output": "文本生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "claude-opus-4.7-easyrouter",
@@ -265,7 +285,9 @@
           "output": "文本生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "claude-sonnet-4.6-easyrouter",
@@ -287,7 +309,9 @@
           "output": "文本生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "deepseek-ai/DeepSeek-V4-Pro-easyrouter",
@@ -311,7 +335,9 @@
           "output": "文本生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         },
         {
           "modelId": "deepseek-ai/DeepSeek-V4-Flash-easyrouter",
@@ -333,7 +359,9 @@
           "output": "文本生成",
           "docsUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
           "sourceUrl": "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-api-list"
         }
       ]
     }
