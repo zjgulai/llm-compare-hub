@@ -1,4 +1,4 @@
-.PHONY: validate typecheck build verify-assets release deploy deploy-dry check check-exposure clean
+.PHONY: validate validate-provenance typecheck build verify-assets release deploy deploy-dry check check-exposure clean
 
 # SSH key: keep production credentials outside the worktree.
 SSH_KEY := $(HOME)/.ssh/llm-compare-hub.pem
@@ -11,6 +11,10 @@ RELEASE_DIR := release
 validate:
 	@echo "🔍 Validating all JSON data files..."
 	@python3 scripts/validate.py
+
+validate-provenance:
+	@echo "🔎 Validating strict provenance coverage..."
+	@python3 scripts/validate.py --strict-provenance
 
 typecheck:
 	@echo "🧪 Type-checking React source..."

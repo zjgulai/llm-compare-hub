@@ -8,6 +8,7 @@ Usage:
     python3 scripts/validate.py
     python3 scripts/validate.py --quiet
     python3 scripts/validate.py --check-urls
+    python3 scripts/validate.py --strict-provenance
 """
 
 import json
@@ -79,6 +80,7 @@ errors = 0
 warnings = 0
 quiet = '--quiet' in sys.argv
 check_urls = '--check-urls' in sys.argv
+strict_provenance = '--strict-provenance' in sys.argv
 
 
 def msg(level, text):
@@ -336,7 +338,7 @@ def check_platform_file(fname, data):
                 docs_urls.append((fname, model.get('name'), model['docsUrl']))
             expect_url(model, model_owner, 'sourceUrl', required=False)
             expect_iso_date(model, model_owner, 'verifiedAt', required=False)
-            check_provenance(model_owner, model, required=False)
+            check_provenance(model_owner, model, required=strict_provenance)
 
             if 'docsUrlNeedsReview' in model:
                 expect_bool(model, model_owner, 'docsUrlNeedsReview')
