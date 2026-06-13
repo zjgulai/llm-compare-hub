@@ -162,7 +162,11 @@
           "context": "256K",
           "pricing": "输入 ¥6.5/M | 输出 ¥27/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "Pro/moonshotai/Kimi-K2.6",
@@ -204,7 +208,9 @@
           "deprecatedAt": "2026-06-11",
           "replacementModelId": "Pro/moonshotai/Kimi-K2.6",
           "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "moonshotai/Kimi-K2-Thinking",
@@ -223,7 +229,9 @@
           "deprecatedAt": "2026-05-15",
           "replacementModelId": "moonshotai/Kimi-K2.6",
           "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "moonshotai/Kimi-K2-Instruct-0905",
@@ -241,7 +249,9 @@
           "deprecatedAt": "2026-05-15",
           "replacementModelId": "moonshotai/Kimi-K2.6",
           "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "zai-org/GLM-5.1",
@@ -253,7 +263,11 @@
           "context": "198K",
           "pricing": "输入 ¥6/M | 输出 ¥28/M",
           "output": "Text",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "Pro/zai-org/GLM-5.1",
@@ -295,7 +309,9 @@
           "deprecatedAt": "2026-06-11",
           "replacementModelId": "Pro/zai-org/GLM-5.1",
           "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "zai-org/GLM-4.7",
@@ -325,7 +341,9 @@
           "deprecatedAt": "2026-06-11",
           "replacementModelId": "Pro/zai-org/GLM-5.1",
           "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "zai-org/GLM-4.6",
@@ -343,7 +361,9 @@
           "deprecatedAt": "2026-05-15",
           "replacementModelId": "zai-org/GLM-5.1",
           "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "Pro/zai-org/GLM-4.6",
@@ -374,7 +394,9 @@
           "deprecatedAt": "2026-05-15",
           "replacementModelId": "deepseek-ai/DeepSeek-R1",
           "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "THUDM/GLM-4-32B-0414",
@@ -575,7 +597,9 @@
           "deprecatedAt": "2026-04-29",
           "replacementModelId": "deepseek-ai/DeepSeek-V4-Pro",
           "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "Qwen/Qwen2.5-Math-72B",
@@ -604,7 +628,11 @@
           "pricing": "输入 ¥1.25/M | 输出 ¥2.50/M（估算，$0.174/$0.348，×7.2）",
           "output": "Text",
           "notes": "DeepSeek-V4 旗舰版，1.6T 总参数 49B 激活 MoE，1049K 超长上下文，2026-04-24 上线",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "Qwen/Qwen3.5-27B",
@@ -843,7 +871,11 @@
           "context": "512",
           "pricing": "¥0.5/M tokens",
           "output": "Vector (1024维)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "BAAI/bge-large-en-v1.5",
@@ -867,7 +899,11 @@
           "context": "8192",
           "pricing": "¥0.5/M tokens",
           "output": "Vector (1024维)",
-          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings"
+          "docsUrl": "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings",
+          "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         },
         {
           "modelId": "Pro/BAAI/bge-m3",
@@ -921,7 +957,9 @@
           "deprecatedAt": "2026-06-11",
           "replacementModelId": "BAAI/bge-m3",
           "sourceUrl": "https://docs.siliconflow.cn/en/release-notes/overview",
-          "verifiedAt": "2026-06-12"
+          "verifiedAt": "2026-06-12",
+          "confidence": "high",
+          "sourceType": "official-release-notes"
         }
       ]
     },
