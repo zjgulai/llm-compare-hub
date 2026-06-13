@@ -1,4 +1,4 @@
-.PHONY: validate validate-provenance provenance-report typecheck build verify-assets smoke-ui smoke-ui-production release deploy deploy-dry check check-exposure clean weekly-snapshot data-update-check data-update-dry data-update-deploy
+.PHONY: validate validate-provenance provenance-report typecheck build verify-assets smoke-ui smoke-ui-update-baselines smoke-ui-production release deploy deploy-dry check check-exposure clean weekly-snapshot data-update-check data-update-dry data-update-deploy
 
 # SSH key: keep production credentials outside the worktree.
 PREFERRED_SSH_KEY := /Users/lute/project/Agent/product/llm_models_hub/ai_video.pem
@@ -39,6 +39,10 @@ verify-assets:
 smoke-ui: release
 	@echo "🖥️  Running local UI smoke checks..."
 	@node scripts/ui_smoke_check.mjs
+
+smoke-ui-update-baselines: release
+	@echo "🖼️  Updating local UI smoke visual baselines..."
+	@node scripts/ui_smoke_check.mjs --update-baselines
 
 smoke-ui-production:
 	@echo "🖥️  Running production UI smoke checks..."

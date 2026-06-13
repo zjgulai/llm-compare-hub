@@ -22,6 +22,7 @@ source repo
 ├── claude.html / codex.html    # 精粹页
 ├── claude/ / codex/            # 短路径跳转页
 ├── src/                        # Vite + React 源码
+├── tests/visual-baselines/      # UI smoke 桌面/移动视觉基线
 ├── dist/                       # build 产物，gitignored
 ├── scripts/
 │   ├── validate.py             # JSON 数据校验
@@ -148,8 +149,9 @@ nginx 对 `src/`、`scripts/`、`.github/`、`.essence-cache/`、文档和隐藏
 | `make typecheck` | 对 `src/` 执行 TypeScript 检查 |
 | `make build` | 将 `src/` 构建到 `dist/`，不影响生产根入口 |
 | `make release` | 先验证数据并构建 `dist/`，再生成干净发布目录 `release/` |
-| `make smoke-ui` | 本地启动 `release/` 预览并用 Chrome headless 检查核心 UI、移动端溢出、基础可访问性和缺失 asset 404 |
-| `make smoke-ui-production` | 对腾讯云生产站执行同一组 UI smoke 检查 |
+| `make smoke-ui` | 本地启动 `release/` 预览并用 Chrome headless 检查核心 UI、移动端溢出、基础可访问性、缺失 asset 404 和视觉 diff |
+| `make smoke-ui-update-baselines` | 确认 UI 变化符合预期后，刷新 `tests/visual-baselines/` 的桌面/移动视觉基线 |
+| `make smoke-ui-production` | 对腾讯云生产站执行同一组 UI smoke 与视觉 diff 检查 |
 | `make deploy-dry` | 预演腾讯云发布与远端删除 |
 | `make deploy` | 发布 `release/` 到腾讯云并清理远端残留 |
 | `make check` | 检查主站和核心 JSON HTTP 状态 |
@@ -214,7 +216,7 @@ python3 scripts/weekly_data_snapshot.py --date 2026-06-12 --stale-days 45 --outp
 
 1. 轮换曾经出现在 git remote URL 中的 GitHub token。
 2. 轮换生产 nginx 配置里硬编码的第三方 API key，并迁移到安全注入方式。
-3. 继续扩展 UI smoke 为阈值化视觉 diff，并补充更深的可访问性检查。
+3. 补充更深的可访问性检查，尤其是颜色对比度、焦点顺序和键盘导航。
 4. `make validate-provenance` 已接入发布链路；继续保持 provenance 字段的 `high/medium` 与 `verifiedAt` 的时效复核。
 
 更多审计记录见 [AUDIT.md](AUDIT.md)，变更记录见 [CHANGELOG.md](CHANGELOG.md)。

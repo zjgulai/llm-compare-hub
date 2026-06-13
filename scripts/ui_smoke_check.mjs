@@ -4,6 +4,7 @@ import { createServer } from "node:http";
 import { createReadStream } from "node:fs";
 import {
   access,
+  copyFile,
   mkdir,
   mkdtemp,
   readFile,
@@ -15,11 +16,16 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { spawn, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { deflateSync, inflateSync } from "node:zlib";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "..");
 const RELEASE_DIR = path.join(REPO_ROOT, "release");
 const ARTIFACT_DIR = path.join(REPO_ROOT, "artifacts", "ui-smoke");
+const BASELINE_DIR = path.join(REPO_ROOT, "tests", "visual-baselines");
+const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+const DEFAULT_VISUAL_THRESHOLD = 0.15;
+const PIXEL_DELTA_THRESHOLD = 80;
 const HEADERS = {
   "Cache-Control": "no-store",
   "X-Content-Type-Options": "nosniff",
@@ -37,7 +43,12 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const parseArgs = () => {
   const args = process.argv.slice(2);
-  const options = { baseUrl: "", keepBrowser: false };
+  const options = {
+    baseUrl: "",
+    keepBrowser: false,
+    updateBaselines: false,
+    visualThreshold: DEFAULT_VISUAL_THRESHOLD,
+  };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--base-url") {
@@ -45,6 +56,13 @@ const parseArgs = () => {
       index += 1;
     } else if (arg === "--keep-browser") {
       options.keepBrowser = true;
+    } else if (arg === "--update-baselines") {
+      options.updateBaselines = true;
+    } else if (arg === "--visual-threshold") {
+      const value = Number(args[index + 1]);
+      assert(Number.isFinite(value) && value >= 0 && value <= 1, "--visual-threshold must be a number between 0 and 1");
+      options.visualThreshold = value;
+      index += 1;
     } else {
       throw new Error(`Unknown argument: ${arg}`);
     }
@@ -65,6 +83,147 @@ const pathExists = async (target) => {
   } catch {
     return false;
   }
+};
+
+const makeCrcTable = () => {
+  const table = new Uint32Array(256);
+  for (let index = 0; index < 256; index += 1) {
+    let value = index;
+    for (let bit = 0; bit < 8; bit += 1) {
+      value = value & 1 ? 0xedb88320 ^ (value >>> 1) : value >>> 1;
+    }
+    table[index] = value >>> 0;
+  }
+  return table;
+};
+
+const CRC_TABLE = makeCrcTable();
+
+const crc32 = (buffers) => {
+  let crc = 0xffffffff;
+  for (const buffer of buffers) {
+    for (const byte of buffer) {
+      crc = CRC_TABLE[(crc ^ byte) & 0xff] ^ (crc >>> 8);
+    }
+  }
+  return (crc ^ 0xffffffff) >>> 0;
+};
+
+const parsePng = (buffer) => {
+  assert(buffer.subarray(0, 8).equals(PNG_SIGNATURE), "Invalid PNG signature");
+
+  let offset = 8;
+  let width = 0;
+  let height = 0;
+  let bitDepth = 0;
+  let colorType = 0;
+  let interlace = 0;
+  const idatChunks = [];
+
+  while (offset < buffer.length) {
+    const length = buffer.readUInt32BE(offset);
+    const type = buffer.subarray(offset + 4, offset + 8).toString("ascii");
+    const data = buffer.subarray(offset + 8, offset + 8 + length);
+    offset += 12 + length;
+
+    if (type === "IHDR") {
+      width = data.readUInt32BE(0);
+      height = data.readUInt32BE(4);
+      bitDepth = data[8];
+      colorType = data[9];
+      interlace = data[12];
+    } else if (type === "IDAT") {
+      idatChunks.push(data);
+    } else if (type === "IEND") {
+      break;
+    }
+  }
+
+  assert(bitDepth === 8, `Unsupported PNG bit depth: ${bitDepth}`);
+  assert(interlace === 0, "Interlaced PNG screenshots are not supported");
+  assert(colorType === 6 || colorType === 2, `Unsupported PNG color type: ${colorType}`);
+
+  const bytesPerPixel = colorType === 6 ? 4 : 3;
+  const raw = inflateSync(Buffer.concat(idatChunks));
+  const stride = width * bytesPerPixel;
+  const pixels = Buffer.alloc(width * height * 4);
+  let rawOffset = 0;
+  let previous = Buffer.alloc(stride);
+
+  for (let y = 0; y < height; y += 1) {
+    const filter = raw[rawOffset];
+    rawOffset += 1;
+    const scanline = Buffer.from(raw.subarray(rawOffset, rawOffset + stride));
+    rawOffset += stride;
+    const recon = Buffer.alloc(stride);
+
+    for (let x = 0; x < stride; x += 1) {
+      const left = x >= bytesPerPixel ? recon[x - bytesPerPixel] : 0;
+      const up = previous[x] ?? 0;
+      const upLeft = x >= bytesPerPixel ? previous[x - bytesPerPixel] : 0;
+      let predictor = 0;
+      if (filter === 1) predictor = left;
+      else if (filter === 2) predictor = up;
+      else if (filter === 3) predictor = Math.floor((left + up) / 2);
+      else if (filter === 4) {
+        const p = left + up - upLeft;
+        const pa = Math.abs(p - left);
+        const pb = Math.abs(p - up);
+        const pc = Math.abs(p - upLeft);
+        predictor = pa <= pb && pa <= pc ? left : pb <= pc ? up : upLeft;
+      } else if (filter !== 0) {
+        throw new Error(`Unsupported PNG filter: ${filter}`);
+      }
+      recon[x] = (scanline[x] + predictor) & 0xff;
+    }
+
+    for (let x = 0; x < width; x += 1) {
+      const source = x * bytesPerPixel;
+      const target = (y * width + x) * 4;
+      pixels[target] = recon[source];
+      pixels[target + 1] = recon[source + 1];
+      pixels[target + 2] = recon[source + 2];
+      pixels[target + 3] = colorType === 6 ? recon[source + 3] : 255;
+    }
+    previous = recon;
+  }
+
+  return { width, height, pixels };
+};
+
+const createPngChunk = (type, data) => {
+  const typeBuffer = Buffer.from(type, "ascii");
+  const length = Buffer.alloc(4);
+  length.writeUInt32BE(data.length, 0);
+  const crc = Buffer.alloc(4);
+  crc.writeUInt32BE(crc32([typeBuffer, data]), 0);
+  return Buffer.concat([length, typeBuffer, data, crc]);
+};
+
+const encodeRgbaPng = ({ width, height, pixels }) => {
+  const stride = width * 4;
+  const raw = Buffer.alloc((stride + 1) * height);
+  for (let y = 0; y < height; y += 1) {
+    const target = y * (stride + 1);
+    raw[target] = 0;
+    pixels.copy(raw, target + 1, y * stride, y * stride + stride);
+  }
+
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(width, 0);
+  ihdr.writeUInt32BE(height, 4);
+  ihdr[8] = 8;
+  ihdr[9] = 6;
+  ihdr[10] = 0;
+  ihdr[11] = 0;
+  ihdr[12] = 0;
+
+  return Buffer.concat([
+    PNG_SIGNATURE,
+    createPngChunk("IHDR", ihdr),
+    createPngChunk("IDAT", deflateSync(raw)),
+    createPngChunk("IEND", Buffer.alloc(0)),
+  ]);
 };
 
 const normalizeUrlPath = (requestUrl) => {
@@ -365,7 +524,78 @@ const pageState = async (client) => evaluate(client, `(() => {
 const captureScreenshot = async (client, filename) => {
   const screenshot = await client.send("Page.captureScreenshot", { format: "png", fromSurface: true }, 10000);
   await mkdir(ARTIFACT_DIR, { recursive: true });
-  await writeFile(path.join(ARTIFACT_DIR, filename), Buffer.from(screenshot.data, "base64"));
+  const screenshotPath = path.join(ARTIFACT_DIR, filename);
+  await writeFile(screenshotPath, Buffer.from(screenshot.data, "base64"));
+  return screenshotPath;
+};
+
+const compareScreenshots = async (filename, threshold) => {
+  const baselinePath = path.join(BASELINE_DIR, filename);
+  const currentPath = path.join(ARTIFACT_DIR, filename);
+
+  assert(await pathExists(baselinePath), `Missing visual baseline ${path.relative(REPO_ROOT, baselinePath)}. Run make smoke-ui-update-baselines to create it.`);
+
+  const baseline = parsePng(await readFile(baselinePath));
+  const current = parsePng(await readFile(currentPath));
+  assert(
+    baseline.width === current.width && baseline.height === current.height,
+    `${filename} dimensions changed: baseline ${baseline.width}x${baseline.height}, current ${current.width}x${current.height}`,
+  );
+
+  let changedPixels = 0;
+  const diffPixels = Buffer.alloc(current.pixels.length);
+  for (let index = 0; index < current.pixels.length; index += 4) {
+    const delta =
+      Math.abs(current.pixels[index] - baseline.pixels[index]) +
+      Math.abs(current.pixels[index + 1] - baseline.pixels[index + 1]) +
+      Math.abs(current.pixels[index + 2] - baseline.pixels[index + 2]) +
+      Math.abs(current.pixels[index + 3] - baseline.pixels[index + 3]);
+
+    if (delta > PIXEL_DELTA_THRESHOLD) {
+      changedPixels += 1;
+      diffPixels[index] = 236;
+      diffPixels[index + 1] = 72;
+      diffPixels[index + 2] = 153;
+      diffPixels[index + 3] = 255;
+    } else {
+      const gray = Math.round((current.pixels[index] + current.pixels[index + 1] + current.pixels[index + 2]) / 3);
+      diffPixels[index] = gray;
+      diffPixels[index + 1] = gray;
+      diffPixels[index + 2] = gray;
+      diffPixels[index + 3] = 80;
+    }
+  }
+
+  const totalPixels = current.width * current.height;
+  const ratio = changedPixels / totalPixels;
+  const diffName = filename.replace(/\.png$/, "-diff.png");
+  await writeFile(path.join(ARTIFACT_DIR, diffName), encodeRgbaPng({
+    width: current.width,
+    height: current.height,
+    pixels: diffPixels,
+  }));
+
+  assert(
+    ratio <= threshold,
+    `${filename} visual diff ${(ratio * 100).toFixed(2)}% exceeds threshold ${(threshold * 100).toFixed(2)}%; see artifacts/ui-smoke/${diffName}`,
+  );
+  console.log(`OK ${filename} visual diff ${(ratio * 100).toFixed(2)}% <= ${(threshold * 100).toFixed(2)}%`);
+};
+
+const updateBaseline = async (filename) => {
+  await mkdir(BASELINE_DIR, { recursive: true });
+  await copyFile(path.join(ARTIFACT_DIR, filename), path.join(BASELINE_DIR, filename));
+  console.log(`OK updated visual baseline ${path.relative(REPO_ROOT, path.join(BASELINE_DIR, filename))}`);
+};
+
+const handleVisualBaselines = async (options) => {
+  for (const filename of ["desktop-home.png", "mobile-home.png"]) {
+    if (options.updateBaselines) {
+      await updateBaseline(filename);
+    } else {
+      await compareScreenshots(filename, options.visualThreshold);
+    }
+  }
 };
 
 const expectedAssets = async () => {
@@ -470,6 +700,7 @@ const main = async () => {
     await assertMissingAsset404(baseUrl);
     await runDesktopChecks(client, baseUrl);
     await runMobileChecks(client, baseUrl);
+    await handleVisualBaselines(options);
 
     assert(client.consoleErrors.length === 0, `Browser console errors:\n${client.consoleErrors.join("\n")}`);
     console.log(`OK UI smoke checks passed for ${baseUrl}`);

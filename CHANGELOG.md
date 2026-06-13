@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-06-13 — Threshold visual diff baselines
+
+### Added
+- `scripts/ui_smoke_check.mjs` 新增 `--update-baselines` 和 `--visual-threshold` 参数。
+- 新增 `tests/visual-baselines/desktop-home.png` 与 `tests/visual-baselines/mobile-home.png`，作为 UI smoke 的桌面/移动视觉基线。
+- 新增 `make smoke-ui-update-baselines`，用于在确认 UI 变化符合预期后刷新视觉基线。
+
+### Changed
+- `make smoke-ui` 和 `make smoke-ui-production` 现在会把当前截图与基线做像素差异检查，默认阈值为 15%。
+- UI smoke 失败 artifact 现在会包含 `desktop-home-diff.png` / `mobile-home-diff.png` 差异图。
+
+### Verified
+- `make smoke-ui-update-baselines` 成功刷新两张基线截图。
+- 本地 `make smoke-ui` 显示桌面和移动视觉 diff 均为 0.00%，低于 15% 阈值。
+
 ## 2026-06-13 — GitHub Pages UI smoke gate
 
 ### Changed

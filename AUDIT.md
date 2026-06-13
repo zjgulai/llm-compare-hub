@@ -26,7 +26,7 @@
 4. **构建事实**：Vite 输出目录已固定到 `dist/`，Tailwind v4 通过 `@tailwindcss/vite` 编译 utilities，构建不会覆盖仓库根入口。
 5. **文档事实**：README、CHANGELOG 和本审计已更新最新状态；历史 `.sisyphus` 计划仅作为归档参考。
 
-这些 P0 发布风险已通过 release-only 链路、源码 UI 复核、构建工具链修复和 CI UI smoke 门禁降级；当前主要剩余风险转为凭据轮换、可访问性深度门禁、视觉 diff 基线和持续数据时效复核。
+这些 P0 发布风险已通过 release-only 链路、源码 UI 复核、构建工具链修复、CI UI smoke 门禁和阈值化视觉 diff 降级；当前主要剩余风险转为凭据轮换、可访问性深度门禁和持续数据时效复核。
 
 ## 2. 债务清单
 
@@ -44,7 +44,7 @@
 | D-10 | 文档债务 | 已缓解/P2 | README/CHANGELOG/AUDIT 已更新 release-first 与源码 UI 最新状态；历史计划仍作为归档存在 | 后续需要维护“以当前 README/AUDIT 为准”的约束 |
 | D-11 | 文档债务 | P1 | `robots.txt` 指向 GitHub Pages sitemap；`sitemap.xml` 未覆盖 `claude`/`codex` 页面 | 已通过 Phase 3 缓解；后续需随新增页面维护 sitemap |
 | D-12 | 技术债务 | P2 | `scripts/validate.py` 已增强为轻量 schema 校验器；BAI/EasyRouter/PoYo/SiliconFlow 已补齐 provenance 字段 | 数据质量已从人工检查转向 CI 门禁；后续风险集中在 provenance 时效复核、价格漂移与来源页语义变化 |
-| D-13 | 工程债务 | 已缓解/P2 | `make smoke-ui` 已接入 GitHub Pages workflow；`make smoke-ui-production` 可做生产冒烟；仍缺视觉 diff 基线和深度 a11y 审计 | 高风险 UI 回归已有 CI/本地/生产命令兜底，细粒度视觉漂移仍需后续治理 |
+| D-13 | 工程债务 | 已缓解/P2 | `make smoke-ui` 已接入 GitHub Pages workflow，并对桌面/移动截图执行阈值化视觉 diff；`make smoke-ui-production` 可做生产冒烟 | 高风险 UI 回归已有 CI/本地/生产命令兜底，深度 a11y 仍需后续治理 |
 | D-14 | 脆弱点债务 | P2 | nginx 是多应用共享入口，单配置文件承载多个业务 | 任一 vhost 配置错误可能影响全站入口 |
 
 ## 3. 治理路线
@@ -382,8 +382,8 @@ sitemap.xml
 
 后续债务：
 
-1. 增加视觉回归截图基线，覆盖首页、对比页三模式和免费模型页。
-2. 补充更深的可访问性检查，尤其是颜色对比度、焦点顺序和键盘导航。
+1. 补充更深的可访问性检查，尤其是颜色对比度、焦点顺序和键盘导航。
+2. 后续可继续扩展视觉基线覆盖对比页三模式和免费模型页。
 
 ## 12. UI smoke 自动化与 assets 404 硬化记录
 
@@ -451,3 +451,30 @@ sitemap.xml
 
 1. 如果未来 runner 镜像移除 Chrome/Chromium，可改为显式 setup Chrome action 或安装固定浏览器包。
 2. 当前 artifact 只在失败时上传；如需长期视觉审计，可增加成功运行的截图 artifact 或阈值化视觉 diff。
+
+## 14. 阈值化视觉 diff 基线记录
+
+> 执行时间：2026-06-13
+
+已完成：
+
+1. `scripts/ui_smoke_check.mjs` 新增 PNG 解码、像素差异统计和 diff PNG 输出。
+2. 新增 `--update-baselines`，用于刷新 `tests/visual-baselines/`。
+3. 新增 `--visual-threshold`，默认阈值为 `0.15`，即当前截图超过 15% 像素差异时失败。
+4. 新增 `make smoke-ui-update-baselines`，先生成 `release/`，再刷新桌面/移动基线。
+5. 新增并纳入版本管理：
+   - `tests/visual-baselines/desktop-home.png`
+   - `tests/visual-baselines/mobile-home.png`
+
+验证通过：
+
+| 检查项 | 结果 |
+| --- | --- |
+| `node --check scripts/ui_smoke_check.mjs` | 通过 |
+| `make smoke-ui-update-baselines` | 成功生成桌面/移动视觉基线 |
+| `make smoke-ui` | 桌面与移动视觉 diff 均为 0.00%，低于 15% 阈值 |
+
+后续债务：
+
+1. 当前视觉基线只覆盖首页首屏；后续可扩展到对比页三模式和免费模型页。
+2. 当前差异阈值偏向“阻止大面积回归”；如需精细审美回归，可引入更严格的分区阈值。
