@@ -1,7 +1,11 @@
 import type { PlatformData, FreeModelsData, CompareData } from './types';
 
+const dataUrl = (fileName: string) => {
+  return new URL(fileName, new URL('.', window.location.href)).toString();
+};
+
 export const fetchPlatformData = async (platformId: string): Promise<PlatformData> => {
-  const response = await fetch(`/${platformId}-data.json`);
+  const response = await fetch(dataUrl(`${platformId}-data.json`));
   if (!response.ok) {
     throw new Error(`Failed to fetch data for ${platformId}`);
   }
@@ -9,7 +13,7 @@ export const fetchPlatformData = async (platformId: string): Promise<PlatformDat
 };
 
 export const fetchFreeModelsData = async (): Promise<FreeModelsData> => {
-  const response = await fetch('/free-models-data.json');
+  const response = await fetch(dataUrl('free-models-data.json'));
   if (!response.ok) {
     throw new Error('Failed to fetch free models data');
   }
@@ -17,7 +21,7 @@ export const fetchFreeModelsData = async (): Promise<FreeModelsData> => {
 };
 
 export const fetchCompareData = async (): Promise<CompareData> => {
-  const response = await fetch('/compare-data.json');
+  const response = await fetch(dataUrl('compare-data.json'));
   if (!response.ok) {
     throw new Error('Failed to fetch compare data');
   }
