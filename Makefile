@@ -1,7 +1,11 @@
 .PHONY: validate validate-provenance typecheck build verify-assets release deploy deploy-dry check check-exposure clean weekly-snapshot
 
 # SSH key: keep production credentials outside the worktree.
+PREFERRED_SSH_KEY := /Users/lute/project/Agent/product/llm_models_hub/ai_video.pem
+SSH_KEY := $(wildcard $(PREFERRED_SSH_KEY))
+ifeq ($(SSH_KEY),)
 SSH_KEY := $(HOME)/.ssh/llm-compare-hub.pem
+endif
 SSH_CMD := ssh -i $(SSH_KEY) -o StrictHostKeyChecking=no
 RSYNC_CMD := rsync -avz -e "$(SSH_CMD)"
 REMOTE := ubuntu@101.34.52.232

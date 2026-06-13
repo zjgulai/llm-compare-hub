@@ -67,7 +67,7 @@ make check
 make check-exposure
 ```
 
-部署使用 `~/.ssh/llm-compare-hub.pem`，不会读取工作区内的私钥。`make deploy` 会先生成 `release/`，再用 `rsync --delete release/` 同步到腾讯云静态目录。
+默认优先使用 `/Users/lute/project/Agent/product/llm_models_hub/ai_video.pem`（若不存在则回退到 `~/.ssh/llm-compare-hub.pem`），不会读取工作区内的私钥。`make deploy` 会先生成 `release/`，再用 `rsync --delete release/` 同步到腾讯云静态目录。
 
 ### GitHub Pages
 
