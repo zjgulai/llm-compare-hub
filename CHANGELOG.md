@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-06-13 — Essence page a11y and breakpoint smoke coverage
+
+### Added
+- `make smoke-ui` 现在覆盖 `/claude.html` 与 `/codex.html`，并检查静态精粹页 landmark、站点导航、内容分类 tablist、资源卡片 article、键盘方向键和移动端触控目标。
+- UI smoke 新增主应用 360px 与 768px 断点检查，补齐 390px 移动视口之外的溢出与 a11y 回归门禁。
+
+### Changed
+- `claude.html`、`codex.html` 增加 `header`、`main`、`footer`、站点导航 `aria-current`、内容分类 `tablist` / `tabpanel` 语义。
+- 精粹页资源卡片改为 `article`，由卡片标题提供 `aria-labelledby`；品牌、导航、分类 tab 和卡片标题链接补足最小触控高度。
+- `pages/essence-template.html` 同步同一套语义结构，避免后续模板生成回退。
+
+### Verified
+- 本地 `make smoke-ui` 通过，覆盖主应用、Claude/Codex 精粹页、360/390/768px 断点、键盘路径和视觉 diff。
+
 ## 2026-06-13 — Accessibility smoke gate and semantic UI hardening
 
 ### Added

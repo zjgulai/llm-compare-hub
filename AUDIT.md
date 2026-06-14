@@ -26,7 +26,7 @@
 4. **构建事实**：Vite 输出目录已固定到 `dist/`，Tailwind v4 通过 `@tailwindcss/vite` 编译 utilities，构建不会覆盖仓库根入口。
 5. **文档事实**：README、CHANGELOG 和本审计已更新最新状态；历史 `.sisyphus` 计划仅作为归档参考。
 
-这些 P0 发布风险已通过 release-only 链路、源码 UI 复核、构建工具链修复、CI UI smoke 门禁、阈值化视觉 diff 和核心视图 a11y 门禁降级；当前主要剩余风险转为凭据轮换、更多页面/断点的可访问性扩展和持续数据时效复核。
+这些 P0 发布风险已通过 release-only 链路、源码 UI 复核、构建工具链修复、CI UI smoke 门禁、阈值化视觉 diff、核心视图与精粹页 a11y 门禁降级；当前主要剩余风险转为凭据轮换、精细焦点可视化和持续数据时效复核。
 
 ## 2. 债务清单
 
@@ -34,17 +34,17 @@
 | --- | --- | --- | --- | --- |
 | D-01 | 脆弱点债务 | 已缓解/P1 | 生产曾公开发布 `README.md`、`AUDIT.md`、`Makefile`、`scripts/*.py`、`src/*.tsx`、`.github/workflows/deploy.yml`、`.essence-cache/*.json` 等开发材料；当前 release-only 部署和 nginx deny 已阻断 | 后续需防止部署边界回退 |
 | D-02 | 工程债务 | 已缓解/P2 | `release/` 现在由 `dist/` 构建生成；根入口与根 assets 仅作 legacy fallback | 后续风险转为 legacy fallback 维护成本 |
-| D-03 | 技术债务 | 已缓解/P2 | `src/` 已可 typecheck/build，并完成中文 UI、对比页模式、视觉 diff 与核心视图 a11y 门禁 | 后续需扩展到更多页面和移动断点 |
+| D-03 | 技术债务 | 已缓解/P2 | `src/` 已可 typecheck/build，并完成中文 UI、对比页模式、视觉 diff、核心视图与 Claude/Codex 精粹页 a11y 门禁 | 后续可增加更细的焦点可视化检查 |
 | D-04 | 工程债务 | 已缓解/P2 | Vite `outDir` 已改为 `dist/`，不会覆盖仓库根目录 | 仍需保持 release-only 发布边界 |
 | D-05 | 脆弱点债务 | P0 | 本地曾在 git remote URL 中嵌入 GitHub token；生产共享 nginx 配置中存在硬编码 API key；工作区保留 SSH 私钥 | 凭据泄露后可导致仓库或服务被控；已清理 remote，但仍需轮换凭据 |
 | D-06 | 工程债务 | 已缓解/P2 | 腾讯云部署已改为 `release/` + `rsync --delete` | 后续需保持备份与回滚演练 |
 | D-07 | 项目管理债务 | 已缓解/P2 | GitHub Pages 已定位为镜像发布目标，主 canonical 是腾讯云 | 仍需关注镜像发布延迟和失败告警 |
-| D-08 | 工程债务 | P2 | CI 已跑数据校验、provenance、typecheck、build、asset release、UI smoke、视觉 diff 与核心 a11y 检查；仍缺 secret scan | 安全凭据与 secret 泄漏回归仍依赖人工复核 |
+| D-08 | 工程债务 | P2 | CI 已跑数据校验、provenance、typecheck、build、asset release、UI smoke、视觉 diff、主应用与精粹页 a11y 检查；仍缺 secret scan | 安全凭据与 secret 泄漏回归仍依赖人工复核 |
 | D-09 | 技术债务 | P1 | 数据 fetch 使用绝对根路径 `/xxx-data.json` | 自有根域可用，GitHub Pages 子路径部署存在环境耦合风险 |
 | D-10 | 文档债务 | 已缓解/P2 | README/CHANGELOG/AUDIT 已更新 release-first 与源码 UI 最新状态；历史计划仍作为归档存在 | 后续需要维护“以当前 README/AUDIT 为准”的约束 |
 | D-11 | 文档债务 | P1 | `robots.txt` 指向 GitHub Pages sitemap；`sitemap.xml` 未覆盖 `claude`/`codex` 页面 | 已通过 Phase 3 缓解；后续需随新增页面维护 sitemap |
 | D-12 | 技术债务 | P2 | `scripts/validate.py` 已增强为轻量 schema 校验器；BAI/EasyRouter/PoYo/SiliconFlow 已补齐 provenance 字段 | 数据质量已从人工检查转向 CI 门禁；后续风险集中在 provenance 时效复核、价格漂移与来源页语义变化 |
-| D-13 | 工程债务 | 已缓解/P2 | `make smoke-ui` 已接入 GitHub Pages workflow，并对桌面/移动截图执行阈值化视觉 diff 和核心 a11y 门禁；`make smoke-ui-production` 可做生产冒烟 | 高风险 UI 回归已有 CI/本地/生产命令兜底 |
+| D-13 | 工程债务 | 已缓解/P2 | `make smoke-ui` 已接入 GitHub Pages workflow，并对桌面/移动截图、360/390/768px 断点、主应用和精粹页 a11y 执行门禁；`make smoke-ui-production` 可做生产冒烟 | 高风险 UI 回归已有 CI/本地/生产命令兜底 |
 | D-14 | 脆弱点债务 | P2 | nginx 是多应用共享入口，单配置文件承载多个业务 | 任一 vhost 配置错误可能影响全站入口 |
 
 ## 3. 治理路线
@@ -510,6 +510,41 @@ sitemap.xml
 
 后续债务：
 
-1. 将 a11y 门禁扩展到 `/claude.html`、`/codex.html` 精粹页。
-2. 增加更多移动断点，例如 360px 和 768px。
-3. 如后续引入 axe-core 或 Lighthouse，可将当前轻量 DOM 门禁作为快速前置检查，重型审计作为定期任务。
+1. Phase 16 已将 a11y 门禁扩展到 `/claude.html`、`/codex.html` 和 360px/768px 断点。
+2. 如后续引入 axe-core 或 Lighthouse，可将当前轻量 DOM 门禁作为快速前置检查，重型审计作为定期任务。
+
+## 16. 精粹页可访问性与断点门禁扩展记录
+
+> 执行时间：2026-06-13
+
+已完成：
+
+1. `scripts/ui_smoke_check.mjs` 新增主应用 360px 与 768px 断点检查，在原 390px 移动检查之外继续验证横向溢出和 a11y 门禁。
+2. `scripts/ui_smoke_check.mjs` 新增 `/claude.html`、`/codex.html` 检查，覆盖：
+   - `header`、`main`、`footer` landmark；
+   - 站点导航 `aria-label="站点导航"` 与当前页 `aria-current="page"`；
+   - 内容分类 `aria-label="内容分类"`、`tablist`、`tab`、`tabpanel`；
+   - 分类 tab 左右方向键与 `Home` 键切换；
+   - 精粹资源卡片 `article` 与标题 `aria-labelledby`；
+   - 360px 移动视口下的触控目标和横向溢出。
+3. `claude.html`、`codex.html` 增加语义化 landmark、站点导航当前页标记、内容分类 tab 语义、键盘切换和资源卡片 article 结构。
+4. `pages/essence-template.html` 同步同一套结构，避免未来模板生成时丢失修复。
+
+红灯验证：
+
+| 检查项 | 失败点 |
+| --- | --- |
+| 静态页 a11y 初始门禁 | 缺少 `main`、`header`、`footer`、站点/内容导航语义 |
+| 精粹页 panel 语义 | 动态内容仍由 `div` 创建，不满足 `section[role="tabpanel"]` |
+| 360px 触控目标 | 品牌链接高度约 30px，低于 32px 最低门槛 |
+
+验证通过：
+
+| 检查项 | 结果 |
+| --- | --- |
+| `make smoke-ui` | 通过，覆盖主应用、Claude/Codex 精粹页、360/390/768px 断点、键盘路径和视觉 diff |
+
+后续债务：
+
+1. 如需更细的视觉无障碍检查，可增加焦点环截图或引入 axe-core/Lighthouse 定期任务。
+2. 当前视觉 diff 仍只覆盖首页首屏；可继续扩展到精粹页首屏和对比页模式页。

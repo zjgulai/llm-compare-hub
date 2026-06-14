@@ -33,13 +33,13 @@
   .header-glow { display: none; }
   .header-accent { display: none; }
   .header-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  .header-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .header-brand { min-height: 32px; display: flex; align-items: center; gap: 10px; text-decoration: none; }
   .header-brand:hover { opacity: .8; }
   .header-logo { width: 30px; height: 30px; background: rgba(194,91,110,.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #C25B6E; font-weight: 700; font-size: 14px; }
   .header-title { color: #231A1A; font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
   .header-title small { font-size: 12px; font-weight: 400; color: #9CA3AF; margin-left: 4px; }
   .header-nav { display: flex; gap: 2px; }
-  .header-nav a { padding: 5px 14px; border-radius: 6px; font-size: 13px; text-decoration: none; color: #6B6B70; transition: all .15s; }
+  .header-nav a { min-height: 32px; display: flex; align-items: center; padding: 5px 14px; border-radius: 6px; font-size: 13px; text-decoration: none; color: #6B6B70; transition: all .15s; }
   .header-nav a:hover { background: rgba(0,0,0,.04); color: #231A1A; }
   .header-nav a.active { background: rgba(194,91,110,.1); color: #C25B6E; font-weight: 500; }
 
@@ -54,7 +54,7 @@
   .section-nav-wrap { background: rgba(251,248,245,.96); border-bottom: 1px solid rgba(0,0,0,.06); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
   .section-nav { max-width: 1200px; margin: 0 auto; padding: 10px 24px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
   .section-nav::-webkit-scrollbar { display: none; }
-  .section-tab { padding: 6px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid rgba(0,0,0,.08); background: transparent; color: var(--text-secondary); white-space: nowrap; transition: all .15s; flex-shrink: 0; }
+  .section-tab { min-height: 32px; padding: 6px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid rgba(0,0,0,.08); background: transparent; color: var(--text-secondary); white-space: nowrap; transition: all .15s; flex-shrink: 0; }
   .section-tab:hover { background: rgba(194,91,110,.07); color: #C25B6E; border-color: rgba(194,91,110,.25); }
   .section-tab.active { background: #C25B6E; color: #fff; border-color: #C25B6E; }
 
@@ -72,7 +72,7 @@
   .card { background: #fff; border: 1px solid var(--border-default); border-radius: 10px; padding: 20px; transition: border-color .15s, box-shadow .15s; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow-card); }
   .card:hover { box-shadow: var(--shadow-card-hover); border-color: rgba(194,91,110,.25); }
   .card-title { font-size: 14px; font-weight: 600; line-height: 1.45; }
-  .card-title a { color: var(--text-primary); text-decoration: none; }
+  .card-title a { min-height: 32px; display: inline-flex; align-items: center; color: var(--text-primary); text-decoration: none; }
   .card-title a:hover { color: #C25B6E; }
   .card-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .card-source { font-size: 11px; padding: 2px 7px; border-radius: 4px; font-weight: 500; letter-spacing: .01em; }
@@ -96,7 +96,7 @@
 </head>
 <body>
 
-<div class="header">
+<header class="header">
   <div class="header-glow"></div>
   <div class="header-accent"></div>
   <div class="header-inner">
@@ -104,9 +104,9 @@
       <span class="header-logo">L</span>
       <span class="header-title">Claude <small>用法精粹</small></span>
     </a>
-    <nav class="header-nav">
+    <nav class="header-nav" aria-label="站点导航">
       <a href="https://llm.lute-tlz-dddd.top/">模型选型</a>
-      <a href="claude.html" class="active">Claude</a>
+      <a href="claude.html" class="active" aria-current="page">Claude</a>
       <a href="codex.html" class="">Codex</a>
     </nav>
   </div>
@@ -119,15 +119,15 @@
       <span>数据来源: <a id="source-aiho" href="https://aihot.virxact.com/">aiho.virxact.com</a> + <a id="source-blog" href="https://www.anthropic.com/blog">官方博客</a></span>
     </div>
   </div>
-</div>
+</header>
 
-<div class="section-nav-wrap"><div class="section-nav" id="section-nav"></div></div>
-<div class="content-wrap" id="content"><div class="loading" id="loading"><div class="loading-spinner"></div><span>加载中...</span></div></div>
+<nav class="section-nav-wrap" aria-label="内容分类"><div class="section-nav" id="section-nav" role="tablist"></div></nav>
+<main class="content-wrap" id="content" tabindex="-1"><div class="loading" id="loading"><div class="loading-spinner"></div><span>加载中...</span></div></main>
 
-<div class="footer">
+<footer class="footer">
   <p>数据来源: <a href="https://aihot.virxact.com/">AIHOT</a> · <a href="https://www.anthropic.com/blog">官方博客</a> · <a href="https://platform.claude.com/docs">官方文档</a></p>
   <p style="margin-top:4px;font-size:12px"><a href="https://llm.lute-tlz-dddd.top/">LLM Compare Hub</a> — 大模型选型指南 &amp; 用法精粹</p>
-</div>
+</footer>
 
 <script>
 const DATA_FILE = './claude-data.json';
@@ -138,6 +138,24 @@ const accentColors = {
   warm: ['var(--accent-warm)', 'var(--accent-warm-light)'],
   teal: ['var(--accent-teal)', 'var(--accent-teal-light)'],
 };
+
+function toDomId(value) {
+  return String(value).replace(/[^a-zA-Z0-9_-]+/g, '-').replace(/^-|-$/g, '') || 'item';
+}
+
+function setActiveSection(sectionId) {
+  document.querySelectorAll('.section').forEach((el) => {
+    const active = el.id === 'section-' + sectionId;
+    el.classList.toggle('active', active);
+    el.hidden = !active;
+  });
+  document.querySelectorAll('.section-tab').forEach((el) => {
+    const active = el.getAttribute('aria-controls') === 'section-' + sectionId;
+    el.classList.toggle('active', active);
+    el.setAttribute('aria-selected', active ? 'true' : 'false');
+    el.tabIndex = active ? 0 : -1;
+  });
+}
 
 async function load() {
   try {
@@ -150,20 +168,43 @@ async function load() {
     data.sections.forEach((s, i) => {
       const btn = document.createElement('button');
       btn.className = 'section-tab' + (i === 0 ? ' active' : '');
+      btn.type = 'button';
+      btn.id = 'section-tab-' + toDomId(s.id);
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      btn.setAttribute('aria-controls', 'section-' + s.id);
+      btn.tabIndex = i === 0 ? 0 : -1;
       btn.textContent = s.name;
-      btn.onclick = () => { document.querySelectorAll('.section').forEach(el => el.classList.remove('active')); document.querySelectorAll('.section-tab').forEach(el => el.classList.remove('active')); document.getElementById('section-' + s.id).classList.add('active'); btn.classList.add('active'); };
+      btn.onclick = () => setActiveSection(s.id);
+      btn.onkeydown = (event) => {
+        const tabs = Array.from(document.querySelectorAll('.section-tab'));
+        const current = tabs.indexOf(btn);
+        let next = current;
+        if (event.key === 'ArrowRight') next = current === tabs.length - 1 ? 0 : current + 1;
+        else if (event.key === 'ArrowLeft') next = current === 0 ? tabs.length - 1 : current - 1;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        tabs[next].focus();
+        setActiveSection(data.sections[next].id);
+      };
       nav.appendChild(btn);
     });
     const content = document.getElementById('content');
     content.innerHTML = '';
     data.sections.forEach((section, si) => {
-      const sec = document.createElement('div');
+      const sec = document.createElement('section');
       sec.className = 'section' + (si === 0 ? ' active' : '');
       sec.id = 'section-' + section.id;
+      sec.setAttribute('role', 'tabpanel');
+      sec.setAttribute('aria-labelledby', 'section-tab-' + toDomId(section.id));
+      sec.hidden = si !== 0;
       const colors = accentColors[section.color] || accentColors.pink;
       sec.innerHTML = '<div class="section-header"><div class="section-indicator" style="background:'+colors[0]+'"></div><div><h2>'+section.name+'</h2><div class="section-desc">'+(section.description||'')+'</div></div></div><div class="card-grid">'+section.items.map(function(item){
         const sc = item.recommendedBy === 'aiho' ? 'aiho' : (item.source||'').includes('官方') ? 'official' : 'community';
-        return '<div class="card"><div class="card-title"><a href="'+item.url+'" target="_blank" rel="noopener">'+item.title+'</a></div><div class="card-meta"><span class="card-source '+sc+'">'+(item.source||(item.recommendedBy||'社区'))+'</span>'+(item.score?'<span class="card-score">✦ '+item.score+'</span>':'')+'</div>'+(item.tags&&item.tags.length?'<div class="card-tags">'+item.tags.slice(0,4).map(function(t){return '<span class="card-tag">'+t+'</span>';}).join('')+'</div>':'')+(item.summary?'<div class="card-summary">'+item.summary+'</div>':'')+'</div>';
+        const cardId = 'essence-card-' + toDomId(section.id + '-' + item.title);
+        return '<article class="card" role="article" data-essence-card="true" aria-labelledby="'+cardId+'"><h3 class="card-title" id="'+cardId+'"><a href="'+item.url+'" target="_blank" rel="noopener">'+item.title+'</a></h3><div class="card-meta"><span class="card-source '+sc+'">'+(item.source||(item.recommendedBy||'社区'))+'</span>'+(item.score?'<span class="card-score">✦ '+item.score+'</span>':'')+'</div>'+(item.tags&&item.tags.length?'<div class="card-tags">'+item.tags.slice(0,4).map(function(t){return '<span class="card-tag">'+t+'</span>';}).join('')+'</div>':'')+(item.summary?'<div class="card-summary">'+item.summary+'</div>':'')+'</article>';
       }).join('')+'</div>';
       content.appendChild(sec);
     });

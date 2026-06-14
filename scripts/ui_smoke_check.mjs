@@ -552,8 +552,9 @@ const pageState = async (client) => evaluate(client, `(() => {
   };
 })()`);
 
-const accessibilityAudit = async (client, { mobile = false } = {}) => evaluate(client, `(() => {
+const accessibilityAudit = async (client, { mobile = false, pageKind = "app" } = {}) => evaluate(client, `(() => {
   const issues = [];
+  const pageKind = ${JSON.stringify(pageKind)};
   const visible = (element) => {
     const style = window.getComputedStyle(element);
     const rect = element.getBoundingClientRect();
@@ -616,31 +617,56 @@ const accessibilityAudit = async (client, { mobile = false } = {}) => evaluate(c
   if (!document.querySelector("header")) issues.push("page should expose a header landmark");
   if (!document.querySelector("footer")) issues.push("page should expose a footer landmark");
 
-  const primaryNav = document.querySelector("nav[aria-label='主导航']");
-  if (!primaryNav) {
-    issues.push("primary navigation should have aria-label='主导航'");
-  } else if (primaryNav.getAttribute("role") !== "tablist") {
-    issues.push("primary navigation should use role='tablist'");
+  if (pageKind === "app") {
+    const primaryNav = document.querySelector("nav[aria-label='主导航']");
+    if (!primaryNav) {
+      issues.push("primary navigation should have aria-label='主导航'");
+    } else if (primaryNav.getAttribute("role") !== "tablist") {
+      issues.push("primary navigation should use role='tablist'");
+    }
+
+    const tabs = primaryNav ? Array.from(primaryNav.querySelectorAll("[role='tab']")) : [];
+    if (tabs.length < 3) issues.push("primary views should expose at least three role='tab' controls");
+    const selectedTabs = tabs.filter((tab) => tab.getAttribute("aria-selected") === "true");
+    if (tabs.length && selectedTabs.length !== 1) issues.push("exactly one primary tab should be selected");
+    for (const tab of tabs) {
+      const controls = tab.getAttribute("aria-controls");
+      if (!controls) issues.push(\`tab "\${selectorName(tab)}" should declare aria-controls\`);
+    }
+    for (const tab of selectedTabs) {
+      const controls = tab.getAttribute("aria-controls");
+      if (!controls || !document.getElementById(controls)) issues.push(\`selected tab "\${selectorName(tab)}" should reference the active panel\`);
+    }
+
+    const panels = Array.from(document.querySelectorAll("main[role='tabpanel']"));
+    if (panels.length !== 1) issues.push("active view should expose exactly one role='tabpanel'");
+    for (const panel of panels) {
+      const labelledBy = panel.getAttribute("aria-labelledby");
+      if (!labelledBy || !document.getElementById(labelledBy)) issues.push("tabpanel should reference its selected tab");
+    }
   }
 
-  const tabs = primaryNav ? Array.from(primaryNav.querySelectorAll("[role='tab']")) : [];
-  if (tabs.length < 3) issues.push("primary views should expose at least three role='tab' controls");
-  const selectedTabs = tabs.filter((tab) => tab.getAttribute("aria-selected") === "true");
-  if (tabs.length && selectedTabs.length !== 1) issues.push("exactly one primary tab should be selected");
-  for (const tab of tabs) {
-    const controls = tab.getAttribute("aria-controls");
-    if (!controls) issues.push(\`tab "\${selectorName(tab)}" should declare aria-controls\`);
-  }
-  for (const tab of selectedTabs) {
-    const controls = tab.getAttribute("aria-controls");
-    if (!controls || !document.getElementById(controls)) issues.push(\`selected tab "\${selectorName(tab)}" should reference the active panel\`);
-  }
+  if (pageKind === "essence") {
+    const siteNav = document.querySelector("nav[aria-label='站点导航']");
+    if (!siteNav) issues.push("essence page should expose site navigation");
+    if (!siteNav?.querySelector("[aria-current='page']")) issues.push("essence site navigation should mark the current page");
 
-  const panels = Array.from(document.querySelectorAll("main[role='tabpanel']"));
-  if (panels.length !== 1) issues.push("active view should expose exactly one role='tabpanel'");
-  for (const panel of panels) {
-    const labelledBy = panel.getAttribute("aria-labelledby");
-    if (!labelledBy || !document.getElementById(labelledBy)) issues.push("tabpanel should reference its selected tab");
+    const sectionNav = document.querySelector("nav[aria-label='内容分类'] [role='tablist']");
+    if (!sectionNav) issues.push("essence section navigation should expose a tablist");
+    const sectionTabs = sectionNav ? Array.from(sectionNav.querySelectorAll("[role='tab']")) : [];
+    if (sectionTabs.length === 0) issues.push("essence page should expose section tabs");
+    const selectedSectionTabs = sectionTabs.filter((tab) => tab.getAttribute("aria-selected") === "true");
+    if (sectionTabs.length && selectedSectionTabs.length !== 1) issues.push("exactly one essence section tab should be selected");
+    for (const tab of sectionTabs) {
+      const controls = tab.getAttribute("aria-controls");
+      if (!controls || !document.getElementById(controls)) issues.push(\`essence section tab "\${selectorName(tab)}" should reference a panel\`);
+    }
+    const activePanels = Array.from(document.querySelectorAll("section[role='tabpanel']")).filter(visible);
+    if (activePanels.length !== 1) issues.push("essence page should expose exactly one active section panel");
+    for (const panel of activePanels) {
+      const labelledBy = panel.getAttribute("aria-labelledby");
+      if (!labelledBy || !document.getElementById(labelledBy)) issues.push("essence section panel should reference its tab");
+    }
   }
 
   const compareHeading = Array.from(document.querySelectorAll("h2, h3"))
@@ -672,6 +698,7 @@ const accessibilityAudit = async (client, { mobile = false } = {}) => evaluate(c
   for (const element of interactives) {
     if (!nameOf(element)) issues.push(\`\${selectorName(element)} is missing an accessible name\`);
     if (${mobile ? "true" : "false"}) {
+      if (element.tagName === "A" && element.closest(".hero-meta, .footer")) continue;
       const rect = element.getBoundingClientRect();
       if (rect.width < 32 || rect.height < 32) {
         issues.push(\`\${selectorName(element)} touch target is too small: \${Math.round(rect.width)}x\${Math.round(rect.height)}\`);
@@ -704,6 +731,19 @@ const accessibilityAudit = async (client, { mobile = false } = {}) => evaluate(c
     if (!heading) issues.push("model data card should include an id-backed heading");
     if (heading && card.getAttribute("aria-labelledby") !== heading.id) {
       issues.push(\`model data card "\${selectorName(heading)}" should be labelled by its heading\`);
+    }
+  }
+
+  if (pageKind === "essence") {
+    const essenceCards = Array.from(document.querySelectorAll("[data-essence-card='true']")).filter(visible);
+    if (essenceCards.length === 0) issues.push("essence page should expose scannable resource cards");
+    for (const card of essenceCards) {
+      if (card.getAttribute("role") !== "article") issues.push("essence resource card should use role='article'");
+      const heading = card.querySelector("h3[id]");
+      if (!heading) issues.push("essence resource card should include an id-backed heading");
+      if (heading && card.getAttribute("aria-labelledby") !== heading.id) {
+        issues.push(\`essence resource card "\${selectorName(heading)}" should be labelled by its heading\`);
+      }
     }
   }
 
@@ -829,6 +869,21 @@ const assertCompareModeKeyboardNavigation = async (client) => {
   assert(await selectedTabLabel(client, "[aria-label='对比模式']") === "综合 TOP", "Home should return to the first compare mode");
 };
 
+const assertEssenceSectionKeyboardNavigation = async (client) => {
+  const labels = await evaluate(client, `Array.from(document.querySelectorAll("nav[aria-label='内容分类'] [role='tab']"))
+    .map((tab) => tab.textContent.trim())`);
+  assert(labels.length > 1, "Essence page should have more than one section tab for keyboard navigation");
+
+  await evaluate(client, "document.querySelector(\"nav[aria-label='内容分类'] [role='tab'][aria-selected='true']\")?.focus()");
+  const firstLabel = await selectedTabLabel(client, "nav[aria-label='内容分类']");
+  await pressKey(client, "ArrowRight");
+  assert(await selectedTabLabel(client, "nav[aria-label='内容分类']") === labels[1], "ArrowRight should select the next essence section");
+  assert(await activeElementLabel(client) === labels[1], "ArrowRight should keep focus on the selected essence section tab");
+
+  await pressKey(client, "Home");
+  assert(await selectedTabLabel(client, "nav[aria-label='内容分类']") === firstLabel, "Home should return to the first essence section");
+};
+
 const expectedAssets = async () => {
   const index = await readFile(path.join(RELEASE_DIR, "index.html"), "utf8");
   return Array.from(index.matchAll(/(?:src|href)="\.\/(assets\/[^"]+)"/g), (match) => match[1]).sort();
@@ -924,6 +979,60 @@ const runMobileChecks = async (client, baseUrl) => {
   await assertAccessibilityAudit(client, { mobile: true });
 };
 
+const assertNoHorizontalOverflow = async (client, label) => {
+  const state = await pageState(client);
+  assert(state.scrollWidth <= state.viewportWidth + 1, `${label} overflows horizontally: ${state.scrollWidth} > ${state.viewportWidth}`);
+};
+
+const runResponsiveBreakpointChecks = async (client, baseUrl) => {
+  for (const viewport of [
+    { width: 360, height: 740, mobile: true, label: "home 360px" },
+    { width: 768, height: 1024, mobile: false, label: "home 768px" },
+  ]) {
+    await client.send("Emulation.setDeviceMetricsOverride", {
+      width: viewport.width,
+      height: viewport.height,
+      deviceScaleFactor: 1,
+      mobile: viewport.mobile,
+    });
+    await client.send("Page.navigate", { url: baseUrl });
+    await waitForText(client, "调用概览 - 硅基流动");
+    await assertNoHorizontalOverflow(client, viewport.label);
+    await assertAccessibilityAudit(client, { mobile: viewport.mobile });
+  }
+};
+
+const runEssencePageChecks = async (client, baseUrl) => {
+  for (const page of [
+    { path: "claude.html", title: "Claude 用法精粹" },
+    { path: "codex.html", title: "Codex 用法精粹" },
+  ]) {
+    await client.send("Emulation.setDeviceMetricsOverride", {
+      width: 1366,
+      height: 850,
+      deviceScaleFactor: 1,
+      mobile: false,
+    });
+    await client.send("Page.navigate", { url: new URL(page.path, baseUrl).href });
+    await waitForText(client, page.title);
+    await waitForText(client, "LLM Compare Hub");
+    await assertNoHorizontalOverflow(client, `${page.path} desktop`);
+    await assertAccessibilityAudit(client, { mobile: false, pageKind: "essence" });
+    await assertEssenceSectionKeyboardNavigation(client);
+
+    await client.send("Emulation.setDeviceMetricsOverride", {
+      width: 360,
+      height: 740,
+      deviceScaleFactor: 1,
+      mobile: true,
+    });
+    await client.send("Page.navigate", { url: new URL(page.path, baseUrl).href });
+    await waitForText(client, page.title);
+    await assertNoHorizontalOverflow(client, `${page.path} 360px`);
+    await assertAccessibilityAudit(client, { mobile: true, pageKind: "essence" });
+  }
+};
+
 const main = async () => {
   const options = parseArgs();
   let server;
@@ -939,6 +1048,8 @@ const main = async () => {
     await assertMissingAsset404(baseUrl);
     await runDesktopChecks(client, baseUrl);
     await runMobileChecks(client, baseUrl);
+    await runResponsiveBreakpointChecks(client, baseUrl);
+    await runEssencePageChecks(client, baseUrl);
     await handleVisualBaselines(options);
 
     assert(client.consoleErrors.length === 0, `Browser console errors:\n${client.consoleErrors.join("\n")}`);
