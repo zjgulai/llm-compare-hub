@@ -486,6 +486,15 @@ const waitForText = async (client, text, timeoutMs = 8000) => {
   throw new Error(`Timed out waiting for text: ${text}`);
 };
 
+const waitForExpression = async (client, expression, label, timeoutMs = 8000) => {
+  const started = Date.now();
+  while (Date.now() - started < timeoutMs) {
+    if (await evaluate(client, expression)) return;
+    await sleep(100);
+  }
+  throw new Error(`Timed out waiting for ${label}`);
+};
+
 const clickButton = async (client, label) => {
   const encoded = JSON.stringify(label);
   await evaluate(client, `(() => {
@@ -1016,6 +1025,11 @@ const runEssencePageChecks = async (client, baseUrl) => {
     await client.send("Page.navigate", { url: new URL(page.path, baseUrl).href });
     await waitForText(client, page.title);
     await waitForText(client, "LLM Compare Hub");
+    await waitForExpression(
+      client,
+      "document.querySelectorAll(\"[data-essence-card='true']\").length > 0",
+      `${page.path} resource cards`,
+    );
     await assertNoHorizontalOverflow(client, `${page.path} desktop`);
     await assertAccessibilityAudit(client, { mobile: false, pageKind: "essence" });
     await assertEssenceSectionKeyboardNavigation(client);
@@ -1028,6 +1042,11 @@ const runEssencePageChecks = async (client, baseUrl) => {
     });
     await client.send("Page.navigate", { url: new URL(page.path, baseUrl).href });
     await waitForText(client, page.title);
+    await waitForExpression(
+      client,
+      "document.querySelectorAll(\"[data-essence-card='true']\").length > 0",
+      `${page.path} mobile resource cards`,
+    );
     await assertNoHorizontalOverflow(client, `${page.path} 360px`);
     await assertAccessibilityAudit(client, { mobile: true, pageKind: "essence" });
   }
