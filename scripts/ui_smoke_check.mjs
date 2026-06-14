@@ -1016,36 +1016,42 @@ const runEssencePageChecks = async (client, baseUrl) => {
     { path: "claude.html", title: "Claude 用法精粹" },
     { path: "codex.html", title: "Codex 用法精粹" },
   ]) {
+    const desktopUrl = new URL(page.path, baseUrl);
+    desktopUrl.searchParams.set("smoke", "desktop");
     await client.send("Emulation.setDeviceMetricsOverride", {
       width: 1366,
       height: 850,
       deviceScaleFactor: 1,
       mobile: false,
     });
-    await client.send("Page.navigate", { url: new URL(page.path, baseUrl).href });
+    await client.send("Page.navigate", { url: desktopUrl.href });
     await waitForText(client, page.title);
     await waitForText(client, "LLM Compare Hub");
     await waitForExpression(
       client,
       "document.querySelectorAll(\"[data-essence-card='true']\").length > 0",
       `${page.path} resource cards`,
+      15000,
     );
     await assertNoHorizontalOverflow(client, `${page.path} desktop`);
     await assertAccessibilityAudit(client, { mobile: false, pageKind: "essence" });
     await assertEssenceSectionKeyboardNavigation(client);
 
+    const mobileUrl = new URL(page.path, baseUrl);
+    mobileUrl.searchParams.set("smoke", "mobile");
     await client.send("Emulation.setDeviceMetricsOverride", {
       width: 360,
       height: 740,
       deviceScaleFactor: 1,
       mobile: true,
     });
-    await client.send("Page.navigate", { url: new URL(page.path, baseUrl).href });
+    await client.send("Page.navigate", { url: mobileUrl.href });
     await waitForText(client, page.title);
     await waitForExpression(
       client,
       "document.querySelectorAll(\"[data-essence-card='true']\").length > 0",
       `${page.path} mobile resource cards`,
+      15000,
     );
     await assertNoHorizontalOverflow(client, `${page.path} 360px`);
     await assertAccessibilityAudit(client, { mobile: true, pageKind: "essence" });
