@@ -23,6 +23,11 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-family: var(--font-sans); background: var(--page-bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
   body { min-height: 100vh; }
+  :where(a[href], button, input, select, textarea, [role="button"], [role="tab"]):focus-visible {
+    outline: 3px solid #3D2E2E;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px rgba(194,91,110,.18);
+  }
 
   .header { background: rgba(255,255,255,.95); border-bottom: 1px solid rgba(0,0,0,.06); position: relative; overflow: hidden; }
   .header-glow { display: none; }

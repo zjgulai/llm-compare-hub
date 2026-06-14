@@ -18,3 +18,9 @@ body {
   color: #0f172a;
   font-family: Inter, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
 }
+
+:where(button, a[href], input, select, textarea, [role='button'], [role='tab']):focus-visible {
+  outline: 3px solid #0f172a;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(244, 63, 94, 0.18);
+}

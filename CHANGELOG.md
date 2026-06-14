@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-06-13 — Focus-visible accessibility smoke gate
+
+### Added
+- `scripts/ui_smoke_check.mjs` 新增焦点可视化审计：逐个聚焦可交互元素，要求存在 2px+ outline、box-shadow 或边框变化。
+- React 主应用、Claude/Codex 静态精粹页和精粹页模板增加统一 `:focus-visible` 样式。
+
+### Fixed
+- 修复 smoke 中焦点审计遍历后影响后续 Tab 顺序的问题：键盘路径检查会先显式重置 sequential focus 起点。
+
+### Verified
+- 红灯验证先失败于主导航、平台/分类按钮和文档链接缺少可检测 focus indicator。
+- `make smoke-ui` 通过，覆盖焦点可视化、主应用键盘路径、精粹页语义、360/390/768px 断点和视觉 diff。
+
 ## 2026-06-13 — Secret scan gate and credential-risk closure
 
 ### Added

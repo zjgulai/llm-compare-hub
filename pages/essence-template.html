@@ -23,6 +23,11 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-family: var(--font-sans); background: var(--page-bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
   body { min-height: 100vh; }
+  :where(a[href], button, input, select, textarea, [role="button"], [role="tab"]):focus-visible {
+    outline: 3px solid #831843;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px rgba(236,72,153,.2);
+  }
 
   /* Pink gradient header */
   .header {

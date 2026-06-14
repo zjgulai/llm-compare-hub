@@ -26,7 +26,7 @@
 4. **构建事实**：Vite 输出目录已固定到 `dist/`，Tailwind v4 通过 `@tailwindcss/vite` 编译 utilities，构建不会覆盖仓库根入口。
 5. **文档事实**：README、CHANGELOG 和本审计已更新最新状态；历史 `.sisyphus` 计划仅作为归档参考。
 
-这些 P0 发布风险已通过 release-only 链路、源码 UI 复核、构建工具链修复、CI UI smoke 门禁、阈值化视觉 diff、核心视图与精粹页 a11y 门禁降级；当前主要剩余风险转为凭据轮换、精细焦点可视化和持续数据时效复核。
+这些 P0 发布风险已通过 release-only 链路、源码 UI 复核、构建工具链修复、CI UI smoke 门禁、阈值化视觉 diff、核心视图与精粹页 a11y 门禁、焦点可视化门禁降级；当前主要剩余风险转为凭据轮换、重型无障碍审计和持续数据时效复核。
 
 ## 2. 债务清单
 
@@ -34,7 +34,7 @@
 | --- | --- | --- | --- | --- |
 | D-01 | 脆弱点债务 | 已缓解/P1 | 生产曾公开发布 `README.md`、`AUDIT.md`、`Makefile`、`scripts/*.py`、`src/*.tsx`、`.github/workflows/deploy.yml`、`.essence-cache/*.json` 等开发材料；当前 release-only 部署和 nginx deny 已阻断 | 后续需防止部署边界回退 |
 | D-02 | 工程债务 | 已缓解/P2 | `release/` 现在由 `dist/` 构建生成；根入口与根 assets 仅作 legacy fallback | 后续风险转为 legacy fallback 维护成本 |
-| D-03 | 技术债务 | 已缓解/P2 | `src/` 已可 typecheck/build，并完成中文 UI、对比页模式、视觉 diff、核心视图与 Claude/Codex 精粹页 a11y 门禁 | 后续可增加更细的焦点可视化检查 |
+| D-03 | 技术债务 | 已缓解/P2 | `src/` 已可 typecheck/build，并完成中文 UI、对比页模式、视觉 diff、核心视图与 Claude/Codex 精粹页 a11y、焦点可视化门禁 | 后续可选引入 axe-core 或 Lighthouse 做定期重型审计 |
 | D-04 | 工程债务 | 已缓解/P2 | Vite `outDir` 已改为 `dist/`，不会覆盖仓库根目录 | 仍需保持 release-only 发布边界 |
 | D-05 | 脆弱点债务 | P0 | 本地曾在 git remote URL 中嵌入 GitHub token；共享 nginx 配置的 `skills.lute-tlz-dddd.top` vhost 仍存在硬编码 OpenAI-compatible API key；工作区内 SSH 私钥已移除 | 凭据泄露后可导致仓库或服务被控；已清理 remote 和部署默认 key 路径，但仍需外部控制台轮换凭据 |
 | D-06 | 工程债务 | 已缓解/P2 | 腾讯云部署已改为 `release/` + `rsync --delete` | 后续需保持备份与回滚演练 |
@@ -546,7 +546,7 @@ sitemap.xml
 
 后续债务：
 
-1. 如需更细的视觉无障碍检查，可增加焦点环截图或引入 axe-core/Lighthouse 定期任务。
+1. Phase 18 已补充焦点可视化门禁；如需更重型审计，可引入 axe-core/Lighthouse 定期任务。
 2. 当前视觉 diff 仍只覆盖首页首屏；可继续扩展到精粹页首屏和对比页模式页。
 
 ## 17. 凭据扫描与共享 nginx 风险收敛记录
@@ -578,3 +578,32 @@ sitemap.xml
 
 1. 在 GitHub 控制台撤销/轮换曾经出现在本地 remote URL 中的 token；本地扫描无法证明外部 token 已失效。
 2. 由 `skills.lute-tlz-dddd.top` 应用 owner 轮换硬编码 API key，并改为后端服务或安全环境注入；不要在 `llm` 站点部署任务中直接修改共享业务配置。
+
+## 18. 焦点可视化门禁记录
+
+> 执行时间：2026-06-13
+
+已完成：
+
+1. `scripts/ui_smoke_check.mjs` 新增 `focusIndicatorAudit`，逐个聚焦可交互元素，并要求 focus 后出现 2px 以上 outline、box-shadow 或边框变化。
+2. 修复新增焦点审计对后续 Tab 顺序的副作用：键盘路径检查先通过临时 `body[tabindex="-1"]` 重置 sequential focus 起点。
+3. `src/index.css` 为 React 主应用增加统一 `:focus-visible` 样式。
+4. `claude.html`、`codex.html` 和 `pages/essence-template.html` 同步增加 `:focus-visible` 样式，覆盖静态精粹页与后续模板生成。
+
+红灯验证：
+
+| 检查项 | 失败点 |
+| --- | --- |
+| 焦点可视化初始门禁 | 主导航、平台/分类按钮和模型文档链接缺少可检测 focus indicator |
+| 焦点审计副作用 | 聚焦遍历后改变 Tab 起点，导致主导航键盘路径检查失败 |
+
+验证通过：
+
+| 检查项 | 结果 |
+| --- | --- |
+| `make smoke-ui` | 通过，覆盖焦点可视化、主应用键盘路径、精粹页语义、360/390/768px 断点和视觉 diff |
+
+后续债务：
+
+1. 当前门禁是轻量 DOM/CSS 审计；后续可选引入 axe-core 或 Lighthouse 做定期重型无障碍审计。
+2. 当前视觉 diff 仍只覆盖首页首屏；可继续扩展到精粹页首屏和对比页模式页。

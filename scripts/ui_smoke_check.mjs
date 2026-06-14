@@ -761,8 +761,81 @@ const accessibilityAudit = async (client, { mobile = false, pageKind = "app" } =
 
 const assertAccessibilityAudit = async (client, options) => {
   const { issues } = await accessibilityAudit(client, options);
-  assert(issues.length === 0, `Accessibility audit failed:\n${issues.join("\n")}`);
+  const { issues: focusIssues } = await focusIndicatorAudit(client);
+  const allIssues = [...issues, ...focusIssues];
+  assert(allIssues.length === 0, `Accessibility audit failed:\n${allIssues.join("\n")}`);
 };
+
+const focusIndicatorAudit = async (client) => evaluate(client, `(async () => {
+  const issues = [];
+  const visible = (element) => {
+    const style = window.getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+    return style.display !== "none" && style.visibility !== "hidden" && rect.width > 0 && rect.height > 0;
+  };
+  const nameOf = (element) => {
+    const labelledBy = element.getAttribute("aria-labelledby");
+    if (labelledBy) {
+      const text = labelledBy
+        .split(/\\s+/)
+        .map((id) => document.getElementById(id)?.textContent?.trim() ?? "")
+        .filter(Boolean)
+        .join(" ");
+      if (text) return text;
+    }
+    return (
+      element.getAttribute("aria-label") ||
+      element.textContent ||
+      element.getAttribute("title") ||
+      element.getAttribute("placeholder") ||
+      ""
+    ).trim();
+  };
+  const selectorName = (element) => {
+    const name = nameOf(element);
+    if (name) return name.slice(0, 40);
+    return element.id || element.className || element.tagName.toLowerCase();
+  };
+  const px = (value) => {
+    const parsed = Number.parseFloat(value);
+    return Number.isFinite(parsed) ? parsed : 0;
+  };
+  const styleSnapshot = (element) => {
+    const style = window.getComputedStyle(element);
+    return {
+      outlineColor: style.outlineColor,
+      outlineStyle: style.outlineStyle,
+      outlineWidth: style.outlineWidth,
+      boxShadow: style.boxShadow,
+      borderColor: style.borderTopColor + "|" + style.borderRightColor + "|" + style.borderBottomColor + "|" + style.borderLeftColor,
+      borderWidth: style.borderTopWidth + "|" + style.borderRightWidth + "|" + style.borderBottomWidth + "|" + style.borderLeftWidth,
+    };
+  };
+  const hasVisibleIndicator = (before, after) => {
+    const outlineWidth = px(after.outlineWidth);
+    const hasOutline = after.outlineStyle !== "none" && outlineWidth >= 2 && !after.outlineColor.includes("rgba(0, 0, 0, 0)");
+    const hasShadow = after.boxShadow && after.boxShadow !== "none";
+    const borderChanged = before.borderColor !== after.borderColor || before.borderWidth !== after.borderWidth;
+    return hasOutline || hasShadow || borderChanged;
+  };
+  const interactives = Array.from(document.querySelectorAll("button, a[href], input, select, textarea, [role='button'], [role='tab']"))
+    .filter((element) => visible(element) && !element.disabled && element.getAttribute("aria-disabled") !== "true");
+
+  for (const element of interactives) {
+    const before = styleSnapshot(element);
+    element.focus({ preventScroll: true });
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    const active = document.activeElement === element || element.contains(document.activeElement);
+    const after = styleSnapshot(element);
+    if (!active) {
+      issues.push(\`\${selectorName(element)} should be keyboard focusable\`);
+    } else if (!hasVisibleIndicator(before, after)) {
+      issues.push(\`\${selectorName(element)} should show a visible focus indicator\`);
+    }
+  }
+  document.activeElement?.blur();
+  return { issues };
+})()`);
 
 const captureScreenshot = async (client, filename) => {
   const screenshot = await client.send("Page.captureScreenshot", { format: "png", fromSurface: true }, 10000);
@@ -841,8 +914,16 @@ const handleVisualBaselines = async (options) => {
   }
 };
 
+const resetSequentialFocus = async (client) => {
+  await evaluate(client, `(() => {
+    document.body.setAttribute("tabindex", "-1");
+    document.body.focus({ preventScroll: true });
+    document.body.removeAttribute("tabindex");
+  })()`);
+};
+
 const assertPrimaryKeyboardNavigation = async (client) => {
-  await evaluate(client, "document.body.focus()");
+  await resetSequentialFocus(client);
   await pressKey(client, "Tab");
   assert(await activeElementLabel(client) === "模型列表", "Tab should focus the selected primary tab first");
 
