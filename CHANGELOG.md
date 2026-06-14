@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-06-13 — Documentation consistency and Codex handoff
+
+### Added
+- README 新增三方一致性快照，统一本地 `origin/main`、腾讯云生产站和 GitHub Pages 镜像的当前产品状态。
+- 新增 `docs/CODEX_HANDOFF.md`，记录当前状态、已完成治理、标准命令、剩余外部事项和下一次 Codex 推荐入口。
+- AUDIT 新增文档一致性与 Codex 交接记录。
+
+### Changed
+- AUDIT 当前状态快照更新为产品 artifact 验收基线 `8f5504b`、GitHub Pages workflow `27489295001` 和腾讯云生产 E2E/UI smoke 通过状态。
+- README 的项目结构说明加入 `docs/CODEX_HANDOFF.md` 与 `docs/ROLLBACK.md`。
+
 ## 2026-06-13 — Focus-visible accessibility smoke gate
 
 ### Added

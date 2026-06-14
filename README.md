@@ -2,6 +2,24 @@
 
 大模型选型与用法精粹静态站点。主生产入口是 `https://llm.lute-tlz-dddd.top/`，GitHub Pages 是镜像发布目标，不作为 canonical SEO 入口。
 
+## 当前三方一致性快照
+
+> 最近复核：2026-06-13（America/Los_Angeles）
+
+| 事实源 | 当前状态 | 验收口径 |
+| --- | --- | --- |
+| 本地仓库 / `origin/main` | 最近一次产品 artifact 验收基线为 `8f5504b`；后续文档-only 提交不改变公网 release 内容 | `git status --short --branch` 无 ahead/behind |
+| 腾讯云生产站 | `https://llm.lute-tlz-dddd.top/` 已部署当前 `release/`，核心页面、JSON 和 UI smoke 验收通过 | `make check`、`make check-exposure`、`make smoke-ui-production` |
+| GitHub Pages 镜像 | 产品 artifact 验收 workflow `27489295001` 成功，head SHA `8f5504b` | GitHub Actions `Deploy to GitHub Pages` 为 `success` |
+
+当前一致性边界：
+
+- 腾讯云是主生产入口，GitHub Pages 是镜像发布目标。
+- 两端都只发布 `release/`，不发布仓库根目录、源码、脚本、文档或缓存。
+- `llm.lute-tlz-dddd.top` vhost 与 `/opt/llm-compare-hub` 发布目录最近扫描未发现可疑凭据。
+- 共享 nginx 中 `skills.lute-tlz-dddd.top` vhost 仍有硬编码第三方 API key，属于相邻应用风险，不应在 `llm` 站点部署任务中直接修改。
+- 下一次 Codex 接手优先阅读 [CODEX_HANDOFF.md](docs/CODEX_HANDOFF.md)，再根据任务类型运行对应 Makefile 验收。
+
 ## 功能概览
 
 | 页面 | 路径 | 内容 | 数据来源 |
@@ -24,6 +42,9 @@ source repo
 ├── src/                        # Vite + React 源码
 ├── tests/visual-baselines/      # UI smoke 桌面/移动视觉基线
 ├── dist/                       # build 产物，gitignored
+├── docs/
+│   ├── CODEX_HANDOFF.md        # 下一次 Codex 接手摘要
+│   └── ROLLBACK.md             # 腾讯云静态站回滚手册
 ├── scripts/
 │   ├── validate.py             # JSON 数据校验
 │   ├── provenance_report.py    # provenance 覆盖报告

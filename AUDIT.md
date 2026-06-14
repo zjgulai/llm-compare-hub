@@ -8,13 +8,15 @@
 
 | 维度 | 结论 |
 | --- | --- |
-| 主生产站 | `https://llm.lute-tlz-dddd.top/` 返回 200，主入口和 8 个核心 JSON 与本地文件哈希一致 |
+| 三方一致性 | 本地 `main` / `origin/main`、腾讯云生产站、GitHub Pages 镜像均已收敛到最近一次产品 artifact 验收基线 `8f5504b`；后续文档-only 提交不改变公网 release 内容 |
+| 主生产站 | `https://llm.lute-tlz-dddd.top/` 返回 200，主入口、核心 JSON、生产 UI smoke 和开发材料拦截验收通过 |
+| GitHub Pages | 产品 artifact 验收 workflow `27489295001` 成功，head SHA `8f5504b`；作为镜像发布目标，不作为 canonical SEO 入口 |
 | 生产服务器 | Ubuntu 22.04，nginx 容器 `ai_video_nginx`，磁盘 `/` 使用 45%，可用内存约 3.4GiB，swap 已满 |
 | TLS | Let's Encrypt 证书有效期至 2026-09-07，SAN 覆盖 `llm.lute-tlz-dddd.top` |
 | 安全头 | 有 `X-Content-Type-Options`、`X-Frame-Options`、CSP；但 CSP 仍含 `unsafe-inline` |
-| GitHub Pages | 作为镜像发布目标；push 到 `main` 后通过 `make data-update-check` 上传 `release/`，`release` 生成后执行 secret scan |
 | 本地依赖 | `npm audit` 0 漏洞；React 19.2.7、Vite 8.0.16、TypeScript 5.9.3、Tailwind Vite plugin 4.3.1 |
 | 本地安全即时处理 | 已将 `origin` 从带 token URL 改为标准 HTTPS URL；工作区内 `ai_video.pem` 不存在；仍需在 GitHub 侧轮换该 token |
+| 下一次接手入口 | `docs/CODEX_HANDOFF.md` 记录当前产品状态、执行命令、剩余外部事项和推荐下一步 |
 
 ## 1. 核心诊断
 
@@ -41,7 +43,7 @@
 | D-07 | 项目管理债务 | 已缓解/P2 | GitHub Pages 已定位为镜像发布目标，主 canonical 是腾讯云 | 仍需关注镜像发布延迟和失败告警 |
 | D-08 | 工程债务 | 已缓解/P2 | CI 已跑数据校验、provenance、typecheck、build、asset release、secret scan、UI smoke、视觉 diff、主应用与精粹页 a11y 检查 | 当前树和 release 的凭据回归已有门禁；历史泄露仍需人工轮换 |
 | D-09 | 技术债务 | P1 | 数据 fetch 使用绝对根路径 `/xxx-data.json` | 自有根域可用，GitHub Pages 子路径部署存在环境耦合风险 |
-| D-10 | 文档债务 | 已缓解/P2 | README/CHANGELOG/AUDIT 已更新 release-first 与源码 UI 最新状态；历史计划仍作为归档存在 | 后续需要维护“以当前 README/AUDIT 为准”的约束 |
+| D-10 | 文档债务 | 已缓解/P2 | README/CHANGELOG/AUDIT 已更新 release-first、三方一致性、源码 UI 和 smoke 门禁状态；`docs/CODEX_HANDOFF.md` 作为下一次 Codex 接手入口 | 后续需要维护“以当前 README/AUDIT/CODEX_HANDOFF 为准”的约束 |
 | D-11 | 文档债务 | P1 | `robots.txt` 指向 GitHub Pages sitemap；`sitemap.xml` 未覆盖 `claude`/`codex` 页面 | 已通过 Phase 3 缓解；后续需随新增页面维护 sitemap |
 | D-12 | 技术债务 | P2 | `scripts/validate.py` 已增强为轻量 schema 校验器；BAI/EasyRouter/PoYo/SiliconFlow 已补齐 provenance 字段 | 数据质量已从人工检查转向 CI 门禁；后续风险集中在 provenance 时效复核、价格漂移与来源页语义变化 |
 | D-13 | 工程债务 | 已缓解/P2 | `make smoke-ui` 已接入 GitHub Pages workflow，并对桌面/移动截图、360/390/768px 断点、主应用和精粹页 a11y 执行门禁；`make smoke-ui-production` 可做生产冒烟 | 高风险 UI 回归已有 CI/本地/生产命令兜底 |
@@ -176,7 +178,7 @@
 | `make build` | 通过，输出到 `dist/` |
 | `make deploy-dry` | 不再同步 `src/`、`scripts/`、文档、缓存或 `dist/` |
 
-仍需后续处理：
+当时仍需后续处理（均已由后续 Phase 2+ 记录继续推进）：
 
 1. `src/` 当前仍是英文重建版，不是生产中文 UI bundle 的完整源码；它现在只能证明“可编译”，不能作为无风险生产 UI 修改入口。
 2. 腾讯云远端目录仍残留旧文件，只是已被 nginx 拦截访问；Phase 2 应改为发布干净 release artifact 并执行受控清理。
@@ -202,9 +204,9 @@
    - 只上传 `release/`
 7. 腾讯云正式部署前已创建远端备份：
    `/opt/llm-compare-hub/backups/html-before-release-20260611122711.tar.gz`
-8. 已执行腾讯云 release 部署，远端 `/opt/llm-compare-hub/html` 现在只剩 22 个公开文件。
+8. 已执行腾讯云 release 部署，当时远端 `/opt/llm-compare-hub/html` 只剩 22 个公开文件；后续构建会随 Vite hash 和公开页面清单变化。
 
-release 当前文件清单：
+Phase 2 当时 release 文件清单：
 
 ```text
 api-data.json
@@ -609,3 +611,35 @@ sitemap.xml
 
 1. 当前门禁是轻量 DOM/CSS 审计；后续可选引入 axe-core 或 Lighthouse 做定期重型无障碍审计。
 2. 当前视觉 diff 仍只覆盖首页首屏；可继续扩展到精粹页首屏和对比页模式页。
+
+## 19. 文档一致性与 Codex 交接记录
+
+> 执行时间：2026-06-13
+
+已完成：
+
+1. README 增加“三方一致性快照”，明确本地 `origin/main`、腾讯云生产站和 GitHub Pages 镜像的共同版本、验收口径和边界。
+2. AUDIT 当前状态快照同步更新到产品 artifact 验收基线 `8f5504b`、GitHub Actions workflow `27489295001` 和生产 smoke 验收状态。
+3. 新增 `docs/CODEX_HANDOFF.md`，作为下一次 Codex 或人工开发接手入口，集中记录：
+   - 当前产品状态；
+   - 三方一致性；
+   - 已完成治理事项；
+   - 标准验证与部署命令；
+   - 剩余外部事项；
+   - 推荐下一步。
+4. CHANGELOG 增加文档一致性与交接摘要记录，避免后续只看变更日志时遗漏当前状态。
+
+验收要求：
+
+| 检查项 | 期望 |
+| --- | --- |
+| `make data-update-check` | 数据、provenance、构建、release、secret scan 全部通过 |
+| `make smoke-ui` | 本地 E2E/UI smoke、a11y、焦点可视化和视觉 diff 通过 |
+| `make check` | 腾讯云主站、GitHub Pages 和核心 JSON 均为 200 |
+| `make check-exposure` | 开发材料和隐藏文件路径仍为 404 |
+| `make smoke-ui-production` | 生产站 E2E/UI smoke 通过 |
+
+后续债务：
+
+1. 外部凭据轮换仍需在 GitHub 控制台和 `skills.lute-tlz-dddd.top` 对应应用侧完成。
+2. 如后续数据或 UI 继续演进，必须同步更新 README、AUDIT、CHANGELOG 和 `docs/CODEX_HANDOFF.md`，保持三方状态口径一致。
