@@ -313,9 +313,12 @@ const findChrome = () => {
   throw new Error("Chrome/Chromium not found. Set CHROME_PATH to run UI smoke checks.");
 };
 
-const waitForDevToolsPort = async (profileDir) => {
+const waitForDevToolsPort = async (profileDir, chrome, stderr) => {
   const portFile = path.join(profileDir, "DevToolsActivePort");
-  for (let attempt = 0; attempt < 80; attempt += 1) {
+  for (let attempt = 0; attempt < 200; attempt += 1) {
+    if (chrome.exitCode !== null || chrome.signalCode !== null) {
+      throw new Error(`Chrome exited before DevTools port was ready: ${stderr().slice(-2000)}`);
+    }
     try {
       const [port] = (await readFile(portFile, "utf8")).trim().split("\n");
       if (port) return port;
@@ -323,7 +326,7 @@ const waitForDevToolsPort = async (profileDir) => {
       await sleep(100);
     }
   }
-  throw new Error("Timed out waiting for Chrome DevTools port");
+  throw new Error(`Timed out waiting for Chrome DevTools port: ${stderr().slice(-2000)}`);
 };
 
 class CdpClient {
@@ -411,7 +414,7 @@ const launchChrome = async () => {
     stderr += chunk.toString();
   });
 
-  const port = await waitForDevToolsPort(profileDir);
+  const port = await waitForDevToolsPort(profileDir, chrome, () => stderr);
   return {
     chrome,
     profileDir,

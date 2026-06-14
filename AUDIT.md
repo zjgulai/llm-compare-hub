@@ -587,8 +587,9 @@ sitemap.xml
 
 1. `scripts/ui_smoke_check.mjs` 新增 `focusIndicatorAudit`，逐个聚焦可交互元素，并要求 focus 后出现 2px 以上 outline、box-shadow 或边框变化。
 2. 修复新增焦点审计对后续 Tab 顺序的副作用：键盘路径检查先通过临时 `body[tabindex="-1"]` 重置 sequential focus 起点。
-3. `src/index.css` 为 React 主应用增加统一 `:focus-visible` 样式。
-4. `claude.html`、`codex.html` 和 `pages/essence-template.html` 同步增加 `:focus-visible` 样式，覆盖静态精粹页与后续模板生成。
+3. Chrome DevTools 端口等待从 8 秒放宽到 20 秒，并在 Chrome 提前退出或超时时输出截断 stderr，避免 CI runner 启动较慢时只得到无诊断超时。
+4. `src/index.css` 为 React 主应用增加统一 `:focus-visible` 样式。
+5. `claude.html`、`codex.html` 和 `pages/essence-template.html` 同步增加 `:focus-visible` 样式，覆盖静态精粹页与后续模板生成。
 
 红灯验证：
 
@@ -596,6 +597,7 @@ sitemap.xml
 | --- | --- |
 | 焦点可视化初始门禁 | 主导航、平台/分类按钮和模型文档链接缺少可检测 focus indicator |
 | 焦点审计副作用 | 聚焦遍历后改变 Tab 起点，导致主导航键盘路径检查失败 |
+| GitHub Pages workflow `27489235115` | CI 中 Chrome DevTools 端口启动超时，需放宽等待并补充 stderr 诊断 |
 
 验证通过：
 

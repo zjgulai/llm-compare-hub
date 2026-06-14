@@ -8,6 +8,7 @@
 
 ### Fixed
 - 修复 smoke 中焦点审计遍历后影响后续 Tab 顺序的问题：键盘路径检查会先显式重置 sequential focus 起点。
+- Chrome DevTools 端口等待从 8 秒放宽到 20 秒，并在 Chrome 提前退出或超时时输出截断 stderr，便于定位 CI runner 启动问题。
 
 ### Verified
 - 红灯验证先失败于主导航、平台/分类按钮和文档链接缺少可检测 focus indicator。
