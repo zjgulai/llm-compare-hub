@@ -1,11 +1,7 @@
-.PHONY: validate validate-provenance provenance-report typecheck build verify-assets smoke-ui smoke-ui-update-baselines smoke-ui-production release deploy deploy-dry check check-exposure clean weekly-snapshot data-update-check data-update-dry data-update-deploy
+.PHONY: validate validate-provenance provenance-report typecheck build verify-assets secret-scan smoke-ui smoke-ui-update-baselines smoke-ui-production release deploy deploy-dry check check-exposure clean weekly-snapshot data-update-check data-update-dry data-update-deploy
 
 # SSH key: keep production credentials outside the worktree.
-PREFERRED_SSH_KEY := /Users/lute/project/Agent/product/llm_models_hub/ai_video.pem
-SSH_KEY := $(wildcard $(PREFERRED_SSH_KEY))
-ifeq ($(SSH_KEY),)
-SSH_KEY := $(HOME)/.ssh/llm-compare-hub.pem
-endif
+SSH_KEY ?= $(HOME)/.ssh/llm-compare-hub.pem
 SSH_CMD := ssh -i $(SSH_KEY) -o StrictHostKeyChecking=no
 RSYNC_CMD := rsync -avz -e "$(SSH_CMD)"
 REMOTE := ubuntu@101.34.52.232
@@ -36,6 +32,10 @@ verify-assets:
 	@echo "🔗 Verifying index.html asset references..."
 	@python3 scripts/verify_assets.py
 
+secret-scan:
+	@echo "🔐 Scanning tracked files, local git config, and release artifact for likely secrets..."
+	@python3 scripts/secret_scan.py --include-release
+
 smoke-ui: release
 	@echo "🖥️  Running local UI smoke checks..."
 	@node scripts/ui_smoke_check.mjs
@@ -51,6 +51,7 @@ smoke-ui-production:
 release: validate build verify-assets
 	@echo "📦 Building clean release artifact..."
 	@python3 scripts/build_release.py
+	@$(MAKE) --no-print-directory secret-scan
 
 deploy: release
 	@echo "🚀 Deploying to Tencent Cloud (key: $(SSH_KEY))..."

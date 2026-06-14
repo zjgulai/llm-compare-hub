@@ -12,9 +12,9 @@
 | 生产服务器 | Ubuntu 22.04，nginx 容器 `ai_video_nginx`，磁盘 `/` 使用 45%，可用内存约 3.4GiB，swap 已满 |
 | TLS | Let's Encrypt 证书有效期至 2026-09-07，SAN 覆盖 `llm.lute-tlz-dddd.top` |
 | 安全头 | 有 `X-Content-Type-Options`、`X-Frame-Options`、CSP；但 CSP 仍含 `unsafe-inline` |
-| GitHub Pages | 作为镜像发布目标；push 到 `main` 后通过 `make data-update-check` 上传 `release/` |
+| GitHub Pages | 作为镜像发布目标；push 到 `main` 后通过 `make data-update-check` 上传 `release/`，`release` 生成后执行 secret scan |
 | 本地依赖 | `npm audit` 0 漏洞；React 19.2.7、Vite 8.0.16、TypeScript 5.9.3、Tailwind Vite plugin 4.3.1 |
-| 本地安全即时处理 | 已将 `origin` 从带 token URL 改为标准 HTTPS URL；仍需在 GitHub 侧轮换该 token |
+| 本地安全即时处理 | 已将 `origin` 从带 token URL 改为标准 HTTPS URL；工作区内 `ai_video.pem` 不存在；仍需在 GitHub 侧轮换该 token |
 
 ## 1. 核心诊断
 
@@ -36,10 +36,10 @@
 | D-02 | 工程债务 | 已缓解/P2 | `release/` 现在由 `dist/` 构建生成；根入口与根 assets 仅作 legacy fallback | 后续风险转为 legacy fallback 维护成本 |
 | D-03 | 技术债务 | 已缓解/P2 | `src/` 已可 typecheck/build，并完成中文 UI、对比页模式、视觉 diff、核心视图与 Claude/Codex 精粹页 a11y 门禁 | 后续可增加更细的焦点可视化检查 |
 | D-04 | 工程债务 | 已缓解/P2 | Vite `outDir` 已改为 `dist/`，不会覆盖仓库根目录 | 仍需保持 release-only 发布边界 |
-| D-05 | 脆弱点债务 | P0 | 本地曾在 git remote URL 中嵌入 GitHub token；生产共享 nginx 配置中存在硬编码 API key；工作区保留 SSH 私钥 | 凭据泄露后可导致仓库或服务被控；已清理 remote，但仍需轮换凭据 |
+| D-05 | 脆弱点债务 | P0 | 本地曾在 git remote URL 中嵌入 GitHub token；共享 nginx 配置的 `skills.lute-tlz-dddd.top` vhost 仍存在硬编码 OpenAI-compatible API key；工作区内 SSH 私钥已移除 | 凭据泄露后可导致仓库或服务被控；已清理 remote 和部署默认 key 路径，但仍需外部控制台轮换凭据 |
 | D-06 | 工程债务 | 已缓解/P2 | 腾讯云部署已改为 `release/` + `rsync --delete` | 后续需保持备份与回滚演练 |
 | D-07 | 项目管理债务 | 已缓解/P2 | GitHub Pages 已定位为镜像发布目标，主 canonical 是腾讯云 | 仍需关注镜像发布延迟和失败告警 |
-| D-08 | 工程债务 | P2 | CI 已跑数据校验、provenance、typecheck、build、asset release、UI smoke、视觉 diff、主应用与精粹页 a11y 检查；仍缺 secret scan | 安全凭据与 secret 泄漏回归仍依赖人工复核 |
+| D-08 | 工程债务 | 已缓解/P2 | CI 已跑数据校验、provenance、typecheck、build、asset release、secret scan、UI smoke、视觉 diff、主应用与精粹页 a11y 检查 | 当前树和 release 的凭据回归已有门禁；历史泄露仍需人工轮换 |
 | D-09 | 技术债务 | P1 | 数据 fetch 使用绝对根路径 `/xxx-data.json` | 自有根域可用，GitHub Pages 子路径部署存在环境耦合风险 |
 | D-10 | 文档债务 | 已缓解/P2 | README/CHANGELOG/AUDIT 已更新 release-first 与源码 UI 最新状态；历史计划仍作为归档存在 | 后续需要维护“以当前 README/AUDIT 为准”的约束 |
 | D-11 | 文档债务 | P1 | `robots.txt` 指向 GitHub Pages sitemap；`sitemap.xml` 未覆盖 `claude`/`codex` 页面 | 已通过 Phase 3 缓解；后续需随新增页面维护 sitemap |
@@ -54,7 +54,7 @@
 目标：先把公开暴露面和不可复现发布风险压下去。
 
 1. 立即轮换曾出现在 git remote URL 中的 GitHub token。
-2. 轮换生产 nginx 配置中硬编码的第三方 API key，并改用环境变量或后端服务注入。
+2. 轮换共享 nginx 配置中 `skills.lute-tlz-dddd.top` vhost 的硬编码第三方 API key，并改用环境变量或后端服务注入。
 3. 将 `ai_video.pem` 移出项目目录，仅保留在 `~/.ssh/`，设置 `chmod 600`。
 4. 生产 nginx 增加 deny 规则或清理发布目录，禁止访问 `.git*`、`.github/`、`src/`、`scripts/`、`*.md`、`Makefile`、`.essence-cache/`、旧 `data/`。
 5. 做一次 `rsync --dry-run --delete`，确认只发布 allowlist：`index.html`、当前被引用的 assets、运行时 JSON、`claude/`、`codex/`、`claude.html`、`codex.html`、`favicon.svg`、`robots.txt`、`sitemap.xml`。
@@ -79,7 +79,7 @@
 
 目标：CI 放行的是发布产物，不是整个仓库。
 
-1. GitHub Actions 增加 typecheck、build、asset 引用检查、secret scan。
+1. GitHub Actions 保持 typecheck、build、asset 引用检查、secret scan 和 UI smoke 门禁。
 2. Pages artifact 改为发布 `dist/` 或 `release/`，不要上传仓库根目录。
 3. 腾讯云部署也从 `release/` 同步，使用 allowlist 或干净目录 + `--delete-after`。
 4. 增加生产 smoke test：主站、核心 JSON、assets、`claude`/`codex` 页面、安全头、开发文件不可访问。
@@ -145,7 +145,7 @@
 仍需人工完成：
 
 1. 在 GitHub 侧撤销并轮换曾经出现在 remote URL 中的 token。
-2. 轮换生产 nginx 配置中硬编码的第三方 API key，并迁移到更安全的注入方式。
+2. 轮换共享 nginx 配置中 `skills.lute-tlz-dddd.top` vhost 的硬编码第三方 API key，并迁移到更安全的注入方式。
 3. 进入 Phase 1，解决生产 assets 不在 git、`src/` 与生产不一致、Vite 输出目录危险这三项可复现发布问题。
 
 ## 6. Phase 1 执行记录
@@ -247,7 +247,7 @@ sitemap.xml
 仍需后续处理：
 
 1. 本地 commit/push 后 GitHub Pages 才会通过新 workflow 更新；当前 Pages 仍取决于远端 `origin/main`。
-2. GitHub token 和生产 nginx 硬编码 API key 仍需人工轮换。
+2. GitHub token 和共享 nginx 中 `skills.lute-tlz-dddd.top` vhost 的硬编码 API key 仍需人工轮换。
 3. 下一阶段可选择：统一 Pages 与腾讯云的 canonical/robots/sitemap 策略，或重建 `src/` 使其完全等价当前中文生产 UI。
 
 ## 8. Phase 3 执行记录
@@ -348,7 +348,7 @@ sitemap.xml
 
 后续债务：
 
-1. 继续轮换历史 GitHub token 与生产 nginx 中的硬编码第三方 API key。
+1. 继续轮换历史 GitHub token 与共享 nginx 中 `skills.lute-tlz-dddd.top` vhost 的硬编码第三方 API key。
 2. 对 `src/` 做中文文案和视觉一致性复核，避免源码构建切换后产品体验漂移。
 3. 为 `make data-update-deploy` 增加部署前远端备份目标，进一步缩短生产回滚时间。
 
@@ -548,3 +548,33 @@ sitemap.xml
 
 1. 如需更细的视觉无障碍检查，可增加焦点环截图或引入 axe-core/Lighthouse 定期任务。
 2. 当前视觉 diff 仍只覆盖首页首屏；可继续扩展到精粹页首屏和对比页模式页。
+
+## 17. 凭据扫描与共享 nginx 风险收敛记录
+
+> 执行时间：2026-06-13
+
+已完成：
+
+1. 新增 `scripts/secret_scan.py`，扫描 git 跟踪文件、当前 `.git/config` 和已生成的 `release/`，输出仅包含文件、行号、严重度和规则名，不输出密钥明文。
+2. 新增 `tests/test_secret_scan.py`，验证 scanner 能发现 GitHub token 与私钥块模式，并确认报告不包含原始值。
+3. 新增 `make secret-scan`，并在 `make release` 生成 release artifact 后自动执行。
+4. Makefile 默认 SSH key 改为仓库外 `~/.ssh/llm-compare-hub.pem`；如需临时覆盖，使用 `SSH_KEY=/absolute/path/to/key.pem make deploy`。
+5. 本地工作区检查确认 `ai_video.pem` 不存在于仓库目录。
+6. 远端只读扫描确认 `/opt/llm-compare-hub` 发布目录无可疑凭据。
+7. 远端只读扫描确认 `llm.lute-tlz-dddd.top` vhost 无可疑 key；共享 nginx 中仍有硬编码 OpenAI-compatible key，但位置属于 `skills.lute-tlz-dddd.top` vhost 的 `/api/chat` 代理，本轮未修改该应用配置。
+
+验证通过：
+
+| 检查项 | 结果 |
+| --- | --- |
+| 红灯验证 | `python3 -m unittest tests.test_secret_scan` 先失败于缺少 `scripts.secret_scan` |
+| `python3 -m unittest tests.test_secret_scan` | 通过 |
+| `make secret-scan` | 当前树、`.git/config` 和 `release/` 未发现可疑凭据 |
+| `python3 scripts/secret_scan.py --history --report-only` | git 历史未发现可疑凭据 |
+| 远端 nginx 扫描 | 仅 `skills.lute-tlz-dddd.top` vhost 命中硬编码 OpenAI-compatible key；`llm` vhost 未命中 |
+| 远端 `/opt/llm-compare-hub` 扫描 | 未发现可疑凭据 |
+
+仍需人工完成：
+
+1. 在 GitHub 控制台撤销/轮换曾经出现在本地 remote URL 中的 token；本地扫描无法证明外部 token 已失效。
+2. 由 `skills.lute-tlz-dddd.top` 应用 owner 轮换硬编码 API key，并改为后端服务或安全环境注入；不要在 `llm` 站点部署任务中直接修改共享业务配置。

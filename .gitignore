@@ -59,4 +59,5 @@ models-data.json
 # Temp scripts
 *.py
 !scripts/*.py
+!tests/*.py
 __pycache__/

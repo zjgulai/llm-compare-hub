@@ -29,6 +29,7 @@ source repo
 │   ├── provenance_report.py    # provenance 覆盖报告
 │   ├── weekly_data_snapshot.py # 数据治理快照
 │   ├── verify_assets.py        # 递归校验 dist/root 入口 asset 引用
+│   ├── secret_scan.py          # 不输出明文的凭据扫描门禁
 │   ├── ui_smoke_check.mjs      # Chrome headless UI 冒烟与截图检查
 │   └── build_release.py        # 生成干净 release artifact
 └── release/                    # 生成产物，gitignored，仅部署该目录
@@ -63,6 +64,7 @@ make verify-assets
 make typecheck
 make build
 make release
+make secret-scan
 make data-update-check
 make smoke-ui
 ```
@@ -77,14 +79,14 @@ make check-exposure
 make smoke-ui-production
 ```
 
-默认优先使用 `/Users/lute/project/Agent/product/llm_models_hub/ai_video.pem`（若不存在则回退到 `~/.ssh/llm-compare-hub.pem`），不会读取工作区内的私钥。`make deploy` 会先生成 `release/`，再用 `rsync --delete release/` 同步到腾讯云静态目录。
+默认使用仓库外的 `~/.ssh/llm-compare-hub.pem`。如需临时指定其他 key，显式传入 `SSH_KEY=/absolute/path/to/key.pem make deploy`；不要把私钥放回工作区。`make deploy` 会先生成 `release/`，再用 `rsync --delete release/` 同步到腾讯云静态目录。
 
 ### GitHub Pages
 
 `.github/workflows/deploy.yml` 在 push 到 `main` 后执行：
 
 1. `npm ci --prefix src`
-2. `make data-update-check`
+2. `make data-update-check`（其中 `make release` 会在生成 `release/` 后执行 `make secret-scan`）
 3. 探测 Chrome/Chromium 并设置 `CHROME_PATH`
 4. `make smoke-ui`
 5. 上传 `release/`
@@ -148,7 +150,8 @@ nginx 对 `src/`、`scripts/`、`.github/`、`.essence-cache/`、文档和隐藏
 | `make verify-assets` | 递归检查 `index.html` 和 JS chunks 引用的 assets 是否存在 |
 | `make typecheck` | 对 `src/` 执行 TypeScript 检查 |
 | `make build` | 将 `src/` 构建到 `dist/`，不影响生产根入口 |
-| `make release` | 先验证数据并构建 `dist/`，再生成干净发布目录 `release/` |
+| `make release` | 先验证数据并构建 `dist/`，再生成干净发布目录 `release/`，随后执行 secret scan |
+| `make secret-scan` | 扫描 git 跟踪文件、当前 `.git/config` 和已生成的 `release/`，只输出文件/行号/规则，不输出密钥值 |
 | `make smoke-ui` | 本地启动 `release/` 预览并用 Chrome headless 检查主应用、Claude/Codex 精粹页、360/390/768px 断点、键盘导航、tab/tabpanel 语义、颜色对比度、移动端触控目标、缺失 asset 404 和视觉 diff |
 | `make smoke-ui-update-baselines` | 确认 UI 变化符合预期后，刷新 `tests/visual-baselines/` 的桌面/移动视觉基线 |
 | `make smoke-ui-production` | 对腾讯云生产站执行同一组 UI smoke、a11y 门禁与视觉 diff 检查 |
@@ -215,7 +218,7 @@ python3 scripts/weekly_data_snapshot.py --date 2026-06-12 --stale-days 45 --outp
 ## 剩余高优先级事项
 
 1. 轮换曾经出现在 git remote URL 中的 GitHub token。
-2. 轮换生产 nginx 配置里硬编码的第三方 API key，并迁移到安全注入方式。
+2. 轮换共享 nginx 配置里 `skills.lute-tlz-dddd.top` vhost 的硬编码第三方 API key，并迁移到安全注入方式；`llm.lute-tlz-dddd.top` vhost 和 `/opt/llm-compare-hub` 发布目录本轮扫描未发现 key。
 3. 将当前 a11y 门禁继续扩展到更细的焦点可视化规则；可选引入 axe-core 或 Lighthouse 做定期重型审计。
 4. `make validate-provenance` 已接入发布链路；继续保持 provenance 字段的 `high/medium` 与 `verifiedAt` 的时效复核。
 

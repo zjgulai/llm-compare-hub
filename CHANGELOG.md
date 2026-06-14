@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-06-13 — Secret scan gate and credential-risk closure
+
+### Added
+- 新增 `scripts/secret_scan.py`，扫描 git 跟踪文件、当前 `.git/config` 和已生成的 `release/`，只输出文件/行号/规则，不输出密钥值。
+- 新增 `tests/test_secret_scan.py`，覆盖 GitHub token、私钥块识别和报告去值化。
+- 新增 `make secret-scan`，并在 `make release` 生成发布物后自动执行。
+
+### Changed
+- Makefile 默认 SSH key 改为仓库外 `~/.ssh/llm-compare-hub.pem`；临时覆盖需显式传 `SSH_KEY=...`。
+- README/AUDIT 更新凭据风险状态：`llm` vhost 与 `/opt/llm-compare-hub` 发布目录未发现 key；共享 nginx 中剩余硬编码 key 位于 `skills.lute-tlz-dddd.top` vhost，需由对应应用 owner 轮换。
+
+### Verified
+- `python3 -m unittest tests.test_secret_scan` 通过。
+- `make secret-scan` 通过。
+- `python3 scripts/secret_scan.py --history --report-only` 未发现 git 历史可疑凭据。
+- 腾讯云只读扫描确认 `llm.lute-tlz-dddd.top` vhost 与 `/opt/llm-compare-hub` 未发现可疑凭据。
+
 ## 2026-06-13 — Essence page a11y and breakpoint smoke coverage
 
 ### Added
