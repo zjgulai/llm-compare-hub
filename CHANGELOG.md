@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-06-19 — Essence data regression guard
+
+### Added
+- `scripts/update-essence.py` now blocks overwriting `claude-data.json` or `codex-data.json` when generated item counts would decrease.
+- Added focused unit tests for essence item counting and regression detection.
+
+### Changed
+- Intentional Claude/Codex essence content removals now require `--allow-regression` plus manual diff review.
+
+### Verified
+- `python3 -m unittest tests.test_update_essence tests.test_secret_scan` passed.
+- `python3 scripts/update-essence.py` correctly refused the current lower-count online output and preserved existing 28-item data files.
+
 ## 2026-06-18 — Incremental data provenance refresh
 
 ### Changed

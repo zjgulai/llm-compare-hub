@@ -1,6 +1,6 @@
 # LLM Models Hub — Codex Handoff
 
-> Last updated: 2026-06-18 (America/Los_Angeles)
+> Last updated: 2026-06-19 (America/Los_Angeles)
 > Primary production: `https://llm.lute-tlz-dddd.top/`
 > Mirror: `https://zjgulai.github.io/llm-compare-hub/`
 > Last product artifact verification baseline: `8f5504b test: harden chrome smoke startup`
@@ -113,7 +113,7 @@ Do not expose or print secret values when investigating these.
 3. CSP still contains `unsafe-inline`; removing it requires a separate CSP hardening pass.
 4. Current visual diff baselines cover the home page screenshots; future work may expand visual baselines to compare modes and essence pages.
 5. Data provenance must keep `verifiedAt`, `confidence`, and `sourceUrl` fresh as model/provider data changes.
-6. `scripts/update-essence.py` currently falls back to curated-only output when `aihot.virxact.com` search fetches fail through Jina Reader. Do not publish regenerated `claude-data.json` / `codex-data.json` if item counts drop unexpectedly; fix source fetching or preserve existing curated/manual content first.
+6. `scripts/update-essence.py` now refuses to overwrite `claude-data.json` / `codex-data.json` when generated item counts would drop. Use `--allow-regression` only after manual diff review confirms the removal is intended.
 
 ## Safe Next Steps
 

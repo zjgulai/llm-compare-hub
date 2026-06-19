@@ -1,6 +1,6 @@
 # LLM Models Hub — 深度债务审计与治理计划
 
-> 审计日期：初始 2026-06-11；最新复核 2026-06-18
+> 审计日期：初始 2026-06-11；最新复核 2026-06-19
 > 范围：本地仓库、腾讯云生产站点、GitHub Pages 发布链路、部署脚本、文档与数据资产  
 > 原则：本报告不记录任何密钥明文；所有 secret 仅按风险类别描述。
 
@@ -17,7 +17,7 @@
 | 本地依赖 | `npm audit` 0 漏洞；React 19.2.7、Vite 8.0.16、TypeScript 5.9.3、Tailwind Vite plugin 4.3.1 |
 | 本地安全即时处理 | 已将 `origin` 从带 token URL 改为标准 HTTPS URL；工作区内 `ai_video.pem` 不存在；仍需在 GitHub 侧轮换该 token |
 | 下一次接手入口 | `docs/CODEX_HANDOFF.md` 记录当前产品状态、执行命令、剩余外部事项和推荐下一步 |
-| 最新数据治理刷新 | `data-provenance-snapshots.json` 已刷新至 `2026-06-18`；78 个来源 URL 可达，77 个唯一 `docsUrl` 返回 200；Claude/Codex 精粹页在线刷新因 aiho/Jina 拉取失败被判定为回退并拒绝发布 |
+| 最新数据治理刷新 | `data-provenance-snapshots.json` 已刷新至 `2026-06-18`；78 个来源 URL 可达，77 个唯一 `docsUrl` 返回 200；Claude/Codex 精粹页刷新已增加项目数下降保护，默认拒绝覆盖回退数据 |
 
 ## 1. 核心诊断
 

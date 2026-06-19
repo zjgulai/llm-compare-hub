@@ -210,7 +210,7 @@ python3 scripts/check_data_drift.py --update-snapshot
 make validate-provenance
 ```
 
-注意：`scripts/update-essence.py` 当前在 aiho/Jina 搜索源拉取失败时会生成 curated-only 的 Claude/Codex 精粹数据。若 `claude-data.json` 或 `codex-data.json` 项目数异常下降，应视为数据回退，不要部署；先修复抓取或保留现有人工整理内容。
+注意：`scripts/update-essence.py` 默认会拒绝覆盖项目数下降的 Claude/Codex 精粹数据。若确认为有意删除内容，需显式追加 `--allow-regression`，并在发布前复核 diff 与页面 smoke。
 
 ## 周报与周度治理快照
 

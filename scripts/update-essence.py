@@ -9,6 +9,7 @@ Usage:
     python3 scripts/update-essence.py --topic claude  # update only claude
     python3 scripts/update-essence.py --topic codex   # update only codex
     python3 scripts/update-essence.py --init    # first-time bootstrap with curated data
+    python3 scripts/update-essence.py --allow-regression  # allow item-count decreases
 """
 
 import json, sys, os, subprocess, re, time
@@ -18,6 +19,24 @@ REPO_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JINA_BASE = "https://r.jina.ai"
 CACHE_DIR = os.path.join(REPO_DIR, ".essence-cache")
 os.makedirs(CACHE_DIR, exist_ok=True)
+
+def count_items(data):
+    return sum(len(section.get('items', [])) for section in data.get('sections', []))
+
+def load_existing_data(path):
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding='utf-8') as f:
+        return json.load(f)
+
+def regression_details(existing_data, generated_data, allow_regression=False):
+    if allow_regression or not existing_data:
+        return None
+    existing_total = count_items(existing_data)
+    generated_total = count_items(generated_data)
+    if generated_total < existing_total:
+        return existing_total, generated_total
+    return None
 
 def fetch_jina(url, cache_key=None, max_age=3600):
     """Fetch a URL through Jina Reader with caching."""
@@ -268,6 +287,8 @@ def main():
     topics = ['claude', 'codex']
     
     offline = '--offline' in args or '--init' in args
+    allow_regression = '--allow-regression' in args
+    failures = 0
     if '--topic' in args:
         idx = args.index('--topic') + 1
         topics = [args[idx]] if idx < len(args) else topics
@@ -324,14 +345,28 @@ def main():
             scored.sort(key=lambda x: x.get('score', 0), reverse=True)
             section['items'] = scored + unscored
         
-        # Write output
         output_file = os.path.join(REPO_DIR, f"{topic}-data.json")
-        with open(output_file, 'w') as f:
+        existing_data = load_existing_data(output_file)
+        regression = regression_details(existing_data, data, allow_regression=allow_regression)
+        total = count_items(data)
+
+        if regression:
+            existing_total, generated_total = regression
+            print(f"  ❌ Refusing to overwrite {topic}-data.json: item count would drop from {existing_total} to {generated_total}")
+            if not offline and not filtered:
+                print("     likely cause: aiho fetch/filter returned no usable items")
+            print("     use --allow-regression only after manually confirming the content removal is intended")
+            failures += 1
+            continue
+
+        # Write output
+        with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         
-        total = sum(len(s['items']) for s in data['sections'])
         print(f"  ✅ {topic}-data.json: {len(data['sections'])} sections, {total} items")
         print(f"     aiho items: {len(filtered)}, curated: 12")
 
+    return 1 if failures else 0
+
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
