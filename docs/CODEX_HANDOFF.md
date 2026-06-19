@@ -1,6 +1,6 @@
 # LLM Models Hub — Codex Handoff
 
-> Last updated: 2026-06-13 (America/Los_Angeles)
+> Last updated: 2026-06-18 (America/Los_Angeles)
 > Primary production: `https://llm.lute-tlz-dddd.top/`
 > Mirror: `https://zjgulai.github.io/llm-compare-hub/`
 > Last product artifact verification baseline: `8f5504b test: harden chrome smoke startup`
@@ -25,12 +25,16 @@ The production source of truth is the generated `release/` directory. Do not dep
 
 | Surface | Current status |
 | --- | --- |
-| Local repo / `origin/main` | Product artifact verification baseline is `8f5504b`; later documentation-only commits should not change the public `release/` artifact |
+| Local repo / `origin/main` | Product artifact verification baseline remains `8f5504b`; 2026-06-18 data-governance refresh updated only `data-provenance-snapshots.json`, which is not part of the public `release/` artifact |
 | Tencent Cloud production | `https://llm.lute-tlz-dddd.top/` has the latest `release/` deployment and passes production smoke |
 | GitHub Pages mirror | Product artifact workflow `27489295001` succeeded for head SHA `8f5504b` |
 
 Verification evidence from the latest loop:
 
+- `python3 scripts/check_data_drift.py --update-snapshot`: 78 source URLs returned `200`; `data-provenance-snapshots.json` refreshed to `generatedAt=2026-06-18`.
+- `python3 scripts/validate.py --check-urls`: 77 unique `docsUrl` targets returned `200`.
+- `make data-update-check`: JSON validation, strict provenance validation, weekly snapshot, TypeScript build, release build, and secret scan passed.
+- `make smoke-ui`: local release browser smoke passed; desktop/mobile visual diff was `0.00%`.
 - `make check`: production site, GitHub Pages, and six core JSON files returned `200`.
 - `make check-exposure`: development files and hidden paths returned `404`.
 - `make smoke-ui-production`: production UI smoke passed; desktop/mobile visual diff was `0.00%`.
@@ -109,6 +113,7 @@ Do not expose or print secret values when investigating these.
 3. CSP still contains `unsafe-inline`; removing it requires a separate CSP hardening pass.
 4. Current visual diff baselines cover the home page screenshots; future work may expand visual baselines to compare modes and essence pages.
 5. Data provenance must keep `verifiedAt`, `confidence`, and `sourceUrl` fresh as model/provider data changes.
+6. `scripts/update-essence.py` currently falls back to curated-only output when `aihot.virxact.com` search fetches fail through Jina Reader. Do not publish regenerated `claude-data.json` / `codex-data.json` if item counts drop unexpectedly; fix source fetching or preserve existing curated/manual content first.
 
 ## Safe Next Steps
 

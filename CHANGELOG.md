@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-06-18 — Incremental data provenance refresh
+
+### Changed
+- Refreshed `data-provenance-snapshots.json` to `generatedAt=2026-06-18`; all 78 tracked source URLs returned `200`.
+- Documented that this refresh does not alter public `release/` contents because the provenance snapshot is governance data, not a deployed runtime asset.
+
+### Verified
+- `python3 scripts/validate.py --check-urls`: 77 unique `docsUrl` targets returned `200`.
+- `make data-update-check` passed: JSON validation, strict provenance, weekly snapshot, build, release, and secret scan.
+- `make smoke-ui` passed with desktop/mobile visual diff `0.00%`.
+
+### Notes
+- Online `scripts/update-essence.py` attempted to refresh Claude/Codex pages, but aiho search fetches failed and produced a curated-only regression. That generated output was rejected and the previous `claude-data.json` / `codex-data.json` content was preserved.
+
 ## 2026-06-13 — Documentation consistency and Codex handoff
 
 ### Added

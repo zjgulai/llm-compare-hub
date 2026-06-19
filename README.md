@@ -4,11 +4,11 @@
 
 ## 当前三方一致性快照
 
-> 最近复核：2026-06-13（America/Los_Angeles）
+> 最近复核：2026-06-18（America/Los_Angeles）
 
 | 事实源 | 当前状态 | 验收口径 |
 | --- | --- | --- |
-| 本地仓库 / `origin/main` | 最近一次产品 artifact 验收基线为 `8f5504b`；后续文档-only 提交不改变公网 release 内容 | `git status --short --branch` 无 ahead/behind |
+| 本地仓库 / `origin/main` | 最近一次产品 artifact 验收基线为 `8f5504b`；2026-06-18 数据治理刷新只更新 provenance snapshot，不改变公网 release 内容 | `git status --short --branch` 无 ahead/behind |
 | 腾讯云生产站 | `https://llm.lute-tlz-dddd.top/` 已部署当前 `release/`，核心页面、JSON 和 UI smoke 验收通过 | `make check`、`make check-exposure`、`make smoke-ui-production` |
 | GitHub Pages 镜像 | 产品 artifact 验收 workflow `27489295001` 成功，head SHA `8f5504b` | GitHub Actions `Deploy to GitHub Pages` 为 `success` |
 
@@ -18,6 +18,7 @@
 - 两端都只发布 `release/`，不发布仓库根目录、源码、脚本、文档或缓存。
 - `llm.lute-tlz-dddd.top` vhost 与 `/opt/llm-compare-hub` 发布目录最近扫描未发现可疑凭据。
 - 共享 nginx 中 `skills.lute-tlz-dddd.top` vhost 仍有硬编码第三方 API key，属于相邻应用风险，不应在 `llm` 站点部署任务中直接修改。
+- `data-provenance-snapshots.json` 最近刷新到 `2026-06-18`：78 个来源页本轮可达；77 个唯一 `docsUrl` 本轮返回 200。
 - 下一次 Codex 接手优先阅读 [CODEX_HANDOFF.md](docs/CODEX_HANDOFF.md)，再根据任务类型运行对应 Makefile 验收。
 
 ## 功能概览
@@ -208,6 +209,8 @@ python3 scripts/check_data_drift.py
 python3 scripts/check_data_drift.py --update-snapshot
 make validate-provenance
 ```
+
+注意：`scripts/update-essence.py` 当前在 aiho/Jina 搜索源拉取失败时会生成 curated-only 的 Claude/Codex 精粹数据。若 `claude-data.json` 或 `codex-data.json` 项目数异常下降，应视为数据回退，不要部署；先修复抓取或保留现有人工整理内容。
 
 ## 周报与周度治理快照
 

@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-06-13",
+  "generatedAt": "2026-06-18",
   "sources": {
     "https://docs.b.ai/llmservice/api/": {
       "status": 200,
-      "sha256": "db96c4c6c36059263b82796ba4f6beb8cf5b6471764899af71e4b0c44b86da6a",
-      "checkedAt": "2026-06-13",
+      "sha256": "eba7f663e7b22920bbdae05eefb4438512919aafcbbc76dbc231ab19dd52e0f7",
+      "checkedAt": "2026-06-18",
       "owners": [
         "bai-data.json:claude-haiku-4.5-bai:docsUrl",
         "bai-data.json:claude-haiku-4.5-bai:sourceUrl",
@@ -28,8 +28,8 @@
     },
     "https://docs.easyrouter.io/en/docs/api/ai-model/models/list/listmodels": {
       "status": 200,
-      "sha256": "97aa257a655900a6e8688a62c473e1a16141fcea96142142a399b585df757e9a",
-      "checkedAt": "2026-06-13",
+      "sha256": "69580fb943e527cfe1a43194e7833544af145eb88f94e8dfa547f9690894a06c",
+      "checkedAt": "2026-06-18",
       "owners": [
         "easyrouter-data.json:claude-haiku-4.5-easyrouter:docsUrl",
         "easyrouter-data.json:claude-haiku-4.5-easyrouter:sourceUrl",
@@ -63,32 +63,32 @@
     },
     "https://docs.poyo.ai/api-manual/3d-series/meshy-6-3d": {
       "status": 200,
-      "sha256": "5533bd15ccce1ba3d49b61e08e96149ebfc298e1df661c13e3b4250db9b18b22",
-      "checkedAt": "2026-06-13",
+      "sha256": "6c804c0829f632029ed7b99c74621b2824ebe430379f797b6667a76749d11e3f",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:meshy-6-3d:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/3d-series/tripo-h31-3d": {
       "status": 200,
-      "sha256": "e33230d68c962692726905e7ec65c45ee8b45efcd2ee782c13f82782b6ad9417",
-      "checkedAt": "2026-06-13",
+      "sha256": "2a65a6fae2738b2e132b9a34774dfa08e0da95fb05f4a78f1ffccc592fa11676",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:tripo-h31-3d:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/3d-series/tripo-p1-3d": {
       "status": 200,
-      "sha256": "cae3d236f5aa7dcc8fa7cbb752c1024a22b5d68ed10f1c9dbc7e7bb62d49c3fe",
-      "checkedAt": "2026-06-13",
+      "sha256": "493ac6b796288e80b3b042fa9aa4e4858bdf027cd81ebe5c7891f54cab65f3d8",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:tripo-p1-3d:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/chat-series/chat-completions": {
       "status": 200,
-      "sha256": "d339580128e6d13638e382366151ed09a16d95d204ad6655e07eedd84ec91179",
-      "checkedAt": "2026-06-13",
+      "sha256": "a2ba21ccfc8c5c350251a34fe21e6f508e2be3eb4dc154879b860e755378ac72",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:claude-4-5-api:docsUrl",
         "api-data.json:claude-4-6-api:docsUrl",
@@ -97,16 +97,16 @@
     },
     "https://docs.poyo.ai/api-manual/chat-series/claude-messages": {
       "status": 200,
-      "sha256": "2ca0ef7c4ca70ddb3cd81d0e131ce53c4f54bfeedf20645dec53a3cc7efa0df4",
-      "checkedAt": "2026-06-13",
+      "sha256": "012d04bb5decf51f492733df9b3bed8fb15cd94cbf336e374ce9b6ae12619cac",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:claude-opus-4-7:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/chat-series/gemini-native-format": {
       "status": 200,
-      "sha256": "3e658e4e6acbdd968ab5485aa4c967e0c945894d3503dec1b96950eed68f8d16",
-      "checkedAt": "2026-06-13",
+      "sha256": "a98d0455fd4d0d4d88db268a1cf234f66e41953afbaca096dbca7b0dba8c2a32",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:gemini-3-api:docsUrl",
         "api-data.json:gemini-3.5-flash:docsUrl"
@@ -114,232 +114,232 @@
     },
     "https://docs.poyo.ai/api-manual/image-series/flux-2": {
       "status": 200,
-      "sha256": "7bd53eb029e1ea40c4b7982719e04871a26cb098d8564df42548d6f5268aac09",
-      "checkedAt": "2026-06-13",
+      "sha256": "316c0c9f1522400e1b21113e25c403000f3dd044a2419a6d288f3da138e26e7a",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:flux-2:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/flux-kontext": {
       "status": 200,
-      "sha256": "fe637a3617f445170a5a377ac132d69439cc0cbfe629688e1256c5939bf526b2",
-      "checkedAt": "2026-06-13",
+      "sha256": "c59bc294365759ec0ec7fe2107212c44575890398ae583a7460e9d47addca8b7",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:flux-kontext-pro:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/gpt-4o-image": {
       "status": 200,
-      "sha256": "827dbd78b4f2c5d4c8539c8fba9a6bffe78c17235ad8d7b459de560901eac4bd",
-      "checkedAt": "2026-06-13",
+      "sha256": "c46a86badf4f176076f926040e0c1d37adba63eb9d03242c7bb102ef5a29225c",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:gpt-4o-image-api:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/gpt-image-1.5": {
       "status": 200,
-      "sha256": "36296e399b7461b572e4569d3c9d9405b14f4d1fba2b5bf2caab360bd11b972e",
-      "checkedAt": "2026-06-13",
+      "sha256": "111754425632c61cb04343a2fed571e5975d7ff4adc5770acc2026568d811411",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:gpt-image-1-5-api:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/gpt-image-2": {
       "status": 200,
-      "sha256": "88496bbd22d135d8302db11b8a40af7fd4dde0ac775fa173be52d60434e33fc6",
-      "checkedAt": "2026-06-13",
+      "sha256": "70f884a71ac31866f1089d8f733cd667238c44f82996aad3856f84342ad0571e",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:gpt-image-2:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/grok-imagine-image": {
       "status": 200,
-      "sha256": "c79e68740432370c64dfae0d8d69332989b94d1a412494e484bdf3d657512d54",
-      "checkedAt": "2026-06-13",
+      "sha256": "f117970e0d4c52133feecb2222754057dae9d9db5a46cf7d66f1db35dcf54bd8",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:grok-imagine-image:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/kling-o1": {
       "status": 200,
-      "sha256": "970724c5f060d2be01c38c04c9f35a7dbc10a2edd8a9f2e0fe0d2aa6c91feb06",
-      "checkedAt": "2026-06-13",
+      "sha256": "906343bfccbbab7666382842ef7f0888b0a8f64356678cd598e385ed7de1f453",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:kling-o1-image:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/kling-o3": {
       "status": 200,
-      "sha256": "d8ee0c93598c54924452a3fb852921353decdc174338152d832730ef99b0200f",
-      "checkedAt": "2026-06-13",
+      "sha256": "8ffb13becd0638cf193344882d66fe0feb0b9d017905138d2230635d217b27a6",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:kling-o3-image:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/nano-banana": {
       "status": 200,
-      "sha256": "bf900ed99ccd53851da5ff35b1790713a396ae9aaf6624ed1095b82a1dea65e3",
-      "checkedAt": "2026-06-13",
+      "sha256": "39e0a598277330bb4d04e3cc4662bdfbc1066e7a4a15fc28bc68615544ec8f01",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:nano-banana:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/nano-banana-2": {
       "status": 200,
-      "sha256": "6c735caf68b45d37996c73b24fb10ff73f50147a6ee192a8e40df502f3919630",
-      "checkedAt": "2026-06-13",
+      "sha256": "f18d69ae18d0d3bb8c501d041b68f367a55556c2dbefa37cdb88378c7f0f232b",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:nano-banana-2-api:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/nano-banana-2-new": {
       "status": 200,
-      "sha256": "a7167708a15dde16f564ed0df7241188a749255735cdca7f642cc240c5a79955",
-      "checkedAt": "2026-06-13",
+      "sha256": "61afb0f72a54d9bf38e28fc4ee69076725a0a86c59064f92d735aea6179c0a0a",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:nano-banana-2-new:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/seedream-4": {
       "status": 200,
-      "sha256": "23320545b65ad18bee0f071fcb9dba824850229b96415ba6c5579cec20a05c7d",
-      "checkedAt": "2026-06-13",
+      "sha256": "3ecf2feb3e997c364b9b7dce5d08461ce23c850fb6304ac3b2a64002a333688f",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:seedream-4:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/seedream-4-5": {
       "status": 200,
-      "sha256": "57edfad9c95560416d52300141ee7c68fa7744438e9d86a7e4f00745f84b101d",
-      "checkedAt": "2026-06-13",
+      "sha256": "6e8e43c50d9faee4e4d5e7c1cda606b83123cc04eab68ecba46868db078b8d7b",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:seedream-4-5-api:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/seedream-5-0-lite": {
       "status": 200,
-      "sha256": "f1b86fbe17b9a62ca4496d48b833dc8db5c20488d0f99c0ce6601fb7fc82327d",
-      "checkedAt": "2026-06-13",
+      "sha256": "e74cbe92e1043d1c5359afc8f034761cc836b728222844e197f324d9dc7a059e",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:seedream-5-0-lite-api:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/wan-2-7-image": {
       "status": 200,
-      "sha256": "aa434c5153a5e98dcf9ebc4ad2296504c9826a85bbb017cf22073ce67790c6a3",
-      "checkedAt": "2026-06-13",
+      "sha256": "9a8504a491d92e95bf5b8ce662eacf79a41ef3467fdf1ffbf7cf34d3b31996a7",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:wan-2-7-image:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/image-series/z-image": {
       "status": 200,
-      "sha256": "7cb855f7719482b5e2d58d3827216720b952c63e906bc230ba0e0d7b52907231",
-      "checkedAt": "2026-06-13",
+      "sha256": "77aa45fc8ff0529ee173d84849fdbac99ec675348739e7f5dbfd713b0feaa6ad",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:z-image:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/add-instrumental": {
       "status": 200,
-      "sha256": "0af987680df913f2bcae9e6e7bb24d204ab3ec98ec64f49053d3ca8b8c724a44",
-      "checkedAt": "2026-06-13",
+      "sha256": "b6c0b60734988f12a2f1bd42298426878b4f0b905cff533acfac91eaaab63ff8",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:add-instrumental:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/add-vocals": {
       "status": 200,
-      "sha256": "5d2b0096bb26c64db4d37719d0bc91fea0cc4f45957824204850bd243dd7012c",
-      "checkedAt": "2026-06-13",
+      "sha256": "08e2ead9e80b1fd329267127f9a02b5aaac5c99bc86ce0654776b06b24c3497f",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:add-vocals:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/boost-music-style": {
       "status": 200,
-      "sha256": "4c34381f367274a78647f29f7ecd156e1d90bae3fcff1584e0fbbcb0c627314a",
-      "checkedAt": "2026-06-13",
+      "sha256": "249a4204c434105564c81f5433980728b91bce47585bfe8891c0c879f272bd40",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:boost-music-style:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/convert-to-wav": {
       "status": 200,
-      "sha256": "f99074dee7ff67626687515d27692a49ba9197ac1b98a56140e2b445fbbf2e25",
-      "checkedAt": "2026-06-13",
+      "sha256": "cfa2ccc7ad37106f78c2446ce9e642b89c2714d1373564196c562dcc5708fd30",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:convert-to-wav:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/create-music-video": {
       "status": 200,
-      "sha256": "fd18837e35bed1a52d467957fbcf5d9fb92b15c92d6720eb9adaf0c74a7dba58",
-      "checkedAt": "2026-06-13",
+      "sha256": "c412661d1b9dadc0bc2edd78c3123519cc7b86e6e6ea9291b885fd4fb2ee650f",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:create-music-video:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/elevenlabs-v3-tts": {
       "status": 200,
-      "sha256": "7b4a7fafd4809e9fd153bb6c426e282104bc87c7002d5c8203aeaa0a399a5612",
-      "checkedAt": "2026-06-13",
+      "sha256": "f653987abdabc1ac9de87d263722e9a23902f3d72513a006d6c02cf520d0edef",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:elevenlabs-v3-tts:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/extend-music": {
       "status": 200,
-      "sha256": "7d7853d596e59689a4e46c5a51df7484701febcba9acfd15c30b403d6fc991bd",
-      "checkedAt": "2026-06-13",
+      "sha256": "dfedfe81e5a1be5e75f8e16db445a4d425355b4021f729bb3efd7962ae1c5b65",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:extend-music:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/generate-lyrics": {
       "status": 200,
-      "sha256": "1548672641ce7768a5407f6ea1035c3789623a7f398058f153c37fe5b7050eff",
-      "checkedAt": "2026-06-13",
+      "sha256": "7fb725ac27102becf242f6b2d7ff2188d81bdc550d080fb93c801878fc8f367e",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:generate-lyrics:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/generate-music": {
       "status": 200,
-      "sha256": "5119ab5585eca7f045f4411dde8453cee7e496a3dc53862e23f7efbae3e0c856",
-      "checkedAt": "2026-06-13",
+      "sha256": "82a58d91832bf556ceb841f688128cf2770edb188484380c8800f978dbc63e86",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:generate-music:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/generate-music-cover": {
       "status": 200,
-      "sha256": "c4a1b395831daa7cef3e089287a3772f4fa0de7b27be046f0740ce1b48b77186",
-      "checkedAt": "2026-06-13",
+      "sha256": "66431570eecf0d1412184bce480566270eeb60311d5e04e8f904304880b847a9",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:generate-music-cover:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/generate-persona": {
       "status": 200,
-      "sha256": "9c9be462cecb30f3d701e4e13b6a77b886ffb0d02472781851b889a915cf625d",
-      "checkedAt": "2026-06-13",
+      "sha256": "4f28bbffdc2e7fda45e166c6e029e91a06a86220fe685641ce9af5347e074083",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:generate-persona:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/get-timestamped-lyrics": {
       "status": 200,
-      "sha256": "b31d24b68b8bb9fa9d2251697e050e1ae90939c8fbaf0017df738e75a1f4080c",
-      "checkedAt": "2026-06-13",
+      "sha256": "235b3a6745de0f70a8174a23deef9f2ecfbc646da612496975dac13526a81d37",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:get-timestamped-lyrics:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/minimax-music-2.6": {
       "status": 200,
-      "sha256": "068a60c21ffbfd43acbabf19fdf1db24b6af09a582f06dcc23b06284354cb8a5",
-      "checkedAt": "2026-06-13",
+      "sha256": "68eb2d52267f48d711576f9bf4191b1c1014158d8a0a388132f88895f0ddbccf",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:minimax-music-2.6:docsUrl",
         "api-data.json:minimax-music-2.6:sourceUrl"
@@ -347,40 +347,40 @@
     },
     "https://docs.poyo.ai/api-manual/music-series/replace-section": {
       "status": 200,
-      "sha256": "c0d70e33233e6196f24d3ef8f30af2c4e85fd74188bdb0791647290ec21f8712",
-      "checkedAt": "2026-06-13",
+      "sha256": "a27d6e94747ffc4c64d49a445289fc14b441f1f623f1f67a9d639e5de2d95aa0",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:replace-section:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/upload-and-cover-audio": {
       "status": 200,
-      "sha256": "4a5796c0d25dda2718b20d359be265a6e7a4551d5bbf36b0c5cfb9c817b6a190",
-      "checkedAt": "2026-06-13",
+      "sha256": "4c8a02cdfd849c9d1e14d4684e9e5d64eeaeb75b15d52c9785361a856f90bcdd",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:upload-and-cover-audio:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/upload-and-extend-audio": {
       "status": 200,
-      "sha256": "58b411cff8db2bb35dd7f9e0b83e16c306e926687af8cbdeea1b496fae15badf",
-      "checkedAt": "2026-06-13",
+      "sha256": "78f0484b8d3c62d717b7ff0d1c17c7d178f311bc803ac7a1718dbd3db245a3ba",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:upload-and-extend-audio:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/music-series/vocal-remover": {
       "status": 200,
-      "sha256": "2f3d54020bdd1dbe7d2b50737a5ab6eec06efcc5f5a3e7d069dd77d0161dc489",
-      "checkedAt": "2026-06-13",
+      "sha256": "e705dc1120287a34d5d2712d07baee0430d45ad9fb2d4d4eb1099d729694d9c6",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:vocal-remover-api:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/overview": {
       "status": 200,
-      "sha256": "0cd7a0117333f718f346f8949f5ff322f7f585874d1342b1312805bea909ab60",
-      "checkedAt": "2026-06-13",
+      "sha256": "06fb41b2207b281a66fd0a7696d6c8aef9087d0ab3d5267c750b7192a7214d86",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:add-instrumental:sourceUrl",
         "api-data.json:add-vocals:sourceUrl",
@@ -457,216 +457,216 @@
     },
     "https://docs.poyo.ai/api-manual/video-series/grok-imagine-video-1-5": {
       "status": 200,
-      "sha256": "b62216327839098a0c6e85392fbdfa49d455043803950969bf7f2f67984bfea9",
-      "checkedAt": "2026-06-13",
+      "sha256": "3cf5c946c5a805e43cea705ce1d824345d7d0fd8a89ca2af7feafce7b54accf3",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:grok-imagine-video-1-5:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/hailuo-02": {
       "status": 200,
-      "sha256": "115d4fbf302ead372621ffb2e5242dbfeb7482a0673455144ad6e39c5cb695d4",
-      "checkedAt": "2026-06-13",
+      "sha256": "8e6794165b58e39373f0bd93730fbb0083e7b0a670b1ad7e173f677fd3159b79",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:hailuo-02:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/hailuo-2-3": {
       "status": 200,
-      "sha256": "6b3043dddff33bb60281145b85f7ee98ec7b445bac0f99b5ddbbf5c4250bac69",
-      "checkedAt": "2026-06-13",
+      "sha256": "5fecfc31596473c6a33b3783e9076389557151556adfa81ca3e5f0ba877d6951",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:hailuo-2-3:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/happy-horse": {
       "status": 200,
-      "sha256": "cdaa1eba03eb007bdc198f227568ce67bff95ac76010ccf27674714922491e3d",
-      "checkedAt": "2026-06-13",
+      "sha256": "c8fae15148a95c36276c897218a20e6c0888483ac945aac722c58a11711f060e",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:happy-horse:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/kling-2-1": {
       "status": 200,
-      "sha256": "c330f6072790f687d2d9a1a4f5eebfd24164593a3ff8bb141562dfad416c0df1",
-      "checkedAt": "2026-06-13",
+      "sha256": "c5210567a62895a7cbef7e4a5a5447ad9ab9b97ddf01a08e6f9a5123363bc9ef",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:kling-2.1/standard:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/kling-2-5-turbo-pro": {
       "status": 200,
-      "sha256": "7736ecfb478d106811b7e071054ea959aa3b69efa3ddeed532262dbfa26da52b",
-      "checkedAt": "2026-06-13",
+      "sha256": "f95fcfd582a135292de3ace609c8c5a70ece30ce8a403a7d1a6f7cba32b80b1d",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:kling-2-5-turbo-pro:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/kling-2-6": {
       "status": 200,
-      "sha256": "8485c722cabd213567d18b6c1f8ce3b7f8315e7e46594996a2ee89719cab1e34",
-      "checkedAt": "2026-06-13",
+      "sha256": "fdf6c27fd2c4a0d3f3aadc5787d186e6869d6b179658920fabe9b639cf17ade7",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:kling-2-6:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/kling-2.6-motion-control": {
       "status": 200,
-      "sha256": "e0b5956ff5fb8d5e276ad613ecabb372a25672ef52a0e646cbe8b8d74ed13cfb",
-      "checkedAt": "2026-06-13",
+      "sha256": "87b456af25566dc683349a565253ea906e54905668549a85a8ec4619f2fc247d",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:kling-2-6-motion-control:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/kling-3-0": {
       "status": 200,
-      "sha256": "7bc12dac4503e852073304d14c3c1f9963c9ee8da04ae0b73d977330d732caf5",
-      "checkedAt": "2026-06-13",
+      "sha256": "a34779991a4c1ec4bdbe6e5c9aa52d0975d2999041c38208f03916254043956b",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:kling-3-api:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/kling-3-0-motion-control": {
       "status": 200,
-      "sha256": "bdd3fd7193c2685ebc05297c17d0de02239cf2bc4430ff172e0be48f56c954dd",
-      "checkedAt": "2026-06-13",
+      "sha256": "90ca3bcf0cbac50a49e272b9cd39241f1616aa901156e7d04eb2bfc1a2e823ea",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:kling-3-0-motion-control:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/kling-avatar-2-0": {
       "status": 200,
-      "sha256": "a8f93572198452469a62640b438ef7a4b4fa55e950284d7277f41114151af90a",
-      "checkedAt": "2026-06-13",
+      "sha256": "d934c56f6d32f3a9ed4f73af4e5ef5b017dd7b5f23f41106951cb3d59102cf4e",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:kling-avatar-2.0:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/kling-o3": {
       "status": 200,
-      "sha256": "433428fa9aa3802178c13c32464f77d2bbafcf63d3e839661a1f9d1c77e3df52",
-      "checkedAt": "2026-06-13",
+      "sha256": "b445c754a0802806e1dc66437243c4a6db14b372f252ccd644d1a346382c53d9",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:kling-o3-api:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/runway-gen-4-5": {
       "status": 200,
-      "sha256": "26ecd762344a2cf4f7026810bec59ad002150cab489d9bb6213070502ca7dd95",
-      "checkedAt": "2026-06-13",
+      "sha256": "6c95577bfee77dfd1ef3ed6ea4de0ad58d21edcaa14585e3702db1652f498a31",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:runway-gen-4-5:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/seedance-1-5-pro": {
       "status": 200,
-      "sha256": "419790fb48f919bc38bd94baa37882cdd5f8c9380f84f3c2ed26314b3548025d",
-      "checkedAt": "2026-06-13",
+      "sha256": "64f85bcaa5d8ff833903bb3300c58af6eb0a461920e0fd493539dd6863c0c39f",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:seedance-1-5-pro:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/seedance-1.0-pro": {
       "status": 200,
-      "sha256": "808f12f8794f3ed29813f888ec22add9b1ef5883c05077063350aa6a5cbf0460",
-      "checkedAt": "2026-06-13",
+      "sha256": "d80ef108ba8532376673a2be0cea7b8228b16fec8f030f6ffdfd92adf8136d66",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:seedance-1-0-pro:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/seedance-2": {
       "status": 200,
-      "sha256": "cf37062573af288c7fb8f389bfd0c46d1e6b11ffe2553f9babd73843c4e41051",
-      "checkedAt": "2026-06-13",
+      "sha256": "47ef90d851a3ff82311a594785fb88de3c29d21b8ffe035bc1b0f059d210ac11",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:seedance-2:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/sora-2": {
       "status": 200,
-      "sha256": "8071acc57f00966c652ff57a5a767aec4aafee1d4883cb89ca7b32760c652dc1",
-      "checkedAt": "2026-06-13",
+      "sha256": "0556d842776003a693b9982c6825cd7e17f55ac52c57d1940b1505f508bb3062",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:sora-2:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/sora-2-official": {
       "status": 200,
-      "sha256": "c3d294a9ab5f272884f5c7bb45920356d16200d9b68402fabb78db78845d7d43",
-      "checkedAt": "2026-06-13",
+      "sha256": "1d3431ea1ff2d9ac7b3db9493e50af247485309e64426f950feb7e4711a13b73",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:sora-2-official:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/sora-2-pro": {
       "status": 200,
-      "sha256": "b7c53aedd4f62904ad3522b0f3261346028142fb7ca70d483be1e5d35599acd2",
-      "checkedAt": "2026-06-13",
+      "sha256": "7960e0c6f8293309b239743a4fadc5d161e1c1d076091f76d6107551283f9c87",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:sora-2-pro:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/veo-3-1": {
       "status": 200,
-      "sha256": "67164f3dae0afd3391fb3cecd2ebfef8ef91709fa6e5a70a71b259665b6d4145",
-      "checkedAt": "2026-06-13",
+      "sha256": "5bb7d0e9d2fc515b280999af2cf32867aab0cd09a416d808cc065908df9ac128",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:veo3.1-fast:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/veo-3-1-official": {
       "status": 200,
-      "sha256": "b0dbab068b028d77330f0eb7aa6eabfe2304bf8ac2f5d4f912c79c681867e12a",
-      "checkedAt": "2026-06-13",
+      "sha256": "c1a318b36fcc410bd25525926f9c12b0933dfe17fc0f3fc963a91997f3893f85",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:veo-3-1-official:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/wan-2-6": {
       "status": 200,
-      "sha256": "d61f528fdebc2c9e6c3389c5525e48fdce075040474992bc930ec4d3c70e343a",
-      "checkedAt": "2026-06-13",
+      "sha256": "c7d42f3b266e97a752e0eca50e46dcb86f3c4594d2e6a8cd249098d3c5ea3c26",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:wan-2-6:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/wan-2-7-video": {
       "status": 200,
-      "sha256": "2f79cf66fcb76aa80264a2e2c58bd090868e3fe9a1ea9cf5ddbd5271deb845c4",
-      "checkedAt": "2026-06-13",
+      "sha256": "69170b19f7b4952e8c2bbaab10be12d959d6a8ec00d2281625f1a806f944a9d1",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:wan-2-7-video:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/wan-animate": {
       "status": 200,
-      "sha256": "17e7aeeb2fdcd2a1efe98f90b8c91d5668da5609babe9054085db5b2ebbaf5c6",
-      "checkedAt": "2026-06-13",
+      "sha256": "abd6a860ab36a5f1d8fec91c37d803c8d0c9b480d07d2a38ba36b4cee6dfc95c",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:wan-animate:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/wan2.2-image-to-video-fast": {
       "status": 200,
-      "sha256": "f72dce2f413437fabae85314d39780abce2ddde87b9bfd8d2536d0f4098a359b",
-      "checkedAt": "2026-06-13",
+      "sha256": "bc4d24ce4e7a572e981480a2136dac6a92bdcdb050fdf1199f7ec1ae96bf1d4b",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:wan-2-2-fast:docsUrl"
       ]
     },
     "https://docs.poyo.ai/api-manual/video-series/wan2.5-image-to-video": {
       "status": 200,
-      "sha256": "a3d9cbcd26e16adb68dc04c07acb7d63e9f5b74438eb20e170598c57b7bd8905",
-      "checkedAt": "2026-06-13",
+      "sha256": "91d106e4e924e2c9ee98ecdf24d21d926d8628027178201ccf2302392ddef71f",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:wan-2-5:docsUrl"
       ]
     },
     "https://docs.siliconflow.cn/cn/api-reference/audio/create-audio-transcriptions": {
       "status": 200,
-      "sha256": "9063afe7efc9da0ac9a9dd04bf5b571cc200b340d9fed0b599a663043fa9b4de",
-      "checkedAt": "2026-06-13",
+      "sha256": "736882c0966078ad5e410e5d961d082f2c211338f1f3b0adc5139965c615035f",
+      "checkedAt": "2026-06-18",
       "owners": [
         "siliconflow-data.json:FunAudioLLM/SenseVoiceSmall:docsUrl",
         "siliconflow-data.json:FunAudioLLM/SenseVoiceSmall:sourceUrl"
@@ -674,8 +674,8 @@
     },
     "https://docs.siliconflow.cn/cn/api-reference/audio/create-speech": {
       "status": 200,
-      "sha256": "050fe90b36587c73feb76af2d16501543045a87c07b1adc255213bf279ffe592",
-      "checkedAt": "2026-06-13",
+      "sha256": "782d6f088e1fc5a2899524289eda5b1b525cc9800195587ec233c9133e1b6228",
+      "checkedAt": "2026-06-18",
       "owners": [
         "siliconflow-data.json:FunAudioLLM/CosyVoice2-0.5B:docsUrl",
         "siliconflow-data.json:FunAudioLLM/CosyVoice2-0.5B:sourceUrl"
@@ -683,8 +683,8 @@
     },
     "https://docs.siliconflow.cn/cn/api-reference/chat-completions/chat-completions": {
       "status": 200,
-      "sha256": "3d34ccc4aeb46b841df0f05c68f94f4e3ea688423207cd1aa495ff2fbfe9b854",
-      "checkedAt": "2026-06-13",
+      "sha256": "01decf2d4c0a208acb841adc9d8eecea755a157acafc4d54c3144537cb0264db",
+      "checkedAt": "2026-06-18",
       "owners": [
         "siliconflow-data.json:MiniMaxAI/MiniMax-M2.5:docsUrl",
         "siliconflow-data.json:MiniMaxAI/MiniMax-M2.5:sourceUrl",
@@ -763,8 +763,8 @@
     },
     "https://docs.siliconflow.cn/cn/api-reference/embeddings/create-embeddings": {
       "status": 200,
-      "sha256": "770f70b32b7e94331720a71a79ebcabc2519352bdd5cdd309efdd5c9833fb43e",
-      "checkedAt": "2026-06-13",
+      "sha256": "b7466a24a8136f5d111fb7fc615593ec1c668abed67804e4cb637c47ce6fe1c5",
+      "checkedAt": "2026-06-18",
       "owners": [
         "siliconflow-data.json:BAAI/bge-large-en-v1.5:docsUrl",
         "siliconflow-data.json:BAAI/bge-large-en-v1.5:sourceUrl",
@@ -781,8 +781,8 @@
     },
     "https://docs.siliconflow.cn/cn/api-reference/images/images-generations": {
       "status": 200,
-      "sha256": "df078aa9a730b6757a3817e87c40e38155796f91497fb4a87d9825f71402533c",
-      "checkedAt": "2026-06-13",
+      "sha256": "0ab9acb3ab8045c7fc2c5c67a1f4a12eb3795a8d10beb516ab5ad0882fadedf5",
+      "checkedAt": "2026-06-18",
       "owners": [
         "siliconflow-data.json:Kwai-Kolors/Kolors:docsUrl",
         "siliconflow-data.json:Kwai-Kolors/Kolors:sourceUrl",
@@ -804,8 +804,8 @@
     },
     "https://docs.siliconflow.cn/cn/api-reference/rerank/create-rerank": {
       "status": 200,
-      "sha256": "3d654a51ac85905d14712de857aa0ca512b88d4ce4ee32bfdbf2f4e9e76b857b",
-      "checkedAt": "2026-06-13",
+      "sha256": "7775ee98891270447faab6f9488ba5c229ec9c7f170b28e5279f9daed5784d66",
+      "checkedAt": "2026-06-18",
       "owners": [
         "siliconflow-data.json:BAAI/bge-reranker-v2-m3:docsUrl",
         "siliconflow-data.json:BAAI/bge-reranker-v2-m3:sourceUrl",
@@ -819,8 +819,8 @@
     },
     "https://docs.siliconflow.cn/cn/api-reference/videos/videos_submit": {
       "status": 200,
-      "sha256": "3ff8935c6f6e1811ea5e4facdfde2b3d8b4c00bcb36dc8c316b271834326dca7",
-      "checkedAt": "2026-06-13",
+      "sha256": "6311f25962bf0851e6d91c4d9fd8e9ccb7edf1f0c72b5652e72219e3f78f6932",
+      "checkedAt": "2026-06-18",
       "owners": [
         "siliconflow-data.json:Wan-AI/Wan2.2-I2V-A14B:docsUrl",
         "siliconflow-data.json:Wan-AI/Wan2.2-I2V-A14B:sourceUrl",
@@ -830,8 +830,8 @@
     },
     "https://docs.siliconflow.cn/en/release-notes/overview": {
       "status": 200,
-      "sha256": "38f762109bcdbc65c79fe0eee946e81dee04fbb40dabf3748b4ab1b652e69d14",
-      "checkedAt": "2026-06-13",
+      "sha256": "5281774a068eca040d97ee9dd6b42207aa94a4330fd1ef00d0f45ca9b69dd385",
+      "checkedAt": "2026-06-18",
       "owners": [
         "siliconflow-data.json:BAAI/bge-large-zh-v1.5:sourceUrl",
         "siliconflow-data.json:BAAI/bge-m3:sourceUrl",
@@ -851,16 +851,16 @@
     },
     "https://poyo.ai/models/image-translator": {
       "status": 200,
-      "sha256": "618791aab46018413822870f8b7f3e5da9fe2c2fd4bf89d71a12dfd6161c0b7c",
-      "checkedAt": "2026-06-13",
+      "sha256": "c642b24d7755ab8446e4dd4f62dc2ce20a702a1dff42afd9cebfd5b98aff6cbd",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:image-translator:docsUrl"
       ]
     },
     "https://poyo.ai/models/video-translator": {
       "status": 200,
-      "sha256": "45354291cd4dabe95c7298732bb1e268938ae5945d801cc931e1103f7fc2433e",
-      "checkedAt": "2026-06-13",
+      "sha256": "482fbf954794fceb8a0f7de1ef58946828359815f5e60a8208891e0d2dc3a7af",
+      "checkedAt": "2026-06-18",
       "owners": [
         "api-data.json:video-translator:docsUrl"
       ]
