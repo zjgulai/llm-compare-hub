@@ -1,6 +1,6 @@
 # LLM Models Hub — 深度债务审计与治理计划
 
-> 审计日期：初始 2026-06-11；最新复核 2026-06-19
+> 审计日期：初始 2026-06-11；最新复核 2026-06-25
 > 范围：本地仓库、腾讯云生产站点、GitHub Pages 发布链路、部署脚本、文档与数据资产  
 > 原则：本报告不记录任何密钥明文；所有 secret 仅按风险类别描述。
 
@@ -8,8 +8,8 @@
 
 | 维度 | 结论 |
 | --- | --- |
-| 三方一致性 | 本地 `main` / `origin/main`、腾讯云生产站、GitHub Pages 镜像均已收敛到最近一次产品 artifact 验收基线 `8f5504b`；2026-06-18 数据治理刷新仅更新 provenance snapshot，不改变公网 release 内容 |
-| 主生产站 | `https://llm.lute-tlz-dddd.top/` 返回 200，主入口、核心 JSON、生产 UI smoke 和开发材料拦截验收通过 |
+| 三方一致性 | 本地 `main` / `origin/main`、腾讯云生产站、GitHub Pages 镜像均已收敛到最近一次产品 artifact 验收基线 `8f5504b`；2026-06-25 数据治理刷新仅更新 provenance snapshot，不改变公网 release 内容 |
+| 主生产站 | `https://llm.lute-tlz-dddd.top/` 返回 200，主入口、核心 JSON、生产 UI smoke 和开发材料拦截验收通过；`make check-exposure` 在 2026-06-25 已重新确认 404 拦截 |
 | GitHub Pages | 产品 artifact 验收 workflow `27489295001` 成功，head SHA `8f5504b`；作为镜像发布目标，不作为 canonical SEO 入口 |
 | 生产服务器 | Ubuntu 22.04，nginx 容器 `ai_video_nginx`，磁盘 `/` 使用 45%，可用内存约 3.4GiB，swap 已满 |
 | TLS | Let's Encrypt 证书有效期至 2026-09-07，SAN 覆盖 `llm.lute-tlz-dddd.top` |
@@ -17,7 +17,7 @@
 | 本地依赖 | `npm audit` 0 漏洞；React 19.2.7、Vite 8.0.16、TypeScript 5.9.3、Tailwind Vite plugin 4.3.1 |
 | 本地安全即时处理 | 已将 `origin` 从带 token URL 改为标准 HTTPS URL；工作区内 `ai_video.pem` 不存在；仍需在 GitHub 侧轮换该 token |
 | 下一次接手入口 | `docs/CODEX_HANDOFF.md` 记录当前产品状态、执行命令、剩余外部事项和推荐下一步 |
-| 最新数据治理刷新 | `data-provenance-snapshots.json` 已刷新至 `2026-06-18`；78 个来源 URL 可达，77 个唯一 `docsUrl` 返回 200；Claude/Codex 精粹页刷新已增加项目数下降保护，默认拒绝覆盖回退数据 |
+| 最新数据治理刷新 | `data-provenance-snapshots.json` 已刷新至 `2026-06-25`；78 个来源 URL 可达，77 个唯一 `docsUrl` 返回 200；Claude/Codex 精粹页刷新保护继续拒绝覆盖低项目数回退数据；开发材料 404 拦截已复核恢复 |
 
 ## 1. 核心诊断
 

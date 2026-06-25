@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-06-25 — Production exposure hardening restore
+
+### Fixed
+- Restored `404` blocking for development material paths on `llm.lute-tlz-dddd.top`, including `README.md`, `AUDIT.md`, `Makefile`, `scripts/*`, `src/*`, `.github/*`, `.essence-cache/*`, and `data/*`.
+
+### Verified
+- `make check-exposure` passed after nginx reload.
+- `make smoke-ui-production` still passed with 0.00% visual diff.
+
+## 2026-06-25 — Incremental provenance refresh
+
+### Changed
+- Refreshed `data-provenance-snapshots.json` to `generatedAt=2026-06-25`; all 78 tracked source URLs returned `200`.
+- Updated README, AUDIT, and Codex handoff docs to reflect the latest data-governance snapshot.
+
+### Verified
+- `python3 scripts/update-essence.py` refused lower-count Claude/Codex generated output and preserved existing 28-item data files.
+- Full local and remote verification is recorded in the current task run.
+
 ## 2026-06-19 — Essence data regression guard
 
 ### Added

@@ -1,6 +1,6 @@
 # LLM Models Hub — Codex Handoff
 
-> Last updated: 2026-06-19 (America/Los_Angeles)
+> Last updated: 2026-06-25 (America/Los_Angeles)
 > Primary production: `https://llm.lute-tlz-dddd.top/`
 > Mirror: `https://zjgulai.github.io/llm-compare-hub/`
 > Last product artifact verification baseline: `8f5504b test: harden chrome smoke startup`
@@ -25,20 +25,21 @@ The production source of truth is the generated `release/` directory. Do not dep
 
 | Surface | Current status |
 | --- | --- |
-| Local repo / `origin/main` | Product artifact verification baseline remains `8f5504b`; 2026-06-18 data-governance refresh updated only `data-provenance-snapshots.json`, which is not part of the public `release/` artifact |
+| Local repo / `origin/main` | Product artifact verification baseline remains `8f5504b`; 2026-06-25 data-governance refresh updated only `data-provenance-snapshots.json`, which is not part of the public `release/` artifact |
 | Tencent Cloud production | `https://llm.lute-tlz-dddd.top/` has the latest `release/` deployment and passes production smoke |
-| GitHub Pages mirror | Product artifact workflow `27489295001` succeeded for head SHA `8f5504b` |
+| GitHub Pages mirror | GitHub Pages deploy workflow is the mirror publication gate and must be checked after each push |
 
 Verification evidence from the latest loop:
 
-- `python3 scripts/check_data_drift.py --update-snapshot`: 78 source URLs returned `200`; `data-provenance-snapshots.json` refreshed to `generatedAt=2026-06-18`.
+- `python3 scripts/check_data_drift.py --update-snapshot`: 78 source URLs returned `200`; `data-provenance-snapshots.json` refreshed to `generatedAt=2026-06-25`.
 - `python3 scripts/validate.py --check-urls`: 77 unique `docsUrl` targets returned `200`.
 - `make data-update-check`: JSON validation, strict provenance validation, weekly snapshot, TypeScript build, release build, and secret scan passed.
 - `make smoke-ui`: local release browser smoke passed; desktop/mobile visual diff was `0.00%`.
+- `make check-exposure`: development material paths such as `README.md`, `scripts/validate.py`, `src/App.tsx`, and `data/api-data.json` returned `404` after restoring the nginx deny rules.
 - `make check`: production site, GitHub Pages, and six core JSON files returned `200`.
 - `make check-exposure`: development files and hidden paths returned `404`.
 - `make smoke-ui-production`: production UI smoke passed; desktop/mobile visual diff was `0.00%`.
-- GitHub Actions `Deploy to GitHub Pages` run `27489295001`: success.
+- GitHub Actions `Deploy to GitHub Pages`: check the latest push run before closing a release or data refresh.
 
 ## Architecture and Deployment Rules
 
